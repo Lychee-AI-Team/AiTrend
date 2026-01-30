@@ -72,7 +72,7 @@ async function fetchZreadTrending() {
   try {
     console.log('[3/4] 正在获取 Zread Trending...');
     const response = await axios.get('https://zread.ai/trending', {
-      timeout: 15000,
+      timeout: 8000,
       headers: { 
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
@@ -136,9 +136,9 @@ async function fetchAIHotToday() {
   try {
     console.log('[4/4] 正在获取 AI Hot Today...');
     const response = await axios.get('https://aihot.today/', {
-      timeout: 15000,
+      timeout: 8000,
       headers: { 
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
       }
     });
@@ -217,6 +217,9 @@ async function main() {
     
     console.log(`\n📊 ${summary}`);
     console.log(`📝 结果已保存到 result.json (${jsonContent.length} 字节)\n`);
+    console.log('=== result.json 内容预览 ===');
+    console.log(jsonContent.substring(0, 500));
+    console.log('=== 预览结束 ===\n');
     
     // 确保至少有一些数据
     if (newsItems.length === 0) {
@@ -227,6 +230,7 @@ async function main() {
     console.log('✅ 脚本执行成功');
   } catch (error) {
     console.error('❌ 脚本执行失败:', error.message);
+    console.error(error.stack);
     process.exit(1);
   }
 }
