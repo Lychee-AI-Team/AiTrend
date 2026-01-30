@@ -30,15 +30,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Send to webhook
-        if: steps.collect.outcome == 'success'
+      - name: Show result.json
+        if: success()
         run: |
-          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+          echo "=== result.json 内容 ==="
+          cat result.json
+          echo "=== 文件大小 ==="
+          wc -c result.json
+      
+      - name: Send to webhook
+        if: success()
+        run: |
+          echo "开始发送 webhook..."
+          echo "WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}"
+          
+          RESPONSE=$(curl -s -w '\nHTTP_CODE:%{http_code}\n' \
+            -X POST "${{ secrets.WEBHOOK_URL }}" \
             -H 'Content-Type: application/json' \
-            -d @result.json
+            -d @result.json)
+          
+          echo "$RESPONSE"
+          
+          # 检查 HTTP 状态码
+          HTTP_CODE=$(echo "$RESPONSE" | grep -o 'HTTP_CODE:[0-9]*' | cut -d: -f2)
+          echo "HTTP 响应码: $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" != "202" ] && [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ Webhook 发送失败 (状态码: $HTTP_CODE)"
+            exit 1
+          else
+            echo "✅ Webhook 发送成功"
+          fi
       
       - name: Upload result
-        if: steps.collect.outcome == 'success'
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: news-result
