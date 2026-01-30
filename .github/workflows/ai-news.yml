@@ -1,0 +1,46 @@
+# AI News Collector - GitHub Action
+
+name: Daily AI News Collection
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 01:00 UTC (09:00 CST)
+  workflow_dispatch:     # 支持手动触发
+
+jobs:
+  collect-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install axios cheerio
+      
+      - name: Run collector script
+        id: collect
+        run: node scripts/collect-news.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Send to webhook
+        if: steps.collect.outcome == 'success'
+        run: |
+          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+            -H 'Content-Type: application/json' \
+            -d @result.json
+      
+      - name: Upload result
+        if: steps.collect.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-result
+          path: result.json
+          retention-days: 7
