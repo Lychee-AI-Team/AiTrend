@@ -44,8 +44,12 @@ jobs:
           echo "开始发送 webhook..."
           echo "WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}"
           
+          # 发送到 AI News 专用端点
+          AI_NEWS_WEBHOOK="${{ secrets.WEBHOOK_URL }}/webhook/ai-news"
+          echo "AI_NEWS_WEBHOOK: $AI_NEWS_WEBHOOK"
+          
           RESPONSE=$(curl -s -w '\nHTTP_CODE:%{http_code}\n' \
-            -X POST "${{ secrets.WEBHOOK_URL }}" \
+            -X POST "$AI_NEWS_WEBHOOK" \
             -H 'Content-Type: application/json' \
             -d @result.json)
           
