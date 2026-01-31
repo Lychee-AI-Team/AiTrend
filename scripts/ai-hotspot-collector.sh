@@ -118,7 +118,7 @@ log "📊 报告已生成: $REPORT_FILE"
 
 # 如果设置了 WEBHOOK_URL，发送到 webhook
 if [ -n "$WEBHOOK_URL" ]; then
-    log "📡 正在发送到 webhook"
+    log "📡 正在发送到 webhook: $WEBHOOK_URL"
 
     # 临时关闭 set-e，防止 webhook 失败导致脚本退出
     set +e
