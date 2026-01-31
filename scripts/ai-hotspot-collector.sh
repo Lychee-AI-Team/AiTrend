@@ -197,9 +197,9 @@ fi
 # 使用 Gemini 翻译和总结
 if [ -n "$GEMINI_API_KEY" ] && command -v gemini >/dev/null 2>&1; then
     log "🌐 正在使用 Gemini 翻译和总结..."
-    
+
     TRANSLATED_FILE="/tmp/hotspot-translated-$$-md"
-    
+
     gemini --model gemini-2.5-flash "你是一个专业的 AI 资讯编辑。请将以下 AI 热点资讯翻译成中文并进行总结整理。
 
 要求：
@@ -213,7 +213,7 @@ if [ -n "$GEMINI_API_KEY" ] && command -v gemini >/dev/null 2>&1; then
 $(cat "$COLLECTED_FILE")
 ---
 " 2>&1 | tee "$TRANSLATED_FILE"
-    
+
     if [ -s "$TRANSLATED_FILE" ]; then
         log "✅ 翻译完成"
         REPORT_FILE="$TRANSLATED_FILE"
@@ -232,25 +232,30 @@ if [ -n "$WEBHOOK_URL" ]; then
 
     # 提取所有标题和链接
     items_json=$(jq -Rs 'split("\n\n## ") | map(
-        split("\n") | 
+        split("\n") |
         map(select(length > 0)) |
         map(
-            if test("^[0-9]+\\. \\*\\*\\*") then
+            if test("^[0-9]+\\. \\*\\*") then
                 {
-                    title: (sub("^[0-9]+\\. \\*\\*\\*"; "") | sub("\\*\\*$"; "")),
+                    title: (sub("^[0-9]+\\. "; "") | sub("\\*\\*$"; "")),
                     summary: (.[1:] // ""),
                     url: (if .[1:] then
                         (.[1:] | scan("🔗 (.*)")[0] // "")
                     else "" end)
                 }
             else empty end
-        ) | .[]
-    ) | .[]' "$REPORT_FILE")
+        )
+    ) | flatten' "$REPORT_FILE")
+
+    log "   解析到的 items: $(echo "$items_json" | jq -r '.title' 2>/dev/null | wc -l) 个"
+    log "   items_json 长度: ${#items_json} 字符"
 
     webhook_response=$(timeout 10 curl -s -w '\nHTTP_CODE:%{http_code}' \
         -X POST "$WEBHOOK_URL" \
         -H 'Content-Type: application/json' \
         -d "{\"title\":\"🔥 AI 热点资讯\",\"items\":$items_json,\"summary\":\"AI 热点\"}" 2>&1)
+
+    log "   Webhook 响应: ${webhook_response:0:200}..."
 
     http_code=$(echo "$webhook_response" | grep -o 'HTTP_CODE:[0-9]*' 2>/dev/null | cut -d: -f2 || echo "000")
 
