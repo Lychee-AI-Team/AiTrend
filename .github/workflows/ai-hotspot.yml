@@ -32,7 +32,7 @@ jobs:
           sudo apt-get install -y nodejs
           
           # Install Gemini CLI via npm
-          sudo npm install -g gemini-cli
+          sudo npm install -g @google/gemini-cli
           
           # Verify installation
           gemini --version || echo "Warning: gemini version check failed"
