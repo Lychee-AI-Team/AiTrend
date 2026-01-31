@@ -64,11 +64,14 @@ app.post('/webhook/ai-hotspot', async (req, res) => {
     const { title, text, items, summary } = req.body;
 
     console.log(`[${new Date().toISOString()}] 📥 AI Hotspot webhook: 收到请求`);
+    console.log(`   Body keys: ${Object.keys(req.body).join(', ')}`);
+    console.log(`   Body:`, JSON.stringify(req.body, null, 2).substring(0, 500));
 
     let messageText = text;
 
     // 如果是 AI Hotspot 格式（items + summary）
     if (!messageText && items && summary) {
+      console.log(`   使用 items + summary 格式，items 数量: ${items.length}`);
       messageText = `📊 **${summary}**\n\n`;
       items.forEach((item, index) => {
         messageText += `${index + 1}. **${item.title}**\n`;
@@ -80,6 +83,7 @@ app.post('/webhook/ai-hotspot', async (req, res) => {
     }
 
     if (!messageText) {
+      console.error(`   ❌ 缺少 text 或 items 字段`);
       return res.status(400).json({ error: 'Missing text or items field' });
     }
 
