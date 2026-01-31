@@ -25,6 +25,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
       
+      - name: Install Gemini CLI
+        run: |
+          # Install Node.js if not available
+          curl -fsSL https://deb.nodesource.com/setup_lts.sh | sudo -E bash -
+          sudo apt-get install -y nodejs
+          
+          # Install Gemini CLI via npm
+          sudo npm install -g gemini-cli
+          
+          # Verify installation
+          gemini --version || echo "Warning: gemini version check failed"
+          gemini --list-extensions
+      
       - name: Run hotspot collector
         id: collect
         env:
