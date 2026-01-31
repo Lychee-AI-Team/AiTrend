@@ -1,0 +1,51 @@
+# AI Hotspot Collector - GitHub Action
+
+name: AI Hotspot Collector
+
+on:
+  schedule:
+    - cron: '0 5,13,21 * * *'  # 每天 05:00, 13:00, 21:00 UTC (13:00, 21:00, 05:00 CST)
+  workflow_dispatch:             # 支持手动触发
+    inputs:
+      reason:
+        description: 触发原因
+        required: false
+        default: 手动触发
+
+jobs:
+  collect-hotspot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+      
+      - name: Run hotspot collector
+        id: collect
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+        run: |
+          chmod +x scripts/ai-hotspot-collector.sh
+          bash scripts/ai-hotspot-collector.sh
+      
+      - name: Upload report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hotspot-report-${{ github.run_number }}
+          path: scripts/hotspot-report-*.md
+          retention-days: 3
+      
+      - name: Report summary
+        if: success()
+        run: |
+          echo "## 📊 AI 热点收集完成" >> $GITHUB_STEP_SUMMARY
+          echo "- **触发时间**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **触发方式**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow Run**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY

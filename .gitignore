@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+logs/
+
+# Sensitive data
+.brave-api-key
+.github-token
+.clawhub/
+
+# Output files
+output/
+scripts/ai-news-*.json
+scripts/hotspot-report-*.md
+
+# Process files
+*.pid
+
+# OS
+.DS_Store
+Thumbs.db
