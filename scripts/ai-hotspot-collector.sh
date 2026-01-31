@@ -129,7 +129,7 @@ if [ -n "$WEBHOOK_URL" ]; then
     webhook_response=$(timeout 10 curl -s -w '\nHTTP_CODE:%{http_code}' \
         -X POST "$WEBHOOK_URL" \
         -H 'Content-Type: application/json' \
-        -d "{\"title\":\"🔥 AI 热点资讯\",\"text\":$report_json}" 2>&1)
+        -d "{\"title\":\"🔥 AI 热点资讯\",\"items\":$report_json,\"summary\":\"AI 热点\"}" 2>&1)
 
     CURL_EXIT_CODE=$?
 
