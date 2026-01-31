@@ -25,10 +25,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
       - name: Install Gemini CLI
         run: |
-          # Use setup-node action to install Node.js
-          echo "Installing Node.js and Gemini CLI..."
+          # Install Gemini CLI
+          echo "Installing Gemini CLI..."
           npm install -g @google/gemini-cli
           
           # Verify installation
