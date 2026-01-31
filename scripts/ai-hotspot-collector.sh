@@ -1,7 +1,7 @@
 #!/bin/bash
-# AI Hotspot Collector - 修复飞书 API 调用
+# AI Hotspot Collector - 简化版
 
-set -e
+set +e  # 允许错误继续
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="$SCRIPT_DIR/ai-hotspot-collector.log"
@@ -18,75 +18,12 @@ FEISHU_APP_ID="${FEISHU_APP_ID:-}"
 FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
 FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
 
-log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:10}..."
+log "=== 配置检查 ==="
+log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:15}..."
+log "FEISHU_SECRET_KEY: ${FEISHU_SECRET_KEY:0:10}..."
 log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
 
-get_token() {
-    log "获取 tenant_access_token..."
-    local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
-        -H "Content-Type: application/json" \
-        -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
-    
-    log "auth resp: $resp"
-    
-    # 检查是否有效 JSON
-    if ! echo "$resp" | jq -e . >/dev/null 2>&1; then
-        log "获取 token 失败: 非 JSON 响应"
-        return 1
-    fi
-    
-    local code=$(echo "$resp" | jq -r '.code')
-    if [ "$code" != "0" ]; then
-        log "获取 token 失败: $(echo "$resp" | jq -r '.msg')"
-        return 1
-    fi
-    
-    echo "$resp" | jq -r '.tenant_access_token'
-}
-
-get_chat_id() {
-    local token="$1"
-    log "获取 chat_id..."
-    
-    local resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
-        -H "Authorization: Bearer $token")
-    
-    log "chats resp: $resp"
-    
-    if ! echo "$resp" | jq -e . >/dev/null 2>&1; then
-        log "获取 chats 失败: 非 JSON"
-        echo "$FEISHU_GROUP_ID"
-        return
-    fi
-    
-    echo "$resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1
-}
-
-send_feishu() {
-    local token="$1"
-    local chat_id="$2"
-    local content="$3"
-    
-    log "发送消息到 chat_id: $chat_id"
-    log "content length: ${#content}"
-    
-    # 准备内容（转义 JSON）
-    local escaped_content=$(echo "$content" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g' | tr '\n' ' ')
-    
-    local data="{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$escaped_content\\\"}\"}"
-    
-    log "request data: $data"
-    
-    local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
-        -H "Authorization: Bearer $token" \
-        -H "Content-Type: application/json" \
-        -d "$data")
-    
-    log "send resp: $resp"
-    echo "$resp"
-}
-
-log "开始收集 AI 热点资讯..."
+log "=== 开始收集 AI 热点资讯 ==="
 
 SEARCH_CATEGORIES=(
     "中美模型厂商|OpenAI|Anthropic|Google|DeepSeek"
@@ -155,23 +92,53 @@ else
     REPORT_FILE="$COLLECTED_FILE"
 fi
 
+log "=== 发送到飞书 ==="
+
 if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP_ID" ]; then
-    log "发送到飞书..."
+    log "步骤1: 获取 tenant_access_token..."
+    resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
+        -H "Content-Type: application/json" \
+        -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
+    log "auth 响应: $resp"
     
-    token=$(get_token) || { log "获取 token 失败"; exit 1; }
-    chat_id=$(get_chat_id "$token") || { log "获取 chat_id 失败"; exit 1; }
+    token=$(echo "$resp" | jq -r '.tenant_access_token' 2>/dev/null)
+    auth_code=$(echo "$resp" | jq -r '.code' 2>/dev/null)
     
+    if [ "$auth_code" != "0" ] || [ -z "$token" ] || [ "$token" = "null" ]; then
+        log "获取 token 失败: auth_code=$auth_code, token=$token"
+        exit 1
+    fi
+    log "获取 token 成功"
+    
+    log "步骤2: 获取 chat_id..."
+    chats_resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
+        -H "Authorization: Bearer $token")
+    log "chats 响应: $chats_resp"
+    
+    chat_id=$(echo "$chats_resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1)
+    [ -z "$chat_id" ] || [ "$chat_id" = "null" ] && chat_id="$FEISHU_GROUP_ID"
+    log "chat_id: $chat_id"
+    
+    log "步骤3: 发送消息..."
     content=$(cat "$REPORT_FILE")
-    result=$(send_feishu "$token" "$chat_id" "$content")
+    escaped_content=$(echo "$content" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g' | tr '\n' ' ' | sed 's/  */ /g')
     
-    if echo "$result" | jq -e '.code == 0' > /dev/null 2>&1; then
+    msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
+        -H "Authorization: Bearer $token" \
+        -H "Content-Type: application/json" \
+        -d "{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$escaped_content\\\"}\"}")
+    
+    log "message 响应: $msg_resp"
+    
+    msg_code=$(echo "$msg_resp" | jq -r '.code' 2>/dev/null)
+    if [ "$msg_code" = "0" ]; then
         log "发送成功！"
     else
-        log "发送失败: $(echo "$result" | jq -r '.msg // "unknown error"')"
+        log "发送失败: $(echo "$msg_resp" | jq -r '.msg')"
     fi
 else
-    log "飞书参数未配置"
+    log "飞书参数未配置，跳过发送"
 fi
 
 rm -f "$COLLECTED_FILE" "$TRANSLATED" 2>/dev/null || true
-log "完成"
+log "=== 完成 ==="
