@@ -1,0 +1,57 @@
+# AI Hotspot Collector 配置文件
+# 可自定义搜索关键词
+
+# 搜索配置
+SEARCH_CONFIG:
+  # 每页结果数量
+  RESULTS_PER_PAGE: 5
+
+  # 内容过滤
+  CONTENT_FILTER:
+    # 最小标题长度
+    MIN_TITLE_LENGTH: 20
+    # 最大描述长度
+    MAX_DESC_LENGTH: 300
+
+# AI 热点分类及搜索关键词
+CATEGORIES:
+  - name: "大模型厂商动态"
+    keywords:
+      - "OpenAI GPT Anthropic Claude DeepSeek Google Gemini 大模型"
+    icon: "🤖"
+
+  - name: "AI Agent 系统"
+    keywords:
+      - "AI Agent LangGraph AutoGPT CrewAI 智能代理"
+    icon: "🧠"
+
+  - name: "AI 应用工具"
+    keywords:
+      - "ChatGPT Claude Code GitHub Copilot AI编程工具"
+    icon: "🛠️"
+
+  - name: "AI 行业新闻"
+    keywords:
+      - "AI news artificial intelligence technology 2026"
+    icon: "📰"
+
+  - name: "AI 加密货币"
+    keywords:
+      - "AI crypto Fetch.ai SingularityNET 人工智能加密货币"
+    icon: "💰"
+
+  - name: "AI 安全与监管"
+    keywords:
+      - "AI safety regulation ethics AI监管 AI安全"
+    icon: "⚖️"
+
+  - name: "AI 研究突破"
+    keywords:
+      - "AI research breakthrough paper LLM reasoning"
+    icon: "🔬"
+
+# 定时任务配置（GitHub Actions 使用）
+SCHEDULE:
+  # UTC 时间定时
+  CRON: "0 5,13,21 * * *"
+  # 对应北京时间 (CST): 13:00, 21:00, 05:00
