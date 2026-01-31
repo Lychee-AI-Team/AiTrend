@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 使用 jq 构建 JSON
+# AI Hotspot Collector - 使用 open_id 替代 chat_id
 
 set +e
 
@@ -16,7 +16,6 @@ FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
 FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
 
 log "=== 配置检查 ==="
-log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:15}..."
 log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
 
 log "=== 收集 AI 热点资讯 ==="
@@ -81,7 +80,7 @@ fi
 if [ -n "$GEMINI_API_KEY" ] && command -v gemini >/dev/null 2>&1; then
     log "使用 Gemini 翻译..."
     TRANSLATED="/tmp/translated-$$.txt"
-    gemini --model gemini-2.5-flash "翻译成中文，保持格式，简洁专业，1000字以内：$(cat "$COLLECTED_FILE")" 2>&1 | tee "$TRANSLATED"
+    gemini --model gemini-2.5-flash "翻译成中文，保持格式，简洁专业，800字以内：$(cat "$COLLECTED_FILE")" 2>&1 | tee "$TRANSLATED"
     REPORT_FILE="$TRANSLATED"
 else
     log "跳过翻译"
@@ -95,7 +94,7 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
-    log "auth: ${resp:0:80}..."
+    log "auth: ${resp:0:60}..."
     
     token=$(echo "$resp" | jq -r '.tenant_access_token')
     if [ "$(echo "$resp" | jq -r '.code')" != "0" ]; then
@@ -104,13 +103,29 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     fi
     log "获取 token 成功"
     
-    log "步骤2: 发送消息..."
+    log "步骤2: 获取群聊的 open_id..."
+    chats_resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
+        -H "Authorization: Bearer $token")
+    log "chats: ${chats_resp:0:100}..."
+    
+    # 查找群聊并获取 open_id
+    open_id=$(echo "$chats_resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .open_id" 2>/dev/null | head -1)
+    
+    if [ -z "$open_id" ] || [ "$open_id" = "null" ]; then
+        log "未找到群聊 open_id，使用 chat_id 发送"
+        open_id="$FEISHU_GROUP_ID"
+        id_type="chat_id"
+    else
+        log "找到 open_id: ${open_id:0:20}..."
+        id_type="open_id"
+    fi
+    
+    log "步骤3: 发送消息 (id_type: $id_type)..."
     content=$(cat "$REPORT_FILE")
     
-    # 使用 jq 构建 JSON
     json_data=$(jq -n \
-        --arg rid "$FEISHU_GROUP_ID" \
-        --arg type "chat_id" \
+        --arg rid "$open_id" \
+        --arg type "$id_type" \
         --arg msgtype "text" \
         --arg txt "$content" \
         '{
@@ -119,8 +134,6 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
             msg_type: $msgtype,
             content: ($txt | tojson)
         }')
-    
-    log "请求: $json_data"
     
     msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
         -H "Authorization: Bearer $token" \
