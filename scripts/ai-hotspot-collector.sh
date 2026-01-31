@@ -1,12 +1,11 @@
 #!/bin/bash
-# AI Hotspot Collector - 使用配置文件
+# AI Hotspot Collector - 修复配置文件路径
 
 set +e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="$SCRIPT_DIR/../config.yaml"
 LOG_FILE="$SCRIPT_DIR/ai-hotspot-collector.log"
-BRAVE_API_KEY_FILE="$SCRIPT_DIR/../.brave-api-key"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
@@ -17,7 +16,10 @@ log() {
 command -v jq >/dev/null 2>&1 || { log "jq 未安装"; exit 1; }
 command -v curl >/dev/null 2>&1 || { log "curl 未安装"; exit 1; }
 
-# 读取配置文件
+# 修复路径问题 - 直接使用绝对路径
+REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+CONFIG_FILE="$REPO_DIR/config.yaml"
+
 if [ -f "$CONFIG_FILE" ]; then
     log "读取配置文件: $CONFIG_FILE"
 else
@@ -25,43 +27,14 @@ else
     exit 1
 fi
 
-# 解析配置文件中的分类
-parse_categories() {
-    local config_file="$1"
-    local temp_file="/tmp/categories-$$.txt"
-    
-    # 使用 yq 或 python 解析 YAML
-    if command -v yq >/dev/null 2>&1; then
-        yq eval '.CATEGORIES[] | "\(.icon) \(.name)|\(.keywords | join(" "))"' "$config_file" | sed 's/| /|/' > "$temp_file"
-    else
-        # 使用 python 解析
-        python3 << 'PYTHON_EOF'
-import yaml
-import json
-
-with open('/home/ubuntu/.openclaw/workspace/AiTrend/config.yaml', 'r') as f:
-    config = yaml.safe_load(f)
-
-for cat in config.get('CATEGORIES', []):
-    name = cat.get('name', '')
-    icon = cat.get('icon', '')
-    keywords = ' '.join(cat.get('keywords', []))
-    print(f"{icon} {name}|{keywords}")
-PYTHON_EOF
-    fi
-    cat "$temp_file"
-}
-
 # 获取 Brave API Key
+BRAVE_API_KEY="${BRAVE_API_KEY:-}"
 if [ -n "$BRAVE_API_KEY" ]; then
     HAS_BRAVE_API=true
-elif [ -f "$BRAVE_API_KEY_FILE" ]; then
-    BRAVE_API_KEY=$(cat "$BRAVE_API_KEY_FILE" | tr -d '\n')
-    export BRAVE_API_KEY
-    HAS_BRAVE_API=true
+    log "使用环境变量 Brave API Key"
 else
     HAS_BRAVE_API=false
-    log "未找到 Brave API Key，使用 mock 数据"
+    log "Brave API Key 未配置，使用 mock 数据"
 fi
 
 log "=== 开始收集 AI 热点资讯 ==="
@@ -72,9 +45,22 @@ echo "" > "$COLLECTED_FILE"
 if [ "$HAS_BRAVE_API" = true ]; then
     log "使用 Brave Search API"
     
-    # 解析分类
+    # 解析配置文件中的分类
+    python3 << PYTHON_EOF
+import yaml
+
+with open('/home/runner/work/AiTrend/AiTrend/config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
+
+for cat in config.get('CATEGORIES', []):
+    name = cat.get('name', '')
+    icon = cat.get('icon', '')
+    keywords = ' '.join(cat.get('keywords', []))
+    print(f"{icon} {name}|{keywords}")
+PYTHON_EOF
+    
     while IFS='|' read -r icon_name keywords; do
-        IFS='|' read -r icon name <<< "$icon_name"
+        IFS=' ' read -r icon name <<< "$icon_name"
         [ -z "$name" ] && continue
         
         log "搜索: $icon $name"
@@ -108,8 +94,10 @@ if [ "$HAS_BRAVE_API" = true ]; then
         done
     done < <(python3 << 'PYTHON_EOF'
 import yaml
-with open('/home/ubuntu/.openclaw/workspace/AiTrend/config.yaml', 'r') as f:
+
+with open('/home/runner/work/AiTrend/AiTrend/config.yaml', 'r') as f:
     config = yaml.safe_load(f)
+
 for cat in config.get('CATEGORIES', []):
     name = cat.get('name', '')
     icon = cat.get('icon', '')
