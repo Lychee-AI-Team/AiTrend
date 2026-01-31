@@ -1,45 +1,93 @@
 #!/bin/bash
-# AI Hotspot Collector - 完整功能版
+# AI Hotspot Collector - 使用配置文件
 
 set +e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="$SCRIPT_DIR/../config.yaml"
 LOG_FILE="$SCRIPT_DIR/ai-hotspot-collector.log"
+BRAVE_API_KEY_FILE="$SCRIPT_DIR/../.brave-api-key"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
 }
 
-FEISHU_APP_ID="${FEISHU_APP_ID:-}"
-FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
-FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
+# 检查必要工具
+command -v jq >/dev/null 2>&1 || { log "jq 未安装"; exit 1; }
+command -v curl >/dev/null 2>&1 || { log "curl 未安装"; exit 1; }
 
-log "=== 收集 AI 热点资讯 ==="
+# 读取配置文件
+if [ -f "$CONFIG_FILE" ]; then
+    log "读取配置文件: $CONFIG_FILE"
+else
+    log "配置文件不存在: $CONFIG_FILE"
+    exit 1
+fi
 
-SEARCH_CATEGORIES=(
-    "中美模型厂商|OpenAI|Anthropic|Google|DeepSeek"
-    "大模型热点|GPT|Claude|DeepSeek|Qwen"
-    "创始人动态|Sam Altman|李开复"
-    "Agent动态|Claude Code|LangGraph"
-)
+# 解析配置文件中的分类
+parse_categories() {
+    local config_file="$1"
+    local temp_file="/tmp/categories-$$.txt"
+    
+    # 使用 yq 或 python 解析 YAML
+    if command -v yq >/dev/null 2>&1; then
+        yq eval '.CATEGORIES[] | "\(.icon) \(.name)|\(.keywords | join(" "))"' "$config_file" | sed 's/| /|/' > "$temp_file"
+    else
+        # 使用 python 解析
+        python3 << 'PYTHON_EOF'
+import yaml
+import json
+
+with open('/home/ubuntu/.openclaw/workspace/AiTrend/config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
+
+for cat in config.get('CATEGORIES', []):
+    name = cat.get('name', '')
+    icon = cat.get('icon', '')
+    keywords = ' '.join(cat.get('keywords', []))
+    print(f"{icon} {name}|{keywords}")
+PYTHON_EOF
+    fi
+    cat "$temp_file"
+}
+
+# 获取 Brave API Key
+if [ -n "$BRAVE_API_KEY" ]; then
+    HAS_BRAVE_API=true
+elif [ -f "$BRAVE_API_KEY_FILE" ]; then
+    BRAVE_API_KEY=$(cat "$BRAVE_API_KEY_FILE" | tr -d '\n')
+    export BRAVE_API_KEY
+    HAS_BRAVE_API=true
+else
+    HAS_BRAVE_API=false
+    log "未找到 Brave API Key，使用 mock 数据"
+fi
+
+log "=== 开始收集 AI 热点资讯 ==="
 
 COLLECTED_FILE="/tmp/hotspot-$$.txt"
 echo "" > "$COLLECTED_FILE"
 
-if [ -n "$BRAVE_API_KEY" ]; then
+if [ "$HAS_BRAVE_API" = true ]; then
     log "使用 Brave Search API"
-    for cat in "${SEARCH_CATEGORIES[@]}"; do
-        IFS='|' read -r name queries <<< "$cat"
-        log "搜索: $name"
+    
+    # 解析分类
+    while IFS='|' read -r icon_name keywords; do
+        IFS='|' read -r icon name <<< "$icon_name"
+        [ -z "$name" ] && continue
+        
+        log "搜索: $icon $name"
         echo "" >> "$COLLECTED_FILE"
-        echo "## $name" >> "$COLLECTED_FILE"
+        echo "$icon $name" >> "$COLLECTED_FILE"
+        
         count=1
-        for q in $queries; do
+        for q in $keywords; do
             [ $count -gt 3 ] && break
-            resp=$(timeout 15 curl -s "https://api.search.brave.com/res/v1/web/search?q=$q&count=5&freshness=pm" \
+            resp=$(timeout 15 curl -s "https://api.search.brave.com/res/v1/web/search?q=$q&count=3&freshness=pm" \
                 -H "Accept: application/json" \
                 -H "X-Subscription-Token: $BRAVE_API_KEY" 2>&1) || true
+            
             if echo "$resp" | jq -e '.web.results' > /dev/null 2>&1; then
                 while IFS= read -r item; do
                     [ $count -gt 3 ] && break
@@ -47,7 +95,7 @@ if [ -n "$BRAVE_API_KEY" ]; then
                     desc=$(echo "$item" | jq -r '.description' | cut -c1-200)
                     url=$(echo "$item" | jq -r '.url')
                     [ -n "$title" ] && [ "$title" != "null" ] && {
-                        echo "$count. **$title**" >> "$COLLECTED_FILE"
+                        echo "$count. $title" >> "$COLLECTED_FILE"
                         echo "   $desc" >> "$COLLECTED_FILE"
                         echo "   $url" >> "$COLLECTED_FILE"
                         echo "" >> "$COLLECTED_FILE"
@@ -58,32 +106,47 @@ if [ -n "$BRAVE_API_KEY" ]; then
             fi
             sleep 1
         done
-    done
+    done < <(python3 << 'PYTHON_EOF'
+import yaml
+with open('/home/ubuntu/.openclaw/workspace/AiTrend/config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
+for cat in config.get('CATEGORIES', []):
+    name = cat.get('name', '')
+    icon = cat.get('icon', '')
+    keywords = ' '.join(cat.get('keywords', []))
+    print(f"{icon} {name}|{keywords}")
+PYTHON_EOF
+)
 else
     log "使用 mock 数据"
     cat > "$COLLECTED_FILE" << 'MOCK'
-## AI 热点资讯
+🏢 中美模型厂商
 
-1. **DeepSeek-V3 发布**
-   DeepSeek-V3 在多项基准测试中表现优异。
+1. DeepSeek-V3 模型发布
+   DeepSeek-V3 在多项基准测试中表现优异，推理能力显著提升
    https://github.com/deepseek-ai/DeepSeek-V3
 
-2. **OpenAI o1 模型发布**
-   OpenAI 发布 o1 系列，专注复杂推理。
+2. OpenAI o1 模型系列发布
+   OpenAI 专注于复杂推理任务，在编程和数学问题上表现突出
    https://openai.com
+
+🧠 大模型热点
+
+1. GPT-4.1 性能优化
+   OpenAI 更新 GPT-4.1，降低成本和延迟，提升响应质量
+   https://openai.com
+
+2. Claude 3.5 Sonnet 升级
+   Anthropic 提升代码生成和长文本处理能力
+   https://www.anthropic.com
 MOCK
 fi
 
-if [ -n "$GEMINI_API_KEY" ] && command -v gemini >/dev/null 2>&1; then
-    log "使用 Gemini 翻译..."
-    TRANSLATED="/tmp/translated-$$.txt"
-    gemini --model gemini-2.5-flash "翻译成中文，保持格式，简洁专业：$(cat "$COLLECTED_FILE")" 2>&1 | tee "$TRANSLATED"
-    REPORT_FILE="$TRANSLATED"
-else
-    REPORT_FILE="$COLLECTED_FILE"
-fi
-
 log "=== 发送到飞书群聊 ==="
+
+FEISHU_APP_ID="${FEISHU_APP_ID:-}"
+FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
+FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
 
 if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP_ID" ]; then
     log "步骤1: 获取 tenant_access_token..."
@@ -99,7 +162,7 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     log "获取 token 成功"
     
     log "步骤2: 发送消息到群聊..."
-    content=$(cat "$REPORT_FILE")
+    content=$(cat "$COLLECTED_FILE")
     
     msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
         -H "Authorization: Bearer $token" \
@@ -124,5 +187,5 @@ else
     log "飞书参数未配置"
 fi
 
-rm -f "$COLLECTED_FILE" "$TRANSLATED" 2>/dev/null || true
+rm -f "$COLLECTED_FILE" 2>/dev/null || true
 log "=== 完成 ==="
