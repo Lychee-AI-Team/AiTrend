@@ -250,22 +250,31 @@ if [ -n "$WEBHOOK_URL" ]; then
     log "   解析到的 items: $(echo "$items_json" | jq -r '.title' 2>/dev/null | wc -l) 个"
     log "   items_json 长度: ${#items_json} 字符"
 
-    webhook_response=$(timeout 10 curl -s -w '\nHTTP_CODE:%{http_code}' \
-        -X POST "$WEBHOOK_URL" \
-        -H 'Content-Type: application/json' \
-        -d "{\"title\":\"🔥 AI 热点资讯\",\"items\":$items_json,\"summary\":\"AI 热点\"}" 2>&1)
+    # 输出 curl 命令到文件
+    CURL_FILE="$SCRIPT_DIR/hotspot-curl-$(date +%Y%m%d-%H%M%S).sh"
+    cat > "$CURL_FILE" << CURL_EOF
+#!/bin/bash
+# AI Hotspot Webhook - $(date '+%Y-%m-%d %H:%M:%S')
+# 手动执行此命令发送到 webhook
+# 设置 WEBHOOK_URL 环境变量，例如：export WEBHOOK_URL=http://your-server:3000/webhook/ai-hotspot
 
-    log "   Webhook 响应: ${webhook_response:0:200}..."
+curl -X POST "\${WEBHOOK_URL}" \\
+  -H 'Content-Type: application/json' \\
+  -d '{
+  "title": "🔥 AI 热点资讯",
+  "items": $(echo "$items_json" | jq -c '.'),
+  "summary": "AI 热点"
+}'
+CURL_EOF
 
-    http_code=$(echo "$webhook_response" | grep -o 'HTTP_CODE:[0-9]*' 2>/dev/null | cut -d: -f2 || echo "000")
-
-    if [ "$http_code" = "200" ] || [ "$http_code" = "202" ]; then
-        log "✅ Webhook 发送成功 (HTTP $http_code)"
-    else
-        log "⚠️ Webhook 发送失败 (HTTP $http_code)"
-    fi
+    chmod +x "$CURL_FILE"
+    log "📄 Curl 命令已生成: $CURL_FILE"
+    log ""
+    log "🔧 手动执行命令："
+    cat "$CURL_FILE"
+    log ""
 else
-    log "⚠️ WEBHOOK_URL 未设置，跳过发送"
+    log "⚠️ WEBHOOK_URL 未设置，跳过生成 curl 命令"
 fi
 
 # 清理临时文件
