@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 直接发送
+# AI Hotspot Collector - 根据飞书官方文档
 
 set +e
 
@@ -14,9 +14,6 @@ log() {
 FEISHU_APP_ID="${FEISHU_APP_ID:-}"
 FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
 FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
-
-log "=== 配置检查 ==="
-log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
 
 log "=== 收集 AI 热点资讯 ==="
 
@@ -65,7 +62,7 @@ if [ -n "$BRAVE_API_KEY" ]; then
 else
     log "使用 mock 数据"
     cat > "$COLLECTED_FILE" << 'MOCK'
-## 中美模型厂商
+## AI 热点资讯
 
 1. **DeepSeek-V3 发布**
    DeepSeek-V3 在多项基准测试中表现优异。
@@ -80,42 +77,40 @@ fi
 if [ -n "$GEMINI_API_KEY" ] && command -v gemini >/dev/null 2>&1; then
     log "使用 Gemini 翻译..."
     TRANSLATED="/tmp/translated-$$.txt"
-    gemini --model gemini-2.5-flash "翻译成中文，保持格式，简洁专业，800字以内：$(cat "$COLLECTED_FILE")" 2>&1 | tee "$TRANSLATED"
+    gemini --model gemini-2.5-flash "翻译成中文，保持格式，简洁专业：$(cat "$COLLECTED_FILE")" 2>&1 | tee "$TRANSLATED"
     REPORT_FILE="$TRANSLATED"
 else
-    log "跳过翻译"
     REPORT_FILE="$COLLECTED_FILE"
 fi
 
-log "=== 发送到飞书 ==="
+log "=== 发送到飞书群聊 ==="
 
 if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP_ID" ]; then
     log "步骤1: 获取 tenant_access_token..."
     resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
-    log "auth: ${resp:0:60}..."
     
-    token=$(echo "$resp" | jq -r '.tenant_access_token')
     if [ "$(echo "$resp" | jq -r '.code')" != "0" ]; then
-        log "获取 token 失败"
+        log "获取 token 失败: $(echo "$resp" | jq -r '.msg')"
         exit 1
     fi
+    token=$(echo "$resp" | jq -r '.tenant_access_token')
     log "获取 token 成功"
     
-    log "步骤2: 发送消息..."
+    log "步骤2: 发送消息到群聊..."
     content=$(cat "$REPORT_FILE")
     
-    # 保存内容到临时文件
-    echo "$content" > /tmp/feishu_content.txt
-    
-    # 使用 curl 直接发送
-    msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
+    # 根据飞书文档，发送群消息需要使用 /v2/messages 端点
+    # 并在 query 参数中指定 receive_id_type
+    msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        --data-raw "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"receive_id_type\":\"chat_id\",\"msg_type\":\"text\",\"content\":{\"text\":$(cat /tmp/feishu_content.txt | jq -Rs .)}}")
-    
-    rm -f /tmp/feishu_content.txt
+        -d "{
+            \"receive_id\": \"$FEISHU_GROUP_ID\",
+            \"msg_type\": \"text\",
+            \"content\": \"{\\\"text\\\": $(echo "$content" | jq -Rs .)}\"
+        }")
     
     log "响应: $msg_resp"
     
