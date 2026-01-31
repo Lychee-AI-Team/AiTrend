@@ -231,21 +231,28 @@ if [ -n "$WEBHOOK_URL" ]; then
     log "📡 正在发送到 webhook: $WEBHOOK_URL"
 
     # 提取所有标题和链接
-    items_json=$(jq -Rs 'split("\n\n## ") | map(
-        split("\n") |
+    items_json=$(jq -Rs '
+        split("\n\n## ") |
         map(select(length > 0)) |
         map(
-            if test("^[0-9]+\\. \\*\\*") then
+            split("\n") |
+            . as $lines |
+            map(select(test("^[0-9]+\\.  \\*\\*"))) |
+            map(. as $title |
+                ($lines | index($title)) as $idx |
                 {
-                    title: (sub("^[0-9]+\\. "; "") | sub("\\*\\*$"; "")),
-                    summary: (.[1:] // ""),
-                    url: (if .[1:] then
-                        (.[1:] | scan("🔗 (.*)")[0] // "")
+                    title: ($title | sub("^[0-9]+\\.  \\*\\*"; "") | sub("\\*\\*$"; "")),
+                    summary: (if $idx + 1 < ($lines | length) then
+                        ($lines[$idx + 1] | sub("^    "; ""))
+                    else "" end),
+                    url: (if $idx + 2 < ($lines | length) and ($lines[$idx + 2] | test("^    🔗")) then
+                        ($lines[$idx + 2] | sub("^    🔗 "; ""))
                     else "" end)
                 }
-            else empty end
-        )
-    ) | flatten' "$REPORT_FILE")
+            )
+        ) |
+        flatten
+    ' "$REPORT_FILE")
 
     log "   解析到的 items: $(echo "$items_json" | jq -r '.title' 2>/dev/null | wc -l) 个"
     log "   items_json 长度: ${#items_json} 字符"
