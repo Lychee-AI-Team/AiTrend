@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 根据飞书官方文档
+# AI Hotspot Collector - 使用 v2/messages 端点
 
 set +e
 
@@ -101,9 +101,8 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     log "步骤2: 发送消息到群聊..."
     content=$(cat "$REPORT_FILE")
     
-    # 根据飞书文档，发送群消息需要使用 /v2/messages 端点
-    # 并在 query 参数中指定 receive_id_type
-    msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
+    # 使用 /v2/messages 端点
+    msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v2/messages" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
         -d "{
