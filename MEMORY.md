@@ -1,0 +1,14 @@
+"# MEMORY.md - 长期记忆
+
+## GitHub 配置
+
+### 已配置项
+- ✅ GitHub Personal Access Token 已配置（2026-01-31）
+- ✅ Token 可直接提交到仓库
+- ✅ 组织: Lychee-AI-Team (https://github.com/Lychee-AI-Team/)
+- ✅ 主分支命名: main
+
+---
+
+*此文件记录需要长期保存的重要信息*
+"
