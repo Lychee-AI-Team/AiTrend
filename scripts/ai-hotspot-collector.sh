@@ -1,7 +1,7 @@
 #!/bin/bash
-# AI Hotspot Collector - 简化版
+# AI Hotspot Collector - 修复 receive_id_type
 
-set +e  # 允许错误继续
+set +e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="$SCRIPT_DIR/ai-hotspot-collector.log"
@@ -20,7 +20,6 @@ FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
 
 log "=== 配置检查 ==="
 log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:15}..."
-log "FEISHU_SECRET_KEY: ${FEISHU_SECRET_KEY:0:10}..."
 log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
 
 log "=== 开始收集 AI 热点资讯 ==="
@@ -99,40 +98,36 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
-    log "auth 响应: $resp"
+    log "auth 响应: ${resp:0:100}..."
     
     token=$(echo "$resp" | jq -r '.tenant_access_token' 2>/dev/null)
     auth_code=$(echo "$resp" | jq -r '.code' 2>/dev/null)
     
     if [ "$auth_code" != "0" ] || [ -z "$token" ] || [ "$token" = "null" ]; then
-        log "获取 token 失败: auth_code=$auth_code, token=$token"
+        log "获取 token 失败"
         exit 1
     fi
     log "获取 token 成功"
     
-    log "步骤2: 获取 chat_id..."
-    chats_resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
-        -H "Authorization: Bearer $token")
-    log "chats 响应: $chats_resp"
-    
-    chat_id=$(echo "$chats_resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1)
-    [ -z "$chat_id" ] || [ "$chat_id" = "null" ] && chat_id="$FEISHU_GROUP_ID"
-    log "chat_id: $chat_id"
-    
-    log "步骤3: 发送消息..."
+    log "步骤2: 发送消息 (添加 receive_id_type: chat_id)..."
     content=$(cat "$REPORT_FILE")
     escaped_content=$(echo "$content" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g' | tr '\n' ' ' | sed 's/  */ /g')
     
     msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        -d "{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$escaped_content\\\"}\"}")
+        -d "{
+            \"receive_id\": \"$FEISHU_GROUP_ID\",
+            \"receive_id_type\": \"chat_id\",
+            \"msg_type\": \"text\",
+            \"content\": \"{\\\"text\\\": \\\"$escaped_content\\\"}\"
+        }")
     
     log "message 响应: $msg_resp"
     
     msg_code=$(echo "$msg_resp" | jq -r '.code' 2>/dev/null)
     if [ "$msg_code" = "0" ]; then
-        log "发送成功！"
+        log "发送成功！✅"
     else
         log "发送失败: $(echo "$msg_resp" | jq -r '.msg')"
     fi
