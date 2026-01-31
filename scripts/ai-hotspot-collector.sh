@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 使用 open_id 替代 chat_id
+# AI Hotspot Collector - 直接发送
 
 set +e
 
@@ -103,42 +103,19 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     fi
     log "获取 token 成功"
     
-    log "步骤2: 获取群聊的 open_id..."
-    chats_resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
-        -H "Authorization: Bearer $token")
-    log "chats: ${chats_resp:0:100}..."
-    
-    # 查找群聊并获取 open_id
-    open_id=$(echo "$chats_resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .open_id" 2>/dev/null | head -1)
-    
-    if [ -z "$open_id" ] || [ "$open_id" = "null" ]; then
-        log "未找到群聊 open_id，使用 chat_id 发送"
-        open_id="$FEISHU_GROUP_ID"
-        id_type="chat_id"
-    else
-        log "找到 open_id: ${open_id:0:20}..."
-        id_type="open_id"
-    fi
-    
-    log "步骤3: 发送消息 (id_type: $id_type)..."
+    log "步骤2: 发送消息..."
     content=$(cat "$REPORT_FILE")
     
-    json_data=$(jq -n \
-        --arg rid "$open_id" \
-        --arg type "$id_type" \
-        --arg msgtype "text" \
-        --arg txt "$content" \
-        '{
-            receive_id: $rid,
-            receive_id_type: $type,
-            msg_type: $msgtype,
-            content: ($txt | tojson)
-        }')
+    # 保存内容到临时文件
+    echo "$content" > /tmp/feishu_content.txt
     
+    # 使用 curl 直接发送
     msg_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        -d "$json_data")
+        --data-raw "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"receive_id_type\":\"chat_id\",\"msg_type\":\"text\",\"content\":{\"text\":$(cat /tmp/feishu_content.txt | jq -Rs .)}}")
+    
+    rm -f /tmp/feishu_content.txt
     
     log "响应: $msg_resp"
     
