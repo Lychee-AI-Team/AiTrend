@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 直接发送到飞书群聊
+# AI Hotspot Collector - 直接发送到飞书群聊（带调试）
 
 set -e
 
@@ -18,26 +18,38 @@ FEISHU_APP_ID="${FEISHU_APP_ID:-}"
 FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
 FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
 
+log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:10}..."
+log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
+
 get_token() {
-    curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
+    log "获取 token..."
+    local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
-        -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}" | jq -r '.tenant_access_token'
+        -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
+    log "token resp: $resp"
+    echo "$resp" | jq -r '.tenant_access_token'
 }
 
 get_chat_id() {
     local token="$1"
-    curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
-        -H "Authorization: Bearer $token" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1
+    log "获取 chat_id..."
+    local resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
+        -H "Authorization: Bearer $token")
+    log "chats resp: $resp"
+    echo "$resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1
 }
 
 send_feishu() {
     local token="$1"
     local chat_id="$2"
     local content="$3"
-    curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
+    log "发送消息到 chat_id: $chat_id"
+    local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        -d "{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$(echo "$content" | sed 's/"/\\"/g' | tr '\n' ' ' | sed 's/  */ /g')\\\"}\"}"
+        -d "{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$(echo "$content" | sed 's/"/\\"/g' | tr '\n' ' ' | sed 's/  */ /g' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')\\\"}\"}")
+    log "send resp: $resp"
+    echo "$resp"
 }
 
 log "开始收集 AI 热点资讯..."
@@ -64,7 +76,7 @@ if [ -n "$BRAVE_API_KEY" ]; then
             [ $count -gt 3 ] && break
             resp=$(timeout 15 curl -s "https://api.search.brave.com/res/v1/web/search?q=$q&count=5&freshness=pm" \
                 -H "Accept: application/json" \
-                -H "X-Subscription-Token: $BRAVE_API_KEY" 2>&1) || true
+                -H "X-Subscription-Token: "$BRAVE_API_KEY"" 2>&1) || true
             if echo "$resp" | jq -e '.web.results' > /dev/null 2>&1; then
                 while IFS= read -r item; do
                     [ $count -gt 3 ] && break
@@ -118,7 +130,7 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     if echo "$result" | jq -e '.code == 0' > /dev/null 2>&1; then
         log "发送成功！"
     else
-        log "发送失败"
+        log "发送失败: $(echo "$result" | jq -r '.msg')"
     fi
 else
     log "飞书参数未配置"
