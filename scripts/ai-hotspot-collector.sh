@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 直接发送到飞书群聊（带调试）
+# AI Hotspot Collector - 修复飞书 API 调用
 
 set -e
 
@@ -22,20 +22,43 @@ log "FEISHU_APP_ID: ${FEISHU_APP_ID:0:10}..."
 log "FEISHU_GROUP_ID: $FEISHU_GROUP_ID"
 
 get_token() {
-    log "获取 token..."
+    log "获取 tenant_access_token..."
     local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
-    log "token resp: $resp"
+    
+    log "auth resp: $resp"
+    
+    # 检查是否有效 JSON
+    if ! echo "$resp" | jq -e . >/dev/null 2>&1; then
+        log "获取 token 失败: 非 JSON 响应"
+        return 1
+    fi
+    
+    local code=$(echo "$resp" | jq -r '.code')
+    if [ "$code" != "0" ]; then
+        log "获取 token 失败: $(echo "$resp" | jq -r '.msg')"
+        return 1
+    fi
+    
     echo "$resp" | jq -r '.tenant_access_token'
 }
 
 get_chat_id() {
     local token="$1"
     log "获取 chat_id..."
+    
     local resp=$(curl -s "https://open.feishu.cn/open-apis/im/v1/chats?page_size=50" \
         -H "Authorization: Bearer $token")
+    
     log "chats resp: $resp"
+    
+    if ! echo "$resp" | jq -e . >/dev/null 2>&1; then
+        log "获取 chats 失败: 非 JSON"
+        echo "$FEISHU_GROUP_ID"
+        return
+    fi
+    
     echo "$resp" | jq -r ".data.items[] | select(.chat_id == \"$FEISHU_GROUP_ID\") | .chat_id" 2>/dev/null | head -1
 }
 
@@ -43,11 +66,22 @@ send_feishu() {
     local token="$1"
     local chat_id="$2"
     local content="$3"
+    
     log "发送消息到 chat_id: $chat_id"
+    log "content length: ${#content}"
+    
+    # 准备内容（转义 JSON）
+    local escaped_content=$(echo "$content" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g' | tr '\n' ' ')
+    
+    local data="{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$escaped_content\\\"}\"}"
+    
+    log "request data: $data"
+    
     local resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/im/v1/messages" \
         -H "Authorization: Bearer $token" \
         -H "Content-Type: application/json" \
-        -d "{\"receive_id\": \"$chat_id\", \"msg_type\": \"text\", \"content\": \"{\\\"text\\\": \\\"$(echo "$content" | sed 's/"/\\"/g' | tr '\n' ' ' | sed 's/  */ /g' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')\\\"}\"}")
+        -d "$data")
+    
     log "send resp: $resp"
     echo "$resp"
 }
@@ -76,7 +110,7 @@ if [ -n "$BRAVE_API_KEY" ]; then
             [ $count -gt 3 ] && break
             resp=$(timeout 15 curl -s "https://api.search.brave.com/res/v1/web/search?q=$q&count=5&freshness=pm" \
                 -H "Accept: application/json" \
-                -H "X-Subscription-Token: "$BRAVE_API_KEY"" 2>&1) || true
+                -H "X-Subscription-Token: $BRAVE_API_KEY" 2>&1) || true
             if echo "$resp" | jq -e '.web.results' > /dev/null 2>&1; then
                 while IFS= read -r item; do
                     [ $count -gt 3 ] && break
@@ -123,14 +157,17 @@ fi
 
 if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP_ID" ]; then
     log "发送到飞书..."
+    
     token=$(get_token) || { log "获取 token 失败"; exit 1; }
-    chat_id=$(get_chat_id "$token") || chat_id="$FEISHU_GROUP_ID"
+    chat_id=$(get_chat_id "$token") || { log "获取 chat_id 失败"; exit 1; }
+    
     content=$(cat "$REPORT_FILE")
     result=$(send_feishu "$token" "$chat_id" "$content")
+    
     if echo "$result" | jq -e '.code == 0' > /dev/null 2>&1; then
         log "发送成功！"
     else
-        log "发送失败: $(echo "$result" | jq -r '.msg')"
+        log "发送失败: $(echo "$result" | jq -r '.msg // "unknown error"')"
     fi
 else
     log "飞书参数未配置"
