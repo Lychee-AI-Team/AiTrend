@@ -18,6 +18,12 @@
 - **Systemd 服务**: clawdbot-webhook.service
 - **工作目录**: /root/clawd/webhook-server
 
+### Brave Search API 限制
+- **⚠️ 重要**: Brave Search API 在本地服务器（115.190.215.54）上无法运行（网络限制/超时）
+- **✅ 可用环境**: GitHub Actions 可以正常使用 Brave Search API
+- **API Key**: 有效，已配置到环境变量和 `.brave-api-key` 文件
+- **解决方案**: 在本地运行时使用 mock 数据模式，在 GitHub Actions 中使用真实 API
+
 ### 支持的端点
 - `/` - AI Hotspot 收集
 - `/webhook/ai-news` - AI News 收集
@@ -28,7 +34,7 @@
 
 ### 当前项目：AiTrend
 - **仓库**: Lychee-AI-Team/AiTrend
-- **本地路径**: /root/clawd
+- **本地路径**: /root/AiTrend
 - **主分支**: main
 - **开发规则**:
   - 所有开发任务都在此仓库中进行
