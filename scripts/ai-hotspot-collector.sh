@@ -1,5 +1,5 @@
 #!/bin/bash
-# AI Hotspot Collector - 修复发送
+# AI Hotspot Collector - 修复 content 格式
 
 set +e
 
@@ -16,21 +16,13 @@ log() {
 command -v jq >/dev/null 2>&1 || { log "jq 未安装"; exit 1; }
 command -v curl >/dev/null 2>&1 || { log "curl 未安装"; exit 1; }
 
-# 读取配置
-if [ -f "$CONFIG_FILE" ]; then
-    log "读取配置文件: $CONFIG_FILE"
-else
-    log "配置文件不存在: $CONFIG_FILE"
-    exit 1
-fi
-
 # Mock 数据
 COLLECTED_FILE="/tmp/hotspot-$$.txt"
 cat > "$COLLECTED_FILE" << 'MOCK'
 🏢 中美模型厂商
 
 1. DeepSeek-V3 模型发布
-   DeepSeek-V3 在多项基准测试中表现优异，推理能力显著提升，开源社区反响热烈
+   DeepSeek-V3 在多项基准测试中表现优异，推理能力显著提升
    https://github.com/deepseek-ai/DeepSeek-V3
 
 2. OpenAI o1 模型系列发布
@@ -65,16 +57,13 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     
     log "步骤2: 发送消息到群聊..."
     
-    # 读取内容并转义
-    content_raw=$(cat "$COLLECTED_FILE")
-    content_json=$(echo "$content_raw" | jq -Rs 'sub("\n"; "\\n") | sub("\""; "\\\"")')
+    # 读取内容并构建 JSON
+    content_text=$(cat "$COLLECTED_FILE" | jq -Rs '@text')
     
-    log "内容长度: ${#content_json} 字符"
+    # 直接构建 JSON
+    json_data="{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":{\"text\":$content_text}}"
     
-    # 构建 JSON
-    json_data="{\"receive_id\": \"$FEISHU_GROUP_ID\", \"msg_type\": \"text\", \"content\": {\"text\": $content_json}}"
-    
-    log "发送请求..."
+    log "JSON 内容长度: ${#json_data} 字符"
     
     msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
         -H "Authorization: Bearer $token" \
@@ -85,7 +74,7 @@ if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP
     body=$(echo "$msg_resp" | grep -v "HTTP_CODE:")
     
     log "HTTP 状态码: $http_code"
-    log "响应体: $body"
+    log "响应体: $(echo "$body" | jq -r '.msg' 2>/dev/null || echo "$body")"
     
     if [ "$http_code" = "200" ] || [ "$(echo "$body" | jq -r '.code')" = "0" ]; then
         log "发送成功！✅"
