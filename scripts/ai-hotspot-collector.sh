@@ -86,13 +86,27 @@ collect_results() {
             # 提取搜索结果 - 先保存到临时文件，避免管道问题
             echo "$response" > /tmp/brave_response_$$.json
 
+            # 检查响应格式
             if jq -e '.web.results' /tmp/brave_response_$$.json > /dev/null 2>&1; then
+                log "   响应格式: .web.results"
                 # 将结果保存到临时文件
                 jq -r '.web.results[] | {
                     title: (.title // "无标题"),
                     description: (.description // "暂无描述"),
                     url: (.url // "")
                 }' /tmp/brave_response_$$.json >> /tmp/hotspot_items_$$.json
+            elif jq -e '.results' /tmp/brave_response_$$.json > /dev/null 2>&1; then
+                log "   响应格式: .results (兼容格式）"
+                jq -r '.results[] | {
+                    title: (.title // "无标题"),
+                    description: (.description // "暂无描述"),
+                    url: (.url // "")
+                }' /tmp/brave_response_$$.json >> /tmp/hotspot_items_$$.json
+            else
+                log "   ⚠️ 未知响应格式，保存原始响应"
+                # 保存原始文本以防 JSON 解析失败
+                echo "[]}" > /tmp/hotspot_items_$$.json
+            fi
 
                 count=0
                 while IFS= read -r title_desc; do
