@@ -27,12 +27,9 @@ jobs:
       
       - name: Install Gemini CLI
         run: |
-          # Install Node.js if not available
-          curl -fsSL https://deb.nodesource.com/setup_lts.sh | sudo -E bash -
-          sudo apt-get install -y nodejs
-          
-          # Install Gemini CLI via npm
-          sudo npm install -g @google/gemini-cli
+          # Use setup-node action to install Node.js
+          echo "Installing Node.js and Gemini CLI..."
+          npm install -g @google/gemini-cli
           
           # Verify installation
           gemini --version || echo "Warning: gemini version check failed"
@@ -43,6 +40,7 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}/webhook/ai-hotspot
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           chmod +x scripts/ai-hotspot-collector.sh
           bash scripts/ai-hotspot-collector.sh
