@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="$SCRIPT_DIR/../config.yaml"
 LOG_FILE="$SCRIPT_DIR/ai-hotspot-collector.log"
-BRAVE_API_KEY_FILE="$SCRIPT_DIR/../.brave-api-key"
+BRAVE_API_KEY_FILE="$SCRIPT_DIR/../.bravi-api-key"
 
 # 日志函数
 log() {
@@ -35,10 +35,16 @@ else
     log "⚠️  未找到 Brave API Key，将使用 mock 数据模式"
 fi
 
-# 获取 Webhook URL
-WEBHOOK_URL="${WEBHOOK_URL:-}"
-if [ -z "$WEBHOOK_URL" ]; then
-    log "⚠️  WEBHOOK_URL 未设置"
+# 获取飞书配置
+FEISHU_APP_ID="${FEISHU_APP_ID:-}"
+FEISHU_SECRET_KEY="${FEISHU_SECRET_KEY:-}"
+FEISHU_GROUP_ID="${FEISHU_GROUP_ID:-}"
+HAS_FEISHU=false
+if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_SECRET_KEY" ] && [ -n "$FEISHU_GROUP_ID" ]; then
+    HAS_FEISHU=true
+    log "✅ 飞书配置已就绪"
+else
+    log "⚠️  飞书配置不完整"
 fi
 
 log "🔥 开始收集 AI 热点资讯..."
@@ -48,19 +54,16 @@ SEARCH_CATEGORIES=()
 if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
     log "📖 从 config.yaml 读取分类配置"
 
-    # 使用 yq 读取每个分类
     while IFS= read -r name; do
         icon=$(yq eval ".CATEGORIES[] | select(.name == \"$name\") | .icon" "$CONFIG_FILE" 2>/dev/null)
         keywords_str=$(yq eval ".CATEGORIES[] | select(.name == \"$name\") | .keywords | join(\"|\")" "$CONFIG_FILE" 2>/dev/null)
 
         if [ -n "$keywords_str" ]; then
             SEARCH_CATEGORIES+=("${icon} ${name}|${keywords_str}")
-            log "   分类: ${icon} ${name}"
         fi
     done < <(yq eval '.CATEGORIES[].name' "$CONFIG_FILE" 2>/dev/null)
 fi
 
-# 如果配置文件读取失败，使用默认类别
 if [ ${#SEARCH_CATEGORIES[@]} -eq 0 ]; then
     log "⚠️  使用默认搜索类别"
     SEARCH_CATEGORIES=(
@@ -78,7 +81,6 @@ declare -a ALL_ITEMS=()
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 if [ "$HAS_BRAVE_API" = true ]; then
-    # 使用 Brave Search API
     for category_line in "${SEARCH_CATEGORIES[@]}"; do
         IFS='|' read -r category_name rest <<< "$category_line"
         queries="$rest"
@@ -90,7 +92,6 @@ if [ "$HAS_BRAVE_API" = true ]; then
             [ $count -gt 3 ] && break
             log "   搜索关键词: $query"
 
-            # 调用 Brave Search API
             response=$(timeout 10 curl -s "https://api.search.brave.com/res/v1/web/search?q=$query&count=3&freshness=pt" \
                 -H "Accept: application/json" \
                 -H "X-Subscription-Token: $BRAVE_API_KEY" 2>&1) || true
@@ -100,7 +101,6 @@ if [ "$HAS_BRAVE_API" = true ]; then
                 continue
             fi
 
-            # 解析结果
             while IFS= read -r item_json; do
                 [ $count -gt 3 ] && break
                 title=$(echo "$item_json" | jq -r '.title // "无标题"' | cut -c1-100)
@@ -118,51 +118,97 @@ if [ "$HAS_BRAVE_API" = true ]; then
         done
     done
 else
-    # Mock 数据模式
     log "📋 使用 mock 数据模式"
-    ALL_ITEMS+=("{\"title\":\"DeepSeek-V3 发布\",\"summary\":\"DeepSeek-V3 在多项基准测试中表现优异\",\"url\":\"https://github.com/deepseek-ai\",\"category\":\"🤖 中美模型厂商\"}")
-    ALL_ITEMS+=("{\"title\":\"OpenAI o1 模型系列\",\"summary\":\"专注于复杂推理任务\",\"url\":\"https://openai.com\",\"category\":\"🤖 中美模型厂商\"}")
-    ALL_ITEMS+=("{\"title\":\"Cursor AI IDE 爆火\",\"summary\":\"集成 GPT-4 和 Claude 的开发者工具\",\"url\":\"https://cursor.sh\",\"category\":\"🔧 AI Agent\"}")
+    ALL_ITEMS+=("{\"title\":\"DeepSeek-V3 发布\",\"summary\":\"DeepSeek-V3 在多项基准测试中表现优异，推理能力显著提升\",\"url\":\"https://github.com/deepseek-ai\",\"category\":\"🤖 中美模型厂商\"}")
+    ALL_ITEMS+=("{\"title\":\"OpenAI o1 模型系列\",\"summary\":\"专注于复杂推理任务，在编程和数学问题上表现突出\",\"url\":\"https://openai.com\",\"category\":\"🤖 中美模型厂商\"}")
+    ALL_ITEMS+=("{\"title\":\"Claude 3.5 Sonnet 升级\",\"summary\":\"提升代码生成和长文本处理能力\",\"url\":\"https://www.anthropic.com\",\"category\":\"🧠 大模型热点\"}")
+    ALL_ITEMS+=("{\"title\":\"Cursor AI IDE 爆火\",\"summary\":\"集成 GPT-4 和 Claude 的开发者工具，月活用户突破百万\",\"url\":\"https://cursor.sh\",\"category\":\"🔧 AI Agent\"}")
+    ALL_ITEMS+=("{\"title\":\"Qwen2.5-Max 开源\",\"summary\":\"阿里通义千问发布新模型，在中文评测中表现优异\",\"url\":\"https://github.com/Qwen/Qwen2.5-Max\",\"category\":\"🧠 大模型热点\"}")
+    ALL_ITEMS+=("{\"title\":\"Google Gemini 2.0 发布\",\"summary\":\"支持多模态输入输出，性能大幅提升\",\"url\":\"https://blog.google/technology/ai/google-gemini-20\",\"category\":\"🤖 中美模型厂商\"}")
 fi
 
-# 发送到 webhook
-if [ -n "$WEBHOOK_URL" ]; then
-    log "📡 正在发送到 webhook..."
+# 按分类组织数据
+log "📊 整理数据，共 ${#ALL_ITEMS[@]} 条..."
 
-    # 构建 JSON
-    ITEMS_JSON=$(IFS=,; echo "${ALL_ITEMS[*]}")
-    ITEMS_JSON="[$ITEMS_JSON]"
+declare -A CATEGORY_ITEMS
+for item in "${ALL_ITEMS[@]}"; do
+    category=$(echo "$item" | jq -r '.category')
+    if [ -n "$category" ] && [ "$category" != "null" ]; then
+        CATEGORY_ITEMS["$category"]+="|$item"
+    fi
+done
 
-    PAYLOAD=$(cat <<EOF
-{
-  "title": "AI 热点资讯",
-  "summary": "AI 行业热点汇总",
-  "items": $ITEMS_JSON,
-  "timestamp": "$TIMESTAMP"
-}
-EOF
-)
+# 构建消息内容
+MESSAGE="🔥 AI 热点资讯\n"
+MESSAGE+="📅 $TIMESTAMP\n\n"
 
-    log "   发送数据: ${#PAYLOAD} 字符"
+for cat in "${!CATEGORY_ITEMS[@]}"; do
+    MESSAGE+="$cat\n"
+    items_str="${CATEGORY_ITEMS[$cat]#|}"
+    IFS='|' read -ra items <<< "$items_str"
+    idx=1
+    for item in "${items[@]}"; do
+        title=$(echo "$item" | jq -r '.title')
+        summary=$(echo "$item" | jq -r '.summary')
+        url=$(echo "$item" | jq -r '.url')
 
-    response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$WEBHOOK_URL" \
+        MESSAGE+="$idx. $title\n"
+        if [ -n "$summary" ] && [ "$summary" != "null" ]; then
+            summary_short=$(echo "$summary" | cut -c1-60)
+            MESSAGE+="   $summary_short"
+            if [ ${#summary} -gt 60 ]; then
+                MESSAGE+="..."
+            fi
+            MESSAGE+="\n"
+        fi
+        if [ -n "$url" ] && [ "$url" != "null" ]; then
+            MESSAGE+="   🔗 $url\n"
+        fi
+        MESSAGE+="\n"
+        ((idx++))
+    done
+done
+
+MESSAGE+="共 ${#ALL_ITEMS[@]} 条 AI 热点资讯"
+
+log "消息长度: ${#MESSAGE} 字符"
+
+# 发送到飞书
+if [ "$HAS_FEISHU" = true ]; then
+    log "📱 正在发送消息到飞书..."
+
+    # 获取 token
+    token_resp=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
         -H "Content-Type: application/json" \
-        -d "$PAYLOAD")
+        -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
 
-    http_code=$(echo "$response" | grep "HTTP_CODE:" | cut -d: -f2)
-    body=$(echo "$response" | grep -v "HTTP_CODE:")
-
-    log "   HTTP 状态码: $http_code"
-    log "   响应: $body"
-
-    if [ "$http_code" = "200" ] || [ "$http_code" = "202" ]; then
-        log "✅ 发送成功！共 ${#ALL_ITEMS[@]} 条"
+    if [ "$(echo "$token_resp" | jq -r '.code')" != "0" ]; then
+        log "❌ 获取飞书 token 失败: $(echo "$token_resp" | jq -r '.msg')"
     else
-        log "⚠️  发送失败，状态码: $http_code"
+        token=$(echo "$token_resp" | jq -r '.tenant_access_token')
+        log "✅ 获取 token 成功"
+
+        # 发送消息
+        msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
+            -H "Authorization: Bearer $token" \
+            -H "Content-Type: application/json" \
+            -d "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":{\"text\":\"$MESSAGE\"}}")
+
+        http_code=$(echo "$msg_resp" | grep "HTTP_CODE:" | cut -d: -f2)
+        body=$(echo "$msg_resp" | grep -v "HTTP_CODE:")
+
+        log "   HTTP 状态码: $http_code"
+        log "   响应: $body"
+
+        if [ "$http_code" = "200" ] || [ "$(echo "$body" | jq -r '.code')" = "0" ]; then
+            log "✅ 发送成功！"
+        else
+            log "❌ 发送失败"
+        fi
     fi
 else
-    log "⚠️  WEBHOOK_URL 未设置，跳过发送"
-    log "   收集到 ${#ALL_ITEMS[@]} 条数据"
+    log "⚠️  飞书配置不完整，跳过发送"
+    log "   消息预览:\n$MESSAGE"
 fi
 
 log "✅ 脚本执行完成"

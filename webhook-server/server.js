@@ -1,16 +1,20 @@
 #!/usr/bin/env node
-// Webhook Server - 支持 AI Hotspot 端点
+// Webhook Server - 支持 AI Hotspot 端点，直接调用飞书 API
+
 import express from 'express';
-import { exec } from 'child_process';
-import { promisify } from 'util';
+import axios from 'axios';
 import { writeFileSync, unlinkSync } from 'fs';
 
-const execAsync = promisify(exec);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 飞书群聊 ID
-const FEISHU_GROUP_ID = 'oc_9a3c218325fd2cfa42f2a8f6fe03ac02';
+// 飞书配置（从环境变量读取）
+const FEISHU_APP_ID = process.env.FEISHU_APP_ID || '';
+const FEISHU_SECRET_KEY = process.env.FEISHU_SECRET_KEY || '';
+const FEISHU_GROUP_ID = process.env.FEISHU_GROUP_ID || 'oc_9a3c218325fd2cfa42f2a8f6fe03ac02';
+
+// Token 缓存
+let tokenCache = { token: null, expireTime: 0 };
 
 // 解析 JSON body
 app.use(express.json({ limit: '10mb' }));
@@ -27,38 +31,68 @@ app.use((req, res, next) => {
   next();
 });
 
-// 通用消息发送函数
-async function sendToFeishu(title, text) {
+// 获取飞书访问令牌
+async function getFeishuToken() {
+  const now = Date.now();
+  if (tokenCache.token && now < tokenCache.expireTime - 60000) {
+    return tokenCache.token;
+  }
+
   try {
-    // 移除 markdown 格式（**粗体**），保留 emoji
+    const response = await axios.post(
+      'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
+      { app_id: FEISHU_APP_ID, app_secret: FEISHU_SECRET_KEY },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+
+    if (response.data.code === 0) {
+      tokenCache = {
+        token: response.data.tenant_access_token,
+        expireTime: now + (response.data.expire - 60) * 1000
+      };
+      return tokenCache.token;
+    }
+    throw new Error(response.data.msg);
+  } catch (error) {
+    console.error('获取飞书 token 失败:', error.message);
+    throw error;
+  }
+}
+
+// 发送消息到飞书
+async function sendToFeishu(text) {
+  try {
+    const token = await getFeishuToken();
+
+    // 移除 markdown 格式，保留 emoji
     let message = text
-      .replace(/\*\*(.*?)\*\*/g, '$1')  // 移除 **粗体**
-      .replace(/`(.*?)`/g, '$1')        // 移除 `行内代码`
-      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // 移除 [链接](url)
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      .replace(/`(.*?)`/g, '$1')
+      .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
 
-    if (title) {
-      title = title.replace(/\*\*(.*?)\*\*/g, '$1')
-      message = `${title}\n\n${message}`
+    const response = await axios.post(
+      `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id`,
+      {
+        receive_id: FEISHU_GROUP_ID,
+        msg_type: 'text',
+        content: JSON.stringify({ text: message })
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if (response.data.code === 0) {
+      console.log(`✅ 消息已发送到飞书群聊 ${FEISHU_GROUP_ID} (${message.length} 字符)`);
+      return true;
     }
-
-    const tempFile = `/tmp/feishu-msg-${Date.now()}.txt`;
-    writeFileSync(tempFile, message, 'utf8');
-
-    const command = `MESSAGE=$(cat ${tempFile}) && clawdbot message send --channel feishu --target '${FEISHU_GROUP_ID}' --message "$MESSAGE"`;
-
-    const { stdout, stderr } = await execAsync(command, { timeout: 30000 });
-
-    try {
-      unlinkSync(tempFile);
-    } catch (e) {}
-
-    if (stderr && !stderr.includes('NO_REPLY')) {
-      console.error(`发送警告: ${stderr}`);
-    }
-    console.log(`✅ 消息已发送到飞书群聊 ${FEISHU_GROUP_ID} (${message.length} 字符)`);
-    return true;
-  } catch (execError) {
-    console.error(`❌ clawdbot message 执行失败:`, execError.message);
+    console.error('发送失败:', response.data.msg);
+    return false;
+  } catch (error) {
+    console.error('发送失败:', error.response?.data || error.message);
     return false;
   }
 }
@@ -115,7 +149,7 @@ app.post('/webhook/ai-hotspot', async (req, res) => {
 
     console.log(`内容长度: ${messageText.length} 字符`);
 
-    await sendToFeishu(title, messageText);
+    await sendToFeishu(messageText);
 
     res.status(202).json({ success: true, message: 'Message queued for delivery' });
   } catch (error) {
