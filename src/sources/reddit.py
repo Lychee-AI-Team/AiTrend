@@ -18,12 +18,22 @@ class RedditSource(DataSource):
     # Pushshift API 地址
     BASE_URL = "api.pullpush.io"
     
-    # AI 相关 subreddit
-    SUBREDDITS = [
-        "ChinaAI", "ChineseAI", "KimiAI", "TongyiQianwen", "WenxinYiyan",
-        "DeepSeekAI", "ByteDanceAI", "TencentAI",
-        "artificial", "MachineLearning", "OpenAI", "ChatGPT", "ClaudeAI",
+    # AI 相关 subreddit（重点监控新产品讨论）
+    # 产品发布类社区（重点）
+    PRODUCT_SUBREDDITS = [
+        "SideProject",      #  side project 发布
+        "startups",         # 创业/产品
+        "indiehackers",     # 独立开发者
+        "alpha", "beta",    # 测试版产品
+        "launches",         # 产品发布
     ]
+    # AI 技术社区
+    AI_SUBREDDITS = [
+        "artificial", "MachineLearning", "OpenAI", "ChatGPT", "ClaudeAI",
+        "LocalLLaMA", "singularity", "GPT3", "StableDiffusion", "Midjourney",
+    ]
+    # 合并
+    SUBREDDITS = PRODUCT_SUBREDDITS + AI_SUBREDDITS
     
     def fetch(self) -> List[Article]:
         """使用 Pushshift API 获取 Reddit AI 相关帖子"""
@@ -95,9 +105,20 @@ class RedditSource(DataSource):
                 comments = post.get('num_comments', 0)
                 selftext = post.get('selftext', '')[:200] if post.get('selftext') else ''
                 
-                # 过滤低质量帖子（降低阈值）
-                if score < 3 or not title:
-                    continue
+                # 新产品检测：标题中包含新产品发布关键词
+                new_product_keywords = [
+                    "launch", "launched", "released", "show hn", "i built", "i made",
+                    "new tool", "new app", "introducing", "announcing", "beta", "alpha"
+                ]
+                is_new_product = any(kw in title.lower() for kw in new_product_keywords)
+                
+                # 放宽过滤：如果是新产品，降低分数要求；否则正常过滤
+                if is_new_product:
+                    if score < 2:  # 新产品阈值更低
+                        continue
+                else:
+                    if score < 10:  # 非新产品需要更高分数
+                        continue
                 
                 # 构建摘要
                 summary = selftext or f"来自 r/{subreddit} 的热门讨论，{comments} 条评论"
