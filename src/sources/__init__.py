@@ -4,7 +4,7 @@
 from typing import Dict, List, Type, Any
 from .base import DataSource, Article
 from .github_trending import GitHubTrendingSource
-from .brave_search import BraveSearchSource
+from .tavily import TavilySource
 from .reddit import RedditSource
 from .hackernews import HackerNewsSource
 from .producthunt import ProductHuntSource
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # 数据源注册表
 SOURCE_REGISTRY: Dict[str, Type[DataSource]] = {
     "github_trending": GitHubTrendingSource,
-    "brave_search": BraveSearchSource,
+    "tavily": TavilySource,
     "reddit": RedditSource,
     "hackernews": HackerNewsSource,
     "producthunt": ProductHuntSource,
