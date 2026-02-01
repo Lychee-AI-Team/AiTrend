@@ -23,8 +23,8 @@
       "enabled": true,
       "api_key": "${BRAVE_API_KEY}",
       "queries": [
-        "Kimi 通义千问 文心一言 国产大模型 DeepSeek 字节 腾讯 阿里 百度",
-        "OpenAI ChatGPT Claude Gemini new model AI tools 2026"
+        "AI工具 实测 使用体验 评测",
+        "大模型对比 用户测试 真实体验"
       ],
       "freshness": "pd",
       "count": 5

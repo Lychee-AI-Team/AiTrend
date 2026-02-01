@@ -73,6 +73,12 @@ class BraveSearchSource(DataSource):
         finally:
             conn.close()
     
+    # 官方新闻源域名（降低权重）
+    OFFICIAL_NEWS_DOMAINS = [
+        "36kr.com", "techcrunch.com", "theverge.com", "venturebeat.com",
+        " bloomberg.com", "reuters.com", "cnbc.com", "forbes.com"
+    ]
+    
     def _parse_results(self, data: dict, query: str) -> List[Article]:
         """解析搜索结果"""
         articles = []
@@ -84,17 +90,31 @@ class BraveSearchSource(DataSource):
                 url = result.get("url", "").strip()
                 description = result.get("description", "").strip()
                 
-                if title and url:
-                    articles.append(Article(
-                        title=title,
-                        url=url,
-                        summary=description,
-                        source="brave_search",
-                        metadata={
-                            "query": query,
-                            "age": result.get("age", "")
-                        }
-                    ))
+                if not title or not url:
+                    continue
+                
+                # 检测是否为官方新闻源
+                is_official_news = any(domain in url.lower() for domain in self.OFFICIAL_NEWS_DOMAINS)
+                
+                # 检测标题是否为官方发布类新闻
+                official_keywords = ["发布", "宣布", "推出", "融资", "上市", "财报", "市值"]
+                is_official_title = any(kw in title for kw in official_keywords) and is_official_news
+                
+                # 官方新闻降低权重（metadata中标记）
+                weight = 0.3 if is_official_news else 1.0
+                
+                articles.append(Article(
+                    title=title,
+                    url=url,
+                    summary=description,
+                    source="brave_search",
+                    metadata={
+                        "query": query,
+                        "age": result.get("age", ""),
+                        "is_official_news": is_official_news,
+                        "weight": weight
+                    }
+                ))
             except Exception as e:
                 logger.debug(f"解析结果失败: {e}")
                 continue

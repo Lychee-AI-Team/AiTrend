@@ -138,32 +138,43 @@ class TrendCollector:
 【数据】
 {content}
 
-【强制要求】
-1. 精选 8-12 个产品按价值排序
-2. 每个产品 2-3 段口语化描述
+【亲密度评估 - 必须执行】
+对每条信息按以下5个维度评分（1-5分）：
+1. 可操作性：用户今天能否开始使用？（工具类5分，新闻类1分）
+2. 决策影响：能否帮助用户做具体决策/行动？（能5分，不能1分）
+3. 使用门槛：普通人5分钟能否上手？（能5分，需要专业背景1分）
+4. 个人收益：对个人工作/生活有无直接提升？（有5分，无1分）
+5. 时间收益：本周内能否见到效果？（能5分，长期趋势1分）
+
+总分=15分以下的信息完全过滤，不输出。
+
+【官方新闻过滤】
+以下类型直接过滤：
+- 公司官方发布（"XX公司发布XX模型"）
+- 行业新闻报道（登上XX杂志、融资XX亿）
+- 模型参数对比（XX战胜XX）
+
+保留：
+- 用户真实评测（"我测试了XX vs XX"）
+- 个人使用体验分享
+- 独立开发者项目
+
+【输出要求】
+1. 从通过评估的信息中精选8-12个
+2. 每个产品2-3段口语化描述
 3. 禁止任何标题行
 4. 第一句直接说"1. **产品名**"
-5. 只编号 1. 2. 3.
-6. 趋势洞察 1-2 段连贯口语，不要列表
-7. 每个产品带链接
+5. 趋势洞察1-2段连贯口语
 
-【Twitter 内容描述方式 - 必须遵守】
-- 格式："@用户名 发布了..."、"@用户名 发现了..."、"@用户名 做了什么..."
-- 用第三人称向用户介绍，不要直接引用推文原文
-- 重点内容可能在作者回复中，要查看并总结
-- 示例：
-  ✅ "@openclaw 在 Twitter 上发布了他的新项目 OpenClaw，这是一个命令行 AI 工具..."
-  ✅ "@rickawsb 发现了一个有趣的 AI 社交网络 Moltbook，里面全是 AI bot..."
-  ❌ "Twitter 上有人说..."、"这条推文内容是..."
+【Twitter描述方式】
+- "@用户名 发布了..."、"@用户名 发现了..."
+- 用第三人称，不要直接引用推文
 
 【输出示例】
-1. **OpenClaw**
-@openclaw 在 Twitter 上发布了他的新项目，这是一个...
-[描述亮点、痛点等]
+1. **产品名**
+@用户名 在Twitter上分享了他的发现...
+[描述]
 👉 链接
-
-2. **产品名**
-...
 
 趋势洞察
 [连贯段落]
@@ -227,8 +238,8 @@ class TrendCollector:
         # 每个来源取前几条
         selected = []
         
-        # 优先取新兴平台的（更可能有新内容）
-        priority_order = ['twitter', 'reddit', 'producthunt', 'hackernews', 'brave_search', 'github_trending']
+        # 优先取用户生成内容平台（降低官方新闻权重）
+        priority_order = ['twitter', 'reddit', 'producthunt', 'hackernews', 'github_trending', 'brave_search']
         for source in priority_order:
             if source in by_source:
                 posts = by_source[source][:5]  # 每个来源最多5条
@@ -237,7 +248,19 @@ class TrendCollector:
         lines = []
         for i, article in enumerate(selected[:20], 1):  # 总共最多20条
             source_tag = f"[{article.source.upper()}]"
-            lines.append(f"{i}. {source_tag} {article.title}")
+            
+            # 检测内容类型标记
+            content_type = ""
+            if article.source == "brave_search" and article.metadata.get("is_official_news"):
+                content_type = "[官方新闻-低权重]"
+            elif article.source in ["twitter", "reddit"]:
+                content_type = "[用户分享]"
+            elif article.source == "producthunt":
+                content_type = "[产品发布]"
+            elif article.source == "hackernews":
+                content_type = "[开发者分享]"
+            
+            lines.append(f"{i}. {source_tag} {content_type} {article.title}")
             lines.append(f"   描述: {article.summary[:150]}")
             lines.append(f"   链接: {article.url}")
             lines.append("")
