@@ -1,54 +1,68 @@
 # AI Hotspot Collector 配置文件
-# 可自定义搜索关键词
+# 可自定义搜索关键词（不需要设置为 secret）
 
 # 搜索配置
 SEARCH_CONFIG:
   # 每页结果数量
-  RESULTS_PER_PAGE: 5
+  RESULTS_PER_PAGE: 3
 
   # 内容过滤
   CONTENT_FILTER:
     # 最小标题长度
     MIN_TITLE_LENGTH: 20
     # 最大描述长度
-    MAX_DESC_LENGTH: 300
+    MAX_DESC_LENGTH: 150
 
-# AI 热点分类及搜索关键词
+# AI 热点分类及搜索关键词（用于 ai-hotspot-collector.sh）
 CATEGORIES:
-  - name: "大模型厂商动态"
-    keywords:
-      - "OpenAI GPT Anthropic Claude DeepSeek Google Gemini 大模型"
+  - name: "中美模型厂商"
     icon: "🤖"
-
-  - name: "AI Agent 系统"
     keywords:
-      - "AI Agent LangGraph AutoGPT CrewAI 智能代理"
+      - "OpenAI"
+      - "Anthropic"
+      - "Google Gemini"
+      - "DeepSeek"
+      - "Meta AI"
+
+  - name: "大模型热点"
     icon: "🧠"
+    keywords:
+      - "GPT-4"
+      - "Claude 3"
+      - "Qwen"
+      - "ChatGLM"
+      - "LLM reasoning"
+
+  - name: "AI Agent"
+    icon: "🔧"
+    keywords:
+      - "AI Agent"
+      - "Claude Code"
+      - "LangGraph"
+      - "AutoGPT"
+      - "CrewAI"
 
   - name: "AI 应用工具"
-    keywords:
-      - "ChatGPT Claude Code GitHub Copilot AI编程工具"
     icon: "🛠️"
+    keywords:
+      - "ChatGPT"
+      - "GitHub Copilot"
+      - "Cursor IDE"
+      - "AI coding"
 
   - name: "AI 行业新闻"
-    keywords:
-      - "AI news artificial intelligence technology 2026"
     icon: "📰"
-
-  - name: "AI 加密货币"
     keywords:
-      - "AI crypto Fetch.ai SingularityNET 人工智能加密货币"
-    icon: "💰"
+      - "AI news 2026"
+      - "artificial intelligence"
+      - "AI technology"
 
   - name: "AI 安全与监管"
-    keywords:
-      - "AI safety regulation ethics AI监管 AI安全"
     icon: "⚖️"
-
-  - name: "AI 研究突破"
     keywords:
-      - "AI research breakthrough paper LLM reasoning"
-    icon: "🔬"
+      - "AI safety"
+      - "AI regulation"
+      - "AI ethics"
 
 # 定时任务配置（GitHub Actions 使用）
 SCHEDULE:

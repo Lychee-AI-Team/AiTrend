@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup jq
-        run: sudo apt-get install -y jq
+      - name: Setup jq and yq
+        run: sudo apt-get install -y jq yq
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
