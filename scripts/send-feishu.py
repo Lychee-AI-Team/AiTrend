@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-# 发送消息到飞书
+# 发送消息到飞书（纯文本，无 markdown）
 
 import json
-import os
 import sys
-import subprocess
 
-def get_token(app_id, secret_key):
-    """获取飞书访问令牌"""
+def send_message(app_id, secret_key, receive_id, message):
+    """发送消息到飞书"""
+    import subprocess
+
+    # 获取 token
     resp = subprocess.run([
         'curl', '-s', '-X', 'POST',
         'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
@@ -18,15 +19,15 @@ def get_token(app_id, secret_key):
     data = json.loads(resp.stdout)
     if data.get('code') != 0:
         print(f"获取 token 失败: {data.get('msg')}")
-        return None
-    return data.get('tenant_access_token')
+        return False
 
-def send_message(token, receive_id, message):
-    """发送消息"""
+    token = data.get('tenant_access_token')
+
+    # 发送消息
     content = json.dumps({'text': message})
     resp = subprocess.run([
         'curl', '-s', '-w', '\nHTTP_CODE:%{http_code}', '-X', 'POST',
-        'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id',
+        f'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id',
         '-H', f'Authorization: Bearer {token}',
         '-H', 'Content-Type: application/json',
         '-d', json.dumps({
@@ -37,10 +38,19 @@ def send_message(token, receive_id, message):
     ], capture_output=True, text=True)
 
     lines = resp.stdout.strip().split('\n')
-    http_code = lines[-1].split(':')[1] if 'HTTP_CODE:' in lines[-1] else '0'
-    body = '\n'.join(lines[:-1]) if 'HTTP_CODE:' in lines[-1] else resp.stdout
+    http_code = '0'
+    body = resp.stdout
+    for line in lines:
+        if 'HTTP_CODE:' in line:
+            http_code = line.split(':')[1]
+            body = '\n'.join([l for l in lines if 'HTTP_CODE:' not in l])
+            break
 
-    data = json.loads(body) if body else {}
+    try:
+        data = json.loads(body) if body else {}
+    except:
+        data = {}
+
     if http_code == '200' or data.get('code') == 0:
         print("✅ 发送成功！")
         return True
@@ -49,7 +59,7 @@ def send_message(token, receive_id, message):
         return False
 
 if __name__ == '__main__':
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         print("用法: send-feishu.py <app_id> <secret_key> <receive_id> <message>")
         sys.exit(1)
 
@@ -58,6 +68,4 @@ if __name__ == '__main__':
     receive_id = sys.argv[3]
     message = sys.argv[4]
 
-    token = get_token(app_id, secret_key)
-    if token:
-        send_message(token, receive_id, message)
+    send_message(app_id, secret_key, receive_id, message)
