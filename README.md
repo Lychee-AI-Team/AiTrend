@@ -13,10 +13,27 @@
 - 👥 **亲民视角**：普通人马上就能用的工具
 - 📝 **口语化表达**：像朋友聊天一样自然
 - 🚫 **零依赖**：纯 Python 标准库，开箱即用
+- 🎯 **AI 自动安装**：提供 [SKILL.md](SKILL.md)，让你的 AI 自主完成安装
 
 ## 🚀 快速开始
 
-### 方式一：作为 OpenClaw Skill 安装（推荐）
+### 🎯 方式一：让 AI 自动安装（推荐）
+
+**只需对你的 AI 说：**
+
+> "请阅读 https://github.com/Lychee-AI-Team/AiTrend/blob/main/SKILL.md 并按照指引安装 AiTrend Skill"
+
+你的 AI 会自动：
+1. 克隆仓库到正确位置
+2. 检查并请求必要的 API Key（仅需 Gemini）
+3. 运行并生成第一条内容
+4. 询问是否需要配置更多数据源
+
+**零配置启动** - 只需一个 Gemini API Key 即可运行！
+
+---
+
+### 💻 方式二：手动安装
 
 #### 1. 安装到 OpenClaw
 
