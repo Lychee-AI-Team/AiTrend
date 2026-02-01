@@ -182,28 +182,30 @@ if [ "$HAS_FEISHU" = true ]; then
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
 
-    if [ "$(echo "$token_resp" | jq -r '.code')" != "0" ]; then
-        log "❌ 获取飞书 token 失败: $(echo "$token_resp" | jq -r '.msg')"
+    token_code=$(echo "$token_resp" | tr -d '\n' | jq -r '.code' 2>/dev/null || echo "1")
+    if [ "$token_code" != "0" ]; then
+        log "❌ 获取飞书 token 失败: $(echo "$token_resp" | tr -d '\n' | jq -r '.msg' 2>/dev/null || echo '未知错误')"
     else
-        token=$(echo "$token_resp" | jq -r '.tenant_access_token')
+        token=$(echo "$token_resp" | tr -d '\n' | jq -r '.tenant_access_token')
         log "✅ 获取 token 成功"
 
-        # 发送消息
+        # 发送消息（处理消息中的换行符）
+        message_escaped=$(echo "$MESSAGE" | jq -Rs '.' | sed 's/^"//' | sed 's/"$//')
         msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
             -H "Authorization: Bearer $token" \
             -H "Content-Type: application/json" \
             -d "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":{\"text\":\"$MESSAGE\"}}")
 
-        http_code=$(echo "$msg_resp" | grep "HTTP_CODE:" | cut -d: -f2)
-        body=$(echo "$msg_resp" | grep -v "HTTP_CODE:")
+        http_code=$(echo "$msg_resp" | grep "HTTP_CODE:" | cut -d: -f2 | tr -d '\r')
+        body=$(echo "$msg_resp" | grep -v "HTTP_CODE:" | tr -d '\r')
 
         log "   HTTP 状态码: $http_code"
-        log "   响应: $body"
 
-        if [ "$http_code" = "200" ] || [ "$(echo "$body" | jq -r '.code')" = "0" ]; then
+        msg_code=$(echo "$body" | jq -r '.code' 2>/dev/null || echo "1")
+        if [ "$http_code" = "200" ] || [ "$msg_code" = "0" ]; then
             log "✅ 发送成功！"
         else
-            log "❌ 发送失败"
+            log "❌ 发送失败: $(echo "$body" | jq -r '.msg' 2>/dev/null || echo '未知错误')"
         fi
     fi
 else
