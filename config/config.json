@@ -1,4 +1,5 @@
 {
+  "language": "zh",
   "sources": {
     "reddit": {
       "enabled": true

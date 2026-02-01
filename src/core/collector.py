@@ -132,8 +132,22 @@ class TrendCollector:
         if not api_key:
             raise ValueError("Gemini API Key 未配置")
         
+        # 获取语言设置
+        language = self.config.get("language", "zh")
+        lang_names = {
+            "zh": "简体中文",
+            "en": "English",
+            "ja": "日本語",
+            "ko": "한국어",
+            "es": "Español"
+        }
+        output_lang = lang_names.get(language, "简体中文")
+        
         content = self._format_for_summary(articles)
         prompt = f"""你是 AI 圈 KOL。基于以下数据输出本周最值得推荐的 AI 产品。
+
+【输出语言要求】
+必须使用 {output_lang} 输出所有内容。
 
 【数据】
 {content}
@@ -147,11 +161,11 @@ class TrendCollector:
 【输出格式】
 1. **产品名**
 @用户名 发现了这个工具...
-[2-3段口语化描述]
+[2-3段口语化描述，使用{output_lang}]
 👉 链接
 
 趋势洞察
-[1-2段连贯口语]
+[1-2段连贯口语，使用{output_lang}]
 
 ---
 数据时间：{datetime.now().strftime('%Y-%m-%d')}"""

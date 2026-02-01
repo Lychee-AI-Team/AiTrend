@@ -289,6 +289,36 @@ MIT License
 
 ---
 
+## 🌐 多语言支持
+
+| 语言 | 文档 |
+|------|------|
+| 简体中文 | [README.md](README.md) |
+| English | [README.en.md](README.en.md) |
+| 日本語 | [README.ja.md](README.ja.md) |
+| 한국어 | [README.ko.md](README.ko.md) |
+| Español | [README.es.md](README.es.md) |
+
+### 语言配置
+
+编辑 `config/config.json` 中的 `language` 字段：
+
+```json
+{
+  "language": "zh",
+  "sources": { ... },
+  "summarizer": { ... }
+}
+```
+
+支持: `zh` (简体中文), `en` (English), `ja` (日本語), `ko` (한국어), `es` (Español)
+
+默认: `zh` (简体中文)
+
+**说明**：数据收集不分语言，仅 AI 总结输出时按配置语言生成。
+
+---
+
 **GitHub**: https://github.com/Lychee-AI-Team/AiTrend  
 **作者**: 屁屁虾🦞  
 **KOL**: 大师
