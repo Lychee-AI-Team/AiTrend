@@ -191,12 +191,12 @@ if [ "$HAS_FEISHU" = true ]; then
         token=$(echo "$token_resp" | grep -o '"tenant_access_token":"[^"]*"' | sed 's/"tenant_access_token":"//' | sed 's/"$//')
         log "✅ 获取 token 成功"
 
-        # 发送消息（正确转义 JSON）
-        content_json=$(jq -n --arg text "$MESSAGE" '{"text": $text}')
+        # 发送消息（手动转义特殊字符）
+        message_escaped=$(echo "$MESSAGE" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g; s/\r/\\r/g' | tr '\n' '\\n' | sed 's/\\n/\\n/g')
         msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
             -H "Authorization: Bearer $token" \
             -H "Content-Type: application/json" \
-            -d "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":$content_json}")
+            -d "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":\"{\\\"text\\\":\\\"$message_escaped\\\"}\"}")
 
         http_code=$(echo "$msg_resp" | grep "HTTP_CODE:" | cut -d: -f2 | tr -d '\r')
         body=$(echo "$msg_resp" | grep -v "HTTP_CODE:" | tr -d '\r')
