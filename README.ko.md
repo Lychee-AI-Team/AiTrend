@@ -1,4 +1,4 @@
-# AiTrend Skill v0.1.0
+# AiTrend Skill v0.1.1
 
 > 🚀 멀티소스 AI 트렌드 수집기 - **누구나 사용할 수 있는 AI 위클리**
 

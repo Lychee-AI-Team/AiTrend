@@ -1,4 +1,4 @@
-# AiTrend Skill v0.1.0
+# AiTrend Skill v0.1.1
 
 > 🚀 Recopilador de Tendencias AI Multi-fuente - **AI Weekly para Todos**
 

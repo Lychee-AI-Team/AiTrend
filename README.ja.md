@@ -1,4 +1,4 @@
-# AiTrend Skill v0.1.0
+# AiTrend Skill v0.1.1
 
 > 🚀 マルチソースAIトレンドコレクター - **誰もが使えるAIウィークリー**
 
