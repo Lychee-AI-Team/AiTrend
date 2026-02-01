@@ -22,19 +22,14 @@ class TwitterSource(DataSource):
         "@karpathy", "@ylecun", "@goodfellow_ian"
     ]
     
-    # AI 关键词（中国:美国 = 7:3）
-    # 中国 AI 关键词（70%）
-    CN_KEYWORDS = [
+    # AI 相关关键词
+    AI_KEYWORDS = [
         "Kimi", "通义千问", "文心一言", "智谱", "DeepSeek",
         "字节跳动", "腾讯", "阿里", "百度", "华为盘古",
-        "中国AI", "国产大模型", "中文大模型", "国内首发"
-    ]
-    # 美国/国际 AI 关键词（30%）
-    INTL_KEYWORDS = [
+        "中国AI", "国产大模型", "中文大模型", "国内首发",
         "OpenAI", "ChatGPT", "Claude", "Gemini", "Anthropic",
-        "new model", "just released", "announcing"
+        "new model", "just released", "announcing",
     ]
-    AI_KEYWORDS = CN_KEYWORDS + INTL_KEYWORDS
     
     def fetch(self) -> List[Article]:
         """获取 Twitter AI 相关内容"""

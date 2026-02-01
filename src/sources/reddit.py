@@ -18,28 +18,12 @@ class RedditSource(DataSource):
     # Pushshift API 地址
     BASE_URL = "api.pullpush.io"
     
-    # AI 相关 subreddit（中国:美国 = 7:3）
-    # 中国 AI 社区（70%）
-    SUBREDDITS_CN = [
-        "ChinaAI",           # 中国AI
-        "ChineseAI",         # 中文AI
-        "KimiAI",           # Kimi
-        "TongyiQianwen",    # 通义千问
-        "WenxinYiyan",      # 文心一言
-        "DeepSeekAI",       # DeepSeek
-        "ByteDanceAI",      # 字节AI
-        "TencentAI",        # 腾讯AI
+    # AI 相关 subreddit
+    SUBREDDITS = [
+        "ChinaAI", "ChineseAI", "KimiAI", "TongyiQianwen", "WenxinYiyan",
+        "DeepSeekAI", "ByteDanceAI", "TencentAI",
+        "artificial", "MachineLearning", "OpenAI", "ChatGPT", "ClaudeAI",
     ]
-    # 国际 AI 社区（30%）
-    SUBREDDITS_INTL = [
-        "artificial",
-        "MachineLearning",
-        "OpenAI",
-        "ChatGPT",
-        "ClaudeAI",
-    ]
-    # 合并列表（保持 7:3 比例）
-    SUBREDDITS = SUBREDDITS_CN + SUBREDDITS_INTL
     
     def fetch(self) -> List[Article]:
         """使用 Pushshift API 获取 Reddit AI 相关帖子"""

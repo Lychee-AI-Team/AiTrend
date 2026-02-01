@@ -17,18 +17,13 @@ class HackerNewsSource(DataSource):
     # HN 官方 API
     BASE_URL = "hacker-news.firebaseio.com"
     
-    # AI 相关关键词（中国:美国 = 7:3）
-    # 中国 AI 关键词（70%）
-    CN_KEYWORDS = [
+    # AI 相关关键词
+    AI_KEYWORDS = [
         "kimi", "通义千问", "文心一言", "智谱", "deepseek",
-        "字节", "腾讯", "阿里", "百度", "华为", "国产", "中文"
-    ]
-    # 美国/国际 AI 关键词（30%）
-    INTL_KEYWORDS = [
+        "字节", "腾讯", "阿里", "百度", "华为", "国产", "中文",
         "openai", "chatgpt", "claude", "anthropic", "gemini",
-        "llm", "ai", "machine learning"
+        "llm", "ai", "machine learning",
     ]
-    AI_KEYWORDS = CN_KEYWORDS + INTL_KEYWORDS
     
     def fetch(self) -> List[Article]:
         """获取 HN 热门 AI 相关帖子"""

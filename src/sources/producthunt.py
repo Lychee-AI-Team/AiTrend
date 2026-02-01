@@ -138,18 +138,13 @@ class ProductHuntSource(DataSource):
         text = (post.title + " " + post.summary).lower()
         topics = [t.lower() for t in post.metadata.get('topics', [])]
         
-        # AI 关键词（中国:美国 = 7:3）
-        # 中国 AI 关键词（70%）
-        cn_keywords = [
+        # AI 相关关键词
+        ai_keywords = [
             "kimi", "tongyi", "wenxin", "deepseek", "chatglm",
-            "中国", "国产", "中文", "字节", "腾讯", "阿里", "百度", "华为"
-        ]
-        # 美国/国际 AI 关键词（30%）
-        intl_keywords = [
+            "中国", "国产", "中文", "字节", "腾讯", "阿里", "百度", "华为",
             "ai", "openai", "chatgpt", "claude", "anthropic", "gemini",
-            "llm", "machine learning", "assistant"
+            "llm", "machine learning", "assistant",
         ]
-        ai_keywords = cn_keywords + intl_keywords
         
         # 检查标题和摘要
         if any(keyword in text for keyword in ai_keywords):
