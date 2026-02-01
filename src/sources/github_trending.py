@@ -18,16 +18,23 @@ class GitHubTrendingSource(DataSource):
     # 要跳过的路径模式
     SKIP_PATTERNS = ['/sponsors', '/trending', '/apps/', '/settings', '/search', '/_graphql', '/explore']
     
+    # AI 特征关键词
+    AI_KEYWORDS = [
+        "ai", "artificial intelligence", "llm", "language model", "gpt", "claude",
+        "openai", "anthropic", "gemini", "kimi", "deepseek", "agent", "rag",
+        "embedding", "vector", "prompt", "chatbot", "copilot", "automation",
+        "ml", "machine learning", "neural", "transformer", "diffusion"
+    ]
+    
     def fetch(self) -> List[Article]:
         """获取 GitHub Trending 数据（同步版本）"""
-        languages = self.config.get("languages", ["python"])
-        min_stars = self.config.get("min_stars", 50)
+        languages = self.config.get("languages", ["python", "typescript", "rust"])
         
         all_articles = []
         
         for lang in languages:
             try:
-                articles = self._fetch_language(lang, min_stars)
+                articles = self._fetch_language(lang)
                 all_articles.extend(articles)
             except Exception as e:
                 logger.error(f"获取 {lang} 趋势失败: {e}")
@@ -63,7 +70,7 @@ class GitHubTrendingSource(DataSource):
             except:
                 html = data.decode('utf-8')
             
-            return self._parse_html(html, language, min_stars)
+            return self._parse_html(html, language)
             
         finally:
             conn.close()
@@ -75,7 +82,7 @@ class GitHubTrendingSource(DataSource):
                 return True
         return False
     
-    def _parse_html(self, html: str, language: str, min_stars: int) -> List[Article]:
+    def _parse_html(self, html: str, language: str) -> List[Article]:
         """解析 HTML 获取仓库信息"""
         articles = []
         
@@ -135,7 +142,11 @@ class GitHubTrendingSource(DataSource):
                     stars_text = stars_match.group(1).replace(',', '')
                     stars = int(stars_text)
                 
-                if stars >= min_stars:
+                # AI 特征检测：标题或描述包含 AI 关键词
+                full_text = f"{repo_name} {description}".lower()
+                is_ai_related = any(kw in full_text for kw in self.AI_KEYWORDS)
+                
+                if is_ai_related:
                     articles.append(Article(
                         title=f"{full_name} ⭐{stars}",
                         url=url,

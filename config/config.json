@@ -17,8 +17,7 @@
     },
     "github_trending": {
       "enabled": true,
-      "languages": ["python", "typescript", "jupyter-notebook"],
-      "min_stars": 300
+      "languages": ["python", "typescript", "rust", "go"]
     },
     "brave_search": {
       "enabled": true,
