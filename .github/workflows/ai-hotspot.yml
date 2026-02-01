@@ -31,6 +31,7 @@ jobs:
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_SECRET_KEY: ${{ secrets.FEISHU_SECRET_KEY }}
           FEISHU_GROUP_ID: ${{ secrets.FEISHU_GROUP_ID }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
