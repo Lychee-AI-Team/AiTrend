@@ -16,23 +16,45 @@
 
 ## 🚀 快速开始
 
-### 1. 克隆项目
+### 方式一：作为 OpenClaw Skill 安装（推荐）
+
+#### 1. 安装到 OpenClaw
 
 ```bash
+# 进入 OpenClaw workspace
+cd ~/.openclaw/workspace
+
+# 克隆 Skill
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
+
+# 安装依赖（如需）
 cd AiTrend
 ```
 
-### 2. 配置环境变量
+#### 2. 配置 API Keys
 
 ```bash
 cp .env.example .env
 # 编辑 .env 文件，填入你的 API Key
 ```
 
-### 3. 运行
+#### 3. 运行
 
 ```bash
+# 直接运行
+python3 -m src
+
+# 或通过 OpenClaw 调用
+openclaw run-skill AiTrend
+```
+
+### 方式二：独立运行
+
+```bash
+git clone https://github.com/Lychee-AI-Team/AiTrend.git
+cd AiTrend
+cp .env.example .env
+# 编辑 .env 填入 API Key
 python3 -m src
 ```
 
@@ -118,6 +140,61 @@ AiTrend/
 ├── README.md                    # 项目说明
 ├── AGENT.md                     # 开发经验总结
 └── LICENSE                      # 许可证
+```
+
+## 🔧 OpenClaw Skill 配置
+
+### 配置文件路径
+
+OpenClaw Skill 配置文件位于 `config/config.json`：
+
+```json
+{
+  "sources": {
+    "reddit": { "enabled": true },
+    "hackernews": { "enabled": true },
+    "producthunt": {
+      "enabled": true,
+      "api_key": "${PRODUCTHUNT_TOKEN}"
+    },
+    "twitter": {
+      "enabled": true,
+      "auth_token": "${TWITTER_AUTH_TOKEN}",
+      "ct0": "${TWITTER_CT0}"
+    },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript", "rust", "go"]
+    },
+    "brave_search": {
+      "enabled": true,
+      "api_key": "${BRAVE_API_KEY}",
+      "queries": [
+        "AI工具 实测 使用体验 评测",
+        "大模型对比 用户测试 真实体验"
+      ]
+    }
+  },
+  "summarizer": {
+    "enabled": true,
+    "provider": "gemini",
+    "model": "gemini-3-flash-preview",
+    "api_key": "${GEMINI_API_KEY}"
+  }
+}
+```
+
+### 定时任务（可选）
+
+在 OpenClaw 中配置定时运行：
+
+```bash
+# 添加定时任务（每周一 9:00）
+openclaw cron add \
+  --name "aitrend-weekly" \
+  --schedule "0 9 * * 1" \
+  --command "python3 -m src" \
+  --cwd "~/.openclaw/workspace/AiTrend"
 ```
 
 ## ⚙️ 配置说明
