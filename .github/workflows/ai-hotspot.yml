@@ -37,8 +37,11 @@ jobs:
         run: |
           chmod +x scripts/ai-hotspot-collector.sh
           bash scripts/ai-hotspot-collector.sh
-      
-      - name: Report summary
-        if: success()
-        run: |
-          echo "## 完成" >> $GITHUB_STEP_SUMMARY
+
+          # 在步骤摘要中输出内容
+          if [ -f scripts/summary-output.txt ]; then
+            echo "## 🔥 AI 热点资讯" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat scripts/summary-output.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
