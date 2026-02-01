@@ -1,0 +1,55 @@
+{
+  "sources": {
+    "reddit": {
+      "enabled": true
+    },
+    "hackernews": {
+      "enabled": true
+    },
+    "producthunt": {
+      "enabled": true,
+      "api_key": "${PRODUCTHUNT_TOKEN}"
+    },
+    "twitter": {
+      "enabled": true,
+      "auth_token": "${TWITTER_AUTH_TOKEN}",
+      "ct0": "${TWITTER_CT0}"
+    },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript"],
+      "min_stars": 500
+    },
+    "brave_search": {
+      "enabled": true,
+      "api_key": "${BRAVE_API_KEY}",
+      "queries": [
+        "AI new model release 2026",
+        "free AI tools productivity",
+        "OpenAI Claude new features"
+      ],
+      "freshness": "pd",
+      "count": 5
+    }
+  },
+  "summarizer": {
+    "enabled": true,
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "api_key": "${GEMINI_API_KEY}",
+    "temperature": 0.7,
+    "max_tokens": 8000
+  },
+  "channels": {
+    "console": {
+      "enabled": true
+    }
+  },
+  "advanced": {
+    "validation": {
+      "enabled": true,
+      "auto_fix": true
+    },
+    "max_retries": 3
+  }
+}

@@ -1,0 +1,22 @@
+# 测试配置
+sources:
+  github_trending:
+    enabled: true
+    languages: ["python"]
+    min_stars: 100
+  
+  brave_search:
+    enabled: false  # 需要 API Key，先禁用
+
+summarizer:
+  enabled: false  # 需要 API Key，先禁用
+
+channels:
+  console:
+    enabled: true  # 只输出到控制台
+
+advanced:
+  validation:
+    enabled: true
+    auto_fix: true
+  max_retries: 3
