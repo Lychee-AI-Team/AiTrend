@@ -191,13 +191,9 @@ if [ "$HAS_FEISHU" = true ]; then
         token=$(echo "$token_resp" | grep -o '"tenant_access_token":"[^"]*"' | sed 's/"tenant_access_token":"//' | sed 's/"$//')
         log "✅ 获取 token 成功"
 
-        # 转义 content 中的特殊字符，然后构造 JSON
-        message_escaped=$(echo "$MESSAGE" | jq -Rs '@text' | sed 's/^"//' | sed 's/"$//')
-        content_str="{\"text\":\"$message_escaped\"}"
-        msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
-            -H "Authorization: Bearer $token" \
-            -H "Content-Type: application/json" \
-            -d "{\"receive_id\":\"$FEISHU_GROUP_ID\",\"msg_type\":\"text\",\"content\":\"$content_str\"}")
+        # 使用 Python 脚本发送消息（避免 bash JSON 转义问题）
+        chmod +x scripts/send-feishu.py
+        python3 scripts/send-feishu.py "$FEISHU_APP_ID" "$FEISHU_SECRET_KEY" "$FEISHU_GROUP_ID" "$MESSAGE"
 
         http_code=$(echo "$msg_resp" | grep "HTTP_CODE:" | cut -d: -f2 | tr -d '\r')
         body=$(echo "$msg_resp" | grep -v "HTTP_CODE:" | tr -d '\r')
