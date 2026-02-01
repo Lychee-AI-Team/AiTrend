@@ -1,107 +1,76 @@
+#!/usr/bin/env python3
 """
-AiTrend Skill 主入口 - 纯标准库版本
+AiTrend - 纯数据收集器
+输出结构化 AI 热点数据，供 OpenClaw 处理和总结
 """
+
 import json
-import logging
+import sys
 import os
-from pathlib import Path
 
-# 先加载环境变量
-from src.utils import load_env_file
-from pathlib import Path
-env_path = Path(__file__).parent.parent / ".env"
-load_env_file(str(env_path))
+# 添加 src 到路径
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.core.collector import TrendCollector
+from src.sources import create_sources
+from src.sources.base import Article
+from typing import List, Dict, Any
 
-# 配置日志
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
-def resolve_env_vars(obj):
-    """递归解析配置中的环境变量引用 ${VAR}"""
-    if isinstance(obj, dict):
-        return {k: resolve_env_vars(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [resolve_env_vars(item) for item in obj]
-    elif isinstance(obj, str):
-        import re
-        # 匹配 ${VAR} 格式
-        pattern = r'\$\{([^}]+)\}'
-        def replace_var(match):
-            var_name = match.group(1)
-            return os.environ.get(var_name, match.group(0))
-        return re.sub(pattern, replace_var, obj)
-    else:
-        return obj
-
-def load_config(config_path: str = None) -> dict:
-    """加载配置文件（JSON 格式，纯标准库）"""
-    if config_path is None:
-        base_dir = Path(__file__).parent.parent
-        config_path = base_dir / "config" / "config.json"
+def collect_data(config: Dict[str, Any]) -> List[Article]:
+    """从所有数据源收集数据"""
+    sources_config = config.get("sources", {})
+    sources = create_sources(sources_config)
     
-    try:
-        with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-            # 解析环境变量
-            return resolve_env_vars(config)
-    except FileNotFoundError:
-        logger.error(f"配置文件不存在: {config_path}")
-        return get_default_config()
-    except Exception as e:
-        logger.error(f"加载配置失败: {e}")
-        return get_default_config()
+    all_articles = []
+    for source in sources:
+        if source.is_enabled():
+            try:
+                articles = source.fetch()
+                all_articles.extend(articles)
+            except Exception as e:
+                print(f"数据源 {source.name} 错误: {e}", file=sys.stderr)
+    
+    return all_articles
 
-def get_default_config() -> dict:
-    """获取默认配置"""
-    return {
-        "sources": {
-            "github_trending": {
-                "enabled": True,
-                "languages": ["python"],
-                "min_stars": 50
-            }
-        },
-        "summarizer": {
-            "enabled": False
-        },
-        "channels": {
-            "console": {
-                "enabled": True
-            }
-        },
-        "advanced": {
-            "validation": {
-                "enabled": True,
-                "auto_fix": True
-            },
-            "max_retries": 3
-        }
-    }
+def format_output(articles: List[Article]) -> str:
+    """格式化为结构化输出"""
+    data = []
+    for article in articles[:20]:  # 最多20条
+        data.append({
+            "title": article.title,
+            "url": article.url,
+            "summary": article.summary,
+            "source": article.source,
+            "metadata": article.metadata
+        })
+    
+    return json.dumps({
+        "count": len(data),
+        "articles": data
+    }, ensure_ascii=False, indent=2)
 
 def main():
     """主函数"""
-    logger.info("🦞 AiTrend Skill v0.1.0 (纯标准库) 启动")
+    # 读取配置
+    config = {
+        "sources": {
+            "reddit": {"enabled": True},
+            "hackernews": {"enabled": True},
+            "github_trending": {
+                "enabled": True,
+                "languages": ["python", "typescript", "rust", "go"]
+            },
+            "twitter": {"enabled": False},
+            "producthunt": {"enabled": False},
+            "brave_search": {"enabled": False}
+        }
+    }
     
-    # 加载配置
-    config = load_config()
+    # 收集数据
+    articles = collect_data(config)
     
-    # 创建收集器并运行
-    collector = TrendCollector(config)
-    success, result = collector.run()
-    
-    if success:
-        logger.info("✅ 任务完成")
-        return result
-    else:
-        logger.error(f"❌ 任务失败: {result}")
-        return None
+    # 输出结构化数据
+    output = format_output(articles)
+    print(output)
 
-if __name__ == "__main__":
-    result = main()
-    if result:
-        print(result)
+if __name__ == '__main__':
+    main()
