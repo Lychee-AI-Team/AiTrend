@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# 发送消息到飞书（纯文本，无 markdown）
+# 发送消息到飞书
 
 import json
 import sys
@@ -23,8 +23,8 @@ def send_message(app_id, secret_key, receive_id, message):
 
     token = data.get('tenant_access_token')
 
-    # 发送消息
-    content = json.dumps({'text': message})
+    # 发送消息 - content 需要是 JSON 字符串（不是嵌套 JSON）
+    # message 中的换行符会正确保留
     resp = subprocess.run([
         'curl', '-s', '-w', '\nHTTP_CODE:%{http_code}', '-X', 'POST',
         f'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id',
@@ -33,7 +33,7 @@ def send_message(app_id, secret_key, receive_id, message):
         '-d', json.dumps({
             'receive_id': receive_id,
             'msg_type': 'text',
-            'content': content
+            'content': json.dumps({'text': message})  # 嵌套 JSON 需要转成字符串
         })
     ], capture_output=True, text=True)
 
