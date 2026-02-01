@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.sources import create_sources
 from src.sources.base import Article
+from src.core.deduplicator import ArticleDeduplicator
 from typing import List, Dict, Any
 
 def collect_data(config: Dict[str, Any]) -> List[Article]:
@@ -59,16 +60,32 @@ def main():
                 "enabled": True,
                 "languages": ["python", "typescript", "rust", "go"]
             },
+            "tavily": {
+                "enabled": True,
+                "api_key": os.getenv("TAVILY_API_KEY", ""),
+                "queries": [
+                    "latest AI tools launch 2026",
+                    "new AI models released this week"
+                ]
+            },
             "twitter": {"enabled": False},
-            "producthunt": {"enabled": False},
-            "brave_search": {"enabled": False}
+            "producthunt": {"enabled": False}
         }
     }
+    
+    # 初始化去重器
+    deduplicator = ArticleDeduplicator()
     
     # 收集数据
     articles = collect_data(config)
     
-    # 输出结构化数据
+    # 去重：过滤掉24小时内已发送的文章
+    articles = deduplicator.filter_new_articles(articles)
+    
+    # 记录本次将要发送的文章
+    deduplicator.record_sent_articles(articles)
+    
+    # 输出去重后的数据
     output = format_output(articles)
     print(output)
 
