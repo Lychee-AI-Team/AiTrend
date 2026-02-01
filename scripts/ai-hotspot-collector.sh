@@ -54,34 +54,41 @@ SEARCH_CATEGORIES=()
 if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
     log "📖 从 config.yaml 读取分类配置"
 
-    # 使用 yq 逐个读取分类（带错误处理）
-    for i in $(seq 0 100); do
-        name=$(yq eval ".CATEGORIES[$i].name" "$CONFIG_FILE" 2>/dev/null || echo "")
-        icon=$(yq eval ".CATEGORIES[$i].icon" "$CONFIG_FILE" 2>/dev/null || echo "")
+    # 使用 grep+sed 解析 YAML（更可靠）
+    current_name=""
+    current_icon=""
+    keywords=""
 
-        if [ -z "$name" ] || [ "$name" = "null" ] || [ "$name" = "" ]; then
-            break
-        fi
-
-        # 读取所有关键词
-        keywords=""
-        for j in $(seq 0 100); do
-            keyword=$(yq eval ".CATEGORIES[$i].keywords[$j]" "$CONFIG_FILE" 2>/dev/null || echo "")
-            if [ -z "$keyword" ] || [ "$keyword" = "null" ] || [ "$keyword" = "" ]; then
-                break
+    while IFS= read -r line; do
+        # 检测新分类开始
+        if [[ "$line" =~ ^[[:space:]]*-[[:space:]]+name:[[:space:]]+\"([^\"]+)\" ]]; then
+            # 保存上一个分类
+            if [ -n "$current_name" ] && [ -n "$keywords" ]; then
+                SEARCH_CATEGORIES+=("${current_icon} ${current_name}|${keywords}")
+                log "   分类: ${current_icon} ${current_name}"
             fi
+            current_name="${BASH_REMATCH[1]}"
+            current_icon=""
+            keywords=""
+        # 检测 icon
+        elif [[ "$line" =~ ^[[:space:]]+icon:[[:space:]]+\"([^\"]+)\" ]]; then
+            current_icon="${BASH_REMATCH[1]}"
+        # 检测 keyword
+        elif [[ "$line" =~ ^[[:space:]]+-[[:space:]]+\"([^\"]+)\" ]]; then
+            keyword="${BASH_REMATCH[1]}"
             if [ -z "$keywords" ]; then
                 keywords="$keyword"
             else
                 keywords="$keywords|$keyword"
             fi
-        done
-
-        if [ -n "$keywords" ]; then
-            SEARCH_CATEGORIES+=("${icon} ${name}|${keywords}")
-            log "   分类: ${icon} ${name}"
         fi
-    done
+    done < "$CONFIG_FILE"
+
+    # 保存最后一个分类
+    if [ -n "$current_name" ] && [ -n "$keywords" ]; then
+        SEARCH_CATEGORIES+=("${current_icon} ${current_name}|${keywords}")
+        log "   分类: ${current_icon} ${current_name}"
+    fi
 fi
 
 if [ ${#SEARCH_CATEGORIES[@]} -eq 0 ]; then
