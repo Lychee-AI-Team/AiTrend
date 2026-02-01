@@ -132,8 +132,9 @@ log "📊 整理数据，共 ${#ALL_ITEMS[@]} 条..."
 
 declare -A CATEGORY_ITEMS
 for item in "${ALL_ITEMS[@]}"; do
-    category=$(echo "$item" | jq -r '.category')
-    if [ -n "$category" ] && [ "$category" != "null" ]; then
+    # 使用 grep + sed 提取，避免 jq 解析问题
+    category=$(echo "$item" | grep -o '"category":"[^"]*"' | sed 's/"category":"//' | sed 's/"$//')
+    if [ -n "$category" ]; then
         CATEGORY_ITEMS["$category"]+="|$item"
     fi
 done
@@ -148,9 +149,9 @@ for cat in "${!CATEGORY_ITEMS[@]}"; do
     IFS='|' read -ra items <<< "$items_str"
     idx=1
     for item in "${items[@]}"; do
-        title=$(echo "$item" | jq -r '.title')
-        summary=$(echo "$item" | jq -r '.summary')
-        url=$(echo "$item" | jq -r '.url')
+        title=$(echo "$item" | grep -o '"title":"[^"]*"' | sed 's/"title":"//' | sed 's/"$//')
+        summary=$(echo "$item" | grep -o '"summary":"[^"]*"' | sed 's/"summary":"//' | sed 's/"$//')
+        url=$(echo "$item" | grep -o '"url":"[^"]*"' | sed 's/"url":"//' | sed 's/"$//')
 
         MESSAGE+="$idx. $title\n"
         if [ -n "$summary" ] && [ "$summary" != "null" ]; then
@@ -182,15 +183,15 @@ if [ "$HAS_FEISHU" = true ]; then
         -H "Content-Type: application/json" \
         -d "{\"app_id\": \"$FEISHU_APP_ID\", \"app_secret\": \"$FEISHU_SECRET_KEY\"}")
 
-    token_code=$(echo "$token_resp" | tr -d '\n' | jq -r '.code' 2>/dev/null || echo "1")
+    token_code=$(echo "$token_resp" | grep -o '"code":[0-9]*' | cut -d: -f2)
     if [ "$token_code" != "0" ]; then
-        log "❌ 获取飞书 token 失败: $(echo "$token_resp" | tr -d '\n' | jq -r '.msg' 2>/dev/null || echo '未知错误')"
+        token_msg=$(echo "$token_resp" | grep -o '"msg":"[^"]*"' | sed 's/"msg":"//' | sed 's/"$//')
+        log "❌ 获取飞书 token 失败: $token_msg"
     else
-        token=$(echo "$token_resp" | tr -d '\n' | jq -r '.tenant_access_token')
+        token=$(echo "$token_resp" | grep -o '"tenant_access_token":"[^"]*"' | sed 's/"tenant_access_token":"//' | sed 's/"$//')
         log "✅ 获取 token 成功"
 
-        # 发送消息（处理消息中的换行符）
-        message_escaped=$(echo "$MESSAGE" | jq -Rs '.' | sed 's/^"//' | sed 's/"$//')
+        # 发送消息
         msg_resp=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id" \
             -H "Authorization: Bearer $token" \
             -H "Content-Type: application/json" \
@@ -201,11 +202,12 @@ if [ "$HAS_FEISHU" = true ]; then
 
         log "   HTTP 状态码: $http_code"
 
-        msg_code=$(echo "$body" | jq -r '.code' 2>/dev/null || echo "1")
+        msg_code=$(echo "$body" | grep -o '"code":[0-9]*' | cut -d: -f2)
         if [ "$http_code" = "200" ] || [ "$msg_code" = "0" ]; then
             log "✅ 发送成功！"
         else
-            log "❌ 发送失败: $(echo "$body" | jq -r '.msg' 2>/dev/null || echo '未知错误')"
+            msg_error=$(echo "$body" | grep -o '"msg":"[^"]*"' | sed 's/"msg":"//' | sed 's/"$//')
+            log "❌ 发送失败: $msg_error"
         fi
     fi
 else
