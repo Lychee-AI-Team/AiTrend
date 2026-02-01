@@ -17,16 +17,19 @@
     },
     "github_trending": {
       "enabled": true,
-      "languages": ["python", "typescript"],
-      "min_stars": 500
+      "languages": ["python", "typescript", "jupyter-notebook"],
+      "keywords": ["kimi", "qianwen", "wenxin", "tongyi", "deepseek", "chatglm"],
+      "min_stars": 300
     },
     "brave_search": {
       "enabled": true,
       "api_key": "${BRAVE_API_KEY}",
       "queries": [
-        "AI new model release 2026",
-        "free AI tools productivity",
-        "OpenAI Claude new features"
+        "Kimi 通义千问 文心一言 国产大模型 2026",
+        "DeepSeek 字节跳动 腾讯AI 阿里AI 百度AI",
+        "智谱AI 华为盘古 中文大模型 国内首发",
+        "OpenAI ChatGPT Claude new features 2026",
+        "Gemini Anthropic AI tools productivity"
       ],
       "freshness": "pd",
       "count": 5
