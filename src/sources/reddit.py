@@ -105,20 +105,9 @@ class RedditSource(DataSource):
                 comments = post.get('num_comments', 0)
                 selftext = post.get('selftext', '')[:200] if post.get('selftext') else ''
                 
-                # 新产品检测：标题中包含新产品发布关键词
-                new_product_keywords = [
-                    "launch", "launched", "released", "show hn", "i built", "i made",
-                    "new tool", "new app", "introducing", "announcing", "beta", "alpha"
-                ]
-                is_new_product = any(kw in title.lower() for kw in new_product_keywords)
-                
-                # 放宽过滤：如果是新产品，降低分数要求；否则正常过滤
-                if is_new_product:
-                    if score < 2:  # 新产品阈值更低
-                        continue
-                else:
-                    if score < 10:  # 非新产品需要更高分数
-                        continue
+                # 放宽过滤：只要有一定互动就保留
+                if score < 3 and comments < 5:
+                    continue
                 
                 # 构建摘要
                 summary = selftext or f"来自 r/{subreddit} 的热门讨论，{comments} 条评论"
