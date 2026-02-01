@@ -54,20 +54,20 @@ SEARCH_CATEGORIES=()
 if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
     log "📖 从 config.yaml 读取分类配置"
 
-    # 使用 yq 逐个读取分类
+    # 使用 yq 逐个读取分类（带错误处理）
     for i in $(seq 0 100); do
-        name=$(yq eval ".CATEGORIES[$i].name // \"\"" "$CONFIG_FILE" 2>/dev/null)
-        icon=$(yq eval ".CATEGORIES[$i].icon // \"\"" "$CONFIG_FILE" 2>/dev/null)
+        name=$(yq eval ".CATEGORIES[$i].name" "$CONFIG_FILE" 2>/dev/null || echo "")
+        icon=$(yq eval ".CATEGORIES[$i].icon" "$CONFIG_FILE" 2>/dev/null || echo "")
 
-        if [ -z "$name" ] || [ "$name" = "null" ]; then
+        if [ -z "$name" ] || [ "$name" = "null" ] || [ "$name" = "" ]; then
             break
         fi
 
         # 读取所有关键词
         keywords=""
         for j in $(seq 0 100); do
-            keyword=$(yq eval ".CATEGORIES[$i].keywords[$j] // \"\"" "$CONFIG_FILE" 2>/dev/null)
-            if [ -z "$keyword" ] || [ "$keyword" = "null" ]; then
+            keyword=$(yq eval ".CATEGORIES[$i].keywords[$j]" "$CONFIG_FILE" 2>/dev/null || echo "")
+            if [ -z "$keyword" ] || [ "$keyword" = "null" ] || [ "$keyword" = "" ]; then
                 break
             fi
             if [ -z "$keywords" ]; then
