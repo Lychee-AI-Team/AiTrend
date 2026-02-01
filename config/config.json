@@ -7,11 +7,11 @@
       "enabled": true
     },
     "producthunt": {
-      "enabled": true,
+      "enabled": false,
       "api_key": "${PRODUCTHUNT_TOKEN}"
     },
     "twitter": {
-      "enabled": true,
+      "enabled": false,
       "auth_token": "${TWITTER_AUTH_TOKEN}",
       "ct0": "${TWITTER_CT0}"
     },
@@ -20,7 +20,7 @@
       "languages": ["python", "typescript", "rust", "go"]
     },
     "brave_search": {
-      "enabled": true,
+      "enabled": false,
       "api_key": "${BRAVE_API_KEY}",
       "queries": [
         "AI工具 实测 使用体验 评测",
