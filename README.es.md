@@ -7,13 +7,29 @@
 
 ## ✨ Características
 
-- 🔥 **Recopilación Multi-fuente**: Twitter, Product Hunt, HackerNews, GitHub, Brave Search, Reddit
-- 🤖 **Resumen AI**: Análisis inteligente con Gemini 3 Flash Preview
-- 👥 **Amigable**: Herramientas que cualquiera puede usar inmediatamente
-- 📝 **Estilo Conversacional**: Expresión natural como charlar con amigos
-- 🚫 **Cero Dependencias**: Solo biblioteca estándar de Python, listo para usar
-- 🌐 **Multi-idioma**: Soporte para 5+ idiomas (solo salida de resumen AI)
-- 🎯 **Auto-instalación AI**: Proporciona [SKILL.md](SKILL.md) para auto-instalación
+### 🔥 Minería Multi-fuente
+- **6 Fuentes de Datos**: Tavily, HackerNews, GitHub, Reddit, Twitter, Product Hunt
+- **Búsqueda AI-Nativo**: Tavily diseñado para LLMs, devuelve contenido completo
+- **Hotspots en Tiempo Real**: Monitoreo de redes sociales
+- **Inicio Zero-config**: Solo se necesita Tavily Key
+
+### 🔄 Deduplicación Inteligente
+- **Ventana Deslizante 24h**: El mismo contenido no se repite
+- **Deduplicación URL**: Filtra automáticamente enlaces duplicados
+- **Memoria Persistente**: Seguimiento local de contenido enviado
+- **Forzar 10 Items**: Mínimo 10 productos por salida
+
+### 🤖 Integración OpenClaw
+- **Depende de OpenClaw**: Enrutamiento de mensajes, programación, resumen LLM
+- **Colección de Datos Pura**: Enfocado en minería, no en envío/resumen
+- **Multi-canal**: Enviar a cualquier plataforma vía OpenClaw
+- **Programación Automática**: Entrega diaria a las 09:00
+
+### 🌐 Soporte Multi-idioma
+- **5 Idiomas**: Chino, Inglés, Japonés, Coreano, Español
+- **Cambio con Un Clic**: Cambiar idioma de salida en la configuración
+- **Adaptación Inteligente**: La recopilación de datos es independiente del idioma
+- **Descripciones Detalladas**: 200+ palabras por producto
 
 ## 🚀 Inicio Rápido
 
@@ -25,11 +41,12 @@
 
 Tu AI automáticamente:
 1. Clona el repositorio en la ubicación correcta
-2. Verifica y solicita las API Keys necesarias (solo Gemini requerido)
-3. Ejecuta y genera el primer contenido
-4. Pregunta si deseas configurar más fuentes de datos
+2. Verifica y solicita la API Key necesaria (solo Tavily)
+3. Ejecuta y recopila datos
+4. Genera resumen conversacional vía OpenClaw LLM
+5. Envía a tu plataforma preferida
 
-**Inicio sin configuración** - ¡Solo se necesita una API Key de Gemini!
+**Inicio sin configuración** - ¡Solo se necesita una API Key de Tavily!
 
 ---
 
@@ -43,6 +60,17 @@ cp .env.example .env
 python3 -m src
 ```
 
+## 📊 Fuentes de Datos
+
+| Fuente | Tipo | API Key Requerida | Descripción |
+|--------|------|-------------------|-------------|
+| Tavily | Búsqueda AI | ✅ Requerida | Búsqueda AI-nativa, devuelve contenido completo |
+| HackerNews | Comunidad de Desarrolladores | ❌ No | Show HN y discusiones populares |
+| GitHub | Código Abierto | ❌ No | Proyectos AI en tendencia |
+| Reddit | Comunidad | ❌ No | SideProject y más |
+| Twitter/X | Tiempo Real | ⚠️ Opcional | Contenido viral y discusiones |
+| Product Hunt | Nuevos Productos | ⚠️ Opcional | Nuevos lanzamientos diarios |
+
 ## 🌐 Configuración de Idioma
 
 Edita `config/config.json`:
@@ -55,7 +83,7 @@ Edita `config/config.json`:
 }
 ```
 
-Idiomas soportados: `zh` (Chino), `en` (Inglés), `ja` (Japonés), `ko` (Coreano), `es` (Español)
+Soportado: `zh` (Chino), `en` (Inglés), `ja` (Japonés), `ko` (Coreano), `es` (Español)
 
 Predeterminado: `zh` (Chino Simplificado)
 

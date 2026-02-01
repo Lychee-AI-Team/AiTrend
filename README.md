@@ -48,35 +48,39 @@
 <td width="50%">
 
 ### 🔥 多源挖掘
-- **6大数据源**：Twitter、Product Hunt、HackerNews、GitHub、Brave Search、Reddit
-- **零配置启动**：仅需 Gemini Key，其他数据源可选
+- **6大数据源**：Tavily、HackerNews、GitHub、Reddit、Twitter、Product Hunt
+- **AI 原生搜索**：Tavily 专为 LLM 设计，返回完整内容
 - **实时热点**：社交媒体监控，发现正在发生的内容
+- **零配置启动**：仅需 Tavily Key，其他数据源可选
 
 </td>
 <td width="50%">
 
-### 🤖 AI 智能总结
-- **Gemini 3 Flash**：最新模型，快速准确
-- **亲密度评估**：过滤官方新闻，保留用户真实体验
-- **口语化输出**：像朋友聊天一样自然
+### 🔄 智能去重
+- **24小时滑动窗口**：同一条内容不会重复出现
+- **URL 去重**：自动识别并过滤重复链接
+- **记忆持久化**：本地记录已发送内容
+- **强制10条**：每次输出最少10个产品
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### 🌐 多语言支持
-- **5种语言**：中、英、日、韩、西
-- **一键切换**：修改配置即可更换输出语言
-- **智能适配**：数据不分语言，总结按语言输出
+### 🤖 OpenClaw 集成
+- **依赖 OpenClaw**：消息路由、定时任务、大模型总结
+- **纯数据收集**：专注挖掘，不处理发送和总结
+- **多渠道支持**：通过 OpenClaw 发送到任意平台
+- **定时自动**：每天 09:00 自动发送
 
 </td>
 <td width="50%">
 
-### 🎯 AI 自动安装
-- **零门槛**：让 AI 阅读 SKILL.md 自动完成安装
-- **引导配置**：安装向导帮助用户获取 API Key
-- **即装即用**：首次运行即可生成内容
+### 🌐 多语言支持
+- **5种语言**：中、英、日、韩、西
+- **一键切换**：修改配置即可更换输出语言
+- **智能适配**：数据不分语言，总结按语言输出
+- **详细描述**：每个产品 200+ 字深度解读
 
 </td>
 </tr>
@@ -91,6 +95,21 @@
 
 ---
 
+## 📊 数据源
+
+| 数据源 | 类型 | 需要 API Key | 说明 |
+|--------|------|--------------|------|
+| Tavily | AI 搜索 | ✅ 必需 | AI 原生搜索引擎，返回完整内容 |
+| HackerNews | 开发者社区 | ❌ 否 | Show HN 和热门讨论 |
+| GitHub | 开源项目 | ❌ 否 | Trending AI 项目 |
+| Reddit | 社区讨论 | ❌ 否 | SideProject 等社区 |
+| Twitter/X | 实时内容 | ⚠️ 可选 | Viral 内容和讨论 |
+| Product Hunt | 新产品 | ⚠️ 可选 | 每日新上线产品 |
+
+**默认启用**：Tavily + HackerNews + GitHub + Reddit
+
+---
+
 ## 🚀 快速开始
 
 ### 🎯 方式一：让 AI 自动安装（推荐）
@@ -101,11 +120,12 @@
 
 你的 AI 会自动：
 1. 克隆仓库到正确位置
-2. 检查并请求必要的 API Key（仅需 Gemini）
+2. 检查并请求必要的 API Key（仅需 Tavily）
 3. 运行并生成第一条内容
-4. 询问是否需要配置更多数据源
+4. 通过 OpenClaw 大模型生成口语化总结
+5. 发送到飞书/其他平台
 
-**零配置启动** - 只需一个 Gemini API Key 即可运行！
+**零配置启动** - 只需一个 Tavily API Key 即可运行！
 
 ---
 
@@ -146,14 +166,13 @@ python3 -m src
 创建 `.env` 文件：
 
 ```bash
-# 必需
-GEMINI_API_KEY=your_gemini_api_key_here
+# 必需（AI 原生搜索引擎）
+TAVILY_API_KEY=your_tavily_api_key_here
 
 # 可选（增强数据源）
 TWITTER_AUTH_TOKEN=your_twitter_token
 TWITTER_CT0=your_twitter_ct0
 PRODUCTHUNT_TOKEN=your_producthunt_token
-BRAVE_API_KEY=your_brave_api_key
 ```
 
 ---
@@ -181,13 +200,20 @@ BRAVE_API_KEY=your_brave_api_key
 ### 定时任务
 
 ```bash
-# 每周一 9:00 自动运行
+# 每天早上 9:00 自动运行
 openclaw cron add \
-  --name "aitrend-weekly" \
-  --schedule "0 9 * * 1" \
+  --name "aitrend-daily" \
+  --schedule "0 9 * * *" \
   --command "python3 -m src" \
   --cwd "~/.openclaw/workspace/AiTrend"
 ```
+
+### 触发指令
+
+随时发送以下指令触发：
+- "最新AI热点"
+- "AI热点"
+- "热点新闻"
 
 ---
 
@@ -226,10 +252,12 @@ AiTrend/
 
 | 维度 | 传统方式 | AiTrend |
 |------|----------|---------|
-| **信息源** | 关键词搜索 → 旧闻 | 社交媒体监控 → 实时热点 |
-| **筛选方式** | 看 star 数 → 老项目 | AI 理解创新点 → 新工具 |
-| **内容呈现** | 行业高度 → 看不懂 | 亲民视角 → 马上能用 |
-| **安装门槛** | 复杂配置 | 零配置启动 |
+| **架构** | 单体应用，自行处理全部流程 | 专注数据收集，OpenClaw 处理路由和总结 |
+| **信息源** | 关键词搜索 → 旧闻 | Tavily AI 搜索 + 社交媒体监控 → 实时热点 |
+| **内容去重** | 无，容易重复 | 24小时滑动窗口，自动去重 |
+| **筛选方式** | 看 star 数 → 老项目 | 亲密度评估，过滤官方新闻 |
+| **输出数量** | 不固定 | 强制 10 条，详细描述 |
+| **安装门槛** | 复杂配置 | 零配置，AI 自动安装 |
 
 ---
 

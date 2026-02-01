@@ -82,6 +82,15 @@ def main():
     # 去重：过滤掉24小时内已发送的文章
     articles = deduplicator.filter_new_articles(articles)
     
+    # 额外去重：同一URL只保留一条（基于本次收集的数据）
+    seen_urls = set()
+    unique_articles = []
+    for article in articles:
+        if article.url and article.url not in seen_urls:
+            seen_urls.add(article.url)
+            unique_articles.append(article)
+    articles = unique_articles
+    
     # 记录本次将要发送的文章
     deduplicator.record_sent_articles(articles)
     
