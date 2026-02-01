@@ -61,25 +61,27 @@ if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
 
     while IFS= read -r line; do
         # 检测新分类开始
-        if [[ "$line" =~ ^[[:space:]]*-[[:space:]]+name:[[:space:]]+\"([^\"]+)\" ]]; then
+        if [[ "$line" =~ ^[[:space:]]*-[[:space:]]*name:[[:space:]]*\"([^\"]+)\" ]]; then
             # 保存上一个分类
             if [ -n "$current_name" ] && [ -n "$keywords" ]; then
                 SEARCH_CATEGORIES+=("${current_icon} ${current_name}|${keywords}")
-                log "   分类: ${current_icon} ${current_name}"
+                log "   分类: ${current_icon} ${current_name} (${keywords})"
             fi
             current_name="${BASH_REMATCH[1]}"
             current_icon=""
             keywords=""
         # 检测 icon
-        elif [[ "$line" =~ ^[[:space:]]+icon:[[:space:]]+\"([^\"]+)\" ]]; then
+        elif [[ "$line" =~ ^[[:space:]]*icon:[[:space:]]*\"([^\"]+)\" ]]; then
             current_icon="${BASH_REMATCH[1]}"
-        # 检测 keyword
-        elif [[ "$line" =~ ^[[:space:]]+-[[:space:]]+\"([^\"]+)\" ]]; then
+        # 检测 keyword - 更宽松的匹配
+        elif [[ "$line" =~ ^[[:space:]]*-[[:space:]]*\"([^\"]+)\" ]]; then
             keyword="${BASH_REMATCH[1]}"
-            if [ -z "$keywords" ]; then
-                keywords="$keyword"
-            else
-                keywords="$keywords|$keyword"
+            if [ -n "$keyword" ]; then
+                if [ -z "$keywords" ]; then
+                    keywords="$keyword"
+                else
+                    keywords="$keywords|$keyword"
+                fi
             fi
         fi
     done < "$CONFIG_FILE"
@@ -87,7 +89,7 @@ if [ -f "$CONFIG_FILE" ] && command -v yq >/dev/null 2>&1; then
     # 保存最后一个分类
     if [ -n "$current_name" ] && [ -n "$keywords" ]; then
         SEARCH_CATEGORIES+=("${current_icon} ${current_name}|${keywords}")
-        log "   分类: ${current_icon} ${current_name}"
+        log "   分类: ${current_icon} ${current_name} (${keywords})"
     fi
 fi
 
