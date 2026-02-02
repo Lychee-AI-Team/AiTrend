@@ -1,0 +1,47 @@
+{
+  "batch_id": "20260202_194112",
+  "contents": [
+    {
+      "id": 9903,
+      "title": "Wikipedia as a doomscrollable social media feed – HackerNews 热门讨论，88 条评论...",
+      "original_title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
+      "content": "Wikipedia as a doomscrollable social media feed 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。\n\n主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。\n\n技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。\n\nhttps://xikipedia.org",
+      "url": "https://xikipedia.org",
+      "source": "hackernews",
+      "metadata": {
+        "score": 242,
+        "comments": 88,
+        "type": "show_hn",
+        "collector_source": "hackernews"
+      }
+    },
+    {
+      "id": 2820,
+      "title": "Minimal – I would like to share Minimal - Its a open source...",
+      "original_title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
+      "content": "Minimal 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。\n\n具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。\n\n开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。\n\nhttps://github.com/rtvkiz/minimal",
+      "url": "https://github.com/rtvkiz/minimal",
+      "source": "hackernews",
+      "metadata": {
+        "score": 112,
+        "comments": 28,
+        "type": "show_hn",
+        "collector_source": "hackernews"
+      }
+    },
+    {
+      "id": 7830,
+      "title": "ÆTHRA – Hi HN<p>I’m building ÆTHRA — a programming languag...",
+      "original_title": "[Show HN] Show HN: ÆTHRA – Writing Music as Code",
+      "content": "ÆTHRA 让你用写代码的方式创作音乐。它把音符、节奏、和声抽象成编程概念，可以用类似函数调用的方式组合出完整的音乐片段。\n\n适合有一定音乐基础但不想学习复杂 DAW 软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。支持导出 MIDI 和音频文件，可以直接导入到其他软件里继续编辑。\n\nShow HN 评论区有音乐人分享了自己用它创作的作品，说这种代码化思维方式对创作某些类型的电子音乐特别合适。也有人提到学习曲线还是有点陡，需要同时懂编程和音乐理论。\n\nhttps://news.ycombinator.com/item?id=46820691",
+      "url": "https://news.ycombinator.com/item?id=46820691",
+      "source": "hackernews",
+      "metadata": {
+        "score": 82,
+        "comments": 26,
+        "type": "show_hn",
+        "collector_source": "hackernews"
+      }
+    }
+  ]
+}

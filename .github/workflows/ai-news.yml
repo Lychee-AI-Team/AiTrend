@@ -1,0 +1,75 @@
+# AI News Collector - GitHub Action
+
+name: Daily AI News Collection
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 01:00 UTC (09:00 CST)
+  workflow_dispatch:     # 支持手动触发
+
+jobs:
+  collect-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install axios cheerio
+      
+      - name: Run collector script
+        id: collect
+        run: node scripts/collect-news.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Show result.json
+        if: success()
+        run: |
+          echo "=== result.json 内容 ==="
+          cat result.json
+          echo "=== 文件大小 ==="
+          wc -c result.json
+      
+      - name: Send to webhook
+        if: success()
+        run: |
+          echo "开始发送 webhook..."
+          echo "WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}"
+          
+          # 发送到 AI News 专用端点
+          AI_NEWS_WEBHOOK="${{ secrets.WEBHOOK_URL }}/webhook/ai-news"
+          echo "AI_NEWS_WEBHOOK: $AI_NEWS_WEBHOOK"
+          
+          RESPONSE=$(curl -s -w '\nHTTP_CODE:%{http_code}\n' \
+            -X POST "$AI_NEWS_WEBHOOK" \
+            -H 'Content-Type: application/json' \
+            -d @result.json)
+          
+          echo "$RESPONSE"
+          
+          # 检查 HTTP 状态码
+          HTTP_CODE=$(echo "$RESPONSE" | grep -o 'HTTP_CODE:[0-9]*' | cut -d: -f2)
+          echo "HTTP 响应码: $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" != "202" ] && [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ Webhook 发送失败 (状态码: $HTTP_CODE)"
+            exit 1
+          else
+            echo "✅ Webhook 发送成功"
+          fi
+      
+      - name: Upload result
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-result
+          path: result.json
+          retention-days: 7

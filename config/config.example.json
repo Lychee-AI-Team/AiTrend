@@ -1,0 +1,78 @@
+{
+  "_comment": "AiTrend 配置文件 - 复制此文件为 config.json 并修改",
+  "language": "zh",
+  "sources": {
+    "reddit": {
+      "enabled": true
+    },
+    "hackernews": {
+      "enabled": true
+    },
+    "producthunt": {
+      "enabled": false,
+      "api_key": "${PRODUCTHUNT_TOKEN}"
+    },
+    "twitter": {
+      "enabled": false,
+      "auth_token": "${TWITTER_AUTH_TOKEN}",
+      "ct0": "${TWITTER_CT0}"
+    },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript", "rust", "go"]
+    },
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}",
+      "queries": [
+        "latest AI tools launch 2026",
+        "new AI models released this week",
+        "AI agent tools 2026",
+        "OpenAI Claude Gemini new features",
+        "AI productivity tools launched"
+      ]
+    }
+  },
+  "summarizer": {
+    "enabled": true,
+    "provider": "gemini",
+    "model": "gemini-3-flash-preview",
+    "api_key": "${GEMINI_API_KEY}",
+    "temperature": 0.7,
+    "max_tokens": 8000
+  },
+  "channels": {
+    "console": {
+      "enabled": true,
+      "description": "输出到控制台（默认）"
+    },
+    "discord": {
+      "enabled": false,
+      "channel_id": "YOUR_DISCORD_CHANNEL_ID",
+      "description": "Discord 普通文字频道"
+    },
+    "discord_forum": {
+      "enabled": false,
+      "channel_id": "YOUR_DISCORD_FORUM_CHANNEL_ID",
+      "webhook_url": "${DISCORD_WEBHOOK_URL}",
+      "description": "Discord 论坛频道（需要 Webhook，自动创建新帖子）"
+    },
+    "feishu": {
+      "enabled": false,
+      "chat_id": "YOUR_FEISHU_CHAT_ID",
+      "description": "飞书群聊 ID"
+    },
+    "telegram": {
+      "enabled": false,
+      "chat_id": "YOUR_TELEGRAM_CHAT_ID",
+      "description": "Telegram 聊天 ID"
+    }
+  },
+  "advanced": {
+    "validation": {
+      "enabled": true,
+      "auto_fix": true
+    },
+    "max_retries": 3
+  }
+}

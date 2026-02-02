@@ -1,0 +1,71 @@
+{
+  "language": "zh",
+  "sources": {
+    "reddit": {
+      "enabled": true
+    },
+    "hackernews": {
+      "enabled": false
+    },
+    "producthunt": {
+      "enabled": true,
+      "api_key": "${PRODUCTHUNT_TOKEN}"
+    },
+    "twitter": {
+      "enabled": false,
+      "auth_token": "${TWITTER_AUTH_TOKEN}",
+      "ct0": "${TWITTER_CT0}"
+    },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript"]
+    },
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}",
+      "queries": [
+        "latest AI tools launch 2026",
+        "new AI models released this week"
+      ]
+    }
+  },
+  "summarizer": {
+    "enabled": true,
+    "provider": "gemini",
+    "model": "gemini-3-flash-preview",
+    "api_key": "${GEMINI_API_KEY}",
+    "temperature": 0.7,
+    "max_tokens": 8000
+  },
+  "channels": {
+    "console": {
+      "enabled": false
+    },
+    "discord": {
+      "enabled": false,
+      "channel_id": "1467767285044346933"
+    },
+    "discord_forum": {
+      "enabled": true,
+      "channel_id": "1467789796087824475",
+      "webhook_url": "${DISCORD_WEBHOOK_URL}"
+    },
+    "feishu": {
+      "enabled": false,
+      "chat_id": "YOUR_FEISHU_CHAT_ID"
+    },
+    "telegram": {
+      "enabled": false,
+      "chat_id": "YOUR_TELEGRAM_CHAT_ID"
+    }
+  },
+  "advanced": {
+    "validation": {
+      "enabled": true,
+      "auto_fix": true
+    },
+    "max_retries": 3,
+    "hourly_mode": true,
+    "single_post": true
+  }
+}

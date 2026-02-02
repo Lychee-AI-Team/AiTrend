@@ -1,0 +1,134 @@
+# AiTrend 模块化系统配置
+
+# 信息源模块配置
+sources:
+  github_trend:
+    enabled: true
+    languages:
+      - python
+      - javascript
+      - go
+      - rust
+      - typescript
+    max_candidates: 20      # 增加获取数量，确保至少3条
+    growth_threshold: 0.1   # 降低阈值，获取更多内容
+  
+  producthunt:
+    enabled: true
+    api_token: ""  # 从环境变量 PRODUCTHUNT_TOKEN 读取
+    categories:
+      - AI
+      - Developer Tools
+      - Productivity
+    min_votes: 20       # 降低阈值，确保至少3条
+    time_period: weekly # 扩大到周，获取更多内容
+    max_candidates: 20  # 增加获取数量
+  
+  hackernews:
+    enabled: true
+    min_points: 50        # 降低阈值，确保至少3条
+    min_comments: 10
+    max_candidates: 20    # 增加获取数量
+    keywords:
+      - AI
+      - machine learning
+      - open source
+      - github
+      - developer
+      - programming
+  
+  reddit:
+    enabled: false       # 暂时禁用
+    subreddits:
+      - MachineLearning
+      - LocalLLaMA
+      - artificial
+      - technology
+    min_upvotes: 30
+    max_candidates: 20
+    time_window: 30
+  
+  arxiv_papers:
+    enabled: false      # 暂时禁用
+    categories:
+      - cs.AI
+      - cs.CL
+      - cs.LG
+      - cs.CV
+    days_back: 30
+    max_candidates: 20
+    min_authors: 1
+  
+  twitter:
+    enabled: false       # 暂时禁用
+    cookie: ""
+    auth_token: ""
+    ct0: ""
+    queries:
+      - "AI launch"
+      - "machine learning new model"
+      - "ChatGPT OR Claude OR Gemini"
+    min_views: 100000
+    min_retweets: 100
+    min_likes: 500
+    max_results: 50
+
+# 内容质量筛选配置（第二步：LLM筛选）
+quality_filter:
+  enabled: true
+  min_quality_score: 7      # LLM质量评分阈值（满分10分）
+  llm_model: "default"      # 使用默认大模型
+
+# 信息整理模块配置
+processors:
+  readme:
+    enabled: true
+    max_features: 5
+    max_length: 400  # LLM总结长度
+  
+  search:
+    enabled: true
+    max_results: 3
+    max_length: 300  # LLM总结长度
+
+# 输出整理模块配置
+output:
+  style: natural_narrative
+  min_length: 200
+  max_length: 800
+  
+  # 自然叙述提示词规则
+  narrative_rules:
+    - 禁止列表符号（-, *, •）
+    - 禁止序号（第一、第二、首先、其次）
+    - 禁止结构化标题（主要功能、使用场景）
+    - 禁止空话套话（针对痛点、功能设计）
+    - 要求故事化叙述
+    - 要求口语化表达
+
+# 发布层配置
+publishers:
+  # 论坛发布模块（创建帖子）
+  forum:
+    enabled: true
+    webhook_url: ""  # Discord 论坛频道的 Webhook URL
+    thread_name: "{name} – {source}"  # 帖子标题模板
+    username: "AiTrend"
+    delay: 2  # 帖子间隔（秒）
+    max_length: 1900  # 内容最大长度
+  
+  # 文字频道发布模块（发送消息）
+  text:
+    enabled: false  # 默认禁用，设置为 true 启用
+    webhook_url: ""  # Discord 文字频道的 Webhook URL
+    use_embed: false  # 是否使用 Embed 格式
+    username: "AiTrend"
+    delay: 1
+    avatar_url: ""  # 可选：自定义头像 URL
+
+# 系统配置
+system:
+  max_iterations: 5
+  parallel_processors: true
+  log_level: info
+  enable_trace: true  # 启用全流程追踪日志

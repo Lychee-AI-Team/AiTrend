@@ -1,0 +1,47 @@
+# AI Hotspot Collector - GitHub Action
+
+name: AI Hotspot Collector
+
+on:
+  schedule:
+    - cron: '0 5,13,21 * * *'
+  workflow_dispatch:
+
+jobs:
+  collect-hotspot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup jq and yq
+        run: sudo apt-get install -y jq yq
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Gemini CLI
+        run: npm install -g @google/gemini-cli
+      
+      - name: Run hotspot collector
+        env:
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_SECRET_KEY: ${{ secrets.FEISHU_SECRET_KEY }}
+          FEISHU_GROUP_ID: ${{ secrets.FEISHU_GROUP_ID }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          chmod +x scripts/ai-hotspot-collector.sh
+          bash scripts/ai-hotspot-collector.sh
+
+          # 在步骤摘要中输出内容
+          if [ -f scripts/summary-output.txt ]; then
+            echo "## 🔥 AI 热点资讯" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat scripts/summary-output.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

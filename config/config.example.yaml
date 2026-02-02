@@ -1,0 +1,103 @@
+# AiTrend Skill 配置文件 v0.1.0
+# 配置说明：
+# - 所有 API Key 可以使用环境变量，如 ${GEMINI_API_KEY}
+# - 不启用的模块可以设置 enabled: false 或直接删除
+
+# ========== 数据源配置 ==========
+sources:
+  # GitHub Trending - 获取热门仓库
+  github_trending:
+    enabled: true
+    languages:
+      - python
+      - typescript
+      - go
+      - rust
+    min_stars: 50
+  
+  # Brave Search - 全网搜索
+  brave_search:
+    enabled: true
+    api_key: ${BRAVE_API_KEY}  # 从环境变量读取
+    queries:
+      - "AI artificial intelligence latest"
+      - "LLM large language model news"
+      - "AI Agent framework"
+      - "OpenAI GPT Claude Gemini"
+    freshness: "pd"  # pd=past day, pw=past week, pm=past month
+    count: 5
+
+# ========== AI 总结器配置 ==========
+summarizer:
+  enabled: true
+  
+  # 可选: gemini, openai, anthropic
+  provider: "gemini"
+  
+  # 模型名称
+  model: "gemini-2.5-flash"
+  
+  # API Key
+  api_key: ${GEMINI_API_KEY}
+  
+  # 创造性参数 (0-2)
+  temperature: 0.7
+  
+  # 最大输出长度
+  max_tokens: 2000
+  
+  # 自定义提示词模板（可选，使用默认则删除）
+  # prompt_template: |
+  #   请将以下 AI 热点资讯总结成简洁的中文...
+
+# ========== 发送渠道配置 ==========
+channels:
+  # 飞书 - 发送到群聊
+  feishu:
+    enabled: true
+    app_id: ${FEISHU_APP_ID}
+    app_secret: ${FEISHU_SECRET_KEY}
+    target: "oc_9a3c218325fd2cfa42f2a8f6fe03ac02"  # 群聊 ID
+  
+  # 控制台 - 本地测试用
+  console:
+    enabled: true
+  
+  # Telegram - 预留
+  # telegram:
+  #   enabled: false
+  #   bot_token: ${TELEGRAM_BOT_TOKEN}
+  #   target: ${TELEGRAM_CHAT_ID}
+  
+  # Discord - 预留
+  # discord:
+  #   enabled: false
+  #   webhook_url: ${DISCORD_WEBHOOK_URL}
+
+# ========== 定时任务配置 ==========
+schedule:
+  # Cron 表达式
+  cron: "0 9,13,21 * * *"
+  
+  # 时区
+  timezone: "Asia/Shanghai"
+
+# ========== 高级配置 ==========
+advanced:
+  # 去重配置
+  deduplication:
+    enabled: true
+    cache_duration: "7d"  # 7 天内不重复发送
+  
+  # 验证配置
+  validation:
+    enabled: true         # 启用自验证
+    auto_fix: true        # 自动修复格式问题
+  
+  # 重试配置
+  max_retries: 3          # 最大重试次数
+  
+  # 日志配置
+  logging:
+    level: "INFO"         # DEBUG, INFO, WARNING, ERROR
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
