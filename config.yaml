@@ -45,6 +45,17 @@ sources:
     min_upvotes: 50
     max_candidates: 5
     time_window: 7
+  
+  arxiv_papers:
+    enabled: true
+    categories:
+      - cs.AI      # 人工智能
+      - cs.CL      # 计算语言学/自然语言处理
+      - cs.LG      # 机器学习
+      - cs.CV      # 计算机视觉
+    days_back: 7
+    max_candidates: 5
+    min_authors: 1
 
 # 信息整理模块配置
 processors:
