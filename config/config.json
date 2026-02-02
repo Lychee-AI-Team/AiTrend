@@ -8,7 +8,7 @@
       "enabled": true
     },
     "producthunt": {
-      "enabled": false,
+      "enabled": true,
       "api_key": "${PRODUCTHUNT_TOKEN}"
     },
     "twitter": {
@@ -45,11 +45,11 @@
       "enabled": false
     },
     "discord": {
-      "enabled": true,
+      "enabled": false,
       "channel_id": "1467767285044346933"
     },
     "discord_forum": {
-      "enabled": false,
+      "enabled": true,
       "channel_id": "1467789796087824475",
       "webhook_url": "${DISCORD_WEBHOOK_URL}"
     },
@@ -67,6 +67,8 @@
       "enabled": true,
       "auto_fix": true
     },
-    "max_retries": 3
+    "max_retries": 3,
+    "hourly_mode": true,
+    "single_post": true
   }
 }
