@@ -1,38 +1,32 @@
 """
-Twitter/X 信息源模块
+Twitter/X 信息源模块 (Cookie方式 - 使用 bird CLI)
 
 提供功能：
-- 搜索 Twitter 上 AI/ML 相关的热门推文
-- 支持按关键词、时间筛选
-- 提取推文内容、作者、互动数据
+- 使用Cookie访问Twitter/X
+- 获取AI/ML相关热门推文
+- 通过 bird CLI 工具获取数据
 
-API: Twitter API v2 (使用 OAuth 1.0a)
-认证: Consumer Key + Secret（用户提供）
+方式: Cookie认证 (auth_token + ct0)
+依赖: @steipete/bird (需要预先安装)
 """
 
-import requests
-import base64
-import hashlib
-import hmac
-import time
-import urllib.parse
-from datetime import datetime, timedelta
-from typing import List, Dict, Any, Optional
+import subprocess
 import json
+import re
+from datetime import datetime
+from typing import List, Dict, Any, Optional
 import os
 
 
 class TwitterSource:
-    """Twitter/X 信息源"""
-    
-    API_BASE = "https://api.twitter.com/2"
+    """Twitter/X 信息源 (使用 bird CLI)"""
     
     # 默认搜索关键词
     DEFAULT_QUERIES = [
-        '"AI tool" OR "AI launch" -is:retweet lang:en',
-        '"machine learning" OR "new model" -is:retweet lang:en',
-        '#BuildInPublic AI -is:retweet lang:en',
-        'ChatGPT OR Claude OR Gemini launch -is:retweet lang:en'
+        'AI launch',
+        'machine learning',
+        'ChatGPT OR Claude',
+        'new AI model'
     ]
     
     def __init__(self, config: Dict[str, Any]):
@@ -41,69 +35,44 @@ class TwitterSource:
         
         Args:
             config: 配置字典
-                - api_key: Twitter API Key
-                - api_secret: Twitter API Key Secret
+                - auth_token: Twitter auth_token
+                - ct0: Twitter ct0
                 - queries: 搜索查询列表
-                - min_retweets: 最小转发数，默认 10
-                - min_likes: 最小点赞数，默认 20
-                - days_back: 回溯天数，默认 1
+                - min_retweets: 最小转发数，默认 5
+                - min_likes: 最小点赞数，默认 10
                 - max_results: 最大结果数，默认 20
         """
         self.config = config or {}
         
-        # 从配置或环境变量获取凭证
-        self.api_key = self.config.get('api_key') or os.getenv('TWITTER_API_KEY')
-        self.api_secret = self.config.get('api_secret') or os.getenv('TWITTER_API_SECRET')
+        # 获取凭证
+        self.auth_token = self.config.get('auth_token') or os.getenv('TWITTER_AUTH_TOKEN', '')
+        self.ct0 = self.config.get('ct0') or os.getenv('TWITTER_CT0', '')
         
+        # 也可以从完整的cookie字符串中提取
+        cookie = self.config.get('cookie', '')
+        if cookie and not self.auth_token:
+            self.auth_token = self._extract_cookie(cookie, 'auth_token')
+        if cookie and not self.ct0:
+            self.ct0 = self._extract_cookie(cookie, 'ct0')
+        
+        # 其他配置
         self.queries = self.config.get('queries', self.DEFAULT_QUERIES)
-        self.min_retweets = self.config.get('min_retweets', 10)
-        self.min_likes = self.config.get('min_likes', 20)
-        self.days_back = self.config.get('days_back', 1)
+        self.min_retweets = self.config.get('min_retweets', 5)
+        self.min_likes = self.config.get('min_likes', 10)
         self.max_results = self.config.get('max_results', 20)
-        
-        # Bearer Token（用于应用认证）
-        self.bearer_token = None
-        
+    
+    def _extract_cookie(self, cookie_str: str, name: str) -> str:
+        """从cookie字符串中提取值"""
+        match = re.search(rf'{name}=([^;]+)', cookie_str)
+        return match.group(1) if match else ''
+    
     def is_enabled(self) -> bool:
-        """检查是否启用（需要 API Key）"""
-        return bool(self.api_key and self.api_secret)
+        """检查是否启用（需要 auth_token 和 ct0）"""
+        return bool(self.auth_token and self.ct0)
     
-    def _get_bearer_token(self) -> Optional[str]:
+    def _run_bird(self, query: str) -> List[Dict]:
         """
-        获取 Bearer Token（OAuth 2.0 应用认证）
-        
-        使用 Consumer Key 和 Secret 换取 Bearer Token
-        """
-        if self.bearer_token:
-            return self.bearer_token
-        
-        try:
-            # 构建认证字符串
-            credentials = f"{self.api_key}:{self.api_secret}"
-            encoded_credentials = base64.b64encode(credentials.encode()).decode()
-            
-            # 请求 Bearer Token
-            url = "https://api.twitter.com/oauth2/token"
-            headers = {
-                "Authorization": f"Basic {encoded_credentials}",
-                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-            }
-            data = {"grant_type": "client_credentials"}
-            
-            response = requests.post(url, headers=headers, data=data, timeout=10)
-            response.raise_for_status()
-            
-            token_data = response.json()
-            self.bearer_token = token_data.get('access_token')
-            return self.bearer_token
-            
-        except Exception as e:
-            print(f"[Twitter] 获取 Bearer Token 失败: {e}")
-            return None
-    
-    def _search_tweets(self, query: str) -> List[Dict]:
-        """
-        搜索推文
+        使用 bird CLI 搜索推文
         
         Args:
             query: 搜索查询
@@ -111,79 +80,79 @@ class TwitterSource:
         Returns:
             推文列表
         """
-        bearer_token = self._get_bearer_token()
-        if not bearer_token:
-            return []
-        
         try:
-            # 构建请求
-            url = f"{self.API_BASE}/tweets/search/recent"
+            print(f"[Twitter] 搜索: {query}")
             
-            # 计算开始时间（ISO 8601 格式）
-            start_time = (datetime.utcnow() - timedelta(days=self.days_back)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            # 构建 bird 命令（加载nvm环境）
+            nvm_init = 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm use --lts'
+            bird_cmd = f"bird search '{query}' -n {min(self.max_results, 20)} --json --auth-token '{self.auth_token}' --ct0 '{self.ct0}'"
             
-            params = {
-                'query': query,
-                'max_results': min(self.max_results, 100),
-                'tweet.fields': 'created_at,public_metrics,author_id,source',
-                'expansions': 'author_id',
-                'user.fields': 'username,public_metrics,description',
-                'start_time': start_time
-            }
+            full_cmd = f"{nvm_init} && {bird_cmd}"
             
-            headers = {
-                'Authorization': f'Bearer {bearer_token}'
-            }
+            result = subprocess.run(
+                full_cmd,
+                capture_output=True,
+                text=True,
+                timeout=30,
+                shell=True,
+                executable='/bin/bash'
+            )
             
-            print(f"[Twitter] 搜索: {query[:50]}...")
-            
-            response = requests.get(url, params=params, headers=headers, timeout=15)
-            
-            if response.status_code == 429:
-                print("[Twitter] 速率限制，请稍后再试")
+            if result.returncode != 0:
+                print(f"[Twitter] bird 命令失败: {result.stderr[:200]}")
                 return []
             
-            response.raise_for_status()
-            data = response.json()
-            
-            tweets = data.get('data', [])
-            includes = data.get('includes', {})
-            users = {u['id']: u for u in includes.get('users', [])}
-            
-            # 处理推文数据
-            results = []
-            for tweet in tweets:
-                metrics = tweet.get('public_metrics', {})
-                author_id = tweet.get('author_id')
-                author = users.get(author_id, {})
+            # 解析 JSON 输出（bird输出JSON数组）
+            tweets = []
+            try:
+                # 找到JSON数组的开始位置
+                stdout = result.stdout.strip()
+                # bird输出以"Now using node..."开头，需要找到"["
+                json_start = stdout.find('[')
+                if json_start == -1:
+                    print(f"[Twitter] 未找到JSON数据")
+                    return []
                 
-                # 筛选条件
-                retweet_count = metrics.get('retweet_count', 0)
-                like_count = metrics.get('like_count', 0)
+                json_data = stdout[json_start:]
+                bird_tweets = json.loads(json_data)
                 
-                if retweet_count >= self.min_retweets or like_count >= self.min_likes:
-                    results.append({
-                        'id': tweet.get('id'),
-                        'text': tweet.get('text', ''),
-                        'created_at': tweet.get('created_at'),
-                        'retweet_count': retweet_count,
-                        'like_count': like_count,
-                        'reply_count': metrics.get('reply_count', 0),
-                        'quote_count': metrics.get('quote_count', 0),
-                        'author_username': author.get('username', 'unknown'),
-                        'author_name': author.get('name', 'Unknown'),
-                        'author_followers': author.get('public_metrics', {}).get('followers_count', 0),
-                        'tweet_url': f"https://twitter.com/{author.get('username', 'user')}/status/{tweet.get('id')}"
-                    })
+                for tweet in bird_tweets:
+                    # 提取互动数据
+                    retweets = tweet.get('retweetCount', 0)
+                    likes = tweet.get('likeCount', 0)
+                    
+                    # 筛选
+                    if retweets >= self.min_retweets or likes >= self.min_likes:
+                        author = tweet.get('author', {})
+                        tweets.append({
+                            'id': str(tweet.get('id', '')),
+                            'text': tweet.get('text', ''),
+                            'created_at': tweet.get('createdAt', ''),
+                            'retweet_count': retweets,
+                            'like_count': likes,
+                            'reply_count': tweet.get('replyCount', 0),
+                            'author_username': author.get('username', 'unknown'),
+                            'author_name': author.get('name', 'Unknown'),
+                            'author_followers': 0,  # bird CLI可能不提供此字段
+                            'tweet_url': f"https://twitter.com/{author.get('username', 'user')}/status/{tweet.get('id', '')}"
+                        })
+            except json.JSONDecodeError as e:
+                print(f"[Twitter] JSON解析错误: {e}")
+            except Exception as e:
+                print(f"[Twitter] 解析错误: {e}")
             
-            print(f"[Twitter] 找到 {len(results)} 条热门推文")
-            return results
+            print(f"[Twitter] 找到 {len(tweets)} 条推文")
+            return tweets
             
-        except requests.exceptions.RequestException as e:
-            print(f"[Twitter] 请求失败: {e}")
+        except subprocess.TimeoutExpired:
+            print("[Twitter] bird 命令超时")
+            return []
+        except FileNotFoundError:
+            print("[Twitter] bird CLI 未安装")
+            print("  安装: npm install -g @steipete/bird")
             return []
         except Exception as e:
-            print(f"[Twitter] 处理错误: {e}")
+            print(f"[Twitter] 错误: {e}")
             return []
     
     def discover(self) -> List[Dict[str, Any]]:
@@ -194,24 +163,20 @@ class TwitterSource:
             候选推文列表
         """
         if not self.is_enabled():
-            print("[Twitter] 未配置 API Key，跳过")
+            print("[Twitter] 未配置 auth_token/ct0，跳过")
             return []
         
         all_tweets = []
         
-        for query in self.queries:
+        for query in self.queries[:3]:  # 限制查询数量
             try:
-                tweets = self._search_tweets(query)
+                tweets = self._run_bird(query)
                 all_tweets.extend(tweets)
-                
-                # 避免速率限制
-                time.sleep(1)
-                
             except Exception as e:
-                print(f"[Twitter] 查询失败 '{query[:30]}...': {e}")
+                print(f"[Twitter] 查询失败: {e}")
                 continue
         
-        # 去重（按推文ID）
+        # 去重
         seen_ids = set()
         unique_tweets = []
         for tweet in all_tweets:
@@ -225,14 +190,9 @@ class TwitterSource:
         # 转换为统一格式
         candidates = []
         for tweet in unique_tweets[:self.max_results]:
-            # 构建描述
-            engagement = f"🔁{tweet['retweet_count']} ❤️{tweet['like_count']}"
-            description = f"@{tweet['author_username']}: {tweet['text'][:200]}...\n\n{engagement}"
-            
             candidates.append({
-                'name': f"Tweet by @{tweet['author_username']}",
+                'name': f"@{tweet['author_username']}: {tweet['text'][:60]}",
                 'title': tweet['text'][:100],
-                'description': description,
                 'text': tweet['text'],
                 'author': tweet['author_name'],
                 'author_username': tweet['author_username'],
@@ -257,31 +217,30 @@ class TwitterSource:
 
 if __name__ == "__main__":
     # 测试
-    import os
+    cookie = 'guest_id_marketing=v1%3A176987549229925032; guest_id_ads=v1%3A176987549229925032; guest_id=v1%3A176987549229925032; personalization_id="v1_9kVMSKZuCxk+EpvF1/g8GA=="; gt=2017630167401943362; __cuid=19e2a63ef6a547bbadbed3e6587222ab; g_state={"i_l":0,"i_ll":1769875479841,"i_b":"oS5VXXuka/LSdTJncUa3mOWQ1RnzhyELXSVtD9AbhYs","i_e":{"enable_itp_optimization":3}}; kdt=ZBkjw7T6361ogMpQQJd4qeHS0CkHEVnWJYfruk0K; auth_token=b8630954ba040bdb5f9fc8b79c4adc67457eabfe; ct0=31455a7de266a10216ac5eb0b17dfe9098dc7628bbfb4138d195a148ad5bc45a8eb0187a726f4c8f4e0ce31ddda65a8f612c87aa8f5e64e05b6bf7b22039a046e23eeaed3149a8fd0d810ca5bd059e08; att=1-AanaTf8KCdNVUUcLXYScJCtoiFQcMROFpURu3hTK; lang=zh-cn; twid=u%3D1135576048177836033; __cf_bm=8zx92X463tzLbfA8t39wtqmIkWO4VbjhO98P7uVh8as-1769875791.704196-1.0.1.1-7rUFG.x0VrZA2O3PYtLHysdE9M0WyHY.R3RZth2lKbEB8U_inG6_9MtzrBaEfTLWg1eP56xlU7HfJh0m5Ztw0LipA9_A27tLmVXCirIZPs66LwTqbz92ju3lWTWTQgi4'
     
-    # 使用用户提供的 API Key
     config = {
-        'api_key': 'kwjFF1m2uTXzkFNCw0AMEkXpP',
-        'api_secret': 'Q6RNe8O1mhNR9AHb5809TIumai7rfRqZFJ9oxWX4dkGf5QFpPV',
-        'queries': ['AI launch -is:retweet lang:en'],
-        'min_retweets': 5,
-        'min_likes': 10,
-        'days_back': 1,
+        'cookie': cookie,
+        'queries': ['AI launch'],
+        'min_retweets': 1,
+        'min_likes': 1,
         'max_results': 5
     }
     
     twitter = TwitterSource(config)
     
+    print(f"✅ auth_token: {'有效' if twitter.auth_token else '无效'}")
+    print(f"✅ ct0: {'有效' if twitter.ct0 else '无效'}")
+    
     if not twitter.is_enabled():
-        print("❌ 未配置 API Key")
+        print("❌ 未配置")
         exit(1)
     
     tweets = twitter.discover()
     
     print(f"\n找到 {len(tweets)} 条推文:\n")
     for i, tweet in enumerate(tweets[:3], 1):
-        print(f"{i}. @{tweet['author_username']} ({tweet['author_followers']} 粉丝)")
+        print(f"{i}. @{tweet['author_username']}")
         print(f"   {tweet['text'][:100]}...")
         print(f"   🔁 {tweet['retweets']} ❤️ {tweet['likes']}")
-        print(f"   {tweet['url']}")
         print()

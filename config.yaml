@@ -59,16 +59,21 @@ sources:
   
   twitter:
     enabled: true
-    api_key: ""           # Twitter API Key (从环境变量 TWITTER_API_KEY 读取)
-    api_secret: ""        # Twitter API Key Secret (从环境变量 TWITTER_API_SECRET 读取)
+    # Cookie方式认证（推荐，无需API Key）
+    # 方式1: 直接填入完整Cookie字符串（从浏览器开发者工具复制）
+    cookie: ""
+    # 方式2: 从环境变量 TWITTER_COOKIE 读取
+    # 方式3: 分别填入 auth_token 和 ct0
+    auth_token: ""        # 从cookie中提取的 auth_token
+    ct0: ""               # 从cookie中提取的 ct0
+    
     queries:
-      - "AI tool OR AI launch -is:retweet lang:en"
-      - "machine learning OR new model -is:retweet lang:en"
-      - "#BuildInPublic AI -is:retweet lang:en"
-    min_retweets: 10
-    min_likes: 20
-    days_back: 1
-    max_candidates: 5
+      - "AI launch"
+      - "machine learning new model"
+      - "ChatGPT OR Claude OR Gemini"
+    min_retweets: 5
+    min_likes: 10
+    max_results: 5
 
 # 信息整理模块配置
 processors:
@@ -116,20 +121,6 @@ publishers:
     username: "AiTrend"
     delay: 1
     avatar_url: ""  # 可选：自定义头像 URL
-  
-  # 备用配置（可扩展其他平台）
-  # feishu:
-  #   enabled: false
-  #   webhook_url: ""
-  #   
-  # telegram:
-  #   enabled: false
-  #   bot_token: ""
-  #   chat_id: ""
-  
-  # feishu:
-  #   enabled: false
-  #   webhook_url: ""
 
 # 系统配置
 system:
