@@ -34,6 +34,17 @@ sources:
       - github
       - developer
       - programming
+  
+  reddit:
+    enabled: true
+    subreddits:
+      - MachineLearning
+      - LocalLLaMA
+      - artificial
+      - technology
+    min_upvotes: 50
+    max_candidates: 5
+    time_window: 7
 
 # 信息整理模块配置
 processors:

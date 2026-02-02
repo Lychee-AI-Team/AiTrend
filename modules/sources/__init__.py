@@ -2,3 +2,4 @@
 from .github_trend import GithubTrend
 from .producthunt import Producthunt
 from .hackernews import Hackernews
+from .reddit import Reddit
