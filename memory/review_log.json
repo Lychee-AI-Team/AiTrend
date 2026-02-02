@@ -1,11 +1,170 @@
 {
-  "review_sessions": [],
+  "review_sessions": [
+    {
+      "batch_id": "20260202_194112",
+      "average_score": 6.8,
+      "reviewed_at": "2026-02-02T19:41:18.975624"
+    },
+    {
+      "batch_id": "20260202_194112",
+      "average_score": 6.8,
+      "reviewed_at": "2026-02-02T19:41:24.047102"
+    }
+  ],
   "current_batch": {
-    "batch_id": null,
-    "articles": [],
-    "reviews": [],
-    "average_score": 0,
-    "status": "pending"
+    "batch_id": "20260202_194112",
+    "articles": [
+      {
+        "id": 9903,
+        "title": "Wikipedia as a doomscrollable social media feed – HackerNews 热门讨论，88 条评论...",
+        "original_title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
+        "content": "Wikipedia as a doomscrollable social media feed 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。\n\n主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。\n\n技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。\n\nhttps://xikipedia.org",
+        "url": "https://xikipedia.org",
+        "source": "hackernews",
+        "metadata": {
+          "score": 242,
+          "comments": 88,
+          "type": "show_hn",
+          "collector_source": "hackernews"
+        }
+      },
+      {
+        "id": 2820,
+        "title": "Minimal – I would like to share Minimal - Its a open source...",
+        "original_title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
+        "content": "Minimal 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。\n\n具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。\n\n开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。\n\nhttps://github.com/rtvkiz/minimal",
+        "url": "https://github.com/rtvkiz/minimal",
+        "source": "hackernews",
+        "metadata": {
+          "score": 112,
+          "comments": 28,
+          "type": "show_hn",
+          "collector_source": "hackernews"
+        }
+      },
+      {
+        "id": 7830,
+        "title": "ÆTHRA – Hi HN<p>I’m building ÆTHRA — a programming languag...",
+        "original_title": "[Show HN] Show HN: ÆTHRA – Writing Music as Code",
+        "content": "ÆTHRA 让你用写代码的方式创作音乐。它把音符、节奏、和声抽象成编程概念，可以用类似函数调用的方式组合出完整的音乐片段。\n\n适合有一定音乐基础但不想学习复杂 DAW 软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。支持导出 MIDI 和音频文件，可以直接导入到其他软件里继续编辑。\n\nShow HN 评论区有音乐人分享了自己用它创作的作品，说这种代码化思维方式对创作某些类型的电子音乐特别合适。也有人提到学习曲线还是有点陡，需要同时懂编程和音乐理论。\n\nhttps://news.ycombinator.com/item?id=46820691",
+        "url": "https://news.ycombinator.com/item?id=46820691",
+        "source": "hackernews",
+        "metadata": {
+          "score": 82,
+          "comments": 26,
+          "type": "show_hn",
+          "collector_source": "hackernews"
+        }
+      }
+    ],
+    "reviews": [
+      {
+        "content_id": 9903,
+        "title": "Wikipedia as a doomscrollable social media feed – HackerNews 热门讨论，88 条评论...",
+        "url": "https://xikipedia.org",
+        "source": "hackernews",
+        "total_score": 6.5,
+        "breakdown": {
+          "information": 3,
+          "practicality": 1,
+          "credibility": 1.5,
+          "experience": 1
+        },
+        "strengths": [
+          "清楚说明了这是什么工具/项目",
+          "包含技术实现细节",
+          "说明了使用方式",
+          "说明了与替代方案的对比",
+          "引用了用户反馈或讨论",
+          "提到了潜在问题或限制",
+          "阅读流畅，像自然对话"
+        ],
+        "weaknesses": [
+          "缺少核心功能说明",
+          "没有说明什么时候会用到",
+          "缺少具体数据（如性能指标、用户数）"
+        ],
+        "suggestions": [
+          "增加具体功能列表：支持XX、能够YY",
+          "增加使用场景：适合在XX时候使用，当YY情况下",
+          "明确目标用户：适合XX人群使用",
+          "增加数据：如'处理速度提升50%'、'已有1万用户'"
+        ],
+        "learner_perspective": "大概知道是什么东西，但缺少核心功能说明。读完有点用，但还要自己去搜更多信息。",
+        "reviewed_at": "2026-02-02T19:41:24.046922"
+      },
+      {
+        "content_id": 2820,
+        "title": "Minimal – I would like to share Minimal - Its a open source...",
+        "url": "https://github.com/rtvkiz/minimal",
+        "source": "hackernews",
+        "total_score": 7.0,
+        "breakdown": {
+          "information": 3,
+          "practicality": 1.5,
+          "credibility": 1.5,
+          "experience": 1
+        },
+        "strengths": [
+          "清楚说明了这是什么工具/项目",
+          "说明了核心功能",
+          "说明了使用方式",
+          "说明了与替代方案的对比",
+          "引用了用户反馈或讨论",
+          "提到了潜在问题或限制",
+          "阅读流畅，像自然对话"
+        ],
+        "weaknesses": [
+          "缺少技术细节",
+          "没有说明什么时候会用到",
+          "缺少具体数据（如性能指标、用户数）"
+        ],
+        "suggestions": [
+          "增加技术实现：使用XX技术，基于YY架构",
+          "增加使用场景：适合在XX时候使用，当YY情况下",
+          "增加数据：如'处理速度提升50%'、'已有1万用户'"
+        ],
+        "learner_perspective": "大概知道是什么东西，但缺少技术细节。读完有点用，但还要自己去搜更多信息。",
+        "reviewed_at": "2026-02-02T19:41:24.046977"
+      },
+      {
+        "content_id": 7830,
+        "title": "ÆTHRA – Hi HN<p>I’m building ÆTHRA — a programming languag...",
+        "url": "https://news.ycombinator.com/item?id=46820691",
+        "source": "hackernews",
+        "total_score": 7.0,
+        "breakdown": {
+          "information": 2,
+          "practicality": 2.5,
+          "credibility": 1.5,
+          "experience": 1
+        },
+        "strengths": [
+          "说明了核心功能",
+          "包含技术实现细节",
+          "说明了适用场景",
+          "说明了与替代方案的对比",
+          "包含具体数据",
+          "引用了用户反馈或讨论",
+          "阅读流畅，像自然对话"
+        ],
+        "weaknesses": [
+          "没有清楚说明这是什么",
+          "缺少使用方式说明"
+        ],
+        "suggestions": [
+          "开头应明确：这是一个XX，用于YY",
+          "增加使用方式：安装方法、配置步骤",
+          "明确目标用户：适合XX人群使用",
+          "增加客观评价：存在的问题或适用限制"
+        ],
+        "learner_perspective": "大概知道是什么东西，但没有清楚说明这是什么。读完有点用，但还要自己去搜更多信息。",
+        "reviewed_at": "2026-02-02T19:41:24.047028"
+      }
+    ],
+    "average_score": 6.8,
+    "status": "reviewed",
+    "reviewed_at": "2026-02-02T19:41:24.047098"
   },
   "optimization_history": [],
   "threshold": 8.0
