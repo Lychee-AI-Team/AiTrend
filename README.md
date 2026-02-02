@@ -1,8 +1,8 @@
-<h1 align="center">AiTrend v0.2.0</h1>
+<h1 align="center">AiTrend v0.3.0</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
-  <img src="https://img.shields.io/badge/Version-0.2.0-orange.svg?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
 </p>
 
 <p align="center">
@@ -32,12 +32,35 @@
 │  信息源模块 (可插拔)                              │
 │  ├─ GitHub Trend    ├─ Product Hunt             │
 │  ├─ HackerNews      ├─ Reddit (Pushshift)       │
-│  └─ [你的自定义模块]   └─ [即将推出...]            │
+│  ├─ arXiv Papers    └─ [更多模块...]             │
 ├─────────────────────────────────────────────────┤
 │  输出渠道 (自由组合)                              │
 │  ├─ Discord 论坛    ├─ Discord 文字频道         │
-│  ├─ 飞书            └─ [更多渠道开发中]          │
+│  └─ [更多渠道开发中]                             │
+├─────────────────────────────────────────────────┤
+│  🔍 全流程追踪 (每条消息都有唯一ID)                │
 └─────────────────────────────────────────────────┘
+
+### 🔍 全流程追踪
+
+**每条消息都有迹可循：**
+
+- 🆔 **唯一追踪ID** - 格式 `AIT-YYYYMMDD-XXXXXX`
+- 📊 **模块执行日志** - 记录每个处理步骤
+- 🔧 **快速诊断** - 根据ID定位问题
+- 💡 **用户反馈** - 用户可直接发送ID报告问题
+
+**示例消息底部：**
+```
+---
+🆔 **追踪ID**: `AIT-20260203-A1B2C3`
+💡 如发现内容问题，请发送此ID进行诊断
+```
+
+**诊断命令：**
+```bash
+python3 diagnose.py AIT-20260203-A1B2C3
+```
 ```
 
 **模块化优势：**
