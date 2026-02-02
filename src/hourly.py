@@ -165,21 +165,28 @@ def generate_detailed_content(article: Article) -> str:
     return content
 
 def get_thread_title(article: Article) -> str:
-    """生成帖子标题：时间 + 项目名"""
-    hour_str = datetime.now().strftime('%H:%M')
-    
-    # 提取项目名
+    """生成帖子标题：项目名 + 核心亮点"""
     title = article.title
+    summary = article.summary or ""
+    
     # 移除常见前缀
-    for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[GitHub]', '[PH]']:
+    for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[GitHub]', '[PH]', 'Show HN:']:
         title = title.replace(prefix, '').strip()
     
-    # 取前40个字符作为项目名
-    product_name = title[:40].strip()
-    if len(title) > 40:
-        product_name += "..."
+    # 提取产品名称（通常是标题的第一部分）
+    product_name = title.split('–')[0].strip() if '–' in title else title.split('-')[0].strip()
+    product_name = product_name.split(':')[0].strip() if ':' in product_name else product_name
     
-    return f"🔥 {hour_str} {product_name}"
+    # 从描述中提取核心亮点（前60字）
+    highlight = summary[:60].strip() if summary else ""
+    # 去除可能出现的"一个"、"一款"等词开头
+    highlight = highlight.lstrip("一个一款一种")
+    
+    # 组合标题：产品名 - 核心亮点
+    if highlight:
+        return f"{product_name} – {highlight}..."
+    else:
+        return product_name[:80]
 
 def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> bool:
     """发布单条文章到论坛"""
