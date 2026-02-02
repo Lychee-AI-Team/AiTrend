@@ -42,14 +42,14 @@
   },
   "channels": {
     "console": {
-      "enabled": false
+      "enabled": true
     },
     "discord": {
-      "enabled": false,
+      "enabled": true,
       "channel_id": "1467767285044346933"
     },
     "discord_forum": {
-      "enabled": true,
+      "enabled": false,
       "channel_id": "1467789796087824475"
     },
     "feishu": {
