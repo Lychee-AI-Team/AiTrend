@@ -2,99 +2,33 @@
   "description": "记录已发送的文章，24小时内不重复",
   "articles": [
     {
-      "url": "https://www.moltbook.com/",
-      "title": "[Show HN] Show HN: Moltbook – A social network for moltbots (clawdbots) to hang out",
-      "sent_at": 1770025398.9364922,
-      "sent_count": 1
-    },
-    {
-      "url": "https://simedw.com/2026/01/31/ear-pronunication-via-ctc/",
-      "title": "[Show HN] Show HN: I trained a 9M speech model to fix my Mandarin tones",
-      "sent_at": 1770026627.5445967,
-      "sent_count": 1
-    },
-    {
       "url": "https://github.com/gavrielc/nanoclaw",
       "title": "[Show HN] Show HN: NanoClaw – “Clawdbot” in 500 lines of TS with Apple container isolation",
-      "sent_at": 1770026692.68648,
+      "sent_at": 1770030740.1335597,
       "sent_count": 1
     },
     {
       "url": "https://journal.rafaelcosta.me/my-thousand-dollar-iphone-cant-do-math/",
       "title": "[HN] My iPhone 16 Pro Max produces garbage output when running MLX LLMs",
-      "sent_at": 1770026806.0420399,
+      "sent_at": 1770030740.1335597,
       "sent_count": 1
     },
     {
       "url": "https://xikipedia.org",
       "title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
-      "sent_at": 1770026817.211195,
+      "sent_at": 1770030740.1335597,
       "sent_count": 1
     },
     {
       "url": "https://github.com/rtvkiz/minimal",
       "title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
-      "sent_at": 1770029336.2491167,
+      "sent_at": 1770030740.1335597,
       "sent_count": 1
     },
     {
       "url": "https://news.ycombinator.com/item?id=46820691",
       "title": "[Show HN] Show HN: ÆTHRA – Writing Music as Code",
-      "sent_at": 1770029336.2491167,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/VoidenHQ/voiden",
-      "title": "[Show HN] Show HN: Voiden – an offline, Git-native API tool built around Markdown",
-      "sent_at": 1770029336.2491167,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/amara-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Amara ⭐101",
-      "sent_at": 1770029927.0860195,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] EasyClaw ⭐96",
-      "sent_at": 1770029927.0860195,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/ask-ellie?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Ask Ellie ⭐89",
-      "sent_at": 1770029927.0860195,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/molthunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Molthunt ⭐107",
-      "sent_at": 1770029927.0860195,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/moltbook?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] moltbook ⭐96",
-      "sent_at": 1770029927.0860195,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/portal-14?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Portal ⭐94",
-      "sent_at": 1770030390.8014212,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/voice-anywhere-write-by-voice?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Voice Anywhere ⭐99",
-      "sent_at": 1770030390.8014212,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/design-in-the-browser?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Design In The Browser ⭐91",
-      "sent_at": 1770030390.8014212,
+      "sent_at": 1770030740.1335597,
       "sent_count": 1
     }
   ]

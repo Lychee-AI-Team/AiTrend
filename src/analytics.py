@@ -137,7 +137,7 @@ def log_publish_session(articles, success_count, duration_ms):
         "total_selected": len(articles),
         "success_count": success_count,
         "duration_ms": duration_ms,
-        "sources": list(set(a.get('source', 'unknown') for a in articles)),
+        "sources": list(set(a.source for a in articles)),
         "titles": [a.get('title', '') for a in articles]
     }
     
