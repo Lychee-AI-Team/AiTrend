@@ -2,19 +2,16 @@
 """
 Discord 文字频道发布模块
 发布内容到 Discord 文字消息频道（Text Channel）
-
-使用方法：
-1. 在 Discord 中创建一个文字频道
-2. 创建 Webhook
-3. 配置 WEBHOOK_URL
-4. 可选：配置是否使用 Embed 格式
 """
 
 import os
 import time
 import requests
 from typing import Dict, Any, List
-from .base import BasePublisher
+from modules.logger import get_logger
+from publishers.base import BasePublisher
+
+logger = get_logger()
 
 class TextPublisher(BasePublisher):
     """
@@ -23,61 +20,85 @@ class TextPublisher(BasePublisher):
     功能：
     - 发布到文字频道
     - 支持纯文本或 Embed 格式
-    - 支持消息分割（长内容分多条发送）
+    - 与论坛发布模块保持格式一致
     """
     
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self.webhook_url = config.get('webhook_url') or os.getenv('DISCORD_WEBHOOK_URL')
-        self.use_embed = config.get('use_embed', False)  # 是否使用 Embed 格式
+        self.use_embed = config.get('use_embed', False)
         self.delay_between_posts = config.get('delay', 1)
         self.username = config.get('username', 'AiTrend')
         self.avatar_url = config.get('avatar_url', '')
         self.max_content_length = 2000  # Discord 文字限制
         
         self.session = requests.Session()
+        
+        logger.info(f"TextPublisher 初始化完成")
+        logger.info(f"  - 使用Embed格式: {self.use_embed}")
+        logger.info(f"  - 发布间隔: {self.delay_between_posts}秒")
     
     def validate_config(self) -> bool:
         """验证配置"""
         if not self.webhook_url:
-            print("❌ 未配置 Discord Webhook URL")
-            return False
-        return True
-    
-    def publish(self, content: Dict[str, Any]) -> bool:
-        """
-        发布单条内容到文字频道
-        """
-        if not self.validate_config():
+            logger.error("❌ 未配置 Discord Webhook URL")
             return False
         
+        logger.info("✅ TextPublisher 配置验证通过")
+        return True
+    
+    def format_content(self, content: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        格式化内容
+        
+        与论坛发布模块保持一致的格式
+        """
         name = content.get('name', 'Unknown')
         text = content.get('content', '')
         url = content.get('url', '')
         source = content.get('source', 'AiTrend')
         
-        if self.use_embed:
-            return self._publish_with_embed(name, text, url, source)
-        else:
-            return self._publish_plain_text(name, text, url, source)
+        # 确保内容包含链接
+        if url and url not in text:
+            text = text.strip() + f"\n\n{url}"
+        
+        return {
+            'name': name,
+            'text': text,
+            'url': url,
+            'source': source
+        }
     
-    def _publish_plain_text(self, name: str, text: str, url: str, source: str) -> bool:
+    def publish(self, content: Dict[str, Any]) -> bool:
+        """发布单条内容到文字频道"""
+        
+        if not self.validate_config():
+            return False
+        
+        formatted = self.format_content(content)
+        name = formatted['name']
+        
+        logger.info(f"📤 发布到文字频道: {name[:50]}...")
+        
+        if self.use_embed:
+            return self._publish_with_embed(formatted)
+        else:
+            return self._publish_plain_text(formatted)
+    
+    def _publish_plain_text(self, formatted: Dict[str, Any]) -> bool:
         """纯文本格式发布"""
         
-        # 添加标题
-        header = f"**{name}** – *{source}*\n\n"
+        name = formatted['name']
+        text = formatted['text']
+        source = formatted['source']
         
-        # 组合内容
+        # 添加标题（与论坛帖子标题格式一致）
+        header = f"**{name}** – *{source}*\n\n"
         full_text = header + text
         
-        # 截断（Discord 限制 2000 字符）
+        # 截断
         if len(full_text) > self.max_content_length:
-            # 保留 URL，截断内容
-            if len(url) + 10 < self.max_content_length:
-                truncated = full_text[:self.max_content_length - len(url) - 20]
-                full_text = truncated + f"...\n\n{url}"
-            else:
-                full_text = full_text[:self.max_content_length - 3] + "..."
+            full_text = full_text[:self.max_content_length - 3] + "..."
         
         payload = {
             'username': self.username,
@@ -87,12 +108,17 @@ class TextPublisher(BasePublisher):
         if self.avatar_url:
             payload['avatar_url'] = self.avatar_url
         
-        return self._send_request(payload)
+        return self._send_request(payload, name)
     
-    def _publish_with_embed(self, name: str, text: str, url: str, source: str) -> bool:
+    def _publish_with_embed(self, formatted: Dict[str, Any]) -> bool:
         """Embed 格式发布"""
         
-        # 截断描述（Embed 描述限制 4096 字符，但建议短一些）
+        name = formatted['name']
+        text = formatted['text']
+        url = formatted['url']
+        source = formatted['source']
+        
+        # 截断描述
         description = text[:2000] if len(text) > 2000 else text
         
         embed = {
@@ -113,9 +139,9 @@ class TextPublisher(BasePublisher):
         if self.avatar_url:
             payload['avatar_url'] = self.avatar_url
         
-        return self._send_request(payload)
+        return self._send_request(payload, name)
     
-    def _send_request(self, payload: Dict) -> bool:
+    def _send_request(self, payload: Dict, name: str) -> bool:
         """发送请求"""
         try:
             response = self.session.post(
@@ -125,34 +151,37 @@ class TextPublisher(BasePublisher):
             )
             response.raise_for_status()
             
-            print(f"  ✅ 消息发送成功")
+            logger.success(f"文字频道消息发送成功: {name[:50]}")
             return True
             
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 429:
                 retry_after = int(e.response.headers.get('Retry-After', 5))
-                print(f"  ⏳ 速率限制，等待 {retry_after} 秒...")
+                logger.warning(f"⏳ 速率限制，等待 {retry_after} 秒后重试...")
                 time.sleep(retry_after)
-                return self._send_request(payload)  # 重试
+                return self._send_request(payload, name)
             else:
-                print(f"  ❌ HTTP 错误: {e}")
+                logger.error(f"❌ HTTP 错误: {e.response.status_code}")
                 return False
                 
         except Exception as e:
-            print(f"  ❌ 发送失败: {e}")
+            logger.error(f"❌ 发送失败: {e}")
             return False
     
     def publish_batch(self, contents: List[Dict[str, Any]]) -> int:
         """批量发布到文字频道"""
         
         if not self.validate_config():
+            logger.error("❌ 配置验证失败，无法批量发布")
             return 0
         
-        print(f"\n📤 发布 {len(contents)} 条内容到 Discord 文字频道...")
+        format_type = "Embed" if self.use_embed else "纯文本"
+        logger.section(f"📤 批量发布 {len(contents)} 条内容到 Discord 文字频道 ({format_type})")
         
         success_count = 0
         for i, content in enumerate(contents, 1):
-            print(f"  [{i}/{len(contents)}] {content.get('name', 'Unknown')[:40]}...")
+            name = content.get('name', 'Unknown')
+            logger.info(f"[{i}/{len(contents)}] {name[:40]}...")
             
             if self.publish(content):
                 success_count += 1
@@ -160,38 +189,5 @@ class TextPublisher(BasePublisher):
             if i < len(contents):
                 time.sleep(self.delay_between_posts)
         
-        print(f"\n  ✅ 成功发布 {success_count}/{len(contents)} 条")
+        logger.section(f"✅ 批量发布完成: {success_count}/{len(contents)} 条成功")
         return success_count
-
-# 测试
-if __name__ == '__main__':
-    print("="*60)
-    print("Discord 文字频道发布模块测试")
-    print("="*60)
-    
-    config = {
-        'webhook_url': os.getenv('DISCORD_WEBHOOK_URL'),
-        'use_embed': False,  # 切换为 True 测试 Embed 格式
-        'delay': 1
-    }
-    
-    publisher = TextPublisher(config)
-    
-    if not publisher.validate_config():
-        print("\n⚠️ 请先配置 DISCORD_WEBHOOK_URL 环境变量")
-        exit(1)
-    
-    test_content = {
-        'name': 'Test Project',
-        'content': '这是一个测试内容，用于验证文字频道发布模块是否正常工作。',
-        'url': 'https://github.com/test/project',
-        'source': 'GitHub'
-    }
-    
-    print("\n发送测试内容...")
-    print(f"格式: {'Embed' if config['use_embed'] else '纯文本'}")
-    
-    if publisher.publish(test_content):
-        print("✅ 测试成功！")
-    else:
-        print("❌ 测试失败")

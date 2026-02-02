@@ -34,8 +34,8 @@ def fetch_candidates() -> List[Dict]:
     
     config = {
         'languages': ['python', 'javascript', 'go'],
-        'max_candidates': 5,
-        'growth_threshold': 0.5
+        'max_candidates': 10,
+        'growth_threshold': 0.3
     }
     
     source = GithubTrend(config)
@@ -158,7 +158,7 @@ def main():
     print("="*60)
     
     prompts = []
-    for i, candidate in enumerate(candidates[:3], 1):
+    for i, candidate in enumerate(candidates[:5], 1):
         print(f"\n{i}. {candidate.get('name', 'Unknown')}")
         prompt = build_prompt(candidate)
         prompts.append({
