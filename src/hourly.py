@@ -28,6 +28,7 @@ from src.sources.base import Article
 from src.core.deduplicator import ArticleDeduplicator
 from src.core.config_loader import load_config, get_enabled_channels
 from src.core.webhook_sender import DiscordWebhookSender
+from src.analytics import log_publish_session, generate_report
 
 def collect_all_sources(config: Dict[str, Any]) -> List[Article]:
     """从所有数据源收集文章"""
@@ -203,6 +204,9 @@ def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> b
 
 def main():
     """主函数"""
+    import time
+    start_time = time.time()
+    
     print("🚀 AiTrend 每小时精选模式（扩展版）", file=sys.stderr)
     
     # 加载配置
@@ -277,11 +281,23 @@ def main():
     success_count = sum(1 for r in results if r['success'])
     print(f"\n📈 发布完成: {success_count}/{len(results)} 条成功", file=sys.stderr)
     
+    # 记录质量日志
+    duration_ms = int((time.time() - start_time) * 1000)
+    log_publish_session(top_articles, success_count, duration_ms)
+    
+    # 显示质量报告摘要
+    print("\n📊 质量报告:", file=sys.stderr)
+    sources_used = list(set(a.source for a in top_articles))
+    print(f"  使用数据源: {', '.join(sources_used)}", file=sys.stderr)
+    print(f"  平均热度分: {sum(calculate_hot_score(a) for a in top_articles)/len(top_articles):.1f}", file=sys.stderr)
+    
     output = {
         "success": success_count == len(results),
         "total": len(results),
         "success_count": success_count,
-        "posts": results
+        "posts": results,
+        "sources": sources_used,
+        "quality_logged": True
     }
     print(json.dumps(output, ensure_ascii=False))
 
