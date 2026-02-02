@@ -22,9 +22,18 @@ sources:
     time_period: daily  # daily 或 weekly
     max_candidates: 5
   
-  # hackernews:
-  #   enabled: false
-  #   max_candidates: 5
+  hackernews:
+    enabled: true
+    min_points: 100
+    min_comments: 20
+    max_candidates: 5
+    keywords:
+      - AI
+      - machine learning
+      - open source
+      - github
+      - developer
+      - programming
 
 # 信息整理模块配置
 processors:
