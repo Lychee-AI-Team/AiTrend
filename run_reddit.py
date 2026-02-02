@@ -25,14 +25,15 @@ from publishers import create_publisher
 logger = get_logger()
 
 def fetch_from_reddit() -> List[Dict]:
-    """从 Reddit 获取热门帖子"""
-    logger.section("📡 从 Reddit 挖掘热门帖子")
+    """从 Reddit (Pushshift) 获取热门帖子"""
+    logger.section("📡 从 Reddit (Pushshift) 挖掘热门帖子")
     
     from modules.sources.reddit import Reddit
     
     config = {
         'subreddits': ['MachineLearning', 'LocalLLaMA', 'artificial', 'technology'],
         'min_upvotes': 50,
+        'min_comments': 10,
         'max_candidates': 5,
         'time_window': 7
     }
