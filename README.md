@@ -1,263 +1,257 @@
-<h1 align="center">AiTrend Skill v0.2.0</h1>
+<h1 align="center">AiTrend v0.2.0</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL-lightgrey.svg?style=flat-square" alt="Platform">
+  <img src="https://img.shields.io/badge/Version-0.2.0-orange.svg?style=flat-square" alt="Version">
 </p>
 
 <p align="center">
-  <b>🚀 多源 AI 热点资讯收集器 - 支持多渠道推送</b>
+  <b>🔥 模块化 AI 热点发现引擎 - 自由组装你的信息源</b>
 </p>
 
 <p align="center">
+  <a href="#-核心特性">核心特性</a> •
   <a href="#-快速开始">快速开始</a> •
-  <a href="#-功能特性">功能特性</a> •
-  <a href="#-配置说明">配置说明</a> •
-  <a href="#-渠道配置">渠道配置</a> •
-  <a href="#-多语言支持">多语言</a>
+  <a href="#-模块化配置">模块配置</a> •
+  <a href="#-信息源市场">信息源</a> •
+  <a href="#-输出渠道">输出渠道</a>
 </p>
 
 ---
 
-## 🌍 多语言文档
+## 🎯 核心特性
 
-<p align="center">
-  <a href="README.md">🇨🇳 简体中文</a> •
-  <a href="README.en.md">🇺🇸 English</a> •
-  <a href="README.ja.md">🇯🇵 日本語</a> •
-  <a href="README.ko.md">🇰🇷 한국어</a> •
-  <a href="README.es.md">🇪🇸 Español</a>
-</p>
+### 🧩 模块化架构
 
----
+**像搭积木一样组装你的 AI 资讯流：**
 
-## 📸 效果展示
+```
+┌─────────────────────────────────────────────────┐
+│                  AiTrend 引擎                    │
+├─────────────────────────────────────────────────┤
+│  信息源模块 (可插拔)                              │
+│  ├─ GitHub Trend    ├─ Product Hunt             │
+│  ├─ HackerNews      ├─ Reddit (Pushshift)       │
+│  └─ [你的自定义模块]   └─ [即将推出...]            │
+├─────────────────────────────────────────────────┤
+│  输出渠道 (自由组合)                              │
+│  ├─ Discord 论坛    ├─ Discord 文字频道         │
+│  ├─ 飞书            └─ [更多渠道开发中]          │
+└─────────────────────────────────────────────────┘
+```
 
-![AiTrend 信息效果](ScreenShot_2026-02-01_235825_945.png)
-
-*AI 热点资讯自动收集并推送到 Discord/飞书的效果*
-
----
-
-## ✨ 功能特性
-
-- 🔥 **多源挖掘**：Tavily、HackerNews、GitHub、Reddit、Twitter、Product Hunt
-- 📢 **多渠道推送**：Discord、飞书、Telegram、Console
-- 🌐 **多语言支持**：中、英、日、韩、西
-- 🔄 **智能去重**：24小时滑动窗口，自动过滤重复内容
-- ⚡ **零配置启动**：仅需 Tavily Key
+**模块化优势：**
+- ✅ **即插即用** - 启用/禁用模块只需修改配置
+- ✅ **自由组合** - 4个信息源 × 2个输出渠道 = 无限可能
+- ✅ **扩展性强** - 轻松添加新信息源或输出渠道
+- ✅ **配置驱动** - 无需修改代码，YAML 配置即可定制
 
 ---
 
 ## 🚀 快速开始
 
-### 1️⃣ 克隆仓库
+### 1️⃣ 安装
 
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
+
+# 安装依赖
+pip install -r requirements.txt
 ```
 
-### 2️⃣ 配置环境变量
+### 2️⃣ 配置环境
 
 ```bash
+# 复制配置模板
 cp .env.example .env
-# 编辑 .env，填入 TAVILY_API_KEY
+cp config.yaml.example config.yaml
+
+# 编辑 .env，添加必要密钥
+echo "DISCORD_WEBHOOK_URL=your_webhook_url" >> .env
+echo "PRODUCTHUNT_TOKEN=your_token" >> .env  # 可选
 ```
 
-### 3️⃣ 配置发送渠道
+### 3️⃣ 选择你的模块
 
-```bash
-cp config/config.example.json config/config.json
-# 编辑 config/config.json，启用你想要的渠道
+编辑 `config.yaml`，启用想要的模块：
+
+```yaml
+sources:
+  github_trend:
+    enabled: true        # 🔥 技术项目趋势
+    languages: [python, go, rust]
+  
+  producthunt:
+    enabled: true        # 🚀 新产品发布
+    categories: [AI, Developer Tools]
+  
+  hackernews:
+    enabled: true        # 💬 技术社区热点
+  
+  reddit:
+    enabled: true        # 👥 草根社区讨论
+    subreddits: [MachineLearning, LocalLLaMA]
+
+publishers:
+  forum:
+    enabled: true        # 📝 发布到 Discord 论坛
 ```
 
 ### 4️⃣ 运行
 
 ```bash
-python3 -m src
+python3 launcher.py
 ```
 
 ---
 
-## 🔧 配置说明
+## 🧩 模块化配置
 
-### 基础配置
+### 信息源模块开关
 
-编辑 `config/config.json`：
+每个信息源都是独立模块，自由启用：
 
-```json
-{
-  "language": "zh",
-  "sources": {
-    "tavily": {
-      "enabled": true,
-      "api_key": "${TAVILY_API_KEY}"
-    },
-    "hackernews": { "enabled": true },
-    "reddit": { "enabled": true },
-    "github_trending": { "enabled": true }
-  },
-  "channels": {
-    "console": { "enabled": true }
-  }
-}
+```yaml
+sources:
+  # GitHub - 发现增长最快的开源项目
+  github_trend:
+    enabled: true
+    languages: [python, javascript, go, rust]
+    max_candidates: 10
+    growth_threshold: 0.5  # stars/天
+  
+  # Product Hunt - 追踪最新产品发布
+  producthunt:
+    enabled: true
+    categories: [AI, Developer Tools, Productivity]
+    min_votes: 50
+  
+  # HackerNews - 技术社区热门讨论
+  hackernews:
+    enabled: true
+    min_points: 100
+    min_comments: 20
+  
+  # Reddit - AI 社区草根声音
+  reddit:
+    enabled: true
+    subreddits: [MachineLearning, LocalLLaMA, artificial]
+    min_upvotes: 50
+```
+
+### 输出渠道切换
+
+```yaml
+publishers:
+  # Discord 论坛 - 每个项目独立帖子
+  forum:
+    enabled: true
+    thread_name: "{name} – {source}"
+    delay: 2
+  
+  # Discord 文字频道 - 消息流
+  text:
+    enabled: false
+    use_embed: false
 ```
 
 ---
 
-## 📢 渠道配置
+## 📡 信息源市场
 
-AiTrend 支持多种输出渠道，可以同时启用多个：
+### 已上线模块
 
-### Console（默认）
+| 信息源 | 内容特点 | 适用场景 |
+|--------|----------|----------|
+| **GitHub Trend** | 开源项目、代码趋势 | 追踪技术栈变化 |
+| **Product Hunt** | 新产品、初创项目 | 发现创新工具 |
+| **HackerNews** | 技术讨论、深度评论 | 了解技术社区观点 |
+| **Reddit** | 经验分享、草根反馈 | 获取实际使用体验 |
 
-```json
-"channels": {
-  "console": {
-    "enabled": true
-  }
-}
-```
+### 模块对比
 
-### Discord
-
-```json
-"channels": {
-  "discord": {
-    "enabled": true,
-    "channel_id": "1467767285044346933"
-  }
-}
-```
-
-**获取 Channel ID：**
-1. Discord 设置 → 高级 → 开启开发者模式
-2. 右键频道 → 复制频道 ID
-
-### Discord 论坛 (Forum)
-
-**需要 Webhook：**
-
-1. 在 Discord 频道设置中创建 Webhook（见下方步骤）
-2. 复制 Webhook URL 到 `.env` 文件
-
-```json
-"channels": {
-  "discord_forum": {
-    "enabled": true,
-    "channel_id": "1467789796087824475",
-    "webhook_url": "${DISCORD_WEBHOOK_URL}"
-  }
-}
-```
-
-```bash
-# .env
-DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
-```
-
-**创建 Webhook 步骤：**
-1. 右键论坛频道 → 服务器设置 → 集成
-2. 点击 "Webhook" → "新建 Webhook"
-3. 选择频道，复制 Webhook URL
-
-**特点：**
-- ✅ 每天自动创建新帖子
-- ✅ 支持 Markdown 格式
-- ✅ 自定义机器人名称和头像
-
-### 飞书 (Feishu)
-
-```json
-"channels": {
-  "feishu": {
-    "enabled": true,
-    "chat_id": "oc_9a3c218325fd2cfa42f2a8f6fe03ac02"
-  }
-}
-```
-
-**获取 Chat ID：**
-- 飞书群设置 → 群机器人 → 查看群 ID
-
-### Telegram
-
-```json
-"channels": {
-  "telegram": {
-    "enabled": true,
-    "chat_id": "-1001234567890"
-  }
-}
-```
-
-**获取 Chat ID：**
-- 使用 @userinfobot 或查看群组 URL
-
-### 多渠道同时推送
-
-```json
-"channels": {
-  "console": { "enabled": true },
-  "discord": {
-    "enabled": true,
-    "channel_id": "YOUR_DISCORD_CHANNEL_ID"
-  },
-  "feishu": {
-    "enabled": true,
-    "chat_id": "YOUR_FEISHU_CHAT_ID"
-  }
-}
-```
+| 维度 | GitHub | Product Hunt | HackerNews | Reddit |
+|------|--------|--------------|------------|--------|
+| **内容类型** | 代码/项目 | 产品/工具 | 讨论/新闻 | 经验/分享 |
+| **更新频率** | 实时 | 每日 | 实时 | 实时 |
+| **社区属性** | 开发者 | 产品人 | 技术人 | 多元 |
+| **内容深度** | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
 
 ---
 
-## ⏰ 定时任务
+## 📢 输出渠道
 
-### OpenClaw Cron
+### Discord 论坛
 
-```bash
-# 每天早上 9:00 自动运行
-openclaw cron add \
-  --name "aitrend-daily" \
-  --schedule "0 9 * * *" \
-  --command "python3 -m src" \
-  --cwd "~/.openclaw/workspace/AiTrend"
-```
+**最适合：** 需要分类讨论的社区
 
-### Linux Cron
+- 每个项目自动创建独立帖子
+- 支持 Markdown 富文本
+- 可自定义机器人名称和头像
 
-```bash
-0 9 * * * cd /path/to/AiTrend && python3 -m src
-```
+### Discord 文字频道
 
----
+**最适合：** 信息流推送
 
-## 📊 数据源
+- 简洁的消息列表
+- 支持 Embed 卡片格式
+- 实时推送无延迟
 
-| 数据源 | 需要 API Key | 说明 |
-|--------|--------------|------|
-| Tavily | ✅ 必需 | AI 原生搜索引擎 |
-| HackerNews | ❌ 否 | 开发者社区热门 |
-| GitHub | ❌ 否 | Trending AI 项目 |
-| Reddit | ❌ 否 | AI 社区讨论 |
-| Twitter/X | ⚠️ 可选 | Viral 内容 |
-| Product Hunt | ⚠️ 可选 | 新产品发布 |
+### 飞书 (即将支持)
+
+- 企业级通知
+- 支持富文本卡片
 
 ---
 
-## 🌍 多语言支持
+## 📋 TODO List
 
-| 语言 | 代码 | 状态 |
-|------|------|------|
-| 简体中文 | zh | ✅ |
-| English | en | ✅ |
-| 日本語 | ja | ✅ |
-| 한국어 | ko | ✅ |
-| Español | es | ✅ |
+### 即将推出的信息源模块
 
-修改 `config/config.json` 中的 `language` 字段即可切换。
+- [ ] **arXiv Papers** - AI 学术论文追踪
+- [ ] **Twitter/X Tech** - 实时技术动态
+- [ ] **Lobsters** - 硬核开发者社区
+- [ ] **Papers with Code** - SOTA 论文+代码
+- [ ] **Indie Hackers** - 独立开发者产品
+
+### 即将支持的输出渠道
+
+- [ ] **飞书** - 企业通知集成
+- [ ] **Telegram** - 即时消息推送
+- [ ] **Slack** - 团队协作集成
+- [ ] **邮件** - 每日摘要推送
+
+### 高级功能
+
+- [ ] **智能去重** - 跨平台内容去重
+- [ ] **个性化推荐** - 基于阅读历史
+- [ ] **内容摘要** - AI 自动生成 TL;DR
+- [ ] **多语言翻译** - 自动翻译为非英文内容
+
+---
+
+## 📊 效果展示
+
+### Discord 论坛效果
+
+```
+📁 AiTrend 论坛
+├── 🔥 browser-use – GitHub
+│   └── "让网站对 AI 智能体可访问..."
+├── 🚀 Amara – Product Hunt
+│   └── "通过探索构建 3D 环境..."
+├── 💬 Netbird – HackerNews
+│   └── "开源零信任网络方案..."
+└── 👥 Llama 3.3 70B – Reddit
+    └── "本地部署大模型讨论..."
+```
+
+### 内容质量
+
+- ✅ **自然叙述** - 无结构化列表，流畅阅读
+- ✅ **信息完整** - 项目特点 + 亮点 + 链接
+- ✅ **社区视角** - 包含 HN/Reddit 热评观点
 
 ---
 
@@ -265,52 +259,20 @@ openclaw cron add \
 
 ```
 AiTrend/
-├── src/
-│   ├── __main__.py              # 程序入口
-│   ├── core/
-│   │   ├── config_loader.py     # 配置加载
-│   │   ├── sender.py            # 渠道发送器
-│   │   └── deduplicator.py      # 去重器
-│   └── sources/                 # 数据源实现
-├── config/
-│   ├── config.example.json      # 配置示例
-│   └── config.json              # 用户配置（需创建）
-├── .env.example                 # 环境变量示例
-├── .env                         # 用户环境变量（需创建）
-└── README.md
-```
-
----
-
-## 📝 配置示例（完整版）
-
-```json
-{
-  "language": "zh",
-  "sources": {
-    "reddit": { "enabled": true },
-    "hackernews": { "enabled": true },
-    "github_trending": {
-      "enabled": true,
-      "languages": ["python", "typescript", "rust", "go"]
-    },
-    "tavily": {
-      "enabled": true,
-      "api_key": "${TAVILY_API_KEY}",
-      "queries": [
-        "latest AI tools launch 2026",
-        "new AI models released this week"
-      ]
-    }
-  },
-  "channels": {
-    "console": { "enabled": true },
-    "discord": {
-      "enabled": true,
-      "channel_id": "1467767285044346933"
-    }
-  }
-}
+├── modules/
+│   ├── sources/          # 信息源模块
+│   │   ├── github_trend.py
+│   │   ├── producthunt.py
+│   │   ├── hackernews.py
+│   │   └── reddit.py
+│   ├── processors/       # 内容处理模块
+│   └── output/           # 输出模块
+├── publishers/           # 发布渠道
+│   ├── forum_publisher.py
+│   └── text_publisher.py
+├── config.yaml           # 模块配置
+├── launcher.py           # 启动入口
+└── docs/                 # 完整文档
 ```
 
 ---
@@ -319,7 +281,5 @@ AiTrend/
 
 MIT License
 
----
-
 **GitHub**: https://github.com/Lychee-AI-Team/AiTrend  
-**作者**: 屁屁虾🦞
+**版本**: v0.2.0 - 模块化架构版
