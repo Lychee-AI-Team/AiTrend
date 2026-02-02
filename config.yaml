@@ -11,9 +11,16 @@ sources:
     max_candidates: 10
     growth_threshold: 0.5  # stars/天，低于此值过滤
   
-  # product_hunt:
-  #   enabled: false
-  #   max_candidates: 5
+  producthunt:
+    enabled: true
+    api_token: ""  # 从环境变量 PRODUCTHUNT_TOKEN 读取
+    categories:
+      - AI
+      - Developer Tools
+      - Productivity
+    min_votes: 50
+    time_period: daily  # daily 或 weekly
+    max_candidates: 5
   
   # hackernews:
   #   enabled: false
