@@ -1,143 +1,62 @@
-# AI Hotspot Collector 配置文件
-# 可自定义搜索关键词（不需要设置为 secret）
+# AiTrend 模块化系统配置
 
-# 搜索配置
-SEARCH_CONFIG:
-  # 每页结果数量
-  RESULTS_PER_PAGE: 3
+# 信息源模块配置
+sources:
+  github_trend:
+    enabled: true
+    languages:
+      - python
+      - javascript
+      - go
+    max_candidates: 10
+    growth_threshold: 0.5  # stars/天，低于此值过滤
+  
+  # product_hunt:
+  #   enabled: false
+  #   max_candidates: 5
+  
+  # hackernews:
+  #   enabled: false
+  #   max_candidates: 5
 
-  # 内容过滤
-  CONTENT_FILTER:
-    # 最小标题长度
-    MIN_TITLE_LENGTH: 20
-    # 最大描述长度
-    MAX_DESC_LENGTH: 150
+# 信息整理模块配置
+processors:
+  readme:
+    enabled: true
+    max_features: 5
+    max_length: 1500
+  
+  search:
+    enabled: true
+    max_results: 3
 
-# AI 热点分类及搜索关键词（用于 ai-hotspot-collector.sh）
-CATEGORIES:
-  - name: "中美模型厂商"
-    icon: "🤖"
-    keywords:
-      - "OpenAI"
-      - "Anthropic"
-      - "Google Gemini"
-      - "DeepSeek"
-      - "Meta AI"
-      - "xAI"
-      - "Grok"
-      - "Mistral AI"
-      - "Cohere"
-      - "Perplexity"
-      - "Microsoft Copilot"
-      - "Llama"
-      - "Meta Llama"
-      - "Baichuan"
-      - "Zhipu"
-      - "GLM-4"
-      - "Qwen Alibaba"
-      - "Doubao ByteDance"
-      - "Hunyuan Tencent"
-      - "Kimi Moonshot"
-      - "Yi model"
-      - "MiniMax"
-      - "Ernie Baidu"
-      - "Wenxin"
+# 输出整理模块配置
+output:
+  style: natural_narrative
+  min_length: 200
+  max_length: 800
+  
+  # 自然叙述提示词规则
+  narrative_rules:
+    - 禁止列表符号（-, *, •）
+    - 禁止序号（第一、第二、首先、其次）
+    - 禁止结构化标题（主要功能、使用场景）
+    - 禁止空话套话（针对痛点、功能设计）
+    - 要求故事化叙述
+    - 要求口语化表达
 
-  - name: "大模型热点"
-    icon: "🧠"
-    keywords:
-      - "GPT-4"
-      - "Claude 3"
-      - "Qwen"
-      - "ChatGLM"
-      - "LLM reasoning"
-      - "GPT-5"
-      - "Claude 4"
-      - "Llama 4"
-      - "Gemini 2"
-      - "o1 model"
-      - "o3 OpenAI"
-      - "MoE mixture of experts"
-      - "long context LLM"
-      - "1M tokens"
-      - "multimodal LLM"
-      - "RAG retrieval"
-      - "fine-tuning LLM"
-      - "RLHF"
-      - "agentic AI"
-      - "frontier model"
+# 发布层配置
+publishers:
+  discord:
+    enabled: true
+    channel: forum  # forum 或 text
+  
+  # feishu:
+  #   enabled: false
+  #   webhook_url: ""
 
-  - name: "AI Agent"
-    icon: "🔧"
-    keywords:
-      - "AI Agent"
-      - "Claude Code"
-      - "LangGraph"
-      - "AutoGPT"
-      - "CrewAI"
-      - "LangChain"
-      - "Devin AI"
-      - "SWE-agent"
-      - "Cursor Agent"
-      - "Code Interpreter"
-      - "ReAct agent"
-      - "AI agent framework"
-      - "tool use LLM"
-      - "function calling"
-      - "agentic workflow"
-      - "AI coding agent"
-
-  - name: "AI 应用工具"
-    icon: "🛠️"
-    keywords:
-      - "ChatGPT"
-      - "GitHub Copilot"
-      - "Cursor IDE"
-      - "AI coding"
-      - "Claude Code"
-      - "v0 dev"
-      - "Replit AI"
-      - "Codeium"
-      - "Tabnine"
-      - "AI pair programming"
-      - "Midjourney"
-      - "DALL-E 3"
-      - "Sora OpenAI"
-      - "Runway Gen-3"
-      - "AI design tool"
-      - "AI writing assistant"
-
-  - name: "AI 行业新闻"
-    icon: "📰"
-    keywords:
-      - "AI news 2026"
-      - "artificial intelligence"
-      - "AI technology"
-      - "AI startup"
-      - "AI funding"
-      - "AI investment"
-      - "machine learning news"
-      - "deep learning"
-      - "AI conference"
-      - "AI research"
-      - "generative AI"
-
-  - name: "AI 安全与监管"
-    icon: "⚖️"
-    keywords:
-      - "AI safety"
-      - "AI regulation"
-      - "AI ethics"
-      - "AI alignment"
-      - "AI governance"
-      - "EU AI Act"
-      - "AI policy"
-      - "AI risk"
-      - "responsible AI"
-      - "AI transparency"
-
-# 定时任务配置（GitHub Actions 使用）
-SCHEDULE:
-  # UTC 时间定时
-  CRON: "0 5,13,21 * * *"
-  # 对应北京时间 (CST): 13:00, 21:00, 05:00
+# 系统配置
+system:
+  max_iterations: 5
+  parallel_processors: true
+  log_level: info
