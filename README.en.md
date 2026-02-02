@@ -1,117 +1,181 @@
-# AiTrend Skill v0.1.1
+<h1 align="center">AiTrend Skill v0.2.0</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL-lightgrey.svg?style=flat-square" alt="Platform">
+</p>
 
-> 🚀 Multi-source AI Trend Collector - **AI Weekly for Everyone**
+<p align="center">
+  <b>🚀 Multi-source AI Trend Collector - Multi-channel Support</b>
+</p>
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL-lightgrey.svg)]()
-
-## ✨ Features
-
-### 🔥 Multi-source Mining
-- **6 Data Sources**: Tavily, HackerNews, GitHub, Reddit, Twitter, Product Hunt
-- **AI-Native Search**: Tavily designed for LLMs, returns full content
-- **Real-time Hotspots**: Social media monitoring for trending content
-- **Zero-config Startup**: Only Tavily Key required
-
-### 🔄 Smart Deduplication
-- **24-hour Sliding Window**: Same content won't repeat
-- **URL Deduplication**: Automatically filters duplicate links
-- **Persistent Memory**: Local tracking of sent content
-- **Force 10 Items**: Minimum 10 products per output
-
-### 🤖 OpenClaw Integration
-- **Depends on OpenClaw**: Message routing, scheduling, LLM summarization
-- **Pure Data Collection**: Focus on mining, not sending/summarizing
-- **Multi-channel**: Send to any platform via OpenClaw
-- **Auto Schedule**: Daily delivery at 09:00
-
-### 🌐 Multi-language Support
-- **5 Languages**: Chinese, English, Japanese, Korean, Spanish
-- **One-click Switch**: Change output language in config
-- **Smart Adaptation**: Data collection language-agnostic
-- **Detailed Descriptions**: 200+ words per product
-
-## 🚀 Quick Start
-
-### 🎯 Method 1: Let AI Install Automatically (Recommended)
-
-**Just tell your AI:**
-
-> "Please read https://github.com/Lychee-AI-Team/AiTrend/blob/main/SKILL.md and install AiTrend Skill"
-
-Your AI will automatically:
-1. Clone the repository to the correct location
-2. Check and request necessary API Key (Tavily only)
-3. Run and collect data
-4. Generate conversational summary via OpenClaw LLM
-5. Send to your preferred platform
-
-**Zero-config startup** - Only one Tavily API Key needed!
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-configuration">Configuration</a> •
+  <a href="#-channel-setup">Channels</a> •
+  <a href="#-multi-language">Languages</a>
+</p>
 
 ---
 
-### 💻 Method 2: Manual Installation
+## 🌍 Multi-language Docs
+
+<p align="center">
+  <a href="README.md">🇨🇳 简体中文</a> •
+  <a href="README.en.md">🇺🇸 English</a> •
+  <a href="README.ja.md">🇯🇵 日本語</a> •
+  <a href="README.ko.md">🇰🇷 한국어</a> •
+  <a href="README.es.md">🇪🇸 Español</a>
+</p>
+
+---
+
+## ✨ Features
+
+- 🔥 **Multi-source Mining**: Tavily, HackerNews, GitHub, Reddit, Twitter, Product Hunt
+- 📢 **Multi-channel Push**: Discord, Feishu, Telegram, Console
+- 🌐 **Multi-language**: Chinese, English, Japanese, Korean, Spanish
+- 🔄 **Smart Deduplication**: 24-hour sliding window
+- ⚡ **Zero-config**: Only Tavily Key required
+
+---
+
+## 🚀 Quick Start
+
+### 1️⃣ Clone Repository
 
 ```bash
-# Clone repository
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
+```
 
-# Configure API Keys
+### 2️⃣ Configure Environment Variables
+
+```bash
 cp .env.example .env
-# Edit .env file with your Tavily API Key
+# Edit .env, add your TAVILY_API_KEY
+```
 
-# Run
+### 3️⃣ Configure Output Channels
+
+```bash
+cp config/config.example.json config/config.json
+# Edit config/config.json, enable your desired channels
+```
+
+### 4️⃣ Run
+
+```bash
 python3 -m src
 ```
 
-## 📋 API Keys Configuration
+---
 
-Create `.env` file:
+## 🔧 Configuration
 
-```bash
-# Required (AI-native search engine)
-TAVILY_API_KEY=your_tavily_api_key
-
-# Optional (enhanced data sources)
-TWITTER_AUTH_TOKEN=your_twitter_auth_token
-TWITTER_CT0=your_twitter_ct0
-PRODUCTHUNT_TOKEN=your_producthunt_token
-```
-
-## 📊 Data Sources
-
-| Source | Type | API Key Required | Description |
-|--------|------|------------------|-------------|
-| Tavily | AI Search | ✅ Required | AI-native search, returns full content |
-| HackerNews | Developer Community | ❌ No | Show HN and trending discussions |
-| GitHub | Open Source | ❌ No | Trending AI projects |
-| Reddit | Community | ❌ No | SideProject and more |
-| Twitter/X | Real-time | ⚠️ Optional | Viral content and discussions |
-| Product Hunt | New Products | ⚠️ Optional | Daily new launches |
-
-**Default Enabled**: Tavily + HackerNews + GitHub + Reddit
-
-## 🌐 Language Configuration
+### Basic Configuration
 
 Edit `config/config.json`:
 
 ```json
 {
   "language": "en",
-  "sources": { ... },
-  "summarizer": { ... }
+  "sources": {
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}"
+    },
+    "hackernews": { "enabled": true },
+    "reddit": { "enabled": true },
+    "github_trending": { "enabled": true }
+  },
+  "channels": {
+    "console": { "enabled": true }
+  }
 }
 ```
 
-Supported: `zh` (Chinese), `en` (English), `ja` (Japanese), `ko` (Korean), `es` (Spanish)
+---
 
-Default: `zh` (Simplified Chinese)
+## 📢 Channel Configuration
 
-**Note**: Data collection is language-agnostic. Only the final AI summary output respects the language setting.
+AiTrend supports multiple output channels. You can enable multiple channels simultaneously:
+
+### Console (Default)
+
+```json
+"channels": {
+  "console": {
+    "enabled": true
+  }
+}
+```
+
+### Discord
+
+```json
+"channels": {
+  "discord": {
+    "enabled": true,
+    "channel_id": "1467767285044346933"
+  }
+}
+```
+
+**Get Channel ID:**
+1. Discord Settings → Advanced → Enable Developer Mode
+2. Right-click channel → Copy Channel ID
+
+### Feishu
+
+```json
+"channels": {
+  "feishu": {
+    "enabled": true,
+    "chat_id": "oc_9a3c218325fd2cfa42f2a8f6fe03ac02"
+  }
+}
+```
+
+**Get Chat ID:**
+- Feishu Group Settings → Group Bot → View Group ID
+
+### Telegram
+
+```json
+"channels": {
+  "telegram": {
+    "enabled": true,
+    "chat_id": "-1001234567890"
+  }
+}
+```
+
+**Get Chat ID:**
+- Use @userinfobot or check group URL
+
+### Multi-channel Push
+
+```json
+"channels": {
+  "console": { "enabled": true },
+  "discord": {
+    "enabled": true,
+    "channel_id": "YOUR_DISCORD_CHANNEL_ID"
+  },
+  "feishu": {
+    "enabled": true,
+    "chat_id": "YOUR_FEISHU_CHAT_ID"
+  }
+}
+```
+
+---
 
 ## ⏰ Scheduling
+
+### OpenClaw Cron
 
 ```bash
 # Daily at 09:00
@@ -122,12 +186,94 @@ openclaw cron add \
   --cwd "~/.openclaw/workspace/AiTrend"
 ```
 
-### Trigger Commands
+### Linux Cron
 
-Send any of these to trigger immediately:
-- "Latest AI hotspots"
-- "AI hotspots"
-- "Hot news"
+```bash
+0 9 * * * cd /path/to/AiTrend && python3 -m src
+```
+
+---
+
+## 📊 Data Sources
+
+| Source | API Key Required | Description |
+|--------|------------------|-------------|
+| Tavily | ✅ Required | AI-native search engine |
+| HackerNews | ❌ No | Developer community |
+| GitHub | ❌ No | Trending AI projects |
+| Reddit | ❌ No | AI community discussions |
+| Twitter/X | ⚠️ Optional | Viral content |
+| Product Hunt | ⚠️ Optional | New product launches |
+
+---
+
+## 🌍 Multi-language Support
+
+| Language | Code | Status |
+|----------|------|--------|
+| Simplified Chinese | zh | ✅ |
+| English | en | ✅ |
+| Japanese | ja | ✅ |
+| Korean | ko | ✅ |
+| Spanish | es | ✅ |
+
+Change the `language` field in `config/config.json` to switch languages.
+
+---
+
+## 📁 Project Structure
+
+```
+AiTrend/
+├── src/
+│   ├── __main__.py              # Entry point
+│   ├── core/
+│   │   ├── config_loader.py     # Config loader
+│   │   ├── sender.py            # Channel sender
+│   │   └── deduplicator.py      # Deduplicator
+│   └── sources/                 # Data source implementations
+├── config/
+│   ├── config.example.json      # Config example
+│   └── config.json              # User config (create this)
+├── .env.example                 # Environment example
+├── .env                         # User environment (create this)
+└── README.md
+```
+
+---
+
+## 📝 Full Configuration Example
+
+```json
+{
+  "language": "en",
+  "sources": {
+    "reddit": { "enabled": true },
+    "hackernews": { "enabled": true },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript", "rust", "go"]
+    },
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}",
+      "queries": [
+        "latest AI tools launch 2026",
+        "new AI models released this week"
+      ]
+    }
+  },
+  "channels": {
+    "console": { "enabled": true },
+    "discord": {
+      "enabled": true,
+      "channel_id": "1467767285044346933"
+    }
+  }
+}
+```
+
+---
 
 ## 📄 License
 

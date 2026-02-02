@@ -1,93 +1,273 @@
-# AiTrend Skill v0.1.1
+<h1 align="center">AiTrend Skill v0.2.0</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL-lightgrey.svg?style=flat-square" alt="Platform">
+</p>
 
-> 🚀 멀티소스 AI 트렌드 수집기 - **누구나 사용할 수 있는 AI 위클리**
+<p align="center">
+  <b>🚀 멀티소스 AI 트렌드 수집기 - 멀티채널 지원</b>
+</p>
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-## ✨ 주요 기능
-
-### 🔥 멀티소스 수집
-- **6개 데이터 소스**: Tavily, HackerNews, GitHub, Reddit, Twitter, Product Hunt
-- **AI 네이티브 검색**: LLM용으로 설계된 Tavily, 전체 콘텐츠 반환
-- **실시간 핫스팟**: 소셜 미디어 모니터링
-- **제로 설정 시작**: Tavily Key만 필요
-
-### 🔄 스마트 중복 제거
-- **24시간 슬라이딩 윈도우**: 동일한 콘텐츠는 반복되지 않음
-- **URL 중복 제거**: 자동으로 중복 링크 필터링
-- **영구 메모리**: 전송된 콘텐츠의 로컬 추적
-- **강제 10개 항목**: 출력당 최소 10개 제품
-
-### 🤖 OpenClaw 통합
-- **OpenClaw 의존**: 메시지 라우팅, 스케줄링, LLM 요약
-- **순수 데이터 수집**: 마이닝에 집중, 전송/요약은 OpenClaw에 위임
-- **멀티채널**: OpenClaw를 통해 모든 플랫폼으로 전송
-- **자동 일정**: 매일 09:00 자동 전송
-
-### 🌐 다국어 지원
-- **5개 언어**: 중국어, 영어, 일본어, 한국어, 스페인어
-- **원클릭 전환**: 설정에서 출력 언어 변경
-- **스마트 적응**: 데이터 수집은 언어에 독립적
-- **자세한 설명**: 제품당 200자 이상
-
-## 🚀 빠른 시작
-
-### 🎯 방법 1: AI에게 자동 설치 요청 (권장)
-
-**AI에게 다음과 같이 말하세요:**
-
-> "https://github.com/Lychee-AI-Team/AiTrend/blob/main/SKILL.md 를 읽고 AiTrend Skill을 설치해주세요"
-
-AI가 자동으로:
-1. 저장소를 올바른 위치에 클론
-2. 필요한 API 키 확인 및 요청 (Tavily만 필요)
-3. 실행하여 데이터 수집
-4. OpenClaw LLM을 통해 대화형 요약 생성
-5. 지정된 플랫폼에 전송
-
-**제로 설정 시작** - Tavily API 키 하나로 실행 가능!
+<p align="center">
+  <a href="#-퀵-스타트">퀵 스타트</a> •
+  <a href="#-기능">기능</a> •
+  <a href="#-설정">설정</a> •
+  <a href="#-채널-설정">채널</a> •
+  <a href="#-다국어">다국어</a>
+</p>
 
 ---
 
-### 💻 방법 2: 수동 설치
+## 🌍 다국어 문서
+
+<p align="center">
+  <a href="README.md">🇨🇳 简体中文</a> •
+  <a href="README.en.md">🇺🇸 English</a> •
+  <a href="README.ja.md">🇯🇵 日本語</a> •
+  <a href="README.ko.md">🇰🇷 한국어</a> •
+  <a href="README.es.md">🇪🇸 Español</a>
+</p>
+
+---
+
+## ✨ 기능
+
+- 🔥 **멀티소스 수집**: Tavily, HackerNews, GitHub, Reddit, Twitter, Product Hunt
+- 📢 **멀티채널 발송**: Discord, Feishu, Telegram, Console
+- 🌐 **다국어 지원**: 중국어, 영어, 일본어, 한국어, 스페인어
+- 🔄 **중복 제거**: 24시간 슬라이딩 윈도우
+- ⚡ **제로 설정**: Tavily Key만 필요
+
+---
+
+## 🚀 퀵 스타트
+
+### 1️⃣ 리포지토리 클론
 
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
+```
+
+### 2️⃣ 환경 변수 설정
+
+```bash
 cp .env.example .env
-# .env 파일 편집
+# .env를 편집하여 TAVILY_API_KEY 추가
+```
+
+### 3️⃣ 발송 채널 설정
+
+```bash
+cp config/config.example.json config/config.json
+# config/config.json을 편집하여 필요한 채널 활성화
+```
+
+### 4️⃣ 실행
+
+```bash
 python3 -m src
 ```
 
-## 📊 데이터 소스
+---
 
-| 소스 | 타입 | API Key 필요 | 설명 |
-|------|------|--------------|------|
-| Tavily | AI 검색 | ✅ 필수 | AI 네이티브 검색, 전체 콘텐츠 반환 |
-| HackerNews | 개발자 커뮤니티 | ❌ 아니오 | Show HN 및 인기 토론 |
-| GitHub | 오픈 소스 | ❌ 아니오 | 트렌드 AI 프로젝트 |
-| Reddit | 커뮤니티 | ❌ 아니오 | SideProject 등 |
-| Twitter/X | 실시간 | ⚠️ 옵션 | Viral 콘텐츠 및 토론 |
-| Product Hunt | 신제품 | ⚠️ 옵션 | 매일 신제품 출시 |
+## 🔧 설정
 
-## 🌐 언어 설정
+### 기본 설정
 
-`config/config.json` 편집:
+`config/config.json`을 편집:
 
 ```json
 {
   "language": "ko",
-  "sources": { ... },
-  "summarizer": { ... }
+  "sources": {
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}"
+    },
+    "hackernews": { "enabled": true },
+    "reddit": { "enabled": true },
+    "github_trending": { "enabled": true }
+  },
+  "channels": {
+    "console": { "enabled": true }
+  }
 }
 ```
 
-지원: `zh` (중국어), `en` (영어), `ja` (일본어), `ko` (한국어), `es` (스페인어)
+---
 
-기본값: `zh` (간체 중국어)
+## 📢 채널 설정
 
-**참고**: 데이터 수집은 언어에 독립적입니다. 최종 AI 요약 출력만 언어 설정을 반영합니다.
+AiTrend는 여러 출력 채널을 지원합니다. 여러 채널을 동시에 활성화할 수 있습니다:
+
+### Console (기본)
+
+```json
+"channels": {
+  "console": {
+    "enabled": true
+  }
+}
+```
+
+### Discord
+
+```json
+"channels": {
+  "discord": {
+    "enabled": true,
+    "channel_id": "1467767285044346933"
+  }
+}
+```
+
+**Channel ID 가져오기:**
+1. Discord 설정 → 고급 → 개발자 모드 활성화
+2. 채널 우클릭 → 채널 ID 복사
+
+### Feishu (비서)
+
+```json
+"channels": {
+  "feishu": {
+    "enabled": true,
+    "chat_id": "oc_9a3c218325fd2cfa42f2a8f6fe03ac02"
+  }
+}
+```
+
+### Telegram
+
+```json
+"channels": {
+  "telegram": {
+    "enabled": true,
+    "chat_id": "-1001234567890"
+  }
+}
+```
+
+### 멀티채널 발송
+
+```json
+"channels": {
+  "console": { "enabled": true },
+  "discord": {
+    "enabled": true,
+    "channel_id": "YOUR_DISCORD_CHANNEL_ID"
+  },
+  "feishu": {
+    "enabled": true,
+    "chat_id": "YOUR_FEISHU_CHAT_ID"
+  }
+}
+```
+
+---
+
+## ⏰ 스케줄링
+
+### OpenClaw Cron
+
+```bash
+# 매일 아침 9:00 자동 실행
+openclaw cron add \
+  --name "aitrend-daily" \
+  --schedule "0 9 * * *" \
+  --command "python3 -m src" \
+  --cwd "~/.openclaw/workspace/AiTrend"
+```
+
+### Linux Cron
+
+```bash
+0 9 * * * cd /path/to/AiTrend && python3 -m src
+```
+
+---
+
+## 📊 데이터 소스
+
+| 소스 | API Key 필요 | 설명 |
+|------|--------------|------|
+| Tavily | ✅ 필요 | AI 네이티브 검색 엔진 |
+| HackerNews | ❌ 불필요 | 개발자 커뮤니티 |
+| GitHub | ❌ 불필요 | 트렌딩 AI 프로젝트 |
+| Reddit | ❌ 불필요 | AI 커뮤니티 토론 |
+| Twitter/X | ⚠️ 옵션 | 바이럴 콘텐츠 |
+| Product Hunt | ⚠️ 옵션 | 신제품 출시 |
+
+---
+
+## 🌍 다국어 지원
+
+| 언어 | 코드 | 상태 |
+|------|------|--------|
+| 중국어 간체 | zh | ✅ |
+| 영어 | en | ✅ |
+| 일본어 | ja | ✅ |
+| 한국어 | ko | ✅ |
+| 스페인어 | es | ✅ |
+
+`config/config.json`의 `language` 필드를 변경하여 언어를 전환합니다.
+
+---
+
+## 📁 프로젝트 구조
+
+```
+AiTrend/
+├── src/
+│   ├── __main__.py              # 진입점
+│   ├── core/
+│   │   ├── config_loader.py     # 설정 로더
+│   │   ├── sender.py            # 채널 발송
+│   │   └── deduplicator.py      # 중복 제거
+│   └── sources/                 # 데이터 소스 구현
+├── config/
+│   ├── config.example.json      # 설정 예시
+│   └── config.json              # 사용자 설정
+├── .env.example                 # 환경 변수 예시
+├── .env                         # 사용자 환경 변수
+└── README.md
+```
+
+---
+
+## 📝 전체 설정 예시
+
+```json
+{
+  "language": "ko",
+  "sources": {
+    "reddit": { "enabled": true },
+    "hackernews": { "enabled": true },
+    "github_trending": {
+      "enabled": true,
+      "languages": ["python", "typescript", "rust", "go"]
+    },
+    "tavily": {
+      "enabled": true,
+      "api_key": "${TAVILY_API_KEY}",
+      "queries": [
+        "latest AI tools launch 2026",
+        "new AI models released this week"
+      ]
+    }
+  },
+  "channels": {
+    "console": { "enabled": true },
+    "discord": {
+      "enabled": true,
+      "channel_id": "1467767285044346933"
+    }
+  }
+}
+```
+
+---
 
 ## 📄 라이선스
 
