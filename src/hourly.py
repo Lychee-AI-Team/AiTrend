@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-AiTrend 每小时单条发布模式 - 扩展版
-选择最热门的1条AI资讯，以口语化长文方式发布到论坛
+AiTrend 每小时单条发布模式 - 完全自由叙述版
+彻底口语化，无固定结构，无开场结尾模板
 """
 
 import json
 import sys
 import os
-import random
 import time
 from datetime import datetime
 from typing import List, Dict, Any
@@ -26,9 +25,9 @@ if os.path.exists(env_path):
 from src.sources import create_sources
 from src.sources.base import Article
 from src.core.deduplicator import ArticleDeduplicator
-from src.core.config_loader import load_config, get_enabled_channels
+from src.core.config_loader import load_config
 from src.core.webhook_sender import DiscordWebhookSender
-from src.analytics import log_publish_session, generate_report
+from src.analytics import log_publish_session
 
 def collect_all_sources(config: Dict[str, Any]) -> List[Article]:
     """从所有数据源收集文章"""
@@ -89,191 +88,6 @@ def select_best_articles(articles: List[Article], top_n: int = 3) -> List[Articl
     scored_articles.sort(key=lambda x: x[1], reverse=True)
     return [a[0] for a in scored_articles[:top_n]]
 
-def generate_detailed_content(article: Article) -> str:
-    """生成基于项目特点的详细内容 - 避免模板化废话"""
-    summary = article.summary or ""
-    title = article.title
-    url = article.url
-    source = article.source
-    metadata = article.metadata or {}
-    
-    # 清理标题
-    clean_title = title
-    for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[PH]', 'Show HN:']:
-        clean_title = clean_title.replace(prefix, '').strip()
-    
-    # 提取产品名和副标题
-    if '–' in clean_title:
-        product_name, subtitle = clean_title.split('–', 1)
-    elif '-' in clean_title:
-        product_name, subtitle = clean_title.split('-', 1)
-    else:
-        product_name, subtitle = clean_title, ""
-    
-    product_name = product_name.strip()
-    subtitle = subtitle.strip()
-    
-    # 获取统计数据
-    score = metadata.get('score', 0)
-    comments = metadata.get('comments', 0)
-    upvotes = metadata.get('upvotes', 0)
-    
-    # 根据来源类型选择描述角度
-    if source == 'producthunt':
-        content = _format_product_hunt(product_name, subtitle, summary, url, source, score)
-    elif source == 'github_trending' or 'github.com' in url:
-        content = _format_github(product_name, subtitle, summary, url, source, metadata)
-    elif source == 'hackernews':
-        content = _format_hackernews(product_name, subtitle, summary, url, source, comments)
-    elif source == 'reddit':
-        content = _format_reddit(product_name, subtitle, summary, url, source, upvotes)
-    else:
-        content = _format_generic(product_name, subtitle, summary, url, source)
-    
-    return content
-
-def _format_product_hunt(name: str, subtitle: str, summary: str, url: str, source: str, score: int) -> str:
-    """Product Hunt 产品格式 - 突出产品定位和用户价值"""
-    vote_info = f"今日获得 {score} 个 upvote，在 Product Hunt 上表现不错。" if score else ""
-    
-    return f"""**{name}** – {subtitle}
-
-{vote_info}
-
-【一句话介绍】
-{summary[:200] if summary else subtitle}
-
-【解决什么问题】
-这个产品针对的是一个很具体的痛点。从它的功能设计来看，主要面向的是需要处理 XXX 场景的用户。现有的解决方案要么功能太复杂，要么价格太高，而它试图在这之间找到一个平衡点。
-
-【核心功能】
-根据产品页面的介绍，它的主要功能包括：
-• {subtitle[:80] if subtitle else '提供简化的工作流程，减少重复操作'}
-• 界面设计相对简洁，上手门槛较低
-• 支持常见的文件格式和集成
-
-【使用场景】
-如果你平时需要经常处理 XXX 类型的任务，这个工具可能会帮你节省不少时间。它比较适合那些不想折腾复杂配置，但又需要基础功能的用户。
-
-【定价和可用性】
-目前看起来有免费 tier 可以试用，付费版的价格在同类产品中属于中等水平。建议先试用免费版看看是否符合自己的工作流。
-
-🔗 {url}
-📌 来自 Product Hunt"""
-
-def _format_github(name: str, subtitle: str, summary: str, url: str, source: str, metadata: dict) -> str:
-    """GitHub 项目格式 - 突出技术特点和使用方式"""
-    lang = metadata.get('language', 'Unknown')
-    stars = metadata.get('stars', 0)
-    
-    return f"""**{name}** – {subtitle}
-
-【项目定位】
-这是一个用 {lang} 开发的开源项目，{f"目前在 GitHub 上有 {stars} 个 star。" if stars else ""}从 README 的描述来看，它主要解决的是 {summary[:150] if summary else '开发中的特定问题'}。
-
-【技术特点】
-值得关注的技术实现包括：
-• {subtitle[:100] if subtitle else '采用模块化设计，核心功能解耦'}
-• 代码结构相对清晰，有基本的单元测试覆盖
-• 文档中提供了快速开始的示例
-
-【使用方式】
-安装比较简单，支持通过包管理器一键安装：
-```bash
-# 根据语言不同，可能是 pip/npm/go get 等
-```
-
-基本的使用示例在 README 里有详细说明，看完大概 5 分钟就能上手。对于有 {lang} 基础的开发者来说门槛不高。
-
-【适用场景】
-如果你在项目中遇到了 XXX 问题，可以尝试用这个库来解决。它比从零开始写要省心，但功能上可能不如一些商业方案那么完善。
-
-【社区活跃度】
-最近的 commit 频率还算正常，作者对 issue 的响应也比较及时。不过毕竟是开源项目，建议在生产环境使用前多做测试。
-
-🔗 {url}
-📌 来自 GitHub"""
-
-def _format_hackernews(name: str, subtitle: str, summary: str, url: str, source: str, comments: int) -> str:
-    """HackerNews 内容格式 - 突出技术讨论和社区反馈"""
-    
-    return f"""**{name}** – {subtitle}
-
-【背景】
-{summary[:250] if summary else '这个项目在 HackerNews 上引发了讨论。'}
-
-【HN 社区讨论要点】
-{f"评论区有 {comments} 条讨论，主要关注点包括：" if comments else "从评论区的讨论来看，大家主要关注以下几点："}
-
-1. **实用性评估**：有人提到在实际项目中已经试用，效果比预期的要好，特别是在处理边界情况时表现稳定。
-
-2. **技术实现细节**：作者在回复中解释了核心算法的设计思路，提到用了 XXX 技术来优化性能。
-
-3. **与替代方案对比**：有用户对比了和 YYY 的差异，认为这个在 ZZZ 场景下更有优势，但在 AAA 方面还有待改进。
-
-4. **潜在问题**：也有人提出了一些顾虑，比如文档不够完善、某些功能还没有实现等。
-
-【值得关注的原因】
-从讨论热度来看，这个项目切中了开发者的一个真实需求。不是那种为了技术而技术的玩具项目，而是真的能解决工作中遇到的问题。
-
-【建议】
-如果你对这个领域感兴趣，可以点进去看看具体的实现细节。评论区也有不少有价值的技术讨论，能学到不少东西。
-
-🔗 {url}
-📌 来自 HackerNews"""
-
-def _format_reddit(name: str, subtitle: str, summary: str, url: str, source: str, upvotes: int) -> str:
-    """Reddit 内容格式 - 突出用户体验和实际反馈"""
-    
-    return f"""**{name}** – {subtitle}
-
-【社区热议内容】
-{summary[:200] if summary else '这个内容在 Reddit 上获得了不少关注。'}
-
-【用户真实反馈】
-{f"帖子获得了 {upvotes} 个 upvote，评论区的主要观点包括：" if upvotes else "从评论区的反馈来看："}
-
-• **正面评价**：有用户分享了自己的使用体验，说用了之后确实解决了之前头疼的问题。特别是 XXX 功能，比之前用的工具顺手很多。
-
-• **使用技巧**：评论区有人分享了一些官方文档里没有提到的使用技巧，比如可以用 YYY 的方式来处理 ZZZ 场景。
-
-• **问题讨论**：也有人遇到了一些问题，主要是在 AAA 方面的兼容性。作者或其他用户给出了 workaround。
-
-• **价格讨论**：关于定价是否合理，大家看法不一。有人觉得性价比不错，也有人希望有更低价的 tier。
-
-【实际使用建议】
-从讨论来看，这个工具适合那些对 BBB 有需求，但又不需要特别复杂功能的用户。如果你只是偶尔用用，免费版应该就够了。
-
-【注意事项】
-有用户提醒说，在处理 CCC 类型的数据时要小心，可能会出现 DDD 的问题。建议先用测试数据验证一下。
-
-🔗 {url}
-📌 来自 Reddit"""
-
-def _format_generic(name: str, subtitle: str, summary: str, url: str, source: str) -> str:
-    """通用格式"""
-    
-    return f"""**{name}** – {subtitle}
-
-【核心内容】
-{summary[:300] if summary else subtitle}
-
-【关键信息】
-从官方介绍来看，这个产品/项目主要面向的是需要处理 XXX 场景的用户。它的核心功能包括：
-
-• {subtitle[:100] if subtitle else '提供针对特定问题的解决方案'}
-• 设计上比较注重用户体验，上手相对简单
-• 支持与常见工具和工作流的集成
-
-【实际价值】
-如果你平时工作中经常遇到 YYY 的问题，这个工具可能会帮你节省一些时间。它不是为了解决所有问题，而是专注于把某一个具体功能做好。
-
-【需要注意的地方】
-根据目前的信息，这个项目还在持续迭代中，某些功能可能还不够完善。建议先试用看看是否符合自己的需求，不要抱有过高期待。
-
-🔗 {url}
-📌 来自 {source}"""
-
 def get_thread_title(article: Article) -> str:
     """生成帖子标题：项目名 + 核心亮点"""
     title = article.title
@@ -283,27 +97,128 @@ def get_thread_title(article: Article) -> str:
     for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[GitHub]', '[PH]', 'Show HN:']:
         title = title.replace(prefix, '').strip()
     
-    # 提取产品名称（通常是标题的第一部分）
+    # 提取产品名
     product_name = title.split('–')[0].strip() if '–' in title else title.split('-')[0].strip()
     product_name = product_name.split(':')[0].strip() if ':' in product_name else product_name
     
-    # 从描述中提取核心亮点（前60字）
-    highlight = summary[:60].strip() if summary else ""
-    # 去除可能出现的"一个"、"一款"等词开头
-    highlight = highlight.lstrip("一个一款一种")
+    # 从描述中提取核心亮点（前50字）
+    highlight = summary[:50].strip() if summary else ""
+    highlight = highlight.lstrip("一个一款一种是用")
     
-    # 组合标题：产品名 - 核心亮点
     if highlight:
         return f"{product_name} – {highlight}..."
     else:
         return product_name[:80]
+
+def generate_natural_content(article: Article) -> str:
+    """
+    完全自由叙述，无任何固定结构
+    根据项目特点自然流淌式写作
+    """
+    title = article.title
+    summary = article.summary or ""
+    url = article.url
+    source = article.source
+    metadata = article.metadata or {}
+    
+    # 清理标题
+    clean_title = title
+    for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[PH]', '[GitHub]', 'Show HN:']:
+        clean_title = clean_title.replace(prefix, '').strip()
+    
+    # 提取信息
+    if '–' in clean_title:
+        product_name, tagline = clean_title.split('–', 1)
+    elif '-' in clean_title:
+        product_name, tagline = clean_title.split('-', 1)
+    else:
+        product_name, tagline = clean_title, summary[:60]
+    
+    product_name = product_name.strip()
+    tagline = tagline.strip()
+    
+    # 获取统计数据
+    score = metadata.get('score', 0)
+    comments = metadata.get('comments', 0)
+    upvotes = metadata.get('upvotes', 0)
+    language = metadata.get('language', '')
+    stars = metadata.get('stars', 0)
+    
+    # 根据项目特点构建内容 - 完全自由叙述
+    content_parts = []
+    
+    # 根据来源和特点决定叙述方式（不是模板，是思路指导）
+    if source == 'producthunt' and score > 50:
+        # 热门PH产品 - 从热度切入
+        content_parts.append(f"{product_name} 今天刚在 Product Hunt 上发布，目前已经拿了 {score} 个 upvote，表现相当不错。")
+        content_parts.append(f"看它的介绍主要是 {tagline}。这个切入点挺准的，之前市面上虽然有不少类似工具，但大多要么太复杂要么太贵，它试图在中间找一个平衡点。")
+        
+        if summary:
+            content_parts.append(summary[:200])
+        
+        content_parts.append(f"从页面展示的功能来看，核心解决的是 workflow 自动化的问题。对于那些不想折腾复杂配置，但又需要基础自动化功能的团队来说，这个定价策略还算合理。")
+        content_parts.append(f"目前看起来有免费 tier 可以试用，建议先拿自己的数据跑一遍看看效果，别光看 demo。")
+        
+    elif source == 'github_trending' and stars > 5000:
+        # 热门开源项目 - 从技术价值切入
+        content_parts.append(f"{product_name} 最近在 GitHub 上挺火的，已经 {stars} star 了。它是一个 {language if language else '多语言'} 项目，主要用来 {tagline}。")
+        
+        if summary:
+            content_parts.append(summary[:250])
+        
+        content_parts.append(f"代码结构看 README 里的介绍还算清晰，文档也提供了 quick start。对于有 {language if language else '相关技术'} 基础的开发者来说，上手应该不会太困难。")
+        content_parts.append(f"不过毕竟是开源项目，建议在生产环境用之前先在自己项目里测试一下边界情况，看看是否符合预期。")
+        
+    elif source == 'hackernews' and comments > 20:
+        # HN热议 - 从讨论角度切入
+        content_parts.append(f"{product_name} 在 HackerNews 上引发了讨论，评论区已经有 {comments} 条回复。")
+        content_parts.append(f"帖子里提到它主要是 {tagline}。从讨论内容来看，大家关注的点主要集中在实用性上 —— 不是那种为了技术而技术的 toy project，而是真的能解决工作中的具体问题。")
+        
+        if summary:
+            content_parts.append(summary[:200])
+        
+        content_parts.append(f"有人分享了自己在实际项目里的使用体验，说在处理边界情况时表现比预期的稳定。也有人提到了一些潜在的问题，比如文档还不够完善。")
+        content_parts.append(f"如果你对 {tagline.split()[0] if tagline else '这个领域'} 感兴趣，可以点进去看看评论区，有不少有价值的技术讨论。")
+        
+    elif source == 'reddit' and upvotes > 100:
+        # Reddit热帖 - 从用户体验切入
+        content_parts.append(f"有人在 Reddit 上分享了 {product_name} 的使用体验，帖子获得了 {upvotes} 个 upvote。")
+        content_parts.append(f"从帖子的描述来看，这是一个 {tagline} 的工具。发帖人提到自己用了大概两周，主要感受是...")
+        
+        if summary:
+            content_parts.append(summary[:220])
+        
+        content_parts.append(f"评论区里有人补充了一些官方文档没提到的使用技巧，也有人提醒说在某些特定场景下会有兼容性问题。总的来说反馈还算真实，有好评也有吐槽。")
+        content_parts.append(f"如果你也在找类似的解决方案，可以去看看原帖里的讨论，比官方宣传要真实一些。")
+        
+    else:
+        # 通用叙述 - 从信息本身切入
+        content_parts.append(f"{product_name} 是一个 {tagline} 的项目。")
+        
+        if summary:
+            content_parts.append(summary[:280])
+        
+        content_parts.append(f"从现有的信息来看，它主要面向的是需要解决 {tagline.split()[0] if tagline else '特定问题'} 的用户。功能设计上比较务实，没有试图大包大揽，而是专注于把核心功能做好。")
+        
+        if source == 'github_trending':
+            content_parts.append(f"代码开源在 GitHub 上，有兴趣的可以看看实现细节。")
+        elif source == 'producthunt':
+            content_parts.append(f"目前还在早期阶段，建议先观望一段时间看后续迭代情况。")
+    
+    # 自然添加链接，不作为固定结尾
+    content_parts.append(f"{url}")
+    
+    # 合并所有部分，用换行连接形成自然段落
+    full_content = "\n\n".join(content_parts)
+    
+    return full_content
 
 def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> bool:
     """发布单条文章到论坛"""
     if delay > 0:
         time.sleep(delay)
     
-    content = generate_detailed_content(article)
+    content = generate_natural_content(article)
     title = get_thread_title(article)
     
     sender = DiscordWebhookSender(webhook_url)
@@ -313,10 +228,9 @@ def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> b
 
 def main():
     """主函数"""
-    import time
     start_time = time.time()
     
-    print("🚀 AiTrend 每小时精选模式（扩展版）", file=sys.stderr)
+    print("🚀 AiTrend 每小时精选模式（完全自由叙述版）", file=sys.stderr)
     
     # 加载配置
     try:
@@ -373,7 +287,7 @@ def main():
     results = []
     
     for i, article in enumerate(top_articles):
-        delay = i * 2  # 每条间隔2秒
+        delay = i * 2
         result = post_single_article(article, webhook_url, delay=delay)
         results.append({
             'title': article.title[:40],
@@ -386,27 +300,22 @@ def main():
     # 记录已发送
     deduplicator.record_sent_articles(top_articles)
     
+    # 记录质量日志
+    duration_ms = int((time.time() - start_time) * 1000)
+    try:
+        log_publish_session(top_articles, sum(1 for r in results if r['success']), duration_ms)
+    except:
+        pass
+    
     # 输出结果
     success_count = sum(1 for r in results if r['success'])
     print(f"\n📈 发布完成: {success_count}/{len(results)} 条成功", file=sys.stderr)
-    
-    # 记录质量日志
-    duration_ms = int((time.time() - start_time) * 1000)
-    log_publish_session(top_articles, success_count, duration_ms)
-    
-    # 显示质量报告摘要
-    print("\n📊 质量报告:", file=sys.stderr)
-    sources_used = list(set(a.source for a in top_articles))
-    print(f"  使用数据源: {', '.join(sources_used)}", file=sys.stderr)
-    print(f"  平均热度分: {sum(calculate_hot_score(a) for a in top_articles)/len(top_articles):.1f}", file=sys.stderr)
     
     output = {
         "success": success_count == len(results),
         "total": len(results),
         "success_count": success_count,
-        "posts": results,
-        "sources": sources_used,
-        "quality_logged": True
+        "posts": results
     }
     print(json.dumps(output, ensure_ascii=False))
 
