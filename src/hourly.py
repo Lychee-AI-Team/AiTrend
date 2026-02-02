@@ -30,19 +30,36 @@ from src.core.config_loader import load_config
 from src.core.webhook_sender import DiscordWebhookSender
 
 def collect_all_sources(config: Dict[str, Any]) -> List[Article]:
-    """从所有数据源收集文章"""
+    """从所有数据源收集文章，每个数据源最多 30 秒"""
+    import signal
+    
     sources_config = config.get("sources", {})
     sources = create_sources(sources_config)
     
     all_articles = []
     for source in sources:
         if source.is_enabled():
+            articles = []
             try:
-                articles = source.fetch()
+                # 使用信号设置硬性超时（仅 Unix/Linux）
+                def timeout_handler(signum, frame):
+                    raise TimeoutError(f"{source.name} 超时")
+                
+                old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+                signal.alarm(30)  # 30 秒超时
+                
+                try:
+                    articles = source.fetch()
+                finally:
+                    signal.alarm(0)  # 取消闹钟
+                    signal.signal(signal.SIGALRM, old_handler)
+                
                 for article in articles:
                     article.metadata['collector_source'] = source.name
                 all_articles.extend(articles)
                 print(f"✓ {source.name}: {len(articles)} 条", file=sys.stderr)
+            except TimeoutError as e:
+                print(f"✗ {source.name}: 超时 (30s)", file=sys.stderr)
             except Exception as e:
                 print(f"✗ {source.name}: {e}", file=sys.stderr)
     
