@@ -91,7 +91,7 @@ class DiscordForumSender(ChannelSender):
         
         for i, article in enumerate(articles[:10], 1):
             lines.append(f"{i}. **{article.get('title', 'N/A')}**")
-            summary = article.get('summary', '')[:100]
+            summary = article.get('summary', '')[:300]
             lines.append(f"   {summary}...")
             lines.append(f"   🔗 {article.get('url', '')}")
             lines.append(f"   📌 {article.get('source', '')}\n")
