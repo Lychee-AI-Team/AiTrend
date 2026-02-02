@@ -137,19 +137,35 @@ AiTrend 支持多种输出渠道，可以同时启用多个：
 
 ### Discord 论坛 (Forum)
 
+**需要 Webhook：**
+
+1. 在 Discord 频道设置中创建 Webhook（见下方步骤）
+2. 复制 Webhook URL 到 `.env` 文件
+
 ```json
 "channels": {
   "discord_forum": {
     "enabled": true,
-    "channel_id": "1467789796087824475"
+    "channel_id": "1467789796087824475",
+    "webhook_url": "${DISCORD_WEBHOOK_URL}"
   }
 }
 ```
 
+```bash
+# .env
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
+```
+
+**创建 Webhook 步骤：**
+1. 右键论坛频道 → 服务器设置 → 集成
+2. 点击 "Webhook" → "新建 Webhook"
+3. 选择频道，复制 Webhook URL
+
 **特点：**
-- 每天自动创建一个新帖子（Thread）
-- 帖子标题包含日期，如 "🔥 AI 热点 02-03"
-- 适合长期归档和追溯历史热点
+- ✅ 每天自动创建新帖子
+- ✅ 支持 Markdown 格式
+- ✅ 自定义机器人名称和头像
 
 ### 飞书 (Feishu)
 
