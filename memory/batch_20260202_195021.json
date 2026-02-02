@@ -1,0 +1,45 @@
+{
+  "batch_id": "20260202_195021",
+  "contents": [
+    {
+      "id": 8287,
+      "title": "Wikipedia as a doomscrollable social media feed – HackerNews 热门讨论，90 条评论...",
+      "original_title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
+      "content": "Wikipedia as a doomscrollable social media feed 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。\n\n主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。\n\n技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。\n\nhttps://xikipedia.org",
+      "url": "https://xikipedia.org",
+      "source": "hackernews"
+    },
+    {
+      "id": 3175,
+      "title": "Minimal – I would like to share Minimal - Its a open source...",
+      "original_title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
+      "content": "Minimal 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。\n\n具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。\n\n开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。\n\nhttps://github.com/rtvkiz/minimal",
+      "url": "https://github.com/rtvkiz/minimal",
+      "source": "hackernews"
+    },
+    {
+      "id": 9698,
+      "title": "Amara ⭐108 – Build your 3D environment through exploration and...",
+      "original_title": "[Product Hunt] Amara ⭐108",
+      "content": "Amara ⭐108 今天刚在 Product Hunt 上发布。它是一个 Build your 3D environment through exploration and iteration. 的工具。\n\nBuild your 3D environment through exploration and iteration\n\n从页面介绍来看，主要面向需要简化工作流程的用户。有免费 tier 可以试用，建议拿自己的数据测试一下效果。\n\nhttps://www.producthunt.com/products/amara-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "url": "https://www.producthunt.com/products/amara-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "source": "producthunt"
+    },
+    {
+      "id": 6856,
+      "title": "EasyClaw ⭐106 – Install ClawdBot, MoltBot, and OpenClaw in one com...",
+      "original_title": "[Product Hunt] EasyClaw ⭐106",
+      "content": "EasyClaw ⭐106 是一个只用 500 行 TypeScript 实现的 Clawdbot（AI 助手），代码量很小但功能完整。作者用了 Apple 的容器隔离技术，安全性比普通的 browser automation 工具高。\n\n核心实现思路是把 AI 决策逻辑和浏览器操作分离，通过受限的 API 让 AI 控制浏览器，避免直接操作 DOM 带来的安全风险。500 行代码里包含了对话管理、任务分解、错误处理等完整功能。\n\nHN 评论区对这种极简实现方式讨论很热烈。有人觉得这种轻量级方案比那些动辄几万行的框架更实用，也有人质疑 500 行能不能处理好边界情况。作者回应说核心逻辑确实简单，但生产环境用还是需要更多测试。\n\nhttps://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "url": "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "source": "producthunt"
+    },
+    {
+      "id": 9431,
+      "title": "VectifyAI/PageIndex ⭐12221 – 📑 PageIndex: Document Index for Vectorless, Reason...",
+      "original_title": "VectifyAI/PageIndex ⭐12221",
+      "content": "VectifyAI/PageIndex ⭐12221 是一个用 python 写的开源项目，主要解决 📑 PageIndex: Document Index for Vectorless, Reasoning-based 的问题。\n\n📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG\n\n代码在 GitHub 上开源，目前 12221 star。README 提供了快速开始指南，有基础的开发者应该能比较快上手。\n\nhttps://github.com/VectifyAI/PageIndex",
+      "url": "https://github.com/VectifyAI/PageIndex",
+      "source": "github_trending"
+    }
+  ]
+}

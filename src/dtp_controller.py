@@ -69,6 +69,14 @@ class DTPLoopController:
         with open(DTF_LOG_PATH, 'w') as f:
             json.dump(self.loop_log, f, ensure_ascii=False, indent=2)
     
+    def _load_review_log(self) -> Dict:
+        """加载评审日志"""
+        try:
+            with open(REVIEW_LOG_PATH, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {"review_sessions": [], "current_batch": {}, "optimization_history": []}
+    
     # ========== DEVELOP 阶段 ==========
     def develop(self, article_count: int = 5, diversity_enforced: bool = True) -> List[Article]:
         """
