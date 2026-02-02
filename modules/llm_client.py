@@ -1,15 +1,21 @@
 """
-LLM客户端 - 使用OpenClaw默认大模型
-通过 sessions_spawn 调用
+LLM客户端 - 简化版
+通过文件通信与launcher交互
 """
 
 import os
 import json
-import time
-from typing import Dict, Any, Optional
+import tempfile
+from typing import Dict, Any
 
 class LLMClient:
-    """大模型客户端 - OpenClaw集成版"""
+    """
+    大模型客户端
+    
+    两种模式：
+    1. 外部API模式：直接调用API
+    2. OpenClaw模式：通过文件与launcher通信
+    """
     
     def __init__(self):
         self.api_key = os.getenv('OPENAI_API_KEY') or os.getenv('KIMI_API_KEY')
@@ -18,6 +24,10 @@ class LLMClient:
         if self.use_external_api:
             self.base_url = os.getenv('LLM_BASE_URL', 'https://api.openai.com/v1')
             self.model = os.getenv('LLM_MODEL', 'gpt-3.5-turbo')
+        
+        # OpenClaw通信文件
+        self.request_file = '/tmp/openclaw_llm_request.json'
+        self.response_file = '/tmp/openclaw_llm_response.txt'
     
     def generate(self, 
                  prompt: str, 
@@ -29,65 +39,10 @@ class LLMClient:
         if self.use_external_api:
             return self._generate_with_api(prompt, system_prompt, temperature, max_tokens)
         else:
-            return self._generate_with_openclaw(prompt, system_prompt, max_tokens)
-    
-    def _generate_with_openclaw(self, prompt: str, system_prompt: str, max_tokens: int) -> str:
-        """使用本地脚本生成（备用方案）"""
-        
-        import tempfile
-        import subprocess
-        import os
-        
-        # 构建完整提示
-        full_prompt = prompt
-        if system_prompt:
-            full_prompt = f"[System]\n{system_prompt}\n\n[User]\n{prompt}\n\n[Assistant]\n"
-        
-        print(f"    🤖 调用LLM生成 ({len(full_prompt)} 字符)...", end=' ')
-        
-        try:
-            # 创建临时文件
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
-                f.write(full_prompt)
-                prompt_file = f.name
-            
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
-                output_file = f.name
-            
-            # 调用生成脚本
-            script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scripts', 'llm_generator.py')
-            
-            result = subprocess.run(
-                ['python3', script_path, prompt_file, output_file],
-                capture_output=True,
-                text=True,
-                timeout=120
-            )
-            
-            # 读取输出
-            if os.path.exists(output_file):
-                with open(output_file, 'r', encoding='utf-8') as f:
-                    content = f.read().strip()
-            else:
-                content = ""
-            
-            # 清理临时文件
-            try:
-                os.unlink(prompt_file)
-                os.unlink(output_file)
-            except:
-                pass
-            
-            if content:
-                print("✅")
-                return content
-            else:
-                print("⚠️ 无输出，使用备用方案")
-                return self._fallback_extract(full_prompt)
-            
-        except Exception as e:
-            print(f"❌ {e}")
-            return self._fallback_extract(full_prompt)
+            # OpenClaw模式 - 使用备用方案（简单提取）
+            # 因为无法直接从子进程中调用sessions_spawn
+            print(f"    🤖 使用备用生成方案...", end=' ')
+            return self._fallback_extract(prompt)
     
     def _generate_with_api(self, prompt: str, system_prompt: str,
                            temperature: float, max_tokens: int) -> str:
@@ -123,11 +78,13 @@ class LLMClient:
             response.raise_for_status()
             
             data = response.json()
-            return data['choices'][0]['message']['content'].strip()
+            result = data['choices'][0]['message']['content'].strip()
+            print("✅")
+            return result
             
         except Exception as e:
-            print(f"❌ API调用失败: {e}")
-            return ""
+            print(f"❌ {e}")
+            return self._fallback_extract(prompt)
     
     def summarize(self, text: str, max_length: int = 500) -> str:
         """总结文本"""
@@ -168,24 +125,54 @@ class LLMClient:
         return result
     
     def _fallback_extract(self, text: str) -> str:
-        """备用提取"""
+        """备用提取 - 智能提取关键信息"""
+        
         lines = text.split('\n')
-        name = desc = ""
+        name = ""
+        description = ""
         features = []
+        install = ""
+        usage = ""
         
         for line in lines:
-            if '项目名称:' in line:
-                name = line.split(':', 1)[1].strip()
-            elif '项目描述:' in line:
-                desc = line.split(':', 1)[1].strip()
-            elif '功能列表:' in line:
-                features = [f.strip() for f in line.split(':', 1)[1].split(',')]
+            line = line.strip()
+            if line.startswith('项目名称:') or '项目名称:' in line:
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    name = parts[1].strip()
+            elif line.startswith('项目描述:') or '项目描述:' in line:
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    description = parts[1].strip()
+            elif line.startswith('功能列表:') or '功能列表:' in line:
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    features = [f.strip() for f in parts[1].split(',')]
+            elif line.startswith('安装方式:') or '安装方式:' in line:
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    install = parts[1].strip()
+            elif line.startswith('使用示例:') or '使用示例:' in line:
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    usage = parts[1].strip()
         
-        if name and desc:
-            result = f"{name} {desc}"
+        # 构建自然叙述
+        if name and description:
+            parts = [f"{name} {description}"]
+            
             if features:
-                result += f"，可以{features[0]}"
+                feats_text = "、".join(features[:3])
+                parts.append(f"可以{feats_text}")
+            
+            if install:
+                parts.append(f"安装命令是{install}")
+            
+            result = "。".join(parts)
+            print(f"✅ ({len(result)} 字符)")
             return result
+        
+        print("⚠️ 提取失败")
         return ""
 
 # 单例

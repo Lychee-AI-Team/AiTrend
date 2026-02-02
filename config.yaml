@@ -48,9 +48,33 @@ output:
 
 # 发布层配置
 publishers:
-  discord:
+  # 论坛发布模块（创建帖子）
+  forum:
     enabled: true
-    channel: forum  # forum 或 text
+    webhook_url: ""  # Discord 论坛频道的 Webhook URL
+    thread_name: "{name} – {source}"  # 帖子标题模板
+    username: "AiTrend"
+    delay: 2  # 帖子间隔（秒）
+    max_length: 1900  # 内容最大长度
+  
+  # 文字频道发布模块（发送消息）
+  text:
+    enabled: false  # 默认禁用，设置为 true 启用
+    webhook_url: ""  # Discord 文字频道的 Webhook URL
+    use_embed: false  # 是否使用 Embed 格式
+    username: "AiTrend"
+    delay: 1
+    avatar_url: ""  # 可选：自定义头像 URL
+  
+  # 备用配置（可扩展其他平台）
+  # feishu:
+  #   enabled: false
+  #   webhook_url: ""
+  #   
+  # telegram:
+  #   enabled: false
+  #   bot_token: ""
+  #   chat_id: ""
   
   # feishu:
   #   enabled: false
