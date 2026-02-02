@@ -1,0 +1,12 @@
+{
+  "review_sessions": [],
+  "current_batch": {
+    "batch_id": null,
+    "articles": [],
+    "reviews": [],
+    "average_score": 0,
+    "status": "pending"
+  },
+  "optimization_history": [],
+  "threshold": 8.0
+}
