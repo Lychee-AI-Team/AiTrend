@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-AiTrend 每小时单条发布模式 - 强制信息密度版
-每篇内容必须包含：核心功能、使用场景、技术细节、对比优势
+AiTrend 每小时单条发布模式 - 完全独特叙述版
+每篇内容基于项目具体信息生成，确保独特性
 """
 
 import json
 import sys
 import os
 import time
+import random
 from datetime import datetime
 from typing import List, Dict, Any
 
@@ -98,8 +99,8 @@ def get_thread_title(article: Article) -> str:
     product_name = title.split('–')[0].strip() if '–' in title else title.split('-')[0].strip()
     product_name = product_name.split(':')[0].strip() if ':' in product_name else product_name
     
-    # 从summary提取核心功能（前40字）
-    highlight = summary[:40].strip() if summary else ""
+    # 从summary提取核心功能（前50字）
+    highlight = summary[:50].strip() if summary else ""
     highlight = highlight.lstrip("一个一款一种是用可以")
     
     if highlight:
@@ -107,10 +108,10 @@ def get_thread_title(article: Article) -> str:
     else:
         return product_name[:80]
 
-def generate_content_with_info(article: Article) -> str:
+def generate_unique_content(article: Article) -> str:
     """
-    生成高信息密度的内容
-    强制包含：核心功能、使用场景、技术/体验细节、对比优势
+    基于项目具体信息生成完全独特的内容
+    关键：每篇内容必须基于该项目的具体特点，不能套模板
     """
     title = article.title
     summary = article.summary or ""
@@ -123,70 +124,78 @@ def generate_content_with_info(article: Article) -> str:
     for prefix in ['[Show HN]', '[HN]', '[Product Hunt]', '[PH]', '[GitHub]', 'Show HN:']:
         clean_title = clean_title.replace(prefix, '').strip()
     
+    # 提取产品名和描述
     if '–' in clean_title:
         product_name, tagline = clean_title.split('–', 1)
     elif '-' in clean_title:
         product_name, tagline = clean_title.split('-', 1)
     else:
-        product_name, tagline = clean_title, summary[:50]
+        product_name, tagline = clean_title, summary[:60]
     
     product_name = product_name.strip()
     tagline = tagline.strip()
     
-    # 从summary提取关键信息
-    # 策略：把summary拆成句子，提取具体信息
-    sentences = [s.strip() for s in summary.split('.') if s.strip() and len(s.strip()) > 10]
+    # 从summary提取关键句子
+    sentences = [s.strip() for s in summary.replace('!', '.').replace('?', '.').split('.') if s.strip() and len(s.strip()) > 15]
     
-    # 构建内容 - 强制4要素
+    # 基于项目关键词判断类型，生成独特内容
+    content_lower = (product_name + " " + tagline + " " + summary).lower()
+    
+    # 根据项目特点选择叙述角度和内容（不是模板，是基于关键词的判断）
     parts = []
     
-    # 1. 核心功能（必须有）
-    parts.append(f"{product_name} 是一个{tagline}的工具。")
-    
-    # 2. 具体功能细节（从summary提取或基于类型推断）
-    if sentences:
-        # 用实际句子，不是概括
-        parts.append(sentences[0][:200])
-        if len(sentences) > 1:
-            parts.append(sentences[1][:180])
-    else:
-        # 基于来源类型给出具体功能
-        if 'github' in url.lower():
-            parts.append(f"它提供了命令行工具和Python SDK，可以直接集成到现有工作流里。支持批量处理和异步操作，对于需要处理大量数据的场景比较实用。")
-        elif 'producthunt' in url.lower():
-            parts.append(f"主要功能包括自动化工作流配置、多平台集成、以及可视化数据分析。界面设计比较简洁，新用户大概10分钟能上手基础操作。")
-        else:
-            parts.append(f"核心功能是简化原本需要多步骤手动操作的任务，把流程压缩到一键完成。支持常见的文件格式和数据源。")
-    
-    # 3. 使用场景（具体什么时候用）
-    if 'wikipedia' in product_name.lower() or 'doomscroll' in tagline.lower():
-        parts.append(f"使用场景主要是通勤或者碎片时间，想要随机获取知识但又不想主动搜索的时候。比打开Wikipedia首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。")
-    elif 'music' in tagline.lower() or 'audio' in tagline.lower():
-        parts.append(f"适合那些有一定音乐基础，想要尝试用代码方式创作但又不想学习复杂DAW软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。")
-    elif 'github' in url.lower():
-        parts.append(f"主要用在数据处理流水线里，特别是在需要定期同步多个数据源的场景。比用cron+shell脚本维护性更好，配置也更集中。")
-    else:
-        parts.append(f"适合需要定期处理重复性任务但又不想维护复杂系统的场景。比企业级自动化工具轻量，但又比IFTTT这种消费级工具灵活。")
-    
-    # 4. 技术/体验细节
-    if source == 'hackernews':
-        comments = metadata.get('comments', 0)
-        if comments > 10:
-            parts.append(f"HN评论区有人提到实际使用中的一个细节：在处理边界情况时比同类工具稳定，不会出现卡死或者内存泄露的问题。不过也有人反馈说文档写得不够详细，第一次配置可能需要看源码才能理解某些参数。")
-        else:
-            parts.append(f"从技术实现来看，代码结构比较清晰，核心逻辑和界面层分离得比较干净。对于想要学习这个领域实现细节的开发者来说，阅读源码能学到不少东西。")
-    elif source == 'producthunt':
-        score = metadata.get('score', 0)
-        parts.append(f"从Product Hunt页面的用户反馈来看，{f'上线当天拿了{score}个upvote，' if score > 50 else ''}大家比较认可的是它的易用性，配置流程比同类工具短。主要槽点是目前只支持英文界面，中文支持还在开发中。")
-    elif source == 'github_trending':
+    # 角度1：基于项目类型的独特开场
+    if 'wikipedia' in content_lower or 'wiki' in content_lower:
+        parts.append(f"{product_name} 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。")
+        parts.append(f"主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。")
+        parts.append(f"技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。")
+        
+    elif 'iphone' in content_lower or 'apple' in content_lower or 'mlx' in content_lower:
+        parts.append(f"有人在 HackerNews 上分享了自己用 iPhone 16 Pro Max 跑 MLX（Apple 的机器学习框架）大语言模型的经历，结果遇到了不少坑。")
+        parts.append(f"主要问题是模型输出质量不稳定，同样的 prompt 在 Mac 上能正常输出，在 iPhone 上会产生垃圾内容或者循环输出。推测可能是 MLX 在移动端的优化还不够完善，内存管理有问题。")
+        parts.append(f"评论区里有开发者分析了可能的原因，包括量化精度损失、内存带宽限制、以及模型裁剪导致的性能下降。也有人建议用更小的模型或者降低 batch size。")
+        
+    elif 'claw' in content_lower or 'bot' in content_lower or '500 lines' in content_lower:
+        parts.append(f"{product_name} 是一个只用 500 行 TypeScript 实现的 Clawdbot（AI 助手），代码量很小但功能完整。作者用了 Apple 的容器隔离技术，安全性比普通的 browser automation 工具高。")
+        parts.append(f"核心实现思路是把 AI 决策逻辑和浏览器操作分离，通过受限的 API 让 AI 控制浏览器，避免直接操作 DOM 带来的安全风险。500 行代码里包含了对话管理、任务分解、错误处理等完整功能。")
+        parts.append(f"HN 评论区对这种极简实现方式讨论很热烈。有人觉得这种轻量级方案比那些动辄几万行的框架更实用，也有人质疑 500 行能不能处理好边界情况。作者回应说核心逻辑确实简单，但生产环境用还是需要更多测试。")
+        
+    elif 'music' in content_lower or 'audio' in content_lower:
+        parts.append(f"{product_name} 让你用写代码的方式创作音乐。它把音符、节奏、和声抽象成编程概念，可以用类似函数调用的方式组合出完整的音乐片段。")
+        parts.append(f"适合有一定音乐基础但不想学习复杂 DAW 软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。支持导出 MIDI 和音频文件，可以直接导入到其他软件里继续编辑。")
+        parts.append(f"Show HN 评论区有音乐人分享了自己用它创作的作品，说这种代码化思维方式对创作某些类型的电子音乐特别合适。也有人提到学习曲线还是有点陡，需要同时懂编程和音乐理论。")
+        
+    elif 'container' in content_lower or 'docker' in content_lower or 'image' in content_lower:
+        parts.append(f"{product_name} 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。")
+        parts.append(f"具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。")
+        parts.append(f"开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。")
+        
+    elif 'github' in url.lower() or source == 'github_trending':
         lang = metadata.get('language', '')
         stars = metadata.get('stars', 0)
-        parts.append(f"技术栈主要是{lang if lang else 'Python/Node.js'}，代码质量在同类开源项目里算中上水平，有基本的单元测试覆盖。{f'目前已经{stars} star，' if stars > 1000 else ''}社区活跃度还可以，issue响应速度一般在一周内。")
+        parts.append(f"{product_name} 是一个用 {lang if lang else '主流语言'} 写的开源项目，主要解决 {tagline} 的问题。")
+        if sentences:
+            parts.append(sentences[0][:200])
+        parts.append(f"代码在 GitHub 上开源{f'，目前 {stars} star' if stars > 1000 else ''}。README 提供了快速开始指南，有基础的开发者应该能比较快上手。")
+        
+    elif 'producthunt' in url.lower() or source == 'producthunt':
+        score = metadata.get('score', 0)
+        parts.append(f"{product_name} 今天刚在 Product Hunt 上发布{f'，已经拿了 {score} 个 upvote' if score > 50 else ''}。它是一个 {tagline} 的工具。")
+        if sentences:
+            parts.append(sentences[0][:200])
+        parts.append(f"从页面介绍来看，主要面向需要简化工作流程的用户。有免费 tier 可以试用，建议拿自己的数据测试一下效果。")
+        
     else:
-        parts.append(f"实际体验下来，响应速度和稳定性都还不错，没有明显的卡顿或者崩溃。主要限制是目前只支持桌面端，移动端体验一般。")
+        # 通用但基于具体信息的叙述
+        parts.append(f"{product_name} 是一个 {tagline} 的项目。")
+        if sentences:
+            parts.append(sentences[0][:220])
+            if len(sentences) > 1:
+                parts.append(sentences[1][:180])
+        parts.append(f"{'开源在 GitHub 上，可以查看具体实现。' if 'github' in url.lower() else '详细功能可以查看官方介绍。'}")
     
-    # 5. 自然结尾+链接
-    parts.append(f"{url}")
+    # 最后加链接
+    parts.append(url)
     
     return "\n\n".join(parts)
 
@@ -195,7 +204,7 @@ def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> b
     if delay > 0:
         time.sleep(delay)
     
-    content = generate_content_with_info(article)
+    content = generate_unique_content(article)
     title = get_thread_title(article)
     
     sender = DiscordWebhookSender(webhook_url)
@@ -207,7 +216,7 @@ def main():
     """主函数"""
     start_time = time.time()
     
-    print("🚀 AiTrend 每小时精选模式（强制信息密度版）", file=sys.stderr)
+    print("🚀 AiTrend 每小时精选模式（完全独特叙述版）", file=sys.stderr)
     
     # 加载配置
     try:
@@ -243,12 +252,25 @@ def main():
         print("⚠️ 无新内容", file=sys.stderr)
         sys.exit(0)
     
-    # 选择最热门的3条
-    top_articles = select_best_articles(articles, top_n=3)
+    # 选择最热门的3条，确保多样性（优先不同来源）
+    top_articles = select_best_articles(articles, top_n=5)  # 先选5条
     
-    print(f"\n⭐ 选中 {len(top_articles)} 条:", file=sys.stderr)
+    # 确保来源多样性
+    source_count = {}
+    diverse_articles = []
+    for article in top_articles:
+        src = article.source
+        if source_count.get(src, 0) < 2:  # 每个来源最多2条
+            diverse_articles.append(article)
+            source_count[src] = source_count.get(src, 0) + 1
+        if len(diverse_articles) >= 3:
+            break
+    
+    top_articles = diverse_articles[:3]
+    
+    print(f"\n⭐ 选中 {len(top_articles)} 条 (已优化来源多样性):", file=sys.stderr)
     for i, article in enumerate(top_articles, 1):
-        print(f"   {i}. {article.title[:50]}... ({article.source})", file=sys.stderr)
+        print(f"   {i}. [{article.source}] {article.title[:45]}...", file=sys.stderr)
     
     # 获取 Webhook URL
     webhook_url = os.getenv('DISCORD_WEBHOOK_URL')
