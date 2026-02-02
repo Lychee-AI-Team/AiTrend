@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-F04D55-3B5E",
+  "created_at": "2026-02-03T04:05:25.751339",
+  "status": "started",
+  "source": "unknown",
+  "name": "PolymarketBTC15mAssistant",
+  "url": "https://github.com/FrondEnt/PolymarketBTC15mAssistant",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.751398",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.751398",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

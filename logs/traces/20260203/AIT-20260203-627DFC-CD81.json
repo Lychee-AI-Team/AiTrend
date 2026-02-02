@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-627DFC-CD81",
+  "created_at": "2026-02-03T04:15:29.730464",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:15:29.730523",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:18:12.605120",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:15:29.730523",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:18:12.605120",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你对 AI 如何理解物理世界感到好奇，那么 lingbot-world 这个项目绝对值得你加入收藏夹。它是一个专注于推进开源世界模型\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

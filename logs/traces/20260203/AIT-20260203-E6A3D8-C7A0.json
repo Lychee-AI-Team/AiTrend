@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-E6A3D8-C7A0",
+  "created_at": "2026-02-03T03:10:42.066406",
+  "status": "completed",
+  "source": "unknown",
+  "name": "PolymarketBTC15mAssistant",
+  "url": "https://github.com/FrondEnt/PolymarketBTC15mAssistant",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.066457",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.066457",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**PolymarketBTC15mAssistant**\n\n📌 来源: GithubTrend\n\nReal-time Polymarket BTC 15m trading assistant for every trader! created by @krajekis\n\n🔗 https://github.com/FrondEnt/PolymarketBTC15mAssistant",
+  "errors": []
+}

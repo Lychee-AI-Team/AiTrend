@@ -1,0 +1,12 @@
+{
+  "trace_id": "AIT-20260203-6D1583-7EF2",
+  "created_at": "2026-02-03T03:06:59.995806",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [],
+  "modules": {},
+  "final_output": "项目介绍: lingbot-world",
+  "errors": []
+}

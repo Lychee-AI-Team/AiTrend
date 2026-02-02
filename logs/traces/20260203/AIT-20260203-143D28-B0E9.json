@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-143D28-B0E9",
+  "created_at": "2026-02-03T04:05:29.705535",
+  "status": "started",
+  "source": "unknown",
+  "name": "Ask Ellie",
+  "url": "https://www.producthunt.com/products/ask-ellie?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:29.705608",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:29.705608",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

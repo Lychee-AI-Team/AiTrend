@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-A38D97-F462",
+  "created_at": "2026-02-03T03:10:42.065946",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Prismer",
+  "url": "https://github.com/Prismer-AI/Prismer",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.066025",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.066025",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**Prismer**\n\n📌 来源: GithubTrend\n\nOpen Source OpenAI Prism Alternative\n\n🔗 https://github.com/Prismer-AI/Prismer",
+  "errors": []
+}

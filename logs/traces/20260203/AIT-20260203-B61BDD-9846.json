@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-B61BDD-9846",
+  "created_at": "2026-02-03T04:15:32.223219",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Portal",
+  "url": "https://www.producthunt.com/products/portal-14?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:15:32.223275",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:18:12.607708",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:15:32.223275",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:18:12.607708",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "体验新软件的过程往往挺别扭的，我们习惯了看落地页、刷演示视频，但真想上手用一下，却总逃不开注册、安装或者预约演示的老套路。Portal 的出现就是为了打破这种“虚假感”，\n\n🔗 https://www.producthunt.com/products/portal-14?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "errors": []
+}

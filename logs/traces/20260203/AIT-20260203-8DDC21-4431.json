@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-8DDC21-4431",
+  "created_at": "2026-02-03T04:05:29.705676",
+  "status": "started",
+  "source": "unknown",
+  "name": "EasyClaw",
+  "url": "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:29.705735",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:29.705735",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

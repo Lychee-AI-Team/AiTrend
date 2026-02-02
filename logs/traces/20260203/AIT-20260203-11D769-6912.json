@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-11D769-6912",
+  "created_at": "2026-02-03T03:49:01.705072",
+  "status": "started",
+  "source": "unknown",
+  "name": "In praise of –dry-run",
+  "url": "https://henrikwarne.com/2026/01/31/in-praise-of-dry-run/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:49:01.705131",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 17 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 17
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:49:01.705131",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

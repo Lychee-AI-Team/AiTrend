@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-9E9C89-A761",
+  "created_at": "2026-02-03T03:43:04.838514",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:43:04.838685",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:43:04.838685",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你一直在寻找一个足够轻量、不累赘的 AI 助手工具，那么 nanobot 绝对值得关注。它被开发者戏称为“超轻量级 Clawdbot”，本质上是一个专门为 Claude 等大模型设计的极简交互工具。相比于那些集成无数复杂功能的重型框架，\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

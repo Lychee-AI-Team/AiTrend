@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-452D19-D5EE",
+  "created_at": "2026-02-03T04:15:32.223076",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Design In The Browser",
+  "url": "https://www.producthunt.com/products/design-in-the-browser?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:15:32.223157",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:18:12.607285",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:15:32.223157",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:18:12.607285",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想象一下，如果你能直接指着网页上的某个按钮或标题，对着 AI 说“把它调大一点”或者“换个颜色”，代码\n\n🔗 https://www.producthunt.com/products/design-in-the-browser?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "errors": []
+}

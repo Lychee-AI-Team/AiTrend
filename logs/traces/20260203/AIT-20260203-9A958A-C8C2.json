@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-9A958A-C8C2",
+  "created_at": "2026-02-03T04:05:25.750497",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills-npm",
+  "url": "https://github.com/antfu/skills-npm",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.750549",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:08:07.604588",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.750549",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:08:07.604588",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想象一下，如果你的 AI 智能体也能像开发者一样，缺什么功能就直接从 npm 上“装”一个，那该多方便。skills\n\n🔗 https://github.com/antfu/skills-npm",
+  "errors": []
+}

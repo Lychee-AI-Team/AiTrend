@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-832152-2A78",
+  "created_at": "2026-02-03T04:05:25.749897",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Qwen3-ASR",
+  "url": "https://github.com/QwenLM/Qwen3-ASR",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.749957",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:08:07.602002",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.749957",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:08:07.602002",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "阿里通义千问团队推出的 Qwen3-ASR 是一款非常全能的开源语音识别模型系列。它不仅能稳稳地搞定多语种的语音转文字，最厉害的地方在于\n\n🔗 https://github.com/QwenLM/Qwen3-ASR",
+  "errors": []
+}

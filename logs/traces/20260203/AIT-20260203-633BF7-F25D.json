@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-633BF7-F25D",
+  "created_at": "2026-02-03T03:10:42.066185",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Pretty-mermaid-skills",
+  "url": "https://github.com/imxv/Pretty-mermaid-skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.066237",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.066237",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**Pretty-mermaid-skills**\n\n📌 来源: GithubTrend\n\nTo provide AI with Mermaid chart rendering capability, supporting both SVG and ASCII output formats\n\n🔗 https://github.com/imxv/Pretty-mermaid-skills",
+  "errors": []
+}

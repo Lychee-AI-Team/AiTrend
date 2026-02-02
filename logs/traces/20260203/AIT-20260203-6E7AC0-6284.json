@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-6E7AC0-6284",
+  "created_at": "2026-02-03T03:20:59.264722",
+  "status": "started",
+  "source": "unknown",
+  "name": "beautiful-mermaid",
+  "url": "https://github.com/lukilabs/beautiful-mermaid",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:20:59.264787",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:20:59.264787",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

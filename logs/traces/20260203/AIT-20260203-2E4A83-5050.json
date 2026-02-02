@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-2E4A83-5050",
+  "created_at": "2026-02-03T03:10:42.065505",
+  "status": "completed",
+  "source": "unknown",
+  "name": "primer",
+  "url": "https://github.com/pierceboggan/primer",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.065559",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.065559",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**primer**\n\n📌 来源: GithubTrend\n\nGet your repo ready for AI.\n\n🔗 https://github.com/pierceboggan/primer",
+  "errors": []
+}

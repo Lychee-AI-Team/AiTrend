@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-3A5A68-7A77",
+  "created_at": "2026-02-03T03:10:42.065843",
+  "status": "completed",
+  "source": "unknown",
+  "name": "openclaw-mini",
+  "url": "https://github.com/voocel/openclaw-mini",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.065894",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.065894",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**openclaw-mini**\n\n📌 来源: GithubTrend\n\nOpenClaw 核心架构的极简复现，涵盖 sessionKey 会话域、队列串行、工具化记忆检索、按需上下文加载、可扩展技能与主动心跳唤醒机制\n\n🔗 https://github.com/voocel/openclaw-mini",
+  "errors": []
+}

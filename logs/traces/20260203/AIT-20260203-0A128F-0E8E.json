@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-0A128F-0E8E",
+  "created_at": "2026-02-03T03:51:22.524471",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanoclaw",
+  "url": "https://github.com/gavrielc/nanoclaw",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:51:22.524541",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:51:22.524541",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你在寻找一个既轻量又安全的 Claude 助手，nanoclaw 是个非常值得关注的开源选择。它专门为苹果用户打造，直接运行在 Apple 容器中，这种设计不仅保证了极高的运行效率，还为你的数据安全筑起了一道天然屏障。与市面上那些功能繁杂、体积庞大的 AI 应用不同，nanoclaw 追求的是极致的简约与透明。它的代码结构非常清晰，初衷就是为了让用户能够\n\n🔗 https://github.com/gavrielc/nanoclaw",
+  "errors": []
+}

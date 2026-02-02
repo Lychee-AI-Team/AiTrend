@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-252D30-5727",
+  "created_at": "2026-02-03T03:51:22.524729",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:51:22.524785",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:51:22.524785",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你经常关注开源圈，一定对 Anthony Fu 不陌生。他发起的这个名为 skills 的项目，本质上是一个为 AI 智能体\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

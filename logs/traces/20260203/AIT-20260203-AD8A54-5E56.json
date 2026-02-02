@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-AD8A54-5E56",
+  "created_at": "2026-02-03T03:13:02.449329",
+  "status": "started",
+  "source": "unknown",
+  "name": "hr-breaker",
+  "url": "https://github.com/btseytlin/hr-breaker",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:13:02.449401",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:13:02.449401",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

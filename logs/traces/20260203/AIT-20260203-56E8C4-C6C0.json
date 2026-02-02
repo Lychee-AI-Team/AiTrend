@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-56E8C4-C6C0",
+  "created_at": "2026-02-03T03:23:50.001688",
+  "status": "started",
+  "source": "unknown",
+  "name": "Generative AI and Wikipedia editing",
+  "url": "https://wikiedu.org/blog/2026/01/29/generative-ai-and-wikipedia-editing-what-we-learned-in-2025/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:23:50.001744",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:23:50.001744",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-56E15C-F8A8",
+  "created_at": "2026-02-03T04:05:25.750126",
+  "status": "completed",
+  "source": "unknown",
+  "name": "OpenClawChineseTranslation",
+  "url": "https://github.com/1186258278/OpenClawChineseTranslation",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.750213",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:08:07.603569",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.750213",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:08:07.603569",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "OpenClawChineseTranslation 是一个非常实用的开源项目，它是知名个人 AI 助手 OpenClaw 的深度汉化版本。简单来说，它能帮你把 Claude 或 ChatGPT 等大语言模型无缝接入到 WhatsApp、Telegram 和 Discord 等主流社交平台，让你拥有一个全天候在线的私人智能助理。这个项目之所以值得关注，是因为它彻底扫清了原版在中文环境下的使用障碍，不仅将命令行界面和管理面板全部翻译成了中文，还贴心地附带了从零开始的搭建教程和详细的排错指南。\n\n🔗 https://github.com/1186258278/OpenClawChineseTranslation",
+  "errors": []
+}

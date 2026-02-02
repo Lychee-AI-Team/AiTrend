@@ -1,0 +1,12 @@
+{
+  "trace_id": "AIT-20260203-74DFC5",
+  "created_at": "2026-02-03T03:05:26.918115",
+  "status": "started",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [],
+  "modules": {},
+  "final_output": null,
+  "errors": []
+}

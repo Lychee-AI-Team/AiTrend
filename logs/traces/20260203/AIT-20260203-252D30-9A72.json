@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-252D30-9A72",
+  "created_at": "2026-02-03T03:48:45.721161",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:48:45.721230",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:48:45.721230",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你正在折腾 AI Agent，一定会被如何给大模型配上好用的“手脚”所困扰。大神 Anthony Fu 开源\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

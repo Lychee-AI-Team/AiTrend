@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-060A55-578D",
+  "created_at": "2026-02-03T03:10:42.065136",
+  "status": "completed",
+  "source": "unknown",
+  "name": "OpenClawChineseTranslation",
+  "url": "https://github.com/1186258278/OpenClawChineseTranslation",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.065189",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.065189",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**OpenClawChineseTranslation**\n\n📌 来源: GithubTrend\n\n🦞 OpenClaw (Clawdbot/Moltbot) 汉化版 - 开源个人 AI 助手中文版 | Claude/ChatGPT LLM 接入 | WhatsApp/Telegram/Discord 多平台 | 每小时自动同步 | CLI + Dashboard 全中文 | 全流程搭建教程，以及排错指南！\n\n🔗 https://github.com/1186258278/OpenClawChineseTranslation",
+  "errors": []
+}

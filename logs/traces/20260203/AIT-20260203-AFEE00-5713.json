@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-AFEE00-5713",
+  "created_at": "2026-02-03T03:10:42.065627",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills-npm",
+  "url": "https://github.com/antfu/skills-npm",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.065686",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.065686",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**skills-npm**\n\n📌 来源: GithubTrend\n\nInstall agent skills from npm\n\n🔗 https://github.com/antfu/skills-npm",
+  "errors": []
+}

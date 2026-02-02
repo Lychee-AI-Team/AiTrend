@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-90CC55-E14E",
+  "created_at": "2026-02-03T03:23:50.002173",
+  "status": "started",
+  "source": "unknown",
+  "name": "Microsoft is walking back Windows 11's AI overload",
+  "url": "https://www.windowscentral.com/microsoft/windows-11/microsoft-is-reevaluating-its-ai-efforts-on-windows-11-plans-to-reduce-copilot-integrations-and-evolve-recall",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:23:50.002238",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:23:50.002238",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

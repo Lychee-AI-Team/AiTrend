@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-7F05FC-3536",
+  "created_at": "2026-02-03T04:15:32.222823",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Ask Ellie",
+  "url": "https://www.producthunt.com/products/ask-ellie?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:15:32.222889",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:18:12.605889",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:15:32.222889",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:18:12.605889",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "Ask Ellie 是一款专门为 Slack 打造的 AI 工程助手，它能把 GitHub、Jira、Linear、Sentry 以及 PostHog 等工具里的工程上下文全部整合到聊天框里。无论是想了解代码变更、PR 进度，还是想复盘冲刺速度和生产环境的报错，你只需要在 Slack 里随口一问，它就能从这些专业工具中抓取数据并给出即时回答。\n\n这个项目最吸引人的地方在于它彻底终结了“仪表盘跳跃”的繁琐体验。你不再需要为了查个数据或确认谁卡住了进度而在几十个网页标签页之间来回切换。除了查询信息，Ask Ellie 还能直接在对话中帮你创建工单、调试事故或者追踪上线情况\n\n🔗 https://www.producthunt.com/products/ask-ellie?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "errors": []
+}

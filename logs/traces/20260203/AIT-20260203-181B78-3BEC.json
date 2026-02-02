@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-181B78-3BEC",
+  "created_at": "2026-02-03T03:10:42.065028",
+  "status": "completed",
+  "source": "unknown",
+  "name": "dingtalk-moltbot-connector",
+  "url": "https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.065081",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.065081",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**dingtalk-moltbot-connector**\n\n📌 来源: GithubTrend\n\n将钉钉机器人连接到 OpenClaw Gateway 的OpenClaw Plugin，支持 AI Card 流式响应\n\n🔗 https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+  "errors": []
+}

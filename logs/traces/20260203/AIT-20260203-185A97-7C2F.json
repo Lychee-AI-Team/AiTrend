@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-185A97-7C2F",
+  "created_at": "2026-02-03T03:49:01.705447",
+  "status": "started",
+  "source": "unknown",
+  "name": "TIL",
+  "url": "https://taoofmac.com/space/til/2026/02/01/1630",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:49:01.705504",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 17 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 17
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:49:01.705504",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

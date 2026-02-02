@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-3A5A68-4946",
+  "created_at": "2026-02-03T04:05:25.750711",
+  "status": "completed",
+  "source": "unknown",
+  "name": "openclaw-mini",
+  "url": "https://github.com/voocel/openclaw-mini",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.750768",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:08:07.605552",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.750768",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:08:07.605552",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "OpenClaw-mini 是对 OpenClaw 核心架构的一次精简复现，它把复杂的 AI 智能体逻辑浓缩成了一个轻量级框架。这个项目最吸引人的地方在于它完整保留了工业级的对话管理能力，通过 sessionKey 实现了精准的会话域隔离，并利用队列串行机制确保了任务处理的稳定性。它不仅能根据需要动态加载上下文，有效避免了资源浪费，还引入了非常\n\n🔗 https://github.com/voocel/openclaw-mini",
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-5DED15-328C",
+  "created_at": "2026-02-03T03:49:01.705186",
+  "status": "started",
+  "source": "unknown",
+  "name": "Leaked Chats Expose the Daily Life of a Scam Compo",
+  "url": "https://www.wired.com/story/the-red-bull-leaks/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:49:01.705249",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 17 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 17
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:49:01.705249",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

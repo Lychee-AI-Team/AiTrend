@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-E6F0B8-A315",
+  "created_at": "2026-02-03T03:23:50.000662",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Netbird – Open Source Zero Trust Networking",
+  "url": "https://netbird.io/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:23:50.000832",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:23:50.000832",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "Netbird，这个开源项目简直就是网络连接的利器！它主打的是一种叫做Zero Trust Networking的技术，简单来说，就是让网络连接更安全、更可靠。你可能会问，这有什么特别的？别急，听我慢慢道来。\n\nNetbird能做什么呢？它就像一个网络连接的守护者，不管你是在家里、公司还是咖啡店，都能帮你快速、稳定地连接到网络。而且，它特别的地方在于，它采用了Zero Trust Networking，这意味着它会对每个连接进行严格的身份验证和授权，确保只有经过验证的用户才能访问网络资源，大大降低了数据泄露的风险。\n\n为什么Netbird值得关注呢？首先，它开源，这意味着任何人都可以免费使用，还能参与到项目的开发中。其次，它的Zero Trust Networking技术，在当前网络安全形势日益严峻的背景下，显得尤为重要。最后，它的操作简单，界面友好，即使是网络小白也能轻松上手。总之，Netbird就是一个既安全又好用的网络连接工具，绝对值得你一试！\n\n🔗 https://netbird.io/",
+  "errors": []
+}

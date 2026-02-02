@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-2F5CF1-79A2",
+  "created_at": "2026-02-03T03:51:22.524150",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:51:22.524359",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:51:22.524359",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你一直在寻找一个极致轻简的 Claude 命令行工具，那么 nanobot 绝对值得你驻足关注。它被开发者戏称为“\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

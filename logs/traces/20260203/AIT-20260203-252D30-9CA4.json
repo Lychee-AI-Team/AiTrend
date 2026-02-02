@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-252D30-9CA4",
+  "created_at": "2026-02-03T03:10:42.064523",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:10:42.064613",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:10:42.064613",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "**skills**\n\n📌 来源: GithubTrend\n\nAnthony Fu's curated collection of agent skills.\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

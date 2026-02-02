@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-7AA3CF-28FD",
+  "created_at": "2026-02-03T03:48:45.721292",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:48:45.721353",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:48:45.721353",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你一直在关注人工智能如何理解物理世界，那么 lingbot-world 这个项目绝对值得花点时间研究。它致力于推进开源世界模型的发展，简单来说，就是让 AI 能够像人类一样通过观察来理解物理规律，并预测接下来会发生什么。在许多顶尖模型选择闭源的当下，lingbot-world 的出现为开发者提供了一个透明且高性能的实验场，让每个人都有机会触碰构建虚拟世界的底层技术。\n\n这个项目最让人眼前一亮的地方在于它对复杂环境模拟的精准度与高效的架构设计。它不仅能处理多模态的数据输入，还能在较低的计算资源下构建出逻辑自洽的动态场景。对于\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

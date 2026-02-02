@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-1CC541-BF37",
+  "created_at": "2026-02-03T04:05:44.104383",
+  "status": "started",
+  "source": "unknown",
+  "name": "Autonomous cars, drones cheerfully obey prompt inj",
+  "url": "https://www.theregister.com/2026/01/30/road_sign_hijack_ai/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:44.104442",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:44.104442",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

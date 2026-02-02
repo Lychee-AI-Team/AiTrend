@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-593C48-71D0",
+  "created_at": "2026-02-03T03:49:26.928037",
+  "status": "started",
+  "source": "arXiv",
+  "name": "unknown",
+  "url": "",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:49:26.928190",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 ArxivPapers 发现 20 条候选",
+      "data": {
+        "source": "ArxivPapers",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:49:26.928190",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

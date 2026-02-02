@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-07A14F-0A6F",
+  "created_at": "2026-02-03T03:48:45.720566",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T03:48:45.720766",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T03:48:45.720766",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你已经厌倦了那些动辄几百MB、安装起来极其繁琐的AI编程助手，那么nanobot绝对会让你眼前一亮。这个自称为“超轻量级Clawdbot”的小\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-8DDC21-0990",
+  "created_at": "2026-02-03T04:15:32.222954",
+  "status": "completed",
+  "source": "unknown",
+  "name": "EasyClaw",
+  "url": "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:15:32.223013",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Producthunt 发现 15 条候选",
+      "data": {
+        "source": "Producthunt",
+        "count": 15
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:18:12.606209",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:15:32.223013",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:18:12.606209",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你一直想拥有一个全能的个人AI助手，但又被复杂的底层配置搞得头大，那EasyClaw绝对值得你关注。它把ClawdBot、MoltBot和OpenClaw这些强大的工具集成在一起，让你告别繁琐的调试过程，只需一行命令就能完成安装部署。\n\n最让人惊喜的是它的连接能力，你可以直接把它接入WhatsApp或iMessage，让AI真正进入你的社交圈。无论是自动处理日常任务、运行复杂的代码片段，还是代发邮件，它都能信手拈来。它最核心的魅力在于把原本属于极客的复杂工具变成了人人可用的“数字分身”，极大地降低了个人AI Agent的上手门槛，让你能把精力真正花在自动化工作流的创意上。\n\n🔗 https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+  "errors": []
+}

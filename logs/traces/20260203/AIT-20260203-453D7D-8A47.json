@@ -1,0 +1,44 @@
+{
+  "trace_id": "AIT-20260203-453D7D-8A47",
+  "created_at": "2026-02-03T04:05:25.750015",
+  "status": "completed",
+  "source": "unknown",
+  "name": "dingtalk-moltbot-connector",
+  "url": "https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T04:05:25.750069",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    },
+    {
+      "timestamp": "2026-02-03T04:08:07.602540",
+      "module": "forum_publisher",
+      "level": "INFO",
+      "message": "发布成功",
+      "data": {
+        "success": true,
+        "response": ""
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T04:05:25.750069",
+      "status": "success",
+      "log_count": 1
+    },
+    "forum_publisher": {
+      "started_at": "2026-02-03T04:08:07.602540",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想要让钉钉机器人拥有像 ChatGPT 那样丝滑的对话体验吗？dingtalk-moltbot-connector 这个项目非常值得关注。它本质上是 OpenClaw Gateway 的一款核心插件，专门负责把钉钉机器人无缝接入到 OpenClaw 生态中。它最让人眼前一亮的功能就是支持 AI Card 的流式响应，这彻底解决了以往钉钉机器人回复死板、等待时间长的痛点。\n\n通过这个连接器，AI 生成的内容可以像流水一样在钉钉的动态卡片里实时呈现，用户能亲眼看到文字逐句蹦出，交互感瞬间拉满。如果你正打算在企业办公场景里落地更智能、更高效的 AI 助手，它能帮你省去大量适配底层协议的麻烦，直接让钉钉办公环境拥有顶级的 AI 交互体验，是构建企业级 AI 机器人不可或缺的利器。\n\n🔗 https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+  "errors": []
+}
