@@ -1,33 +1,34 @@
 #!/usr/bin/env python3
 """
-README 整理模块
-从GitHub README提取关键信息
+README 整理模块（带大模型深度总结）
+从GitHub README提取关键信息，并用大模型生成自然叙述
 """
 
 import re
 import requests
 from typing import Dict, Any
 from .base import BaseProcessor
+from ..llm_client import get_llm_client
 
 class ReadmeProcessor(BaseProcessor):
     """
-    README整理处理器
+    README整理处理器（LLM增强版）
+    
     功能：
     1. 抓取README内容
-    2. 提取项目描述
-    3. 提取功能列表
-    4. 提取安装说明
-    5. 提取使用示例
+    2. 提取关键信息
+    3. 调用大模型深度总结
+    4. 生成自然叙述（非结构化）
     """
     
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
-        self.max_features = config.get('max_features', 5)
-        self.max_length = config.get('max_length', 1500)
+        self.max_length = config.get('max_length', 400)
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         })
+        self.llm = get_llm_client()
     
     def can_process(self, candidate: Dict[str, Any]) -> bool:
         """只能处理GitHub项目"""
@@ -35,10 +36,11 @@ class ReadmeProcessor(BaseProcessor):
         return 'github.com' in url
     
     def process(self, candidate: Dict[str, Any]) -> str:
-        """处理候选项目，生成README内容摘要"""
+        """处理候选项目，使用LLM生成深度总结"""
         
         url = candidate.get('url', '')
         name = candidate.get('name', '')
+        description = candidate.get('description', '')
         
         # 提取repo路径
         repo_path = self._extract_repo_path(url)
@@ -48,38 +50,63 @@ class ReadmeProcessor(BaseProcessor):
         # 抓取README
         readme = self._fetch_readme(repo_path)
         if not readme:
-            return ""
+            # 如果没有README，用API描述
+            readme = description or ""
         
-        # 提取各部分
-        description = self._extract_description(readme, candidate)
+        # 提取结构化信息
         features = self._extract_features(readme)
         install = self._extract_install(readme)
         usage = self._extract_usage(readme)
         
-        # 组合成自然叙述
+        # 构建给LLM的输入
+        context = self._build_context(name, description, readme, features, install, usage)
+        
+        # 调用大模型生成自然叙述
+        summary = self.llm.summarize(context, max_length=self.max_length)
+        
+        if not summary:
+            # LLM失败，使用简单提取
+            return self._fallback_summary(name, description, features)
+        
+        return summary
+    
+    def _build_context(self, name: str, description: str, readme: str, 
+                       features: list, install: str, usage: str) -> str:
+        """构建给LLM的上下文"""
+        
+        parts = [f"项目名称: {name}"]
+        
+        if description:
+            parts.append(f"项目描述: {description}")
+        
+        # README前1500字
+        readme_preview = readme[:1500].strip()
+        if readme_preview:
+            parts.append(f"README内容:\n{readme_preview}")
+        
+        if features:
+            parts.append(f"功能列表: {', '.join(features[:5])}")
+        
+        if install:
+            parts.append(f"安装方式: {install}")
+        
+        if usage:
+            parts.append(f"使用示例: {usage}")
+        
+        return "\n\n".join(parts)
+    
+    def _fallback_summary(self, name: str, description: str, features: list) -> str:
+        """LLM失败时的备用总结"""
         parts = []
         
         if description:
             parts.append(f"{name} {description}")
         
         if features:
-            features_text = ", ".join(features[:self.max_features])
+            features_text = "、".join(features[:3])
             parts.append(f"主要功能包括{features_text}")
         
-        if install:
-            parts.append(f"安装方式是{install}")
-        
-        if usage:
-            parts.append(f"使用示例：{usage}")
-        
-        # 自然连接
-        content = "。".join(parts)
-        
-        # 限制长度
-        if len(content) > self.max_length:
-            content = content[:self.max_length] + "..."
-        
-        return content
+        return "。".join(parts) if parts else ""
     
     def _extract_repo_path(self, url: str) -> str:
         """从URL提取owner/repo"""
@@ -105,22 +132,6 @@ class ReadmeProcessor(BaseProcessor):
         
         return ""
     
-    def _extract_description(self, readme: str, candidate: Dict) -> str:
-        """提取项目描述"""
-        # 优先使用API返回的描述
-        api_desc = candidate.get('description', '')
-        if api_desc:
-            return api_desc[:200]
-        
-        # 从README第一行提取
-        lines = readme.split('\n')
-        for line in lines[:10]:
-            line = line.strip()
-            if line and not line.startswith('#') and len(line) > 10:
-                return line[:200]
-        
-        return ""
-    
     def _extract_features(self, readme: str) -> list:
         """提取功能列表"""
         features = []
@@ -128,26 +139,22 @@ class ReadmeProcessor(BaseProcessor):
         in_features = False
         
         for line in lines:
-            # 检测Features标题
             if re.match(r'^#{1,3}\s*feature', line, re.I):
                 in_features = True
                 continue
             
-            # 检测下一个标题
             if in_features and line.startswith('#'):
                 break
             
-            # 提取列表项
             if in_features:
                 match = re.match(r'^\s*[-*]\s*(.+)', line)
                 if match:
                     feature = match.group(1).strip()
-                    # 清理markdown链接
                     feature = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', feature)
                     if feature and len(feature) > 5:
                         features.append(feature[:80])
                 
-                if len(features) >= self.max_features:
+                if len(features) >= 5:
                     break
         
         return features
@@ -166,7 +173,6 @@ class ReadmeProcessor(BaseProcessor):
                 break
             
             if in_install:
-                # 查找代码块
                 if '```' in line and i + 1 < len(lines):
                     code = lines[i + 1].strip()
                     if any(cmd in code for cmd in ['pip ', 'npm ', 'yarn ', 'go get', 'cargo ']):
@@ -188,35 +194,9 @@ class ReadmeProcessor(BaseProcessor):
                 break
             
             if in_usage:
-                # 查找代码示例
                 if '```' in line and i + 1 < len(lines):
                     code = lines[i + 1].strip()
                     if code and not code.startswith('#') and len(code) < 150:
                         return code
         
         return ""
-
-# 测试
-if __name__ == '__main__':
-    print("="*60)
-    print("README整理模块测试")
-    print("="*60)
-    
-    config = {'max_features': 3, 'max_length': 500}
-    processor = ReadmeProcessor(config)
-    
-    # 测试项目
-    test_candidate = {
-        'name': 'browser-use',
-        'url': 'https://github.com/browser-use/browser-use',
-        'description': 'Make websites accessible for AI agents'
-    }
-    
-    print(f"\n测试项目: {test_candidate['name']}")
-    result = processor.process(test_candidate)
-    
-    if result:
-        print(f"\n整理结果 ({len(result)} 字符):")
-        print(result)
-    else:
-        print("\n无法获取README")

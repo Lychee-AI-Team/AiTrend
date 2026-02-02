@@ -1,110 +1,109 @@
 #!/usr/bin/env python3
 """
-全网评价搜索模块
-使用Tavily搜索项目的全网评价
+全网评价搜索模块（带大模型深度总结）
+使用Tavily搜索项目评价，并用大模型生成自然叙述
 """
 
 import os
 import requests
 from typing import Dict, Any, List
 from .base import BaseProcessor
+from ..llm_client import get_llm_client
 
 class SearchProcessor(BaseProcessor):
     """
-    全网评价搜索处理器
+    全网评价搜索处理器（LLM增强版）
+    
     功能：
-    1. 搜索项目名称+评价/评测/体验
-    2. 提取用户真实反馈
-    3. 总结优缺点
+    1. 搜索项目名称+评价/评测
+    2. 获取多个来源的评价
+    3. 调用大模型深度总结评价
+    4. 生成自然叙述（非结构化）
     """
     
     def __init__(self, config: Dict[str, Any]):
         super().__init__(config)
         self.max_results = config.get('max_results', 5)
+        self.max_length = config.get('max_length', 300)
         self.tavily_api_key = os.getenv('TAVILY_API_KEY')
         self.session = requests.Session()
+        self.llm = get_llm_client()
     
     def can_process(self, candidate: Dict[str, Any]) -> bool:
-        """需要项目名称才能搜索"""
+        """需要项目名称和API Key"""
         name = candidate.get('name', '')
         return bool(name) and bool(self.tavily_api_key)
     
     def process(self, candidate: Dict[str, Any]) -> str:
-        """搜索并整理全网评价"""
+        """搜索并深度总结全网评价"""
         
         name = candidate.get('name', '')
         description = candidate.get('description', '')
+        url = candidate.get('url', '')
         
-        # 构建搜索查询
+        # 搜索多个查询
+        search_results = self._multi_search(name, description)
+        
+        if not search_results:
+            return ""
+        
+        # 构建给LLM的输入
+        context = self._build_context(name, search_results)
+        
+        # 调用大模型生成评价总结
+        system_prompt = """你是一个专业的产品评价分析师，擅长从用户反馈中提取有价值的观点。
+
+重要约束：
+1. 禁止结构化输出 - 不要使用列表、序号、 bullet points
+2. 必须自然叙述 - 像转述朋友的话一样，口语化
+3. 突出用户真实反馈 - 具体用户在说什么、关心什么
+4. 突出优缺点 - 用户喜欢什么、抱怨什么
+5. 信息来源多样 - 综合多个来源的评价
+6. 客观中立 - 既说优点也说不足
+
+输出风格：
+- 用连续的段落
+- 用"有人说"、"有用户提到"来引用
+- 直接说评价内容，不要"评价显示"、"反馈表明"
+- 控制在300字以内"""
+        
+        prompt = f"""请分析以下关于「{name}」的搜索评价，用自然叙述的方式总结用户反馈：
+
+搜索到的评价内容：
+{context}
+
+要求：
+1. 总结用户的真实反馈（优点和缺点）
+2. 用自然叙述，不要列表、不要序号
+3. 控制在300字以内
+4. 直接输出内容，不要标题"""
+        
+        summary = self.llm.generate(prompt, system_prompt, temperature=0.5, max_tokens=self.max_length)
+        
+        if not summary:
+            return self._fallback_summary(search_results)
+        
+        return summary
+    
+    def _multi_search(self, name: str, description: str) -> List[Dict]:
+        """执行多个搜索查询"""
+        
         queries = [
-            f"{name} review experience",
-            f"{name} 评测 体验",
-            f"{name} github alternatives comparison"
+            f"{name} review github experience",
+            f"{name} 评测 使用体验",
         ]
         
         all_results = []
-        for query in queries[:2]:  # 搜索前2个查询
+        for query in queries[:2]:
             try:
-                results = self._search(query)
+                results = self._search_tavily(query)
                 all_results.extend(results)
             except Exception as e:
                 print(f"    搜索失败: {e}")
         
-        if not all_results:
-            return ""
-        
-        # 提取关键信息
-        pros = []
-        cons = []
-        user_quotes = []
-        
-        for result in all_results[:self.max_results]:
-            content = result.get('content', '')
-            
-            # 简单提取正面/负面评价
-            if any(word in content.lower() for word in ['good', 'great', 'awesome', 'excellent', 'love', 'perfect', '推荐']):
-                # 提取这句话
-                sentences = content.split('.')
-                for sent in sentences:
-                    if any(word in sent.lower() for word in ['good', 'great', 'awesome', 'useful', 'helpful']):
-                        pros.append(sent.strip()[:100])
-                        break
-            
-            if any(word in content.lower() for word in ['bad', 'issue', 'problem', 'bug', 'slow', 'difficult', '缺点']):
-                sentences = content.split('.')
-                for sent in sentences:
-                    if any(word in sent.lower() for word in ['issue', 'problem', 'bug', 'limitation']):
-                        cons.append(sent.strip()[:100])
-                        break
-            
-            # 提取用户原话
-            if '"' in content or '"' in content:
-                import re
-                quotes = re.findall(r'["""]([^"""]+)["""]', content)
-                for quote in quotes[:2]:
-                    if len(quote) > 20 and len(quote) < 150:
-                        user_quotes.append(quote)
-        
-        # 组合成内容
-        parts = []
-        
-        if user_quotes:
-            parts.append(f"有用户反馈说：{user_quotes[0]}")
-        
-        if pros:
-            parts.append(f"优点方面，{pros[0]}")
-        
-        if cons:
-            parts.append(f"需要注意的点是{cons[0]}")
-        
-        if not parts:
-            # 如果没有提取到具体评价，使用搜索结果摘要
-            snippets = [r.get('content', '')[:100] for r in all_results[:2]]
-            parts.append(f"搜索结果显示：{snippets[0]}...")
-        
-        return " ".join(parts)
+        return all_results[:self.max_results]
     
-    def _search(self, query: str) -> List[Dict]:
+    def _search_tavily(self, query: str) -> List[Dict]:
         """使用Tavily搜索"""
         
         url = "https://api.tavily.com/search"
@@ -121,33 +120,32 @@ class SearchProcessor(BaseProcessor):
         response.raise_for_status()
         
         data = response.json()
-        results = data.get('results', [])
+        return data.get('results', [])
+    
+    def _build_context(self, name: str, results: List[Dict]) -> str:
+        """构建给LLM的上下文"""
         
-        return results
-
-# 测试
-if __name__ == '__main__':
-    print("="*60)
-    print("全网搜索模块测试")
-    print("="*60)
+        parts = []
+        for i, result in enumerate(results, 1):
+            title = result.get('title', '')
+            content = result.get('content', '')
+            url = result.get('url', '')
+            
+            if content:
+                parts.append(f"来源{i} [{title}]:\n{content[:500]}")
+        
+        return "\n\n".join(parts)
     
-    if not os.getenv('TAVILY_API_KEY'):
-        print("\n⚠️ 需要设置 TAVILY_API_KEY 环境变量")
-        exit(1)
-    
-    config = {'max_results': 3}
-    processor = SearchProcessor(config)
-    
-    test_candidate = {
-        'name': 'browser-use',
-        'description': 'Make websites accessible for AI agents'
-    }
-    
-    print(f"\n测试项目: {test_candidate['name']}")
-    result = processor.process(test_candidate)
-    
-    if result:
-        print(f"\n搜索结果 ({len(result)} 字符):")
-        print(result)
-    else:
-        print("\n未找到相关评价")
+    def _fallback_summary(self, results: List[Dict]) -> str:
+        """LLM失败时的备用总结"""
+        if not results:
+            return ""
+        
+        # 简单拼接前几条
+        snippets = []
+        for r in results[:2]:
+            content = r.get('content', '')[:150]
+            if content:
+                snippets.append(content)
+        
+        return " ".join(snippets) if snippets else ""

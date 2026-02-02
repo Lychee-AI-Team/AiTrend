@@ -24,11 +24,12 @@ processors:
   readme:
     enabled: true
     max_features: 5
-    max_length: 1500
+    max_length: 400  # LLM总结长度
   
   search:
     enabled: true
     max_results: 3
+    max_length: 300  # LLM总结长度
 
 # 输出整理模块配置
 output:

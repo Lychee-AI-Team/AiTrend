@@ -63,7 +63,7 @@ class Launcher:
             if source_config.get('enabled', False):
                 try:
                     module = importlib.import_module(f'modules.sources.{source_name}')
-                    source_class = getattr(module, source_name.replace('_', '').title())
+                    source_class = getattr(module, 'GithubTrend')
                     source_instance = source_class(source_config)
                     self.sources.append(source_instance)
                     print(f"  ✅ {source_name}")
@@ -182,13 +182,66 @@ class Launcher:
             if pub_config.get('enabled', False):
                 try:
                     print(f"\n📤 发布到 {pub_name}...")
-                    # 这里调用发布器
-                    print(f"  发布 {len(contents)} 条内容")
+                    
+                    if pub_name == 'discord':
+                        self._publish_to_discord(contents, pub_config)
+                    
                 except Exception as e:
                     print(f"  ❌ 发布失败: {e}")
+    
+    def _publish_to_discord(self, contents: List[Dict], config: Dict):
+        """发布到Discord"""
+        import os
+        import requests
+        import time
+        
+        webhook_url = os.getenv('DISCORD_WEBHOOK_URL')
+        if not webhook_url:
+            print("  ❌ 未配置 DISCORD_WEBHOOK_URL")
+            return
+        
+        published = 0
+        for i, content in enumerate(contents, 1):
+            try:
+                print(f"  发布 {i}/{len(contents)}: {content['name'][:35]}...")
+                
+                # 创建论坛帖子
+                payload = {
+                    'username': 'AiTrend',
+                    'thread_name': f"{content['name']} – GitHub趋势",
+                    'content': content['content'][:1900]  # Discord限制
+                }
+                
+                response = requests.post(
+                    webhook_url,
+                    json=payload,
+                    timeout=15
+                )
+                response.raise_for_status()
+                
+                published += 1
+                print(f"    ✅ 成功")
+                
+                # 避免速率限制
+                time.sleep(2)
+                
+            except Exception as e:
+                print(f"    ❌ 失败: {e}")
+        
+        print(f"\n  ✅ 成功发布 {published}/{len(contents)} 条内容")
 
 def main():
     """主入口"""
+    # 加载环境变量
+    import os
+    env_path = '.env'
+    if os.path.exists(env_path):
+        with open(env_path, 'r') as f:
+            for line in f:
+                if '=' in line and not line.startswith('#'):
+                    key, value = line.strip().split('=', 1)
+                    os.environ[key] = value
+    
     print("="*60)
     print("🎯 AiTrend 模块化系统启动")
     print("="*60)

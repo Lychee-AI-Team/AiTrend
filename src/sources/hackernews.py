@@ -1,9 +1,10 @@
 """
-HackerNews AI 热点监控 - 纯标准库版本
+HackerNews AI 热点监控 - 使用 urllib 版本
 获取 Show HN 和 AI 相关热门帖子
 """
-import http.client
 import json
+import urllib.request
+import urllib.error
 from typing import List, Dict, Any
 from .base import DataSource, Article
 import logging
@@ -15,14 +16,15 @@ class HackerNewsSource(DataSource):
     name = "hackernews"
     
     # HN 官方 API
-    BASE_URL = "hacker-news.firebaseio.com"
+    BASE_URL = "https://hacker-news.firebaseio.com/v0"
     
     # AI 相关关键词
     AI_KEYWORDS = [
         "kimi", "通义千问", "文心一言", "智谱", "deepseek",
         "字节", "腾讯", "阿里", "百度", "华为", "国产", "中文",
         "openai", "chatgpt", "claude", "anthropic", "gemini",
-        "llm", "ai", "machine learning",
+        "llm", "ai", "machine learning", "gpt-4", "gpt4",
+        "open ai", "mistral", "llama", "anthropic", "perplexity"
     ]
     
     def fetch(self) -> List[Article]:
@@ -50,47 +52,45 @@ class HackerNewsSource(DataSource):
     
     def _fetch_show_hn(self) -> List[Article]:
         """获取 Show HN 帖子"""
-        # Show HN 的 ID 列表
         story_ids = self._get_story_ids("showstories")
-        return self._fetch_stories(story_ids[:15], "show_hn")
+        return self._fetch_stories(story_ids[:8], "show_hn")
     
     def _fetch_top_stories(self) -> List[Article]:
         """获取热门帖子"""
         story_ids = self._get_story_ids("topstories")
-        return self._fetch_stories(story_ids[:30], "top")
+        return self._fetch_stories(story_ids[:15], "top")
     
     def _get_story_ids(self, category: str) -> List[int]:
         """获取帖子 ID 列表"""
-        conn = http.client.HTTPSConnection(self.BASE_URL, timeout=30)
+        url = f"{self.BASE_URL}/{category}.json"
         try:
-            conn.request("GET", f"/v0/{category}.json")
-            response = conn.getresponse()
-            if response.status == 200:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+            })
+            with urllib.request.urlopen(req, timeout=10) as response:
                 return json.loads(response.read().decode('utf-8'))
+        except Exception as e:
+            logger.warning(f"获取 {category} ID 列表失败: {e}")
             return []
-        finally:
-            conn.close()
     
     def _fetch_stories(self, story_ids: List[int], source_type: str) -> List[Article]:
-        """获取帖子详情（优化：限制数量，缩短超时）"""
+        """获取帖子详情"""
         posts = []
         
-        # 优化：只取前10个，减少请求时间
-        for story_id in story_ids[:10]:
+        for story_id in story_ids[:8]:  # 限制数量
             try:
-                conn = http.client.HTTPSConnection(self.BASE_URL, timeout=5)
-                conn.request("GET", f"/v0/item/{story_id}.json")
-                response = conn.getresponse()
-                
-                if response.status == 200:
+                url = f"{self.BASE_URL}/item/{story_id}.json"
+                req = urllib.request.Request(url, headers={
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+                })
+                with urllib.request.urlopen(req, timeout=8) as response:
                     story = json.loads(response.read().decode('utf-8'))
-                    if story and not story.get('deleted') and not story.get('dead'):
-                        post = self._parse_story(story, source_type)
-                        if post:
-                            posts.append(post)
-                
-                conn.close()
-                
+                    
+                if story and not story.get('deleted') and not story.get('dead'):
+                    post = self._parse_story(story, source_type)
+                    if post:
+                        posts.append(post)
+                        
             except Exception as e:
                 logger.debug(f"获取 story {story_id} 失败: {e}")
                 continue
