@@ -20,6 +20,7 @@ SOURCE_MAP = {
     'hackernews': ('modules.sources.hackernews', 'Hackernews'),
     'reddit': ('modules.sources.reddit', 'Reddit'),
     'arxiv_papers': ('modules.sources.arxiv_papers', 'ArxivPapers'),
+    'twitter': ('modules.sources.twitter', 'TwitterSource'),
 }
 
 

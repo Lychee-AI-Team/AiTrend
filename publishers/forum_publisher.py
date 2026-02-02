@@ -63,12 +63,16 @@ class ForumPublisher(BasePublisher):
         url = content.get('url', '')
         source = content.get('source', 'AiTrend')
         
-        # 构建帖子标题
-        thread_name = self.thread_name_template.format(
-            name=name,
-            source=source,
-            date=time.strftime('%m-%d')
-        )
+        # 构建帖子标题（安全格式化）
+        try:
+            thread_name = self.thread_name_template.format(
+                name=name,
+                source=source,
+                date=time.strftime('%m-%d')
+            )
+        except (KeyError, ValueError):
+            # 如果模板格式不匹配，使用默认格式
+            thread_name = f"{name} – {source}"
         
         # 确保内容包含链接
         if url and url not in text:

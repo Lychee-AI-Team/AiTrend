@@ -56,6 +56,19 @@ sources:
     days_back: 7
     max_candidates: 5
     min_authors: 1
+  
+  twitter:
+    enabled: true
+    api_key: ""           # Twitter API Key (从环境变量 TWITTER_API_KEY 读取)
+    api_secret: ""        # Twitter API Key Secret (从环境变量 TWITTER_API_SECRET 读取)
+    queries:
+      - "AI tool OR AI launch -is:retweet lang:en"
+      - "machine learning OR new model -is:retweet lang:en"
+      - "#BuildInPublic AI -is:retweet lang:en"
+    min_retweets: 10
+    min_likes: 20
+    days_back: 1
+    max_candidates: 5
 
 # 信息整理模块配置
 processors:

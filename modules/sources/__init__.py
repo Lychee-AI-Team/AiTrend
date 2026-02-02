@@ -4,3 +4,4 @@ from .producthunt import Producthunt
 from .hackernews import Hackernews
 from .reddit import Reddit
 from .arxiv_papers import ArxivPapers
+from .twitter import TwitterSource
