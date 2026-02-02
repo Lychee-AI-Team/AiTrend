@@ -66,7 +66,7 @@ def format_markdown(articles: List[Article], language: str = "zh") -> str:
     for i, article in enumerate(articles[:10], 1):
         lines.append(f"{i}. **{article.title}**")
         lines.append(f"   {article.summary[:300]}...")
-        lines.append(f"   🔗 {article.url}")
+        lines.append(f"   🔗 <{article.url}>")
         lines.append(f"   📌 来源: {article.source}\n")
     
     lines.append("━━━━━━━━━━━━━━━")

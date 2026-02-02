@@ -98,7 +98,7 @@ class DiscordForumSender(ChannelSender):
             lines.append(f"{i}. **{article.get('title', 'N/A')}**")
             summary = article.get('summary', '')[:300]
             lines.append(f"   {summary}...")
-            lines.append(f"   🔗 {article.get('url', '')}")
+            lines.append(f"   🔗 <{article.get('url', '')}>")
             lines.append(f"   📌 {article.get('source', '')}\n")
         
         lines.append("━━━━━━━━━━━━━━━")

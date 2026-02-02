@@ -4,331 +4,193 @@
     {
       "url": "https://simedw.com/2026/01/31/ear-pronunication-via-ctc/",
       "title": "[Show HN] Show HN: I trained a 9M speech model to fix my Mandarin tones",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.moltbook.com/",
-      "title": "[Show HN] Show HN: Moltbook – A social network for moltbots (clawdbots) to hang out",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://henrikwarne.com/2026/01/31/in-praise-of-dry-run/",
-      "title": "[HN] In praise of –dry-run",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://rose.systems/animalist/",
-      "title": "[HN] List animals until failure",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://wikiedu.org/blog/2026/01/29/generative-ai-and-wikipedia-editing-what-we-learned-in-2025/",
-      "title": "[HN] Generative AI and Wikipedia editing: What we learned in 2025",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/amlalabs/amla-sandbox",
-      "title": "[Show HN] Show HN: Amla Sandbox – WASM bash shell sandbox for AI agents",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://kolibrinkpg.com/",
-      "title": "[Show HN] Show HN: Kolibri, a DIY music club in Sweden",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://phage-explorer.org/",
-      "title": "[Show HN] Show HN: Phage Explorer",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/rtvkiz/minimal",
-      "title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/narwhal-io/narwhal",
-      "title": "[Show HN] Show HN: An extensible pub/sub messaging server for edge applications",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/microsoft/agent-lightning",
-      "title": "microsoft/agent-lightning ⭐12826",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
-      "title": "AUTOMATIC1111/stable-diffusion-webui ⭐160360",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/karpathy/nanochat",
-      "title": "karpathy/nanochat ⭐41210",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/pedramamini/Maestro",
-      "title": "pedramamini/Maestro ⭐840",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/badlogic/pi-mono",
-      "title": "badlogic/pi-mono ⭐4578",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/thedotmack/claude-mem",
-      "title": "thedotmack/claude-mem ⭐0",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/amantus-ai/vibetunnel",
-      "title": "amantus-ai/vibetunnel ⭐3399",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/onlook-dev/onlook",
-      "title": "onlook-dev/onlook ⭐24598",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/AykutSarac/jsoncrack.com",
-      "title": "AykutSarac/jsoncrack.com ⭐43194",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/daytonaio/daytona",
-      "title": "daytonaio/daytona ⭐52298",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/firecrawl/firecrawl",
-      "title": "firecrawl/firecrawl ⭐78892",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/chroma-core/chroma",
-      "title": "chroma-core/chroma ⭐25897",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/livekit/livekit",
-      "title": "livekit/livekit ⭐16831",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/AlexanderGrooff/mermaid-ascii",
-      "title": "AlexanderGrooff/mermaid-ascii ⭐926",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/tailscale/tailscale",
-      "title": "tailscale/tailscale ⭐27727",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/ArvinLovegood/go-stock",
-      "title": "ArvinLovegood/go-stock ⭐4231",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/yusing/godoxy",
-      "title": "yusing/godoxy ⭐2818",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/NoFxAiOS/nofx",
-      "title": "NoFxAiOS/nofx ⭐10291",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/danielmiessler/Fabric",
-      "title": "danielmiessler/Fabric ⭐0",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/maximhq/bifrost",
-      "title": "maximhq/bifrost ⭐1992",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/mostlygeek/llama-swap",
-      "title": "mostlygeek/llama-swap ⭐2284",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/icereed/paperless-gpt",
-      "title": "icereed/paperless-gpt ⭐1838",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/gogs/gogs",
-      "title": "gogs/gogs ⭐47508",
-      "sent_at": 1769958155.3301744,
-      "sent_count": 1
-    },
-    {
-      "url": "https://aioperator.com/blog/top-10-ai-tools-to-try-in-2026",
-      "title": "Top 10 AI tools to try in 2026 | AI Operator",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
-      "title": "The Best AI Tools for 2026 - Medium",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.techradar.com/best/best-ai-tools",
-      "title": "I tried 70+ best AI tools in 2026 - TechRadar",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.synthesia.io/post/ai-tools",
-      "title": "The 45 Best AI Tools in 2026 (Tried & Tested) - Synthesia",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=z-s5xqMJK4A",
-      "title": "I Tested 230+ AI Tools: These 15 Will Be Hot in 2026 - YouTube",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.humanityredefined.com/p/sync-550",
-      "title": "Six new AI models worth your attention - Sync #550",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.cnbc.com/2026/01/28/chinese-tech-companies-accelerate-ai-model-rollouts-us-rivals-deepseek-moonshot-kimi.html",
-      "title": "One year after DeepSeek, Chinese AI firms from Alibaba to ... - CNBC",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
-      "title": "List of AI models released this month : r/ArtificialInteligence - Reddit",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://blogs.nvidia.com/blog/open-models-data-tools-accelerate-ai/",
-      "title": "NVIDIA Unveils New Open Models, Data and Tools to Advance AI ...",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://nhlocal.github.io/AiTimeline/",
-      "title": "AI Timeline - NH Local",
-      "sent_at": 1769959255.5389144,
-      "sent_count": 1
-    },
-    {
-      "url": "https://openjuris.org/",
-      "title": "[Show HN] Show HN: OpenJuris – AI legal research with citations from primary sources",
-      "sent_at": 1769960074.0675147,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
-      "title": "Generative coding: 10 Breakthrough Technologies 2026",
-      "sent_at": 1769960074.0675147,
-      "sent_count": 1
-    },
-    {
-      "url": "https://taoofmac.com/space/til/2026/02/01/1630",
-      "title": "[HN] TIL: Apple Broke Time Machine Again on Tahoe",
-      "sent_at": 1769996243.1408234,
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     },
     {
       "url": "https://github.com/gavrielc/nanoclaw",
       "title": "[Show HN] Show HN: NanoClaw – “Clawdbot” in 500 lines of TS with Apple container isolation",
-      "sent_at": 1769996243.1408234,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/zuckermanai/zuckerman",
-      "title": "[Show HN] Show HN: Zuckerman – minimalist personal AI agent that self-edits its own code",
-      "sent_at": 1769996243.1408234,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.sciencedaily.com/releases/2026/01/260121034130.htm",
-      "title": "[HN] MRI scans show exercise can make the brain look younger",
-      "sent_at": 1769996243.1408234,
-      "sent_count": 1
-    },
-    {
-      "url": "https://news.ycombinator.com/item?id=46820691",
-      "title": "[Show HN] Show HN: ÆTHRA – Writing Music as Code",
-      "sent_at": 1769996243.1408234,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/VoidenHQ/voiden",
-      "title": "[Show HN] Show HN: Voiden – an offline, Git-native API tool built around Markdown",
-      "sent_at": 1769996243.1408234,
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     },
     {
       "url": "https://journal.rafaelcosta.me/my-thousand-dollar-iphone-cant-do-math/",
       "title": "[HN] My iPhone 16 Pro Max produces garbage output when running MLX LLMs",
-      "sent_at": 1770020813.0926573,
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.moltbook.com/",
+      "title": "[Show HN] Show HN: Moltbook – A social network for moltbots (clawdbots) to hang out",
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     },
     {
       "url": "https://martinalderson.com/posts/two-kinds-of-ai-users-are-emerging/",
       "title": "[HN] Two kinds of AI users are emerging",
-      "sent_at": 1770020813.0926573,
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     },
     {
       "url": "https://xikipedia.org",
       "title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
-      "sent_at": 1770020813.0926573,
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://phage-explorer.org/",
+      "title": "[Show HN] Show HN: Phage Explorer",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/rtvkiz/minimal",
+      "title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     },
     {
       "url": "https://www.wired.com/story/the-red-bull-leaks/",
       "title": "[HN] Leaked Chats Expose the Daily Life of a Scam Compound's Enslaved Workforce",
-      "sent_at": 1770020813.0926573,
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/microsoft/agent-lightning",
+      "title": "microsoft/agent-lightning ⭐13122",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+      "title": "AUTOMATIC1111/stable-diffusion-webui ⭐160375",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/karpathy/nanochat",
+      "title": "karpathy/nanochat ⭐41358",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/pedramamini/Maestro",
+      "title": "pedramamini/Maestro ⭐1102",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/badlogic/pi-mono",
+      "title": "badlogic/pi-mono ⭐5251",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/thedotmack/claude-mem",
+      "title": "thedotmack/claude-mem ⭐0",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/amantus-ai/vibetunnel",
+      "title": "amantus-ai/vibetunnel ⭐3668",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/onlook-dev/onlook",
+      "title": "onlook-dev/onlook ⭐24608",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/AykutSarac/jsoncrack.com",
+      "title": "AykutSarac/jsoncrack.com ⭐43227",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/daytonaio/daytona",
+      "title": "daytonaio/daytona ⭐52385",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/firecrawl/firecrawl",
+      "title": "firecrawl/firecrawl ⭐79034",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/chroma-core/chroma",
+      "title": "chroma-core/chroma ⭐25909",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/livekit/livekit",
+      "title": "livekit/livekit ⭐16846",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/AlexanderGrooff/mermaid-ascii",
+      "title": "AlexanderGrooff/mermaid-ascii ⭐965",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/tailscale/tailscale",
+      "title": "tailscale/tailscale ⭐27768",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/ArvinLovegood/go-stock",
+      "title": "ArvinLovegood/go-stock ⭐4241",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/yusing/godoxy",
+      "title": "yusing/godoxy ⭐2825",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/NoFxAiOS/nofx",
+      "title": "NoFxAiOS/nofx ⭐10309",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/danielmiessler/Fabric",
+      "title": "danielmiessler/Fabric ⭐0",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/maximhq/bifrost",
+      "title": "maximhq/bifrost ⭐2007",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/mostlygeek/llama-swap",
+      "title": "mostlygeek/llama-swap ⭐2291",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/icereed/paperless-gpt",
+      "title": "icereed/paperless-gpt ⭐1845",
+      "sent_at": 1770023477.0500772,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/gogs/gogs",
+      "title": "gogs/gogs ⭐47515",
+      "sent_at": 1770023477.0500772,
       "sent_count": 1
     }
   ]
