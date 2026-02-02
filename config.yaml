@@ -123,3 +123,4 @@ system:
   max_iterations: 5
   parallel_processors: true
   log_level: info
+  enable_trace: true  # 启用全流程追踪日志
