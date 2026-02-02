@@ -127,6 +127,22 @@ AiTrend supports multiple output channels. You can enable multiple channels simu
 1. Discord Settings → Advanced → Enable Developer Mode
 2. Right-click channel → Copy Channel ID
 
+### Discord Forum
+
+```json
+"channels": {
+  "discord_forum": {
+    "enabled": true,
+    "channel_id": "1467789796087824475"
+  }
+}
+```
+
+**Features:**
+- Automatically creates a new thread daily
+- Thread title includes date, e.g., "🔥 AI Hotspots 02-03"
+- Great for archiving and historical reference
+
 ### Feishu
 
 ```json

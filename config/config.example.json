@@ -49,7 +49,12 @@
     "discord": {
       "enabled": false,
       "channel_id": "YOUR_DISCORD_CHANNEL_ID",
-      "description": "Discord 频道 ID"
+      "description": "Discord 普通文字频道"
+    },
+    "discord_forum": {
+      "enabled": false,
+      "channel_id": "YOUR_DISCORD_FORUM_CHANNEL_ID",
+      "description": "Discord 论坛频道（自动创建新帖子）"
     },
     "feishu": {
       "enabled": false,

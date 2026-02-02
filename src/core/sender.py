@@ -1,6 +1,6 @@
 """
 输出处理器
-支持多渠道输出：Console、Discord、Feishu、Telegram
+支持多渠道输出：Console、Discord、DiscordForum、Feishu、Telegram
 """
 from abc import ABC, abstractmethod
 from typing import Dict, Any
@@ -49,6 +49,62 @@ class DiscordSender(ChannelSender):
         # Discord 支持 Markdown，返回原始内容
         return data.get('formatted_content', '')
 
+class DiscordForumSender(ChannelSender):
+    """Discord 论坛发送器 - 创建新帖子"""
+    
+    def send(self, content: str) -> bool:
+        """
+        论坛频道输出格式：
+        [DISCORD_FORUM:channel_id] title | content
+        """
+        channel_id = self.config.get('channel_id', '')
+        if not channel_id:
+            print(content)
+            return True
+        
+        # 提取标题（第一行）和内容（剩余部分）
+        lines = content.split('\n')
+        title = lines[0].strip() if lines else "AI 热点"
+        body = '\n'.join(lines[1:]).strip() if len(lines) > 1 else content
+        
+        # 论坛格式：频道ID | 标题 | 内容
+        print(f"[DISCORD_FORUM:{channel_id}] {title} | {body}")
+        return True
+    
+    def format_content(self, data: Dict[str, Any]) -> str:
+        """论坛帖子格式：标题 + 内容"""
+        articles = data.get('data', {}).get('articles', [])
+        language = data.get('language', 'zh')
+        
+        # 生成标题
+        titles = {
+            'zh': f"🔥 AI 热点 {self._get_date()}",
+            'en': f"🔥 AI Hotspots {self._get_date()}",
+            'ja': f"🔥 AI ホットニュース {self._get_date()}",
+            'ko': f"🔥 AI 핫이슈 {self._get_date()}",
+            'es': f"🔥 Tendencias AI {self._get_date()}"
+        }
+        title = titles.get(language, titles['zh'])
+        
+        # 生成内容
+        lines = [title, "═══════════════════\n"]
+        
+        for i, article in enumerate(articles[:10], 1):
+            lines.append(f"{i}. **{article.get('title', 'N/A')}**")
+            summary = article.get('summary', '')[:100]
+            lines.append(f"   {summary}...")
+            lines.append(f"   🔗 {article.get('url', '')}")
+            lines.append(f"   📌 {article.get('source', '')}\n")
+        
+        lines.append("━━━━━━━━━━━━━━━")
+        lines.append("🤖 Powered by AiTrend")
+        
+        return '\n'.join(lines)
+    
+    def _get_date(self) -> str:
+        from datetime import datetime
+        return datetime.now().strftime("%m-%d")
+
 class FeishuSender(ChannelSender):
     """飞书发送器（通过 OpenClaw 调用）"""
     
@@ -82,6 +138,7 @@ def create_sender(channel_name: str, config: Dict[str, Any]) -> ChannelSender:
     senders = {
         'console': ConsoleSender,
         'discord': DiscordSender,
+        'discord_forum': DiscordForumSender,
         'feishu': FeishuSender,
         'telegram': TelegramSender
     }

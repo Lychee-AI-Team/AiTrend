@@ -135,6 +135,22 @@ AiTrend 支持多种输出渠道，可以同时启用多个：
 1. Discord 设置 → 高级 → 开启开发者模式
 2. 右键频道 → 复制频道 ID
 
+### Discord 论坛 (Forum)
+
+```json
+"channels": {
+  "discord_forum": {
+    "enabled": true,
+    "channel_id": "1467789796087824475"
+  }
+}
+```
+
+**特点：**
+- 每天自动创建一个新帖子（Thread）
+- 帖子标题包含日期，如 "🔥 AI 热点 02-03"
+- 适合长期归档和追溯历史热点
+
 ### 飞书 (Feishu)
 
 ```json
