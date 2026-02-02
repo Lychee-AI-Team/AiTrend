@@ -150,60 +150,61 @@ def generate_natural_content(article: Article) -> str:
     # 根据来源和特点决定叙述方式（不是模板，是思路指导）
     if source == 'producthunt' and score > 50:
         # 热门PH产品 - 从热度切入
-        content_parts.append(f"{product_name} 今天刚在 Product Hunt 上发布，目前已经拿了 {score} 个 upvote，表现相当不错。")
-        content_parts.append(f"看它的介绍主要是 {tagline}。这个切入点挺准的，之前市面上虽然有不少类似工具，但大多要么太复杂要么太贵，它试图在中间找一个平衡点。")
-        
-        if summary:
-            content_parts.append(summary[:200])
-        
-        content_parts.append(f"从页面展示的功能来看，核心解决的是 workflow 自动化的问题。对于那些不想折腾复杂配置，但又需要基础自动化功能的团队来说，这个定价策略还算合理。")
-        content_parts.append(f"目前看起来有免费 tier 可以试用，建议先拿自己的数据跑一遍看看效果，别光看 demo。")
-        
-    elif source == 'github_trending' and stars > 5000:
-        # 热门开源项目 - 从技术价值切入
-        content_parts.append(f"{product_name} 最近在 GitHub 上挺火的，已经 {stars} star 了。它是一个 {language if language else '多语言'} 项目，主要用来 {tagline}。")
-        
-        if summary:
-            content_parts.append(summary[:250])
-        
-        content_parts.append(f"代码结构看 README 里的介绍还算清晰，文档也提供了 quick start。对于有 {language if language else '相关技术'} 基础的开发者来说，上手应该不会太困难。")
-        content_parts.append(f"不过毕竟是开源项目，建议在生产环境用之前先在自己项目里测试一下边界情况，看看是否符合预期。")
-        
-    elif source == 'hackernews' and comments > 20:
-        # HN热议 - 从讨论角度切入
-        content_parts.append(f"{product_name} 在 HackerNews 上引发了讨论，评论区已经有 {comments} 条回复。")
-        content_parts.append(f"帖子里提到它主要是 {tagline}。从讨论内容来看，大家关注的点主要集中在实用性上 —— 不是那种为了技术而技术的 toy project，而是真的能解决工作中的具体问题。")
-        
-        if summary:
-            content_parts.append(summary[:200])
-        
-        content_parts.append(f"有人分享了自己在实际项目里的使用体验，说在处理边界情况时表现比预期的稳定。也有人提到了一些潜在的问题，比如文档还不够完善。")
-        content_parts.append(f"如果你对 {tagline.split()[0] if tagline else '这个领域'} 感兴趣，可以点进去看看评论区，有不少有价值的技术讨论。")
-        
-    elif source == 'reddit' and upvotes > 100:
-        # Reddit热帖 - 从用户体验切入
-        content_parts.append(f"有人在 Reddit 上分享了 {product_name} 的使用体验，帖子获得了 {upvotes} 个 upvote。")
-        content_parts.append(f"从帖子的描述来看，这是一个 {tagline} 的工具。发帖人提到自己用了大概两周，主要感受是...")
+        content_parts.append(f"{product_name} 今天刚在 Product Hunt 上发布，目前已经拿了 {score} 个 upvote。")
+        content_parts.append(f"看介绍主要是做 {tagline} 的。这个方向其实挺实用的，之前市面上的同类产品要么功能太臃肿，要么定价太高，它试图在功能丰富度和易用性之间找一个中间地带。")
         
         if summary:
             content_parts.append(summary[:220])
         
-        content_parts.append(f"评论区里有人补充了一些官方文档没提到的使用技巧，也有人提醒说在某些特定场景下会有兼容性问题。总的来说反馈还算真实，有好评也有吐槽。")
-        content_parts.append(f"如果你也在找类似的解决方案，可以去看看原帖里的讨论，比官方宣传要真实一些。")
+        content_parts.append(f"从页面展示的功能来看，确实解决了一些具体的痛点，比如自动化流程配置太复杂的问题。对于小团队或者个人用户来说，这种轻量级的方案可能比那些 enterprise 级别的工具更实用。")
+        content_parts.append(f"定价方面，有免费 tier 可以先试用，建议别光看 demo 视频，拿自己的实际数据跑一遍，看看在真实场景下的表现如何。")
+        
+    elif source == 'github_trending' and stars > 5000:
+        # 热门开源项目 - 从技术价值切入
+        content_parts.append(f"{product_name} 最近在 GitHub 上增长很快，已经 {stars} star 了。这是一个用 {language if language else '主流语言'} 写的项目，主要解决 {tagline} 的问题。")
+        
+        if summary:
+            content_parts.append(summary[:240])
+        
+        content_parts.append(f"README 里提供了 quick start 示例，代码结构看起来还算清晰。有 {language if language else '相关'} 基础的开发者应该能比较快上手。不过文档里对一些高级用法的说明比较少，需要自己看源码理解。")
+        content_parts.append(f"建议在正式项目里用之前，先拿测试数据跑一遍，特别是看看在异常情况下表现如何。毕竟开源项目维护精力有限，issue 响应速度不算快。")
+        
+    elif source == 'hackernews' and comments > 20:
+        # HN热议 - 从讨论角度切入
+        content_parts.append(f"{product_name} 在 HackerNews 上引发了{comments}条评论的讨论。")
+        content_parts.append(f"从帖子的描述来看，这是一个 {tagline} 的项目。评论区讨论的焦点在于它到底能不能在实际工作里用，而不是那种只能 demo 的玩具。")
+        
+        if summary:
+            content_parts.append(summary[:220])
+        
+        content_parts.append(f"有人分享了自己在实际项目里试用的结果，说在处理一些边界情况时比预期的要稳。也有人提到了一些坑，比如文档写得不够详细，第一次配置的时候可能会卡住。")
+        content_parts.append(f"整体来看，这个项目确实是针对一个真实存在的痛点，不是那种为了技术而技术的炫技作品。点进去看评论区能了解到一些官方文档没提到的细节。")
+        
+    elif source == 'reddit' and upvotes > 100:
+        # Reddit热帖 - 从用户体验切入
+        content_parts.append(f"Reddit 上有篇关于 {product_name} 的使用体验分享，拿了 {upvotes} 个 upvote。发帖人说自己用了两周，感受比预期的好一些。")
+        
+        content_parts.append(f"这是一个 {tagline} 的工具。从描述来看，确实解决了他工作里的一个具体痛点，之前得花不少时间手动处理，现在能省下来。")
+        
+        if summary:
+            content_parts.append(summary[:200])
+        
+        content_parts.append(f"评论区有人补充了几个官方文档没写的使用技巧，也有人提醒说在处理特定格式的文件时会有问题。整体反馈比较真实，不是那种全是好评的水帖。")
+        content_parts.append(f"如果你也在找类似功能的工具，可以去看看原帖里的讨论，比看官方宣传实在一些。")
         
     else:
         # 通用叙述 - 从信息本身切入
         content_parts.append(f"{product_name} 是一个 {tagline} 的项目。")
         
         if summary:
-            content_parts.append(summary[:280])
+            content_parts.append(summary[:260])
         
-        content_parts.append(f"从现有的信息来看，它主要面向的是需要解决 {tagline.split()[0] if tagline else '特定问题'} 的用户。功能设计上比较务实，没有试图大包大揽，而是专注于把核心功能做好。")
+        content_parts.append(f"功能设计上比较务实，没有试图做太多功能，而是把核心的一点做好。面向的是需要解决 {tagline.split()[0] if tagline else '特定场景'} 问题的用户，属于那种解决具体痛点而不是追逐热点的工具。")
         
         if source == 'github_trending':
-            content_parts.append(f"代码开源在 GitHub 上，有兴趣的可以看看实现细节。")
+            content_parts.append(f"代码在 GitHub 上开源，有兴趣实现细节的可以去看看源码。")
         elif source == 'producthunt':
-            content_parts.append(f"目前还在早期阶段，建议先观望一段时间看后续迭代情况。")
+            content_parts.append(f"刚发布不久，建议先观察一两个月的迭代情况再决定是否深度使用。")
     
     # 自然添加链接，不作为固定结尾
     content_parts.append(f"{url}")
