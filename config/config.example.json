@@ -54,7 +54,8 @@
     "discord_forum": {
       "enabled": false,
       "channel_id": "YOUR_DISCORD_FORUM_CHANNEL_ID",
-      "description": "Discord 论坛频道（自动创建新帖子）"
+      "webhook_url": "${DISCORD_WEBHOOK_URL}",
+      "description": "Discord 论坛频道（需要 Webhook，自动创建新帖子）"
     },
     "feishu": {
       "enabled": false,

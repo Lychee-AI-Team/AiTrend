@@ -3,8 +3,10 @@
 支持多渠道输出：Console、Discord、DiscordForum、Feishu、Telegram
 """
 from abc import ABC, abstractmethod
-from typing import Dict, Any
+from typing import Dict, Any, Optional, List
 import json
+import os
+from .webhook_sender import DiscordWebhookSender
 
 class ChannelSender(ABC):
     """发送渠道基类"""
@@ -50,26 +52,29 @@ class DiscordSender(ChannelSender):
         return data.get('formatted_content', '')
 
 class DiscordForumSender(ChannelSender):
-    """Discord 论坛发送器 - 创建新帖子"""
+    """Discord 论坛发送器 - 使用 Webhook 创建新帖子"""
+    
+    def __init__(self, config: Dict[str, Any]):
+        super().__init__(config)
+        self.webhook_url = config.get('webhook_url', os.getenv('DISCORD_WEBHOOK_URL', ''))
+        self.use_webhook = bool(self.webhook_url)
+        if self.use_webhook:
+            self.webhook_sender = DiscordWebhookSender(self.webhook_url)
     
     def send(self, content: str) -> bool:
-        """
-        论坛频道输出格式：
-        [DISCORD_FORUM:channel_id] title | content
-        """
-        channel_id = self.config.get('channel_id', '')
-        if not channel_id:
+        """使用 Webhook 发送论坛帖子"""
+        if not self.use_webhook:
+            # 没有 webhook 时回退到普通输出
             print(content)
             return True
         
-        # 提取标题（第一行）和内容（剩余部分）
+        # 解析标题和内容
         lines = content.split('\n')
         title = lines[0].strip() if lines else "AI 热点"
         body = '\n'.join(lines[1:]).strip() if len(lines) > 1 else content
         
-        # 论坛格式：频道ID | 标题 | 内容
-        print(f"[DISCORD_FORUM:{channel_id}] {title} | {body}")
-        return True
+        # 使用 Webhook 发送
+        return self.webhook_sender.send_to_forum(title, body)
     
     def format_content(self, data: Dict[str, Any]) -> str:
         """论坛帖子格式：标题 + 内容"""
