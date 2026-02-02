@@ -72,12 +72,13 @@ class HackerNewsSource(DataSource):
             conn.close()
     
     def _fetch_stories(self, story_ids: List[int], source_type: str) -> List[Article]:
-        """获取帖子详情"""
+        """获取帖子详情（优化：限制数量，缩短超时）"""
         posts = []
         
-        for story_id in story_ids:
+        # 优化：只取前10个，减少请求时间
+        for story_id in story_ids[:10]:
             try:
-                conn = http.client.HTTPSConnection(self.BASE_URL, timeout=10)
+                conn = http.client.HTTPSConnection(self.BASE_URL, timeout=5)
                 conn.request("GET", f"/v0/item/{story_id}.json")
                 response = conn.getresponse()
                 

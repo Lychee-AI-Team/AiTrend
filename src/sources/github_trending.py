@@ -45,7 +45,7 @@ class GitHubTrendingSource(DataSource):
     
     def _fetch_language(self, language: str) -> List[Article]:
         """获取指定语言的趋势仓库（使用 http.client）"""
-        conn = http.client.HTTPSConnection("github.com", timeout=30)
+        conn = http.client.HTTPSConnection("github.com", timeout=15)
         
         try:
             headers = {

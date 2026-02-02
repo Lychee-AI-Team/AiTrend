@@ -18,17 +18,14 @@
     },
     "github_trending": {
       "enabled": true,
-      "languages": ["python", "typescript", "rust", "go"]
+      "languages": ["python", "typescript"]
     },
     "tavily": {
       "enabled": true,
       "api_key": "${TAVILY_API_KEY}",
       "queries": [
         "latest AI tools launch 2026",
-        "new AI models released this week",
-        "AI agent tools 2026",
-        "OpenAI Claude Gemini new features",
-        "AI productivity tools launched"
+        "new AI models released this week"
       ]
     }
   },

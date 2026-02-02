@@ -18,35 +18,21 @@ class RedditSource(DataSource):
     # Pushshift API 地址
     BASE_URL = "api.pullpush.io"
     
-    # AI 相关 subreddit（重点监控新产品讨论）
-    # 产品发布类社区（重点）
-    PRODUCT_SUBREDDITS = [
-        "SideProject",      #  side project 发布
-        "startups",         # 创业/产品
-        "indiehackers",     # 独立开发者
-        "alpha", "beta",    # 测试版产品
-        "launches",         # 产品发布
+    # AI 相关 subreddit（优化：只保留最核心的）
+    SUBREDDITS = [
+        "artificial", "MachineLearning", "OpenAI", "ChatGPT", "LocalLLaMA"
     ]
-    # AI 技术社区
-    AI_SUBREDDITS = [
-        "artificial", "MachineLearning", "OpenAI", "ChatGPT", "ClaudeAI",
-        "LocalLLaMA", "singularity", "GPT3", "StableDiffusion", "Midjourney",
-    ]
-    # 合并
-    SUBREDDITS = PRODUCT_SUBREDDITS + AI_SUBREDDITS
     
     def fetch(self) -> List[Article]:
         """使用 Pushshift API 获取 Reddit AI 相关帖子"""
         all_posts = []
         
-        # 获取最近 24 小时的热门帖子
+        # 获取热门帖子（优化：移除 sleep，减少 subreddit 数量）
         for subreddit in self.SUBREDDITS:
             try:
                 posts = self._fetch_subreddit(subreddit)
                 all_posts.extend(posts)
                 logger.info(f"Reddit r/{subreddit} 获取 {len(posts)} 条")
-                # 避免请求过快
-                time.sleep(0.5)
             except Exception as e:
                 logger.error(f"获取 r/{subreddit} 失败: {e}")
                 continue
@@ -67,7 +53,7 @@ class RedditSource(DataSource):
     
     def _fetch_subreddit(self, subreddit: str) -> List[Article]:
         """使用 Pushshift API 获取指定 subreddit 的帖子"""
-        conn = http.client.HTTPSConnection(self.BASE_URL, timeout=30)
+        conn = http.client.HTTPSConnection(self.BASE_URL, timeout=10)
         
         try:
             # 获取热门帖子（不按时间过滤，因为 Pushshift 数据有延迟）
