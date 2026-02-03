@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-DAB0D7-A0DA",
+  "created_at": "2026-02-03T11:36:44.966445",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:36:44.966607",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:36:44.966607",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "nanobot 是一款主打极致轻量化的 AI 命令行工具，它的定位非常明确，就是要做一个更小巧、更敏捷的 Claude 助手。它能让你在终端里直接与强大的大模型对话，无论是快速生成一段代码、重构复杂的逻辑，还是进行日常的文本润色，它都能信手拈来。\n\n这个项目之所以\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

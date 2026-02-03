@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-58A75E-FAE7",
+  "created_at": "2026-02-03T11:39:39.628211",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Qwen3-ASR",
+  "url": "https://github.com/QwenLM/Qwen3-ASR",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:39:39.628265",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:39:39.628265",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "话说，阿里巴巴的Qwen团队又搞了个大动作，这次是开源了一系列语音识别模型，叫做Qwen3-ASR。这可不是一般的语音识别，它能稳稳当当地识别多种语言的语音、音乐甚至歌曲，简直是“听音辨位”的高手！\n\n更厉害的是，它还能告诉你这段语音是什么语言，甚至能预测每个词或者音节出现的时间戳。这意味着什么？你可以用它来做更精细的语音分析，比如自动生成字幕、分析歌曲结构等等，想象空间很大。\n\nQwen3-ASR最值得关注的地方在于它的多功能性。它不只是个语音转文字的工具，更像是一个语音理解的引擎。无论是处理日常对话，还是分析复杂的音乐作品，它都能胜任。而且，作为开源项目，你可以免费使用它，甚至可以根据自己的需求进行定制和改进。如果你对语音识别、自然语言处理感兴趣，或者想开发一些创新的语音应用，那这个项目绝对值得你好好研究一番。\n\n🔗 https://github.com/QwenLM/Qwen3-ASR",
+  "errors": []
+}

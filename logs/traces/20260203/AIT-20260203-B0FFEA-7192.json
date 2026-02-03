@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-B0FFEA-7192",
+  "created_at": "2026-02-03T11:39:39.627703",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanoclaw",
+  "url": "https://github.com/gavrielc/nanoclaw",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:39:39.627795",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:39:39.627795",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想拥有一个完全属于你自己的 Claude 助手吗？nanoclaw 这个开源项目就能帮你实现！它就像一个轻量级的 Claude 客户端，特别之处在于，它能在 Apple 的容器环境中运行。这意味着你可以在你的 Mac 或者其他 Apple 设备上，拥有一个安全、私密的 Claude 助手。\n\nnanoclaw 的设计理念非常棒，它追求简洁易懂，方便你根据自己的需求进行定制和修改。你可以把它想象成一个乐高玩具，你可以自由地添加、删除或者修改各种功能，让它更好地服务于你的工作和生活。\n\n那么，nanoclaw 有什么特别之处呢？我认为它最大的亮点就是“定制化”和“安全性”。不同于那些大型的 AI 服务，nanoclaw 让你完全掌控你的数据和隐私，而且你可以根据自己的需要，打造一个独一无二的 Claude 助手。如果你对 AI 助手的隐私和个性化有较高要求，又喜欢动手折腾，那么 nanoclaw 绝对值得你关注和尝试。\n\n🔗 https://github.com/gavrielc/nanoclaw",
+  "errors": []
+}

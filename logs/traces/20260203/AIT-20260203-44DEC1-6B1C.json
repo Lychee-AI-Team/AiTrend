@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-44DEC1-6B1C",
+  "created_at": "2026-02-03T11:35:56.615115",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:35:56.615167",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:35:56.615167",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "lingbot-world 是一个专注于推动开源世界模型发展的硬核项目。简单来说，它想让 AI 像人类一样具备理解\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

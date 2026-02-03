@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-97FAB8-2DBC",
+  "created_at": "2026-02-03T11:38:06.509735",
+  "status": "started",
+  "source": "unknown",
+  "name": "The largest number representable in 64 bits",
+  "url": "https://tromp.github.io/blog/2026/01/28/largest-number-revised",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:06.509788",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:06.509788",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

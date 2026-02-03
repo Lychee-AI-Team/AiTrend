@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-D5DD83-E856",
+  "created_at": "2026-02-03T11:35:56.614496",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:35:56.614659",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:35:56.614659",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你在寻找一个极致轻量化的 Claude 客户端，那么 nanobot 绝对值得你关注。它被开发者亲切地称为“超轻量级 Clawdbot”，本质上是一个精简到极致的命令行工具，让你能以最快的方式与 Claude 大模型进行交互。它的核心魅力在于“小而美”，完全摒弃了沉重的图形界面和复杂的配置流程，只保留了最纯粹的对话功能。\n\n对于那些习惯在终端工作的开发者来说，nanobot 就像是一个随叫随到的 AI 助手。它最特别的地方在于对系统资源的占用几乎可以忽略不计，启动速度极快，非常适合集成到日常的工作流中。无论是快速生成一段代码，还是在写文档时顺手问个问题，你都不需要切换到臃肿的浏览器窗口。这种极致的简洁和效率，让它在各类繁杂的 AI 工具中显得尤为独特，是追求极简主义和极客体验用户的理想选择。\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

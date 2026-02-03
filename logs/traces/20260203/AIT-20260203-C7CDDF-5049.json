@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-C7CDDF-5049",
+  "created_at": "2026-02-03T11:34:50.242914",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanoclaw",
+  "url": "https://github.com/gavrielc/nanoclaw",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:34:50.242982",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:34:50.242982",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你正在寻找一个既私密又轻量级的 AI 助手，nanoclaw 绝对值得你花点时间研究。它是一个专门为 Apple 容器环境打造的个人 Claude 助手，最大的特点就是极致的简约与安全。开发者构建它的初衷就是为了让代码易于理解和二次开发，这意味着你不再是单纯使用一个现成的工具，而是可以根据自己的习惯深度定制它。\n\n最让人心动的地方在于它对隐私的极致保护，通过在 Apple 容器中运行，你的所有对话和数据都被锁在自己的生态系统内。相比那些功能臃肿、逻辑复杂的商业客户端，nanoclaw 像是一把锋利的小手术刀，只保留最核心的智能体验，同时给用户留下了充足的折腾空间。如果你想在 Apple 设备上拥有一个完全受控、响应迅速且足够简单的 Claude 伙伴，这个开源项目就是那个理想的起点。\n\n🔗 https://github.com/gavrielc/nanoclaw",
+  "errors": []
+}

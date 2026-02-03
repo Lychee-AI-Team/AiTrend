@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-32A74A-44A6",
+  "created_at": "2026-02-03T11:34:50.243271",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:34:50.243324",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:34:50.243324",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想象一下让 AI 拥有一双看透物理规律的眼睛，lingbot-world 正在把这种科幻的能力带入开源世界。这个\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

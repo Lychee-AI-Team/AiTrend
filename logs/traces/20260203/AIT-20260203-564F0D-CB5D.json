@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-564F0D-CB5D",
+  "created_at": "2026-02-03T11:38:53.587531",
+  "status": "completed",
+  "source": "unknown",
+  "name": "Netbird – Open Source Zero Trust Networking",
+  "url": "https://netbird.io/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:53.587671",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:53.587671",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "Netbird 是一个开源的零信任网络解决方案，它能帮你轻松构建安全、私密的网络，就像拥有一个虚拟的局域网一样。想象一下，无论你的设备身处何方，都能安全地连接到你的服务器、数据库，或者和团队成员共享文件，就像它们都在同一个房间里一样。\n\nNetbird 最酷的地方在于它的简单易用。你不需要复杂的 VPN 配置，也不用担心端口转发之类的麻烦事。它会自动处理密钥交换和路由，让你专注于真正重要的事情。你可以用它来安全地访问家里的 NAS，或者让分布在全球各地的开发团队协同工作，而不用担心数据泄露的风险。\n\n更重要的是，Netbird 是开源的，这意味着你可以完全掌控你的网络安全。你可以审查代码，了解它的工作原理，甚至根据自己的需求进行定制。如果你对传统的 VPN 感到头疼，或者正在寻找一种更安全、更灵活的网络解决方案，Netbird 绝对值得尝试。它就像一个为你量身定制的安全通道，随时随地保护你的数据安全。\n\n🔗 https://netbird.io/",
+  "errors": []
+}

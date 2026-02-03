@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-793598-B739",
+  "created_at": "2026-02-03T11:38:38.682785",
+  "status": "completed",
+  "source": "unknown",
+  "name": "nanobot",
+  "url": "https://github.com/HKUDS/nanobot",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:38.682931",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:38.682931",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想象一下，你想要一个超轻量级的“机械猫爪”，能够帮你抓取网页上的各种信息，nanobot 就是这样一个神奇的工具。它就像一只灵巧的小猫，悄无声息地潜入网页，抓取你想要的数据，而且非常节能，资源占用极低。\n\nnanobot 的核心优势在于它的轻量级和高效性。不同于那些笨重的爬虫框架，它非常小巧，启动速度快，运行起来也毫不费力。这意味着即使在资源有限的环境下，比如嵌入式设备或者低配置服务器上，你也能轻松使用 nanobot 来完成数据抓取任务。\n\n更酷的是，nanobot 设计得非常灵活，你可以根据自己的需求定制抓取规则，轻松提取网页中的特定内容，比如商品价格、新闻标题、或者社交媒体上的评论。如果你需要一个快速、轻便、可定制的网页抓取工具，nanobot 绝对值得你关注和尝试。它就像一把锋利的瑞士军刀，随时帮你解决各种数据抓取难题。\n\n🔗 https://github.com/HKUDS/nanobot",
+  "errors": []
+}

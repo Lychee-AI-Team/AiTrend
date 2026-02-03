@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-1BDFAC-F33E",
+  "created_at": "2026-02-03T11:37:49.739234",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:37:49.739289",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:37:49.739289",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "提到 Anthony Fu，很多开发者第一时间想到的就是高效和优雅，而他发起的这个名为 skills 的项目，本质上是一个专门为\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

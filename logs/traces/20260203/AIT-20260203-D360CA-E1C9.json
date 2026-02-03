@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-D360CA-E1C9",
+  "created_at": "2026-02-03T11:35:13.343125",
+  "status": "started",
+  "source": "unknown",
+  "name": "GitHub experience various partial-outages/degradat",
+  "url": "https://www.githubstatus.com?todayis=2026-02-02",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:35:13.343174",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:35:13.343174",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

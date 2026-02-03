@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-1BDFAC-2F48",
+  "created_at": "2026-02-03T11:36:44.966946",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:36:44.967000",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:36:44.967000",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "如果你在关注 AI Agent 开发，那一定不能错过大神 Anthony Fu 发起的 skills 这个项目。它本质上是一个精心打磨的智能体技能仓库，把各种复杂的操作封装成了开箱即用的“\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

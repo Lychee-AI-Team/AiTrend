@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-962276-61B9",
+  "created_at": "2026-02-03T11:39:39.629295",
+  "status": "started",
+  "source": "unknown",
+  "name": "Pretty-mermaid-skills",
+  "url": "https://github.com/imxv/Pretty-mermaid-skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:39:39.629344",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:39:39.629344",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

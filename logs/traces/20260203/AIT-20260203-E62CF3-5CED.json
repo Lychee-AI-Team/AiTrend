@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-E62CF3-5CED",
+  "created_at": "2026-02-03T11:37:01.634741",
+  "status": "started",
+  "source": "unknown",
+  "name": "termux-app",
+  "url": "https://github.com/termux/termux-app",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:37:01.634800",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:37:01.634800",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

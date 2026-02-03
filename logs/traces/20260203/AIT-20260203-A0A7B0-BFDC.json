@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-A0A7B0-BFDC",
+  "created_at": "2026-02-03T11:38:38.683379",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:38.683435",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:38.683435",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "LingBot-World 是一个致力于推进开源世界模型的项目，简单来说，它就像在给 AI 打造一个可以学习和理解世界的“沙盒”。这个“沙盒”里包含了各种各样的环境、任务和工具，让 AI 可以在其中自由探索、学习并最终掌握更高级的技能。\n\n这个项目最酷的地方在于它的开放性。它鼓励研究人员和开发者共同贡献，构建一个更加丰富和强大的世界模型。想象一下，未来的 AI 可以通过 LingBot-World 学习如何驾驶汽车、组装家具，甚至进行更复杂的科学研究，而这一切都可以在虚拟环境中完成，无需耗费大量的真实资源。\n\n为什么说它值得关注呢？因为世界模型是通往通用人工智能的关键一步。如果 AI 能够像人类一样理解和预测世界的变化，那么它就能更好地解决问题、做出决策，并与人类进行更自然的互动。LingBot-World 的出现，降低了世界模型研究的门槛，让更多人能够参与到这个激动人心的领域中来，加速人工智能的发展。\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

@@ -1,0 +1,33 @@
+name: aitrend
+version: 0.3.0
+description: AI 热点发现引擎 - 自动采集和发布 AI 产品资讯
+author: AiTrend Team
+license: MIT
+
+entry_point: src.hourly:main
+requirements: requirements.txt
+
+config_template: config/config.example.yaml
+env_template: .env.example
+
+channels:
+  - discord_forum
+  - discord_text
+  - telegram
+  - feishu
+
+sources:
+  - github_trending
+  - producthunt
+  - hackernews
+  - reddit
+  - tavily
+  - twitter
+
+required_env:
+  - GEMINI_API_KEY
+  - DISCORD_WEBHOOK_URL
+
+schedule:
+  type: cron
+  expression: "0 * * * *"

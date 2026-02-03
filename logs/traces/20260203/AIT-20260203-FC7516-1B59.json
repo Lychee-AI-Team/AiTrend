@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-FC7516-1B59",
+  "created_at": "2026-02-03T11:38:06.509542",
+  "status": "started",
+  "source": "unknown",
+  "name": "Firefox Getting New Controls to Turn Off AI Featur",
+  "url": "https://www.macrumors.com/2026/02/02/firefox-ai-toggle/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:06.509590",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:06.509590",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

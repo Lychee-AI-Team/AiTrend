@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-EA7513-F00B",
+  "created_at": "2026-02-03T11:38:38.684084",
+  "status": "started",
+  "source": "unknown",
+  "name": "InstaTrace",
+  "url": "https://github.com/v4nsh0x/InstaTrace",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:38.684137",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:38.684137",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

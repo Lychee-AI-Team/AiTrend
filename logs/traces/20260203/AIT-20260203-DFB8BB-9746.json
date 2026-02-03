@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-DFB8BB-9746",
+  "created_at": "2026-02-03T11:35:56.615350",
+  "status": "completed",
+  "source": "unknown",
+  "name": "OpenClawChineseTranslation",
+  "url": "https://github.com/1186258278/OpenClawChineseTranslation",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:35:56.615405",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:35:56.615405",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "OpenClawChineseTranslation 是一个为开发者和 AI 爱好者量身定制的开源项目，它对强大的个人 AI 助手 OpenClaw 进行了深度汉化。这个项目的核心价值在于它能将 Claude 或 ChatGPT 等顶级大模型无缝接入到 WhatsApp、Telegram 和 Discord 等主流社交平台，让你在日常聊天中就能随时调用 AI 的力量。\n\n相比原版，这个汉化版最特别的地方在于它彻底\n\n🔗 https://github.com/1186258278/OpenClawChineseTranslation",
+  "errors": []
+}

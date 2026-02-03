@@ -1,9 +1,6 @@
-# AiTrend Skill v0.1.0 - 纯标准库版本
+# AiTrend
 # Python >= 3.9
-# 本版本使用 Python 标准库，无需 pip 安装依赖
 
-# 注意：如需使用 Brave Search 或 Gemini API，需要 API Key
-# 请在 config.json 中配置
-
-# 开发依赖（可选，测试用）
-# pytest>=7.4.0
+requests>=2.28.0
+pyyaml>=6.0
+google-generativeai>=0.3.0

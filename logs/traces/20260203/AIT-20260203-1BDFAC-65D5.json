@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-1BDFAC-65D5",
+  "created_at": "2026-02-03T11:38:38.683270",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:38.683325",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:38.683325",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想让你的AI Agent更聪明、更实用吗？那得看看Anthony Fu大佬的这个开源项目——skills。简单来说，它就像一个技能百宝箱，专门收集各种各样的AI Agent技能。这些技能就像Agent的“超能力”，让它们能完成各种任务，比如帮你总结文章、翻译文本、甚至生成创意文案。\n\n这个项目的特别之处在于它的“策展”特性。Anthony Fu大佬亲自挑选和整理这些技能，保证了质量和实用性。你不用自己大海捞针，就能找到靠谱的、经过验证的Agent技能。而且，它不仅仅是技能的简单罗列，还提供了清晰的文档和示例，让你能快速上手，把这些技能应用到你自己的Agent项目中。\n\n如果你正在开发AI Agent，或者对Agent技术感兴趣，这个项目绝对值得关注。它能帮你快速提升Agent的能力，让你的Agent更智能、更强大，在各种应用场景中发挥更大的作用。想象一下，你的Agent拥有了各种“超能力”，是不是很酷？\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-71B585-2519",
+  "created_at": "2026-02-03T11:36:20.192411",
+  "status": "started",
+  "source": "unknown",
+  "name": "Nano-vLLM",
+  "url": "https://neutree.ai/blog/nano-vllm-part-1",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:36:20.192471",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:36:20.192471",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

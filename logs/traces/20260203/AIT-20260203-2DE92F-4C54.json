@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-2DE92F-4C54",
+  "created_at": "2026-02-03T11:38:53.588240",
+  "status": "started",
+  "source": "unknown",
+  "name": "Two kinds of AI users are emerging",
+  "url": "https://martinalderson.com/posts/two-kinds-of-ai-users-are-emerging/",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:53.588293",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:53.588293",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

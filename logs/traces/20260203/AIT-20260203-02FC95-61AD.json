@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-02FC95-61AD",
+  "created_at": "2026-02-03T11:38:38.685080",
+  "status": "started",
+  "source": "unknown",
+  "name": "MOVA",
+  "url": "https://github.com/OpenMOSS/MOVA",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:38:38.685133",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:38:38.685133",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

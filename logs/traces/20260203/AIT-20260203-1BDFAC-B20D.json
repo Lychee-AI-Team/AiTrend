@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-1BDFAC-B20D",
+  "created_at": "2026-02-03T11:39:39.627985",
+  "status": "completed",
+  "source": "unknown",
+  "name": "skills",
+  "url": "https://github.com/antfu/skills",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:39:39.628044",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:39:39.628044",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想让你的AI智能体更上一层楼吗？那可得好好了解一下Anthony Fu大佬的这个“skills”项目了。简单来说，它就是一个精心整理的AI智能体技能库。你可以把它想象成一个巨大的工具箱，里面装满了各种各样的“技能”，比如处理文本、生成图像、控制硬件等等。\n\n这个项目最酷的地方在于，它不是一个死板的框架，而是一个灵活的技能集合。你可以根据自己的需求，像搭积木一样，把不同的技能组合起来，创造出独一无二的智能体。想象一下，你可以用它来构建一个能自动回复邮件、帮你整理文件，甚至还能帮你设计海报的超级助手！\n\n更重要的是，这个项目背后是Anthony Fu大佬，他在前端领域可是响当当的人物。他的项目通常都设计精巧、代码质量高，而且文档完善，非常容易上手。如果你想深入了解AI智能体，或者想为你的智能体注入新的活力，这个“skills”项目绝对值得你关注。它就像一把钥匙，能帮你打开AI应用的新世界。\n\n🔗 https://github.com/antfu/skills",
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-AB9949-AB77",
+  "created_at": "2026-02-03T11:34:50.243588",
+  "status": "started",
+  "source": "unknown",
+  "name": "dingtalk-moltbot-connector",
+  "url": "https://github.com/DingTalk-Real-AI/dingtalk-moltbot-connector",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:34:50.243642",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:34:50.243642",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": null,
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-E62CF3-825A",
+  "created_at": "2026-02-03T11:36:20.191566",
+  "status": "completed",
+  "source": "unknown",
+  "name": "termux-app",
+  "url": "https://github.com/termux/termux-app",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:36:20.191730",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 Hackernews 发现 18 条候选",
+      "data": {
+        "source": "Hackernews",
+        "count": 18
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:36:20.191730",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "Termux-app 是一款运行在安卓系统上的开源终端模拟器，它在手机里直接开辟了一套完整的 Linux 环境。这个项目\n\n🔗 https://github.com/termux/termux-app",
+  "errors": []
+}

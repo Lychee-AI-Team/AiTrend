@@ -1,0 +1,29 @@
+{
+  "trace_id": "AIT-20260203-A0A7B0-B349",
+  "created_at": "2026-02-03T11:39:39.628101",
+  "status": "completed",
+  "source": "unknown",
+  "name": "lingbot-world",
+  "url": "https://github.com/Robbyant/lingbot-world",
+  "logs": [
+    {
+      "timestamp": "2026-02-03T11:39:39.628153",
+      "module": "source",
+      "level": "INFO",
+      "message": "信息源 GithubTrend 发现 20 条候选",
+      "data": {
+        "source": "GithubTrend",
+        "count": 20
+      }
+    }
+  ],
+  "modules": {
+    "source": {
+      "started_at": "2026-02-03T11:39:39.628153",
+      "status": "success",
+      "log_count": 1
+    }
+  },
+  "final_output": "想象一下，你正在构建一个AI，它不仅能理解世界，还能预测未来！lingbot-world 这个开源项目，正是朝着这个方向努力的。它专注于推进开源世界模型的开发，简单来说，就是让AI能够像人类一样，对周围环境进行建模，并预测接下来会发生什么。\n\n这个项目厉害的地方在于，它提供了一套完整的工具和框架，帮助开发者构建、训练和评估世界模型。你可以用它来训练AI玩游戏，让AI在虚拟环境中学习驾驶，甚至可以用来开发更智能的机器人。\n\n那么，为什么 lingbot-world 值得关注呢？因为它打破了传统AI模型的局限，让AI不再只是被动地响应指令，而是能够主动地理解和预测环境变化。这为AI的未来发展打开了新的大门，让我们可以构建出更加智能、更加自主的AI系统。最特别的是，它完全开源，意味着任何人都可以参与到这个激动人心的项目中来，共同推动世界模型技术的发展，一起创造更美好的AI未来！\n\n🔗 https://github.com/Robbyant/lingbot-world",
+  "errors": []
+}

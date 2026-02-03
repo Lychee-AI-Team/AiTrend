@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  aitrend:
+    build: .
+    container_name: aitrend
+    restart: unless-stopped
+    volumes:
+      - ./.env.keys:/app/.env.keys:ro
+      - ./config/config.yaml:/app/config/config.yaml:ro
+      - ./logs:/app/logs
+      - ./memory:/app/memory
+    environment:
+      - TZ=Asia/Shanghai
