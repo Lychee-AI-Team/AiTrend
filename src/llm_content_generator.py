@@ -15,7 +15,7 @@ class LLMContentGenerator:
         if not api_key:
             raise RuntimeError("❌ GEMINI_API_KEY not set")
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        self.model = genai.GenerativeModel('gemini-3-flash-preview')
     
     def generate(self, article_data: Dict) -> str:
         """
