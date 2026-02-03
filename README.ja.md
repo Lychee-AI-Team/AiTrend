@@ -26,38 +26,32 @@
 
 <table>
   <tr>
-    <td width="33%" align="center">
-      <a href="IMG_1033.PNG">
-        <img src="IMG_1033.PNG" width="100%" alt="Discord Forum プレビュー1"/>
-      </a>
-    </td>
-    <td width="33%" align="center">
+    <td width="50%" align="center">
       <a href="IMG_1034.PNG">
-        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum プレビュー2"/>
+        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum プレビュー1"/>
       </a>
     </td>
-    <td width="33%" align="center">
+    <td width="50%" align="center">
       <a href="IMG_1035.PNG">
-        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum プレビュー3"/>
+        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum プレビュー2"/>
       </a>
     </td>
   </tr>
   <tr>
-    <td width="33%" align="center">
+    <td width="50%" align="center">
       <a href="IMG_1036.PNG">
-        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum プレビュー4"/>
+        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum プレビュー3"/>
       </a>
     </td>
-    <td width="33%" align="center">
+    <td width="50%" align="center">
       <a href="IMG_1037.PNG">
-        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum プレビュー5"/>
+        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum プレビュー4"/>
       </a>
-    </td>
-    <td width="33%" align="center">
-      <sub>サムネイルをクリックして拡大表示</sub>
     </td>
   </tr>
 </table>
+
+<sub align="center">サムネイルをクリックして拡大表示</sub>
 
 ---
 
