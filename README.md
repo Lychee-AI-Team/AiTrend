@@ -8,6 +8,17 @@
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
 </p>
 
+<p align="center">
+  <b>🌍 多语言文档</b> |
+  <a href="README.md">🇨🇳 简体中文</a> •
+  <a href="README.en.md">🇺🇸 English</a> •
+  <a href="README.ja.md">🇯🇵 日本語</a> •
+  <a href="README.ko.md">🇰🇷 한국어</a> •
+  <a href="README.es.md">🇪🇸 Español</a>
+</p>
+
+---
+
 ## ✨ 特性
 
 - 🧩 **模块化设计** - 自由组合信息源和输出渠道
@@ -66,9 +77,29 @@ AiTrend/
 
 ## 📄 文档
 
-- [安装指南](docs/installation.md)
-- [配置说明](docs/configuration.md)
-- [API 文档](docs/api.md)
+- [API Key 设置指南](docs/API_KEY_SETUP.md)
+- [开发指南](docs/DEVELOPMENT_GUIDE.md)
+- [故障排查](docs/TROUBLESHOOTING.md)
+- [快速参考](docs/QUICK_REFERENCE.md)
+
+## 🔧 支持的渠道
+
+| 渠道 | 状态 | 说明 |
+|------|------|------|
+| Discord Forum | ✅ 已支持 | 自动创建每日主题帖 |
+| Discord Text | ✅ 已支持 | 发送到文字频道 |
+| Telegram | 🚧 开发中 | 即将支持 |
+| 飞书 | 🚧 开发中 | 即将支持 |
+
+## 📊 数据源
+
+| 数据源 | API Key | 说明 |
+|--------|---------|------|
+| GitHub Trending | 可选 | 热门 AI 项目 |
+| Product Hunt | 可选 | 新产品发布 |
+| HackerNews | 无需 | 开发者社区热点 |
+| Reddit | 无需 | AI 社区讨论 |
+| Tavily | 可选 | AI 搜索 |
 
 ## 📜 许可证
 
