@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
 COPY config/ ./config/
-COPY CONSTITUTION.md .
+COPY CODE_CONSTITUTION.md .
 COPY SECURITY.md .
 COPY README.md .
 
