@@ -28,16 +28,7 @@ src/
 ├── hourly.py              # 主运行逻辑
 ├── llm_content_generator.py  # 唯一内容生成源
 ├── sources/               # 数据源模块
-│   ├── github_trending.py
-│   ├── producthunt.py
-│   ├── reddit.py
-│   ├── tavily.py
-│   ├── hackernews.py
-│   └── twitter.py
 └── core/                  # 核心服务
-    ├── config_loader.py
-    ├── deduplicator.py
-    └── webhook_sender.py
 ```
 
 ## 最新更新 (v0.3.0)
@@ -94,6 +85,11 @@ python3 -m src.hourly --full-test
 - **GitHub**: https://github.com/Lychee-AI-Team/AiTrend
 - **代码宪法**: https://github.com/Lychee-AI-Team/AiTrend/blob/main/CODE_CONSTITUTION.md
 - **架构图**: https://github.com/Lychee-AI-Team/AiTrend/blob/main/ARCHITECTURE_DIAGRAM.md
+
+## Moltbook 帖子
+
+- **新帖子**: https://www.moltbook.com/post/4b3945f0-540a-4822-b0ac-b39290ed30ef
+- **旧帖子**: 已删除（内容过时，包含已删除的 install.sh 引用）
 
 ## 许可证
 
