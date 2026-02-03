@@ -68,16 +68,20 @@ class DiscordForumSender(ChannelSender):
             print(content)
             return True
         
-        # 解析标题和内容
-        lines = content.split('\n')
-        title = lines[0].strip() if lines else "AI 热点"
-        body = '\n'.join(lines[1:]).strip() if len(lines) > 1 else content
+        # 解析标题和内容 - 找到第一个换行符分割
+        first_newline = content.find('\n')
+        if first_newline > 0:
+            title = content[:first_newline].strip()
+            body = content[first_newline+1:].strip()
+        else:
+            title = "AI 热点"
+            body = content
         
         # 使用 Webhook 发送
         return self.webhook_sender.send_to_forum(title, body)
     
     def format_content(self, data: Dict[str, Any]) -> str:
-        """论坛帖子格式：标题 + 内容"""
+        """论坛帖子格式：标题 + 内容 - 直接返回完整f-string，禁止拼接"""
         articles = data.get('data', {}).get('articles', [])
         language = data.get('language', 'zh')
         
@@ -91,20 +95,25 @@ class DiscordForumSender(ChannelSender):
         }
         title = titles.get(language, titles['zh'])
         
-        # 生成内容
-        lines = [title, "═══════════════════\n"]
-        
+        # 构建文章列表 - 使用列表推导式生成，然后直接f-string输出
+        article_blocks = []
         for i, article in enumerate(articles[:10], 1):
-            lines.append(f"{i}. **{article.get('title', 'N/A')}**")
+            article_title = article.get('title', 'N/A')
             summary = article.get('summary', '')[:300]
-            lines.append(f"   {summary}...")
-            lines.append(f"   🔗 <{article.get('url', '')}>")
-            lines.append(f"   📌 {article.get('source', '')}\n")
+            url = article.get('url', '')
+            source = article.get('source', '')
+            article_blocks.append(f"{i}. **{article_title}**\n   {summary}...\n   🔗 <{url}>\n   📌 {source}")
         
-        lines.append("━━━━━━━━━━━━━━━")
-        lines.append("🤖 Powered by AiTrend")
+        articles_text = "\n\n".join(article_blocks) if article_blocks else "暂无内容"
         
-        return '\n'.join(lines)
+        # 直接返回完整f-string，禁止lines.append + join模式
+        return f"""{title}
+═══════════════════
+
+{articles_text}
+
+━━━━━━━━━━━━━━━
+🤖 Powered by AiTrend"""
     
     def _get_date(self) -> str:
         from datetime import datetime

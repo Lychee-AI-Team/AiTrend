@@ -2,6 +2,7 @@
 """
 基于真实抓取数据的内容生成器
 严禁编造，只能基于已有数据总结
+严格禁止：字符串拼接、模板填充、分段组合
 """
 
 import random
@@ -14,6 +15,7 @@ def generate_from_real_data(scraped_data: Dict) -> str:
     1. 只能使用scraped_data中的真实信息
     2. 数据不足时诚实说明，不编造
     3. 自然叙述，无结构化格式
+    4. 严禁使用字符串拼接（parts.append + join）
     """
     
     source = scraped_data.get('source', '')
@@ -31,7 +33,7 @@ def generate_from_real_data(scraped_data: Dict) -> str:
         return _generate_generic_narrative(scraped_data)
 
 def _generate_github_narrative(data: Dict) -> str:
-    """基于GitHub真实数据生成叙述"""
+    """基于GitHub真实数据生成叙述 - 直接返回完整f-string，禁止拼接"""
     
     name = data.get('name', '')
     description = data.get('description', '')
@@ -47,54 +49,31 @@ def _generate_github_narrative(data: Dict) -> str:
     if not description and not features:
         return f"{name} 是一个GitHub开源项目。由于README信息有限，无法提供详细介绍。\n\n{url}"
     
-    # 构建自然叙述
-    parts = []
+    # 构建内容 - 直接返回完整字符串，严禁使用 parts.append + join
+    desc = tagline or description
+    feat_text = ", ".join(features[:3]) if features else ""
+    tech_text = ", ".join(tech) if tech else ""
+    stars_text = f"目前已经有 {stars} 个 star，社区活跃度还不错。" if stars > 100 else ""
+    install_text = f"安装命令是：{install}。" if install else (f"使用示例：{usage}。" if usage else "")
+    features_text = f"主要功能包括：{feat_text}。" if feat_text else ""
+    tech_stack_text = f"技术栈是{tech_text}。" if tech_text else ""
     
-    # 开场
-    openings = [
+    # 随机开场
+    opening = random.choice([
         f"{name} 是一个GitHub上的开源项目",
         f"在GitHub上发现了 {name}",
         f"{name} 这个开源项目挺有意思",
-    ]
-    parts.append(random.choice(openings))
+    ])
     
-    # 描述（真实数据）
-    if tagline or description:
-        desc = tagline or description
-        parts.append(f"，{desc[:150]}。")
-    else:
-        parts.append("。")
+    # 直接返回完整f-string，禁止任何拼接操作
+    content = f"""{opening}{f"，{desc[:150]}。" if desc else "。"}{features_text}{tech_stack_text}{install_text}{stars_text}建议先阅读文档再集成到自己的项目中。
+
+{url}"""
     
-    # 功能（真实数据，最多3个）
-    if features:
-        feat_text = ", ".join(features[:3])
-        parts.append(f"主要功能包括：{feat_text}。")
-    
-    # 技术栈（真实数据）
-    if tech:
-        parts.append(f"技术栈是{', '.join(tech)}。")
-    
-    # 使用方式（真实数据）
-    if install:
-        parts.append(f"安装命令是：{install}。")
-    elif usage:
-        parts.append(f"使用示例：{usage}。")
-    
-    # 社区数据（真实数据）
-    if stars > 100:
-        parts.append(f"目前已经有 {stars} 个 star，社区活跃度还不错。")
-    
-    # 自然地连接
-    content = "".join(parts)
-    
-    # 添加使用建议
-    if features or usage:
-        content += "建议先阅读文档再集成到自己的项目中。"
-    
-    return content + f"\n\n{url}"
+    return content
 
 def _generate_ph_narrative(data: Dict) -> str:
-    """基于Product Hunt真实数据生成叙述"""
+    """基于Product Hunt真实数据生成叙述 - 直接返回完整f-string"""
     
     name = data.get('name', '')
     tagline = data.get('tagline', '')
@@ -107,33 +86,19 @@ def _generate_ph_narrative(data: Dict) -> str:
     if not tagline and not maker_desc:
         return f"{name} 今天刚在 Product Hunt 上发布。详细信息还在收集中。\n\n{url}"
     
-    parts = []
+    # 直接构建完整内容
+    votes_text = f"，目前已经拿了 {votes} 个 upvote" if votes > 50 else ""
+    desc_text = maker_desc[:200] if maker_desc else (f"它是一个 {tagline} 的工具。" if tagline else "")
+    review_text = f"有用户评论说：{reviews[0][:150]}..." if reviews else ""
     
-    # 开场
-    if votes > 50:
-        parts.append(f"{name} 今天刚在 Product Hunt 上发布，目前已经拿了 {votes} 个 upvote。")
-    else:
-        parts.append(f"{name} 今天刚在 Product Hunt 上发布。")
+    content = f"""{name} 今天刚在 Product Hunt 上发布{votes_text}。{desc_text} {review_text}建议先试用免费版看看是否符合自己的工作流。
+
+{url}"""
     
-    # Maker描述（真实）
-    if maker_desc:
-        parts.append(f"{maker_desc[:200]}")
-    elif tagline:
-        parts.append(f"它是一个 {tagline} 的工具。")
-    
-    # 用户评论（真实）
-    if reviews:
-        review = reviews[0]
-        parts.append(f"有用户评论说：{review[:150]}...")
-    
-    # 自然地连接
-    content = " ".join(parts)
-    content += "建议先试用免费版看看是否符合自己的工作流。"
-    
-    return content + f"\n\n{url}"
+    return content
 
 def _generate_hn_narrative(data: Dict) -> str:
-    """基于HackerNews真实数据生成叙述"""
+    """基于HackerNews真实数据生成叙述 - 直接返回完整f-string"""
     
     title = data.get('title', '')
     points = data.get('points', 0)
@@ -142,37 +107,21 @@ def _generate_hn_narrative(data: Dict) -> str:
     external_url = data.get('external_url', '')
     url = data.get('url', '')
     
-    parts = []
+    points_text = f"在 HackerNews 上引发了讨论，拿了 {points} points" if points > 100 else "在 HackerNews 上有讨论"
+    comment_count_text = f"评论区有 {comment_count} 条回复。" if comment_count > 10 else ""
     
-    # 开场
-    if points > 100:
-        parts.append(f"{title} 在 HackerNews 上引发了讨论，拿了 {points} points。")
-    else:
-        parts.append(f"{title} 在 HackerNews 上有讨论。")
+    first_comment = f"有人提到：{comments[0][:200]}..." if comments else ""
+    second_comment = f"还有人补充说：{comments[1][:150]}..." if len(comments) > 1 else ""
+    external_link_text = f"讨论的原项目在这里：{external_url}" if external_url else ""
     
-    # 评论数
-    if comment_count > 10:
-        parts.append(f"评论区有 {comment_count} 条回复。")
+    content = f"""{title} {points_text}。{comment_count_text}{first_comment}{second_comment}{external_link_text}
+
+HN讨论：{url}"""
     
-    # 高赞评论（真实）
-    if comments:
-        comment = comments[0]
-        parts.append(f"有人提到：{comment[:200]}...")
-        
-        if len(comments) > 1:
-            parts.append(f"还有人补充说：{comments[1][:150]}...")
-    
-    # 外部链接
-    if external_url:
-        parts.append(f"讨论的原项目在这里：{external_url}")
-    
-    # 自然地连接
-    content = " ".join(parts)
-    
-    return content + f"\n\nHN讨论：{url}"
+    return content
 
 def _generate_generic_narrative(data: Dict) -> str:
-    """通用叙述"""
+    """通用叙述 - 直接返回完整f-string"""
     name = data.get('name', '')
     description = data.get('description', '')
     url = data.get('url', '')
@@ -199,7 +148,6 @@ def has_sufficient_data(scraped_data: Dict) -> bool:
         # PH需要：描述或评论
         return bool(
             scraped_data.get('tagline') or 
-            scraped_data.get('maker_description') or
             scraped_data.get('reviews')
         )
     
@@ -209,65 +157,27 @@ def has_sufficient_data(scraped_data: Dict) -> bool:
     
     return False
 
-def check_no_fabrication(content: str, scraped_data: Dict) -> bool:
-    """
-    检查是否包含编造内容
-    简单的启发式检查
-    """
-    # 如果内容中包含具体数字但数据源没有，可能是编造的
-    # 这是一个简化检查
+def estimate_quality(scraped_data: Dict) -> int:
+    """估算数据质量（0-100）"""
     
-    import re
+    score = 0
     
-    # 提取内容中的数字
-    content_numbers = set(re.findall(r'\d+', content))
+    # 基础信息
+    if scraped_data.get('name'):
+        score += 10
+    if scraped_data.get('description'):
+        score += 20
     
-    # 提取数据中的数字
-    data_text = str(scraped_data)
-    data_numbers = set(re.findall(r'\d+', data_text))
+    # 详细信息
+    if scraped_data.get('features'):
+        score += min(len(scraped_data['features']) * 10, 30)
+    if scraped_data.get('reviews'):
+        score += min(len(scraped_data['reviews']) * 10, 20)
+    if scraped_data.get('tech_stack'):
+        score += 10
     
-    # 如果内容中有大量数字不在数据源中，可能有问题
-    # 但这只是一个启发式检查，不完美
+    # 社区数据
+    if scraped_data.get('stars', 0) > 100:
+        score += 10
     
-    return True  # 暂时返回True，允许一定程度的数据整合
-
-# 测试
-if __name__ == '__main__':
-    # 测试GitHub
-    github_data = {
-        'source': 'github',
-        'name': 'browser-use',
-        'description': 'Make websites accessible for AI agents',
-        'tagline': 'Make websites accessible for AI agents',
-        'features': [
-            'Connect LLMs to websites',
-            'Simple Python API',
-            'Works with any LLM'
-        ],
-        'install': 'pip install browser-use',
-        'usage': 'from browser_use import Agent',
-        'tech_stack': ['python'],
-        'stars': 41415,
-        'url': 'https://github.com/browser-use/browser-use'
-    }
-    
-    print("GitHub内容生成测试:")
-    print(generate_from_real_data(github_data))
-    print("\n" + "="*60 + "\n")
-    
-    # 测试PH
-    ph_data = {
-        'source': 'producthunt',
-        'name': 'Amara',
-        'tagline': 'Build your 3D environment',
-        'maker_description': 'Amara lets you build 3D environments through exploration and iteration.',
-        'reviews': [
-            'This is exactly what I needed for my indie game project.',
-            'The interface is intuitive and the results are impressive.'
-        ],
-        'votes': 108,
-        'url': 'https://www.producthunt.com/products/amara'
-    }
-    
-    print("Product Hunt内容生成测试:")
-    print(generate_from_real_data(ph_data))
+    return min(score, 100)

@@ -2,54 +2,6 @@
   "description": "记录已发送的文章，24小时内不重复",
   "articles": [
     {
-      "url": "https://github.com/gavrielc/nanoclaw",
-      "title": "[Show HN] Show HN: NanoClaw – “Clawdbot” in 500 lines of TS with Apple container isolation",
-      "sent_at": 1770032129.2226865,
-      "sent_count": 1
-    },
-    {
-      "url": "https://journal.rafaelcosta.me/my-thousand-dollar-iphone-cant-do-math/",
-      "title": "[HN] My iPhone 16 Pro Max produces garbage output when running MLX LLMs",
-      "sent_at": 1770032129.2226865,
-      "sent_count": 1
-    },
-    {
-      "url": "https://xikipedia.org",
-      "title": "[Show HN] Show HN: Wikipedia as a doomscrollable social media feed",
-      "sent_at": 1770037672.0035028,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/rtvkiz/minimal",
-      "title": "[Show HN] Show HN: Minimal – Open-Source Community driven Hardened Container Images",
-      "sent_at": 1770037672.0035028,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/amara-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Amara ⭐138",
-      "sent_at": 1770037892.7172954,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/ask-ellie?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Ask Ellie ⭐115",
-      "sent_at": 1770037892.7172954,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/chaching?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] ChaChing ⭐202",
-      "sent_at": 1770041145.8768003,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] EasyClaw ⭐122",
-      "sent_at": 1770041145.8768003,
-      "sent_count": 1
-    },
-    {
       "url": "https://www.producthunt.com/products/molthunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Molthunt ⭐183",
       "sent_at": 1770048382.65695,
@@ -107,6 +59,30 @@
       "url": "https://github.com/EbookFoundation/free-programming-books",
       "title": "EbookFoundation/free-programming-books ⭐381913",
       "sent_at": 1770058857.5054984,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/crisp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Hugo ⭐331",
+      "sent_at": 1770134548.9080076,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/atoms-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Atoms ⭐256",
+      "sent_at": 1770134548.9080076,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/trupeer?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] AI Doc Writer by Trupeer ⭐194",
+      "sent_at": 1770134575.5166903,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/lightfern?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Lightfern for Email ⭐128",
+      "sent_at": 1770134575.5166903,
       "sent_count": 1
     }
   ]

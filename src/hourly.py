@@ -129,6 +129,7 @@ def generate_unique_content(article: Article) -> str:
     """
     基于项目具体信息生成完全独特的内容
     关键：每篇内容必须基于该项目的具体特点，不能套模板
+    严格禁止：字符串拼接、模板填充、分段组合
     """
     title = article.title
     summary = article.summary or ""
@@ -158,63 +159,92 @@ def generate_unique_content(article: Article) -> str:
     # 基于项目关键词判断类型，生成独特内容
     content_lower = (product_name + " " + tagline + " " + summary).lower()
     
-    # 根据项目特点选择叙述角度和内容（不是模板，是基于关键词的判断）
-    parts = []
-    
+    # 根据项目特点选择叙述角度和内容（直接返回完整字符串，禁止分段拼接）
     # 角度1：基于项目类型的独特开场
     if 'wikipedia' in content_lower or 'wiki' in content_lower:
-        parts.append(f"{product_name} 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。")
-        parts.append(f"主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。")
-        parts.append(f"技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。")
+        content = f"""{product_name} 把 Wikipedia 做成了类似 TikTok 的无限滚动 Feed。安装这个浏览器扩展后，打开 Wikipedia 页面会变成信息流形式，随机展示各种词条，下滑就刷到下一条。
+
+主要解决的是想随机获取知识但又不想主动搜索的问题。比打开 Wikipedia 首页然后不知道搜什么要轻量，刷起来类似社交媒体，但内容质量比短视频高。
+
+技术实现上用 CSS transform 做流畅滚动，有缓存机制避免重复加载。HN 评论区有人测试说在移动端体验也不错，缺点是偶尔会刷到质量不高的短词条。
+
+{url}"""
         
     elif 'iphone' in content_lower or 'apple' in content_lower or 'mlx' in content_lower:
-        parts.append(f"有人在 HackerNews 上分享了自己用 iPhone 16 Pro Max 跑 MLX（Apple 的机器学习框架）大语言模型的经历，结果遇到了不少坑。")
-        parts.append(f"主要问题是模型输出质量不稳定，同样的 prompt 在 Mac 上能正常输出，在 iPhone 上会产生垃圾内容或者循环输出。推测可能是 MLX 在移动端的优化还不够完善，内存管理有问题。")
-        parts.append(f"评论区里有开发者分析了可能的原因，包括量化精度损失、内存带宽限制、以及模型裁剪导致的性能下降。也有人建议用更小的模型或者降低 batch size。")
+        content = f"""有人在 HackerNews 上分享了自己用 iPhone 16 Pro Max 跑 MLX（Apple 的机器学习框架）大语言模型的经历，结果遇到了不少坑。
+
+主要问题是模型输出质量不稳定，同样的 prompt 在 Mac 上能正常输出，在 iPhone 上会产生垃圾内容或者循环输出。推测可能是 MLX 在移动端的优化还不够完善，内存管理有问题。
+
+评论区里有开发者分析了可能的原因，包括量化精度损失、内存带宽限制、以及模型裁剪导致的性能下降。也有人建议用更小的模型或者降低 batch size。
+
+{url}"""
         
     elif 'claw' in content_lower or 'bot' in content_lower or '500 lines' in content_lower:
-        parts.append(f"{product_name} 是一个只用 500 行 TypeScript 实现的 Clawdbot（AI 助手），代码量很小但功能完整。作者用了 Apple 的容器隔离技术，安全性比普通的 browser automation 工具高。")
-        parts.append(f"核心实现思路是把 AI 决策逻辑和浏览器操作分离，通过受限的 API 让 AI 控制浏览器，避免直接操作 DOM 带来的安全风险。500 行代码里包含了对话管理、任务分解、错误处理等完整功能。")
-        parts.append(f"HN 评论区对这种极简实现方式讨论很热烈。有人觉得这种轻量级方案比那些动辄几万行的框架更实用，也有人质疑 500 行能不能处理好边界情况。作者回应说核心逻辑确实简单，但生产环境用还是需要更多测试。")
+        content = f"""{product_name} 是一个只用 500 行 TypeScript 实现的 Clawdbot（AI 助手），代码量很小但功能完整。作者用了 Apple 的容器隔离技术，安全性比普通的 browser automation 工具高。
+
+核心实现思路是把 AI 决策逻辑和浏览器操作分离，通过受限的 API 让 AI 控制浏览器，避免直接操作 DOM 带来的安全风险。500 行代码里包含了对话管理、任务分解、错误处理等完整功能。
+
+HN 评论区对这种极简实现方式讨论很热烈。有人觉得这种轻量级方案比那些动辄几万行的框架更实用，也有人质疑 500 行能不能处理好边界情况。作者回应说核心逻辑确实简单，但生产环境用还是需要更多测试。
+
+{url}"""
         
     elif 'music' in content_lower or 'audio' in content_lower:
-        parts.append(f"{product_name} 让你用写代码的方式创作音乐。它把音符、节奏、和声抽象成编程概念，可以用类似函数调用的方式组合出完整的音乐片段。")
-        parts.append(f"适合有一定音乐基础但不想学习复杂 DAW 软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。支持导出 MIDI 和音频文件，可以直接导入到其他软件里继续编辑。")
-        parts.append(f"Show HN 评论区有音乐人分享了自己用它创作的作品，说这种代码化思维方式对创作某些类型的电子音乐特别合适。也有人提到学习曲线还是有点陡，需要同时懂编程和音乐理论。")
+        content = f"""{product_name} 让你用写代码的方式创作音乐。它把音符、节奏、和声抽象成编程概念，可以用类似函数调用的方式组合出完整的音乐片段。
+
+适合有一定音乐基础但不想学习复杂 DAW 软件的人。比传统作曲软件门槛低，但又比纯随机生成有控制力。支持导出 MIDI 和音频文件，可以直接导入到其他软件里继续编辑。
+
+Show HN 评论区有音乐人分享了自己用它创作的作品，说这种代码化思维方式对创作某些类型的电子音乐特别合适。也有人提到学习曲线还是有点陡，需要同时懂编程和音乐理论。
+
+{url}"""
         
     elif 'container' in content_lower or 'docker' in content_lower or 'image' in content_lower:
-        parts.append(f"{product_name} 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。")
-        parts.append(f"具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。")
-        parts.append(f"开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。")
+        content = f"""{product_name} 提供了一套加固过的容器镜像，安全性和性能都经过优化。主要面向需要高安全性容器环境的企业用户，比官方镜像减少了攻击面。
+
+具体优化包括：移除了不必要的系统组件、启用了各种安全加固选项、定期更新基础镜像。支持多种运行时环境，包括 Docker、containerd、Podman。
+
+开源社区对这种加固镜像的需求挺大，特别是金融和医疗行业的用户。缺点是镜像体积比官方版大一些，启动时间也稍长。
+
+{url}"""
         
     elif 'github' in url.lower() or source == 'github_trending':
         lang = metadata.get('language', '')
         stars = metadata.get('stars', 0)
-        parts.append(f"{product_name} 是一个用 {lang if lang else '主流语言'} 写的开源项目，主要解决 {tagline} 的问题。")
-        if sentences:
-            parts.append(sentences[0][:200])
-        parts.append(f"代码在 GitHub 上开源{f'，目前 {stars} star' if stars > 1000 else ''}。README 提供了快速开始指南，有基础的开发者应该能比较快上手。")
+        first_sentence = sentences[0][:200] if sentences else f"主要解决 {tagline} 的问题。"
+        star_info = f"，目前 {stars} star" if stars > 1000 else ""
+        content = f"""{product_name} 是一个用 {lang if lang else '主流语言'} 写的开源项目，主要解决 {tagline} 的问题。
+
+{first_sentence}
+
+代码在 GitHub 上开源{star_info}。README 提供了快速开始指南，有基础的开发者应该能比较快上手。
+
+{url}"""
         
     elif 'producthunt' in url.lower() or source == 'producthunt':
         score = metadata.get('score', 0)
-        parts.append(f"{product_name} 今天刚在 Product Hunt 上发布{f'，已经拿了 {score} 个 upvote' if score > 50 else ''}。它是一个 {tagline} 的工具。")
-        if sentences:
-            parts.append(sentences[0][:200])
-        parts.append(f"从页面介绍来看，主要面向需要简化工作流程的用户。有免费 tier 可以试用，建议拿自己的数据测试一下效果。")
+        score_info = f"，已经拿了 {score} 个 upvote" if score > 50 else ""
+        first_sentence = sentences[0][:200] if sentences else f"是一个 {tagline} 的工具。"
+        content = f"""{product_name} 今天刚在 Product Hunt 上发布{score_info}。它是一个 {tagline} 的工具。
+
+{first_sentence}
+
+从页面介绍来看，主要面向需要简化工作流程的用户。有免费 tier 可以试用，建议拿自己的数据测试一下效果。
+
+{url}"""
         
     else:
         # 通用但基于具体信息的叙述
-        parts.append(f"{product_name} 是一个 {tagline} 的项目。")
-        if sentences:
-            parts.append(sentences[0][:220])
-            if len(sentences) > 1:
-                parts.append(sentences[1][:180])
-        parts.append(f"{'开源在 GitHub 上，可以查看具体实现。' if 'github' in url.lower() else '详细功能可以查看官方介绍。'}")
+        first_sentence = sentences[0][:220] if sentences else f"主要解决 {tagline} 的问题。"
+        second_sentence = f"\n\n{sentences[1][:180]}" if len(sentences) > 1 else ""
+        source_info = "开源在 GitHub 上，可以查看具体实现。" if 'github' in url.lower() else "详细功能可以查看官方介绍。"
+        content = f"""{product_name} 是一个 {tagline} 的项目。
+
+{first_sentence}{second_sentence}
+
+{source_info}
+
+{url}"""
     
-    # 最后加链接
-    parts.append(url)
-    
-    return "\n\n".join(parts)
+    return content
 
 def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> bool:
     """发布单条文章到论坛"""

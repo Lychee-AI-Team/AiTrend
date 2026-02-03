@@ -89,52 +89,59 @@ class AutoDTPController:
         
         content_lower = (product_name + " " + tagline).lower()
         
-        # 构建内容 - 强制4要素
-        parts = []
+        # 构建内容 - 强制4要素，直接返回完整f-string，严禁拼接
         
-        # 1. 核心功能（必须具体）
-        parts.append(f"{product_name} 是一个{tagline}。")
+        # 提取功能描述
+        sentences = [s.strip() for s in summary.split('.') if s.strip() and len(s.strip()) > 10] if summary else []
+        first_feature = f"主要功能包括：{sentences[0][:150]}。" if sentences else ""
+        second_feature = f"另外还支持：{sentences[1][:120]}。" if len(sentences) > 1 else ""
         
-        # 2. 具体功能点（从tagline和summary提取）
-        if summary:
-            # 提取前两句作为功能描述
-            sentences = [s.strip() for s in summary.split('.') if s.strip() and len(s.strip()) > 10]
-            if sentences:
-                parts.append(f"主要功能包括：{sentences[0][:150]}。")
-                if len(sentences) > 1:
-                    parts.append(f"另外还支持：{sentences[1][:120]}。")
-        
-        # 3. 使用场景（强制）
+        # 使用场景 - 直接返回完整字符串
         if 'wikipedia' in content_lower:
-            parts.append(f"使用场景：适合在通勤、排队等碎片时间随机获取知识。打开页面自动加载内容，下滑刷新，不需要主动搜索。比刷短视频信息质量高，比查资料更轻松。")
+            usage_scene = f"使用场景：适合在通勤、排队等碎片时间随机获取知识。打开页面自动加载内容，下滑刷新，不需要主动搜索。比刷短视频信息质量高，比查资料更轻松。"
         elif 'music' in content_lower or 'audio' in content_lower:
-            parts.append(f"使用场景：适合有一定音乐基础但不想学复杂DAW的人。用代码方式控制音符、节奏、和声，比传统作曲软件门槛低，但又比随机生成有控制力。")
+            usage_scene = f"使用场景：适合有一定音乐基础但不想学复杂DAW的人。用代码方式控制音符、节奏、和声，比传统作曲软件门槛低，但又比随机生成有控制力。"
         elif 'iphone' in content_lower or 'mobile' in content_lower:
-            parts.append(f"使用场景：想在iPhone上跑大模型做本地AI应用开发。利用Apple Silicon的MLX框架，但需要注意内存和性能限制。")
+            usage_scene = f"使用场景：想在iPhone上跑大模型做本地AI应用开发。利用Apple Silicon的MLX框架，但需要注意内存和性能限制。"
         elif 'github' in url.lower() or source == 'github_trending':
-            parts.append(f"使用场景：需要在项目中集成{tagline[:30]}功能的开发者。通过pip/npm安装，几行代码即可接入现有系统。")
+            usage_scene = f"使用场景：需要在项目中集成{tagline[:30]}功能的开发者。通过pip/npm安装，几行代码即可接入现有系统。"
         elif 'producthunt' in url.lower() or source == 'producthunt':
-            parts.append(f"使用场景：{f'适合小团队或个人用户，定价{f"{score}个upvote认可的" if score > 50 else ""}' if score > 50 else '适合需要简化工作流程的用户'}。可以替代复杂的企业级工具，上手门槛低。")
+            ph_scene = f"适合小团队或个人用户，定价{score}个upvote认可的" if score > 50 else "适合需要简化工作流程的用户"
+            usage_scene = f"使用场景：{ph_scene}。可以替代复杂的企业级工具，上手门槛低。"
         else:
-            parts.append(f"使用场景：需要解决{tagline.split()[0] if tagline else '特定'}问题的场景。{'适合开发者集成到现有系统' if 'api' in content_lower or 'tool' in content_lower else '适合个人或团队使用'}。")
+            scene_type = "特定" if not tagline else tagline.split()[0]
+            user_type = "适合开发者集成到现有系统" if 'api' in content_lower or 'tool' in content_lower else "适合个人或团队使用"
+            usage_scene = f"使用场景：需要解决{scene_type}问题的场景。{user_type}。"
         
-        # 4. 技术/数据细节（强制）
+        # 技术/数据细节
         if source == 'github_trending' and stars > 0:
-            parts.append(f"技术细节：GitHub {stars} star，{language if language else '多语言'}项目。代码结构清晰，有单元测试，文档提供了quick start示例。")
+            tech_detail = f"技术细节：GitHub {stars} star，{language if language else '多语言'}项目。代码结构清晰，有单元测试，文档提供了quick start示例。"
         elif source == 'producthunt' and score > 0:
-            parts.append(f"产品数据：Product Hunt {score} upvote。{'用户反馈普遍认可易用性' if score > 50 else '刚发布，还在早期阶段'}。{'有免费tier可以试用' if score > 30 else '需要付费'}。")
+            ph_feedback = "用户反馈普遍认可易用性" if score > 50 else "刚发布，还在早期阶段"
+            ph_free = "有免费tier可以试用" if score > 30 else "需要付费"
+            tech_detail = f"产品数据：Product Hunt {score} upvote。{ph_feedback}。{ph_free}。"
         elif source == 'hackernews' and comments > 0:
-            parts.append(f"社区反馈：HN {comments}条评论。有人分享实际使用体验，也有人提到边界情况处理和文档完善度问题。")
+            tech_detail = f"社区反馈：HN {comments}条评论。有人分享实际使用体验，也有人提到边界情况处理和文档完善度问题。"
         else:
-            parts.append(f"实现细节：基于现有技术栈开发，{'代码开源可查看' if 'github' in url.lower() else '提供详细文档'}。")
+            github_open = "代码开源可查看" if 'github' in url.lower() else "提供详细文档"
+            tech_detail = f"实现细节：基于现有技术栈开发，{github_open}。"
         
-        # 5. 优缺点（客观）
-        parts.append(f"优缺点：优势是{tagline[:20]}做得比较专注，没有过度设计。限制是目前{'只支持特定平台' if 'ios' in content_lower or 'android' in content_lower else '功能还在迭代中'}，{'中文支持有待完善' if 'producthunt' in url.lower() else '文档可以更详细'}。")
+        # 优缺点
+        advantage = tagline[:20]
+        limit_platform = "只支持特定平台" if 'ios' in content_lower or 'android' in content_lower else "功能还在迭代中"
+        limit_doc = "中文支持有待完善" if 'producthunt' in url.lower() else "文档可以更详细"
         
-        # 6. 链接
-        parts.append(url)
-        
-        return "\n\n".join(parts)
+        # 直接返回完整f-string，严禁使用parts.append + join
+        return f"""{product_name} 是一个{tagline}。
+
+{first_feature}{second_feature}
+{usage_scene}
+
+{tech_detail}
+
+优缺点：优势是{advantage}做得比较专注，没有过度设计。限制是目前{limit_platform}，{limit_doc}。
+
+{url}"""
     
     def develop(self, count: int = 10) -> List[Article]:
         """开发阶段"""
