@@ -131,17 +131,8 @@ class AutoDTPController:
         limit_platform = "只支持特定平台" if 'ios' in content_lower or 'android' in content_lower else "功能还在迭代中"
         limit_doc = "中文支持有待完善" if 'producthunt' in url.lower() else "文档可以更详细"
         
-        # 直接返回完整f-string，严禁使用parts.append + join
-        return f"""{product_name} 是一个{tagline}。
-
-{first_feature}{second_feature}
-{usage_scene}
-
-{tech_detail}
-
-优缺点：优势是{advantage}做得比较专注，没有过度设计。限制是目前{limit_platform}，{limit_doc}。
-
-{url}"""
+        # 直接返回完整f-string，完全连续流畅，无段落分隔
+        return f"{product_name} 是一个{tagline}。{first_feature}{second_feature}{usage_scene}{tech_detail}优缺点：优势是{advantage}做得比较专注，没有过度设计，限制是目前{limit_platform}，{limit_doc}。{url}"
     
     def develop(self, count: int = 10) -> List[Article]:
         """开发阶段"""
