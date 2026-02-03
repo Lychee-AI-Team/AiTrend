@@ -3,6 +3,9 @@
 🔥 **AI 热点发现引擎** - 自动采集和发布 AI 产品资讯
 
 <p align="center">
+  <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Lychee-AI-Team/AiTrend/ci.yml?branch=main&style=flat-square" alt="CI">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
@@ -70,6 +73,7 @@ AiTrend/
 │   └── hourly.py     # 主入口
 ├── config/           # 配置文件
 ├── docs/             # 文档
+├── scripts/          # 工具脚本
 ├── install.sh        # 安装脚本
 ├── Dockerfile        # Docker 镜像
 └── skill.yaml        # OpenClaw Skill 描述
@@ -81,6 +85,7 @@ AiTrend/
 - [开发指南](docs/DEVELOPMENT_GUIDE.md)
 - [故障排查](docs/TROUBLESHOOTING.md)
 - [快速参考](docs/QUICK_REFERENCE.md)
+- [贡献指南](CONTRIBUTING.md)
 
 ## 🔧 支持的渠道
 
@@ -101,9 +106,17 @@ AiTrend/
 | Reddit | 无需 | AI 社区讨论 |
 | Tavily | 可选 | AI 搜索 |
 
+## 🤝 贡献
+
+我们欢迎所有形式的贡献！请查看 [贡献指南](CONTRIBUTING.md)。
+
 ## 📜 许可证
 
-MIT License
+[MIT License](LICENSE)
+
+## 🙏 致谢
+
+感谢所有贡献者为这个项目付出的努力！
 
 ---
 
