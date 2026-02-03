@@ -190,11 +190,23 @@ def generate_unique_content(article: Article) -> str:
         content = f"""{product_name} 今天刚在 Product Hunt 上发布{score_info}，它是一个 {tagline} 的工具。{first_sentence} 从页面介绍来看主要面向需要简化工作流程的用户，有免费 tier 可以试用，建议拿自己的数据测试一下效果。{url}"""
         
     else:
-        # 通用但基于具体信息的叙述 - 完全连续流畅
-        first_sentence = sentences[0][:220] if sentences else f"主要解决 {tagline} 的问题。"
+        # 严格模式：如果没有足够信息，立即报错，不生成通用内容
+        if not sentences:
+            raise RuntimeError(f"❌ 内容生成失败：{product_name} 没有足够信息生成独特内容。summary为空，无法生成高质量介绍。")
+        
+        first_sentence = sentences[0][:220]
         second_sentence = f" {sentences[1][:180]}" if len(sentences) > 1 else ""
-        source_info = "开源在 GitHub 上，可以查看具体实现。" if 'github' in url.lower() else "详细功能可以查看官方介绍。"
-        content = f"""{product_name} 是一个 {tagline} 的项目。{first_sentence}{second_sentence} {source_info} {url}"""
+        
+        # 必须基于真实信息，不能是通用描述
+        if 'github' in url.lower():
+            source_info = "代码开源在 GitHub 上。"
+        else:
+            # 非 GitHub 链接必须有具体描述，否则报错
+            if not summary or len(summary) < 50:
+                raise RuntimeError(f"❌ 内容生成失败：{product_name} 信息不足。非 GitHub 项目必须有详细描述才能生成内容。")
+            source_info = f"详细介绍：{summary[:100]}..."
+        
+        content = f"{product_name} 是一个 {tagline} 的项目。{first_sentence}{second_sentence} {source_info} {url}"
     
     return content
 
