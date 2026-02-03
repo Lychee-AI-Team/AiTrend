@@ -197,10 +197,13 @@ def main():
     """
     start_time = time.time()
     
-    # 检查是否为测试模式
+    # 检查是否为测试模式或全量测试模式
     is_test_mode = '--test' in sys.argv or os.getenv('AITREND_TEST_MODE') == '1'
+    is_full_test_mode = '--full-test' in sys.argv or os.getenv('AITREND_FULL_TEST_MODE') == '1'
     
-    if is_test_mode:
+    if is_full_test_mode:
+        print("🧪🔥 AiTrend 全量测试模式（所有数据源，最大化输出，跳过去重）", file=sys.stderr)
+    elif is_test_mode:
         print("🧪 AiTrend 测试模式（跳过去重，添加ATI ID）", file=sys.stderr)
     else:
         print("🚀 AiTrend 每小时精选模式（完全独特叙述版）", file=sys.stderr)
@@ -246,23 +249,30 @@ def main():
         print("⚠️ 无新内容", file=sys.stderr)
         sys.exit(0)
     
-    # 选择最热门的3条，确保多样性（优先不同来源）
-    top_articles = select_best_articles(articles, top_n=5)  # 先选5条
+    # 选择文章（全量测试模式输出所有，普通模式限制数量）
+    if is_full_test_mode:
+        # 全量测试：输出所有收集到的内容（按热度排序）
+        top_articles = select_best_articles(articles, top_n=len(articles))
+        print(f"\n🔥 全量测试模式: 选中 {len(top_articles)} 条 (最大化输出)", file=sys.stderr)
+    else:
+        # 普通模式：选择最热门的3条，确保多样性
+        top_articles = select_best_articles(articles, top_n=5)  # 先选5条
+        
+        # 确保来源多样性
+        source_count = {}
+        diverse_articles = []
+        for article in top_articles:
+            src = article.source
+            if source_count.get(src, 0) < 2:  # 每个来源最多2条
+                diverse_articles.append(article)
+                source_count[src] = source_count.get(src, 0) + 1
+            if len(diverse_articles) >= 3:
+                break
+        
+        top_articles = diverse_articles[:3]
     
-    # 确保来源多样性
-    source_count = {}
-    diverse_articles = []
-    for article in top_articles:
-        src = article.source
-        if source_count.get(src, 0) < 2:  # 每个来源最多2条
-            diverse_articles.append(article)
-            source_count[src] = source_count.get(src, 0) + 1
-        if len(diverse_articles) >= 3:
-            break
-    
-    top_articles = diverse_articles[:3]
-    
-    print(f"\n⭐ 选中 {len(top_articles)} 条 (已优化来源多样性):", file=sys.stderr)
+    if not is_full_test_mode:
+        print(f"\n⭐ 选中 {len(top_articles)} 条 (已优化来源多样性):", file=sys.stderr)
     for i, article in enumerate(top_articles, 1):
         print(f"   {i}. [{article.source}] {article.title[:45]}...", file=sys.stderr)
     
@@ -276,25 +286,32 @@ def main():
                     break
     
     # 发布到论坛
-    mode_str = "测试" if is_test_mode else ""
+    mode_str = ""
+    if is_full_test_mode:
+        mode_str = "全量测试"
+    elif is_test_mode:
+        mode_str = "测试"
+    
     print(f"\n📤 正在发布{mode_str}内容...", file=sys.stderr)
     results = []
     
     for i, article in enumerate(top_articles):
         delay = i * 2
-        result = post_single_article(article, webhook_url, delay=delay, is_test=is_test_mode)
+        # 全量测试或测试模式都添加ATI ID
+        is_test_flag = is_test_mode or is_full_test_mode
+        result = post_single_article(article, webhook_url, delay=delay, is_test=is_test_flag)
         results.append({
             'title': article.title[:40],
             'source': article.source,
             'success': result,
-            'is_test': is_test_mode
+            'is_test': is_test_flag
         })
         status = "✅" if result else "❌"
-        test_mark = " [TEST]" if is_test_mode else ""
+        test_mark = " [TEST]" if is_test_flag else ""
         print(f"   {status} 第{i+1}条{test_mark}发布{'成功' if result else '失败'}", file=sys.stderr)
     
     # 记录已发送（测试模式不记录）
-    if not is_test_mode:
+    if not is_test_mode and not is_full_test_mode:
         deduplicator.record_sent_articles(top_articles)
     
     # 输出结果
