@@ -2,6 +2,8 @@
 LLM内容生成器
 使用Gemini API为每个项目生成独特内容
 严格遵守AiTrend宪法文档要求
+
+配置入口：config/config.json -> summarizer.model
 """
 import os
 import google.generativeai as genai
@@ -10,12 +12,25 @@ from typing import Dict, Optional
 class LLMContentGenerator:
     """使用Gemini生成独特内容"""
     
-    def __init__(self):
+    def __init__(self, model_name: str = None):
+        """
+        初始化LLM生成器
+        
+        Args:
+            model_name: 模型名称，默认从配置文件读取
+        """
+        # 加载配置获取模型名称（唯一配置入口）
+        if model_name is None:
+            from .core.config_loader import load_config
+            config = load_config()
+            summarizer_config = config.get('summarizer', {})
+            model_name = summarizer_config.get('model', 'gemini-2.5-flash')
+        
         api_key = os.getenv('GEMINI_API_KEY')
         if not api_key:
             raise RuntimeError("❌ GEMINI_API_KEY not set")
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-3-flash-preview')
+        self.model = genai.GenerativeModel(model_name)
     
     def generate(self, article_data: Dict) -> str:
         """
