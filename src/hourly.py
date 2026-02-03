@@ -9,6 +9,7 @@ import sys
 import os
 import time
 import random
+import hashlib
 from datetime import datetime
 from typing import List, Dict, Any
 
@@ -125,10 +126,24 @@ def get_thread_title(article: Article) -> str:
     else:
         return product_name[:80]
 
-def generate_unique_content(article: Article) -> str:
+def generate_ati_id() -> str:
+    """生成 ATI 内容 ID - 格式: ATI-YYYYMMDD-[6字符十六进制]"""
+    import hashlib
+    now = datetime.now()
+    date_str = now.strftime("%Y%m%d")
+    # 使用当前时间戳生成6字符十六进制哈希
+    hash_input = f"{now.timestamp()}{random.randint(1000, 9999)}"
+    short_hash = hashlib.sha256(hash_input.encode()).hexdigest()[:6].upper()
+    return f"ATI-{date_str}-{short_hash}"
+
+def generate_unique_content(article: Article, is_test: bool = False) -> str:
     """
     基于项目具体信息生成完全独特的内容
     使用LLM生成，禁止模板化文字
+    
+    Args:
+        article: 文章数据
+        is_test: 是否为测试模式，测试模式会添加ATI ID
     """
     from .llm_content_generator import get_llm_generator
     
@@ -143,14 +158,29 @@ def generate_unique_content(article: Article) -> str:
         'metadata': article.metadata or {}
     }
     
-    return generator.generate(article_data)
+    content = generator.generate(article_data)
+    
+    # 测试模式添加 ATI ID（与真实内容格式完全一致）
+    if is_test:
+        ati_id = generate_ati_id()
+        # 将 ATI ID 添加到内容末尾（在URL之后）
+        content = f"{content}\n\nATI ID: {ati_id}"
+    
+    return content
 
-def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> bool:
-    """发布单条文章到论坛"""
+def post_single_article(article: Article, webhook_url: str, delay: int = 0, is_test: bool = False) -> bool:
+    """发布单条文章到论坛
+    
+    Args:
+        article: 文章数据
+        webhook_url: Webhook URL
+        delay: 延迟秒数
+        is_test: 是否为测试模式
+    """
     if delay > 0:
         time.sleep(delay)
     
-    content = generate_unique_content(article)
+    content = generate_unique_content(article, is_test=is_test)
     title = get_thread_title(article)
     
     sender = DiscordWebhookSender(webhook_url)
@@ -159,10 +189,21 @@ def post_single_article(article: Article, webhook_url: str, delay: int = 0) -> b
     return result
 
 def main():
-    """主函数"""
+    """主函数
+    
+    支持参数:
+        --test: 测试模式（跳过去重，添加ATI ID）
+        python3 -m src.hourly --test
+    """
     start_time = time.time()
     
-    print("🚀 AiTrend 每小时精选模式（完全独特叙述版）", file=sys.stderr)
+    # 检查是否为测试模式
+    is_test_mode = '--test' in sys.argv or os.getenv('AITREND_TEST_MODE') == '1'
+    
+    if is_test_mode:
+        print("🧪 AiTrend 测试模式（跳过去重，添加ATI ID）", file=sys.stderr)
+    else:
+        print("🚀 AiTrend 每小时精选模式（完全独特叙述版）", file=sys.stderr)
     
     # 加载配置
     try:
@@ -180,10 +221,16 @@ def main():
         print("⚠️ 无数据", file=sys.stderr)
         sys.exit(0)
     
-    # 去重
-    deduplicator = ArticleDeduplicator()
-    articles = deduplicator.filter_new_articles(all_articles)
+    # 去重（测试模式跳过）
+    deduplicator = ArticleDeduplicator()  # 始终创建，测试模式不使用
+    if is_test_mode:
+        articles = all_articles
+        print(f"🧪 测试模式: 跳过去重检查", file=sys.stderr)
+    else:
+        articles = deduplicator.filter_new_articles(all_articles)
+        print(f"🔍 去重后: {len(articles)} 条", file=sys.stderr)
     
+    # URL去重（保持URL唯一性，即使是测试模式）
     seen_urls = set()
     unique_articles = []
     for article in articles:
@@ -192,7 +239,8 @@ def main():
             unique_articles.append(article)
     articles = unique_articles
     
-    print(f"🔍 去重后: {len(articles)} 条", file=sys.stderr)
+    if not is_test_mode:
+        print(f"🔍 去重后: {len(articles)} 条", file=sys.stderr)
     
     if not articles:
         print("⚠️ 无新内容", file=sys.stderr)
@@ -228,22 +276,26 @@ def main():
                     break
     
     # 发布到论坛
-    print(f"\n📤 正在发布...", file=sys.stderr)
+    mode_str = "测试" if is_test_mode else ""
+    print(f"\n📤 正在发布{mode_str}内容...", file=sys.stderr)
     results = []
     
     for i, article in enumerate(top_articles):
         delay = i * 2
-        result = post_single_article(article, webhook_url, delay=delay)
+        result = post_single_article(article, webhook_url, delay=delay, is_test=is_test_mode)
         results.append({
             'title': article.title[:40],
             'source': article.source,
-            'success': result
+            'success': result,
+            'is_test': is_test_mode
         })
         status = "✅" if result else "❌"
-        print(f"   {status} 第{i+1}条发布{'成功' if result else '失败'}", file=sys.stderr)
+        test_mark = " [TEST]" if is_test_mode else ""
+        print(f"   {status} 第{i+1}条{test_mark}发布{'成功' if result else '失败'}", file=sys.stderr)
     
-    # 记录已发送
-    deduplicator.record_sent_articles(top_articles)
+    # 记录已发送（测试模式不记录）
+    if not is_test_mode:
+        deduplicator.record_sent_articles(top_articles)
     
     # 输出结果
     success_count = sum(1 for r in results if r['success'])
