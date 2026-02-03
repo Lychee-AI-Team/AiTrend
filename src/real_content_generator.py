@@ -14,7 +14,7 @@ def generate_from_real_data(scraped_data: Dict) -> str:
     基于真实抓取的数据生成叙述
     规则：
     1. 只能使用scraped_data中的真实信息
-    2. 数据不足时诚实说明，不编造
+    2. 数据不足时立即报错，不生成任何降级内容
     3. 自然叙述，无结构化格式，完全连续流畅
     4. 严禁使用字符串拼接（parts.append + join）
     """
@@ -46,9 +46,9 @@ def _generate_github_narrative(data: Dict) -> str:
     stars = data.get('stars', 0)
     url = data.get('url', '')
     
-    # 如果没有足够数据，诚实说明
+    # 严格模式：没有足够数据立即报错，不生成降级内容
     if not description and not features:
-        return f"{name} 是一个GitHub开源项目。由于README信息有限，无法提供详细介绍。{url}"
+        raise RuntimeError(f"❌ 内容生成失败：{name} README信息不足。没有description和features，无法生成高质量内容。")
     
     # 构建内容 - 直接返回完整字符串，严禁使用 parts.append + join，完全连续流畅
     desc = tagline or description
@@ -79,14 +79,18 @@ def _generate_ph_narrative(data: Dict) -> str:
     votes = data.get('votes', 0)
     url = data.get('url', '')
     
-    # 如果没有足够数据
+    # 严格模式：没有足够数据立即报错
     if not tagline and not maker_desc:
-        return f"{name} 今天刚在 Product Hunt 上发布。详细信息还在收集中。{url}"
+        raise RuntimeError(f"❌ 内容生成失败：{name} Product Hunt数据不足。没有tagline和maker_description，无法生成内容。")
     
     # 直接构建完整内容，完全连续流畅
     votes_text = f"，目前已经拿了 {votes} 个 upvote" if votes > 50 else ""
-    desc_text = maker_desc[:200] if maker_desc else (f"它是一个 {tagline} 的工具" if tagline else "")
-    review_text = f"有用户评论说{reviews[0][:150]}..." if reviews else ""
+    desc_text = maker_desc[:200] if maker_desc else f"它是一个 {tagline} 的工具"
+    
+    if not reviews:
+        raise RuntimeError(f"❌ 内容生成失败：{name} 没有用户评论数据。无法生成基于真实反馈的内容。")
+    
+    review_text = f"有用户评论说{reviews[0][:150]}..."
     
     return f"{name} 今天刚在 Product Hunt 上发布{votes_text}。{desc_text} {review_text}建议先试用免费版看看是否符合自己的工作流。{url}"
 
@@ -100,25 +104,29 @@ def _generate_hn_narrative(data: Dict) -> str:
     external_url = data.get('external_url', '')
     url = data.get('url', '')
     
-    points_text = f"在 HackerNews 上引发了讨论，拿了 {points} points" if points > 100 else "在 HackerNews 上有讨论"
+    # 严格模式：没有评论数据立即报错
+    if not comments:
+        raise RuntimeError(f"❌ 内容生成失败：{title} 没有HN评论数据。无法生成基于社区讨论的内容。")
+    
+    points_text = f"在 HackerNews 上引发了讨论，拿了 {points} points，" if points > 100 else "在 HackerNews 上有讨论，"
     comment_count_text = f"评论区有 {comment_count} 条回复，" if comment_count > 10 else ""
     
-    first_comment = f"有人提到{comments[0][:200]}..." if comments else ""
+    first_comment = f"有人提到{comments[0][:200]}..."
     second_comment = f"还有人补充说{comments[1][:150]}..." if len(comments) > 1 else ""
     external_link_text = f"讨论的原项目在这里{external_url}。" if external_url else ""
     
-    return f"{title} {points_text}。{comment_count_text}{first_comment}{second_comment}{external_link_text}HN讨论{url}"
+    return f"{title} {points_text}{comment_count_text}{first_comment}{second_comment}{external_link_text}HN讨论{url}"
 
 def _generate_generic_narrative(data: Dict) -> str:
-    """通用叙述 - 直接返回完整f-string，完全连续"""
+    """通用叙述 - 直接返回完整f-string，完全连续。严格模式：无描述立即报错"""
     name = data.get('name', '')
     description = data.get('description', '')
     url = data.get('url', '')
     
-    if description:
-        return f"{name} {description[:200]}。{url}"
-    else:
-        return f"{name} 的详细信息还在收集中。{url}"
+    if not description:
+        raise RuntimeError(f"❌ 内容生成失败：{name} 没有description数据，无法生成内容。")
+    
+    return f"{name} {description[:200]}。{url}"
 
 # 质量检查
 def has_sufficient_data(scraped_data: Dict) -> bool:

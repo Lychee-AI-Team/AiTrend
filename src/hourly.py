@@ -197,16 +197,12 @@ def generate_unique_content(article: Article) -> str:
         first_sentence = sentences[0][:220]
         second_sentence = f" {sentences[1][:180]}" if len(sentences) > 1 else ""
         
-        # 必须基于真实信息，不能是通用描述
-        if 'github' in url.lower():
-            source_info = "代码开源在 GitHub 上。"
-        else:
-            # 非 GitHub 链接必须有具体描述，否则报错
-            if not summary or len(summary) < 50:
-                raise RuntimeError(f"❌ 内容生成失败：{product_name} 信息不足。非 GitHub 项目必须有详细描述才能生成内容。")
-            source_info = f"详细介绍：{summary[:100]}..."
+        # 必须基于真实信息，不能是通用描述，严格模式
+        if not summary or len(summary) < 50:
+            raise RuntimeError(f"❌ 内容生成失败：{product_name} 信息不足。summary长度{len(summary) if summary else 0}字符，需要至少50字符才能生成内容。")
         
-        content = f"{product_name} 是一个 {tagline} 的项目。{first_sentence}{second_sentence} {source_info} {url}"
+        # 直接引用真实数据，不加任何模板前缀
+        content = f"{product_name} 是一个 {tagline} 的项目。{first_sentence}{second_sentence} {summary[:120]}... {url}"
     
     return content
 
