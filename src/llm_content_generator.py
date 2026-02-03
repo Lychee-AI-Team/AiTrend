@@ -4,6 +4,10 @@ LLM内容生成器
 严格遵守AiTrend宪法文档要求
 
 配置入口：config/config.json -> summarizer.model
+
+重要变更：
+- 不再验证LLM输出（信任大模型质量）
+- 改为验证输入数据质量（确保输入有足够信息量）
 """
 import os
 import google.generativeai as genai
@@ -32,10 +36,69 @@ class LLMContentGenerator:
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(model_name)
     
+    def _validate_input(self, article_data: Dict) -> tuple[bool, str]:
+        """
+        验证输入数据质量
+        
+        验证规则：
+        1. 标题不能为空
+        2. 标题不能只有网址
+        3. 描述/摘要要有足够信息量（至少50字符）
+        4. URL不能为空
+        
+        Returns:
+            (是否合格, 不合格原因)
+        """
+        title = article_data.get('title', '').strip()
+        summary = article_data.get('summary', '').strip()
+        url = article_data.get('url', '').strip()
+        
+        # 检查标题
+        if not title:
+            return False, "标题为空"
+        
+        if len(title) < 3:
+            return False, f"标题过短（{len(title)}字符），至少需要3字符"
+        
+        # 检查标题是否只是网址
+        if title.startswith('http://') or title.startswith('https://'):
+            return False, "标题不能只是网址"
+        
+        # 检查URL
+        if not url:
+            return False, "URL为空"
+        
+        if not url.startswith('http://') and not url.startswith('https://'):
+            return False, "URL格式无效"
+        
+        # 检查描述/摘要的信息量
+        info_text = f"{title} {summary}".strip()
+        if len(info_text) < 50:
+            return False, f"输入信息不足（{len(info_text)}字符），标题+描述至少需要50字符"
+        
+        # 检查是否包含有效信息（不只是占位符）
+        meaningless_words = ['待补充', '暂无', 'unknown', 'n/a', 'null', 'none']
+        if summary.lower() in meaningless_words or len(summary.strip()) < 5:
+            # 如果summary无效，检查title是否足够长
+            if len(title) < 30:
+                return False, "描述无有效信息且标题过短"
+        
+        return True, ""
+    
     def generate(self, article_data: Dict) -> str:
         """
         基于文章数据生成独特内容
-        返回：生成的内容或抛出异常
+        
+        流程：
+        1. 验证输入数据质量（前置验证）
+        2. 使用LLM生成内容（信任大模型输出）
+        3. 确保URL在内容中
+        
+        Returns:
+            生成的内容
+        
+        Raises:
+            RuntimeError: 输入不合格或LLM生成失败
         """
         title = article_data.get('title', '')
         summary = article_data.get('summary', '')
@@ -43,21 +106,17 @@ class LLMContentGenerator:
         source = article_data.get('source', '')
         metadata = article_data.get('metadata', {})
         
+        # 【关键变更】验证输入数据质量，而非输出
+        is_valid, error_msg = self._validate_input(article_data)
+        if not is_valid:
+            raise RuntimeError(f"❌ 输入数据不合格：{error_msg}")
+        
         # 构建提示词
         prompt = self._build_prompt(title, summary, url, source, metadata)
         
         try:
             response = self.model.generate_content(prompt)
             content = response.text.strip()
-            
-            # 验证内容质量 - 严格检查宪法禁止项
-            is_low_quality, violation_reason = self._is_low_quality(content)
-            if is_low_quality:
-                # 记录违规内容用于调试
-                print(f"\n[DEBUG] 内容违规详情:")
-                print(f"[DEBUG] 违规原因: {violation_reason}")
-                print(f"[DEBUG] 生成的内容:\n{content[:300]}...")
-                raise RuntimeError(f"❌ LLM生成内容违反宪法：{violation_reason}")
             
             # 确保URL在内容中
             if url not in content:
@@ -107,54 +166,6 @@ class LLMContentGenerator:
 {base_info}
 
 直接输出介绍内容（不要加标题、不要加总结、不要分段）："""
-    
-    def _is_low_quality(self, content: str) -> tuple[bool, str]:
-        """检查是否低质量（违反宪法）
-        
-        Returns:
-            (是否低质量, 违反的具体模式)
-        """
-        # 宪法明确禁止的套话
-        forbidden_patterns = [
-            "最近发现",
-            "今天看到",
-            "找到一个",
-            "发现一个",
-            "最近",
-            "今天",
-            "这是一个",
-            "是一个",
-            "主要解决",
-            "主要功能",
-            "使用场景",
-            "技术细节",
-            "优缺点",
-            "详细介绍",
-            "详细信息",
-            "针对痛点",
-            "功能设计",
-            "架构清晰",
-            "旨在解决",
-        ]
-        
-        # 检查禁止的模式
-        for pattern in forbidden_patterns:
-            if pattern in content:
-                return True, f"包含禁止的套话: '{pattern}'"
-        
-        # 检查列表符号
-        list_symbols = ['- ', '* ', '• ', '1.', '2.', '3.']
-        for symbol in list_symbols:
-            if symbol in content:
-                return True, f"包含列表符号: '{symbol}'"
-        
-        # 检查序号词
-        sequence_words = ['第一', '第二', '第三', '首先', '其次', '最后']
-        for word in sequence_words:
-            if word in content:
-                return True, f"包含序号词: '{word}'"
-        
-        return False, ""
 
 # 单例
 _llm_generator = None
