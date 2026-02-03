@@ -3,6 +3,9 @@
 🔥 **AIホットスポット発見エンジン** - AI製品ニュースを自動収集・発信
 
 <p align="center">
+  <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Lychee-AI-Team/AiTrend/ci.yml?branch=main&style=flat-square" alt="CI">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
@@ -16,6 +19,45 @@
   <a href="README.ko.md">🇰🇷 한국어</a> •
   <a href="README.es.md">🇪🇸 Español</a>
 </p>
+
+---
+
+## 📸 スクリーンショット
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1033.PNG">
+        <img src="IMG_1033.PNG" width="100%" alt="Discord Forum プレビュー1"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1034.PNG">
+        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum プレビュー2"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1035.PNG">
+        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum プレビュー3"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1036.PNG">
+        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum プレビュー4"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1037.PNG">
+        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum プレビュー5"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <sub>サムネイルをクリックして拡大表示</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -70,6 +112,7 @@ AiTrend/
 │   └── hourly.py     # メインエントリ
 ├── config/           # 設定ファイル
 ├── docs/             # ドキュメント
+├── scripts/          # ツールスクリプト
 ├── install.sh        # インストールスクリプト
 ├── Dockerfile        # Dockerイメージ
 └── skill.yaml        # OpenClaw Skill記述
@@ -81,6 +124,7 @@ AiTrend/
 - [開発ガイド](docs/DEVELOPMENT_GUIDE.md)
 - [トラブルシューティング](docs/TROUBLESHOOTING.md)
 - [クイックリファレンス](docs/QUICK_REFERENCE.md)
+- [貢献ガイド](CONTRIBUTING.md)
 
 ## 🔧 対応チャネル
 
@@ -101,9 +145,17 @@ AiTrend/
 | Reddit | 不要 | AIコミュニティの議論 |
 | Tavily | 任意 | AI検索 |
 
+## 🤝 貢献
+
+すべての貢献を歓迎します！[貢献ガイド](CONTRIBUTING.md)をご覧ください。
+
 ## 📜 ライセンス
 
-MIT License
+[MIT License](LICENSE)
+
+## 🙏 謝辞
+
+このプロジェクトに貢献してくださったすべての方々に感謝します！
 
 ---
 

@@ -3,6 +3,9 @@
 🔥 **Motor de Descubrimiento de Tendencias AI** - Recolección y publicación automática de noticias de productos AI
 
 <p align="center">
+  <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Lychee-AI-Team/AiTrend/ci.yml?branch=main&style=flat-square" alt="CI">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
@@ -16,6 +19,45 @@
   <a href="README.ko.md">🇰🇷 한국어</a> •
   <a href="README.es.md">🇪🇸 Español</a>
 </p>
+
+---
+
+## 📸 Capturas de Pantalla
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1033.PNG">
+        <img src="IMG_1033.PNG" width="100%" alt="Discord Forum Vista Previa 1"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1034.PNG">
+        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum Vista Previa 2"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1035.PNG">
+        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum Vista Previa 3"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1036.PNG">
+        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum Vista Previa 4"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1037.PNG">
+        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum Vista Previa 5"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <sub>Haz clic en las miniaturas para ver en tamaño completo</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -70,6 +112,7 @@ AiTrend/
 │   └── hourly.py     # Entrada principal
 ├── config/           # Archivos de configuración
 ├── docs/             # Documentación
+├── scripts/          # Scripts de utilidad
 ├── install.sh        # Script de instalación
 ├── Dockerfile        # Imagen Docker
 └── skill.yaml        # Descripción OpenClaw Skill
@@ -81,6 +124,7 @@ AiTrend/
 - [Guía de Desarrollo](docs/DEVELOPMENT_GUIDE.md)
 - [Solución de Problemas](docs/TROUBLESHOOTING.md)
 - [Referencia Rápida](docs/QUICK_REFERENCE.md)
+- [Guía de Contribución](CONTRIBUTING.md)
 
 ## 🔧 Canales Soportados
 
@@ -101,9 +145,17 @@ AiTrend/
 | Reddit | No necesario | Discusiones de la comunidad AI |
 | Tavily | Opcional | Búsqueda AI |
 
+## 🤝 Contribuir
+
+¡Damos la bienvenida a todas las formas de contribución! Por favor consulta la [Guía de Contribución](CONTRIBUTING.md).
+
 ## 📜 Licencia
 
-MIT License
+[MIT License](LICENSE)
+
+## 🙏 Agradecimientos
+
+¡Gracias a todos los contribuidores por sus esfuerzos en este proyecto!
 
 ---
 

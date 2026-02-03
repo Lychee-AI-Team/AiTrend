@@ -22,6 +22,45 @@
 
 ---
 
+## 📸 运行效果
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1033.PNG">
+        <img src="IMG_1033.PNG" width="100%" alt="Discord Forum 效果1"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1034.PNG">
+        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum 效果2"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1035.PNG">
+        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum 效果3"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1036.PNG">
+        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum 效果4"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1037.PNG">
+        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum 效果5"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <sub>点击缩略图查看大图</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## ✨ 特性
 
 - 🧩 **模块化设计** - 自由组合信息源和输出渠道

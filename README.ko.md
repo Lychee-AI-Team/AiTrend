@@ -3,6 +3,9 @@
 🔥 **AI 핫스팟 발견 엔진** - AI 제품 뉴스를 자동 수집 및 발신
 
 <p align="center">
+  <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Lychee-AI-Team/AiTrend/ci.yml?branch=main&style=flat-square" alt="CI">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
@@ -16,6 +19,45 @@
   <a href="README.ko.md">🇰🇷 한국어</a> •
   <a href="README.es.md">🇪🇸 Español</a>
 </p>
+
+---
+
+## 📸 스크린샷
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1033.PNG">
+        <img src="IMG_1033.PNG" width="100%" alt="Discord Forum 미리보기1"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1034.PNG">
+        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum 미리보기2"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1035.PNG">
+        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum 미리보기3"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" align="center">
+      <a href="IMG_1036.PNG">
+        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum 미리보기4"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <a href="IMG_1037.PNG">
+        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum 미리보기5"/>
+      </a>
+    </td>
+    <td width="33%" align="center">
+      <sub>썸네일을 클릭하여 확대 보기</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -70,6 +112,7 @@ AiTrend/
 │   └── hourly.py     # 메인 엔트리
 ├── config/           # 설정 파일
 ├── docs/             # 문서
+├── scripts/          # 유틸리티 스크립트
 ├── install.sh        # 설치 스크립트
 ├── Dockerfile        # Docker 이미지
 └── skill.yaml        # OpenClaw Skill 설명
@@ -81,6 +124,7 @@ AiTrend/
 - [개발 가이드](docs/DEVELOPMENT_GUIDE.md)
 - [문제 해결](docs/TROUBLESHOOTING.md)
 - [퀵 레퍼런스](docs/QUICK_REFERENCE.md)
+- [기여 가이드](CONTRIBUTING.md)
 
 ## 🔧 지원 채널
 
@@ -101,9 +145,17 @@ AiTrend/
 | Reddit | 불필요 | AI 커뮤니티 토론 |
 | Tavily | 선택사항 | AI 검색 |
 
+## 🤝 기여
+
+모든 형태의 기여를 환영합니다! [기여 가이드](CONTRIBUTING.md)를 확인해 주세요.
+
 ## 📜 라이선스
 
-MIT License
+[MIT License](LICENSE)
+
+## 🙏 감사의 말
+
+이 프로젝트에 기여해 주신 모든 분들께 감사드립니다!
 
 ---
 
