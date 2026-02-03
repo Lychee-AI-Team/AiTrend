@@ -51,8 +51,13 @@ class LLMContentGenerator:
             content = response.text.strip()
             
             # 验证内容质量 - 严格检查宪法禁止项
-            if self._is_low_quality(content):
-                raise RuntimeError(f"❌ LLM生成内容违反宪法：检测到禁止的套话或模板化文字")
+            is_low_quality, violation_reason = self._is_low_quality(content)
+            if is_low_quality:
+                # 记录违规内容用于调试
+                print(f"\n[DEBUG] 内容违规详情:")
+                print(f"[DEBUG] 违规原因: {violation_reason}")
+                print(f"[DEBUG] 生成的内容:\n{content[:300]}...")
+                raise RuntimeError(f"❌ LLM生成内容违反宪法：{violation_reason}")
             
             # 确保URL在内容中
             if url not in content:
@@ -103,8 +108,12 @@ class LLMContentGenerator:
 
 直接输出介绍内容（不要加标题、不要加总结、不要分段）："""
     
-    def _is_low_quality(self, content: str) -> bool:
-        """检查是否低质量（违反宪法）"""
+    def _is_low_quality(self, content: str) -> tuple[bool, str]:
+        """检查是否低质量（违反宪法）
+        
+        Returns:
+            (是否低质量, 违反的具体模式)
+        """
         # 宪法明确禁止的套话
         forbidden_patterns = [
             "最近发现",
@@ -131,21 +140,21 @@ class LLMContentGenerator:
         # 检查禁止的模式
         for pattern in forbidden_patterns:
             if pattern in content:
-                return True
+                return True, f"包含禁止的套话: '{pattern}'"
         
         # 检查列表符号
         list_symbols = ['- ', '* ', '• ', '1.', '2.', '3.']
         for symbol in list_symbols:
             if symbol in content:
-                return True
+                return True, f"包含列表符号: '{symbol}'"
         
         # 检查序号词
         sequence_words = ['第一', '第二', '第三', '首先', '其次', '最后']
         for word in sequence_words:
             if word in content:
-                return True
+                return True, f"包含序号词: '{word}'"
         
-        return False
+        return False, ""
 
 # 单例
 _llm_generator = None
