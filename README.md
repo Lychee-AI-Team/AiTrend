@@ -3,6 +3,9 @@
 🔥 **AI 热点发现引擎** - 自动采集和发布 AI 产品资讯
 
 <p align="center">
+  <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Lychee-AI-Team/AiTrend/ci.yml?branch=main&style=flat-square" alt="CI">
+  </a>
   <img src="https://img.shields.io/badge/Python-3.9+-blue.svg?style=flat-square&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Version-0.3.0-orange.svg?style=flat-square" alt="Version">
