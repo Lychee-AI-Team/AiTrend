@@ -25,6 +25,8 @@ Thumbs.db
 
 # Environment variables
 .env
+.env.keys
+.env.*.backup
 
 # Python
 venv/
