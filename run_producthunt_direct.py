@@ -63,25 +63,13 @@ def generate_with_llm(candidate: Dict, index: int) -> str:
     
     logger.info(f"📝 生成内容: {name}")
     
-    # 构建上下文
-    context_parts = []
-    
-    if name:
-        context_parts.append(f"产品名: {name}")
-    
-    if tagline:
-        context_parts.append(f" Slogan: {tagline}")
-    
-    if description:
-        context_parts.append(f"介绍: {description[:400]}")
-    
-    if votes:
-        context_parts.append(f"投票: {votes}")
-    
-    if makers:
-        context_parts.append(f"团队: {', '.join(makers[:2])}")
-    
-    context = "\n".join(context_parts)
+    # 构建上下文 - 使用直接f-string，避免拼接
+    makers_text = ", ".join(makers[:2]) if makers else ""
+    context = f"""产品名: {name}
+Slogan: {tagline}
+介绍: {description[:400] if description else ""}
+投票: {votes}
+团队: {makers_text}"""
     
     # 开头多样化提示
     opening_styles = [

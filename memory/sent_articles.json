@@ -2,66 +2,6 @@
   "description": "记录已发送的文章，24小时内不重复",
   "articles": [
     {
-      "url": "https://www.producthunt.com/products/molthunt?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Molthunt ⭐183",
-      "sent_at": 1770048382.65695,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/moltbook?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] moltbook ⭐226",
-      "sent_at": 1770048382.65695,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/voice-anywhere-write-by-voice?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Voice Anywhere ⭐131",
-      "sent_at": 1770051967.6140096,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/portal-14?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Portal ⭐131",
-      "sent_at": 1770051967.6140096,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/VectifyAI/PageIndex",
-      "title": "VectifyAI/PageIndex ⭐12360",
-      "sent_at": 1770051967.6140096,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/design-in-the-browser?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Design In The Browser ⭐132",
-      "sent_at": 1770055226.7176042,
-      "sent_count": 1
-    },
-    {
-      "url": "https://www.producthunt.com/products/moltweet?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Moltweet ⭐117",
-      "sent_at": 1770055226.7176042,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/karpathy/nanochat",
-      "title": "karpathy/nanochat ⭐41528",
-      "sent_at": 1770055226.7176042,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/microsoft/agent-lightning",
-      "title": "microsoft/agent-lightning ⭐13235",
-      "sent_at": 1770058857.5054984,
-      "sent_count": 1
-    },
-    {
-      "url": "https://github.com/EbookFoundation/free-programming-books",
-      "title": "EbookFoundation/free-programming-books ⭐381913",
-      "sent_at": 1770058857.5054984,
-      "sent_count": 1
-    },
-    {
       "url": "https://www.producthunt.com/products/crisp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Hugo ⭐331",
       "sent_at": 1770134548.9080076,
@@ -83,6 +23,132 @@
       "url": "https://www.producthunt.com/products/lightfern?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Lightfern for Email ⭐128",
       "sent_at": 1770134575.5166903,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/helply?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Helply ⭐172",
+      "sent_at": 1770138078.3260329,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/findable-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] findable. ⭐217",
+      "sent_at": 1770138078.3260329,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/relay-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Relay.app Agents ⭐135",
+      "sent_at": 1770141624.8072848,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/memoryplugin-for-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] MemoryPlugin for OpenClaw ⭐113",
+      "sent_at": 1770141624.8072848,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/OpenBMB/ChatDev",
+      "title": "OpenBMB/ChatDev ⭐29725",
+      "sent_at": 1770141624.8072848,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/grok-com-beta?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Grok Imagine 1.0 ⭐134",
+      "sent_at": 1770141652.9046192,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Codex by OpenAI ⭐202",
+      "sent_at": 1770141652.9046192,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/karpathy/nanochat",
+      "title": "karpathy/nanochat ⭐41957",
+      "sent_at": 1770141652.9046192,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/heuris?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "title": "[Product Hunt] Heuris ⭐116",
+      "sent_at": 1770145235.9773242,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/VectifyAI/PageIndex",
+      "title": "VectifyAI/PageIndex ⭐12887",
+      "sent_at": 1770145235.9773242,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/shareAI-lab/learn-claude-code",
+      "title": "shareAI-lab/learn-claude-code ⭐16268",
+      "sent_at": 1770145235.9773242,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/EbookFoundation/free-programming-books",
+      "title": "EbookFoundation/free-programming-books ⭐382003",
+      "sent_at": 1770145263.018384,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/xerrors/Yuxi-Know",
+      "title": "xerrors/Yuxi-Know ⭐0",
+      "sent_at": 1770145263.018384,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/jingyaogong/minimind",
+      "title": "jingyaogong/minimind ⭐38635",
+      "sent_at": 1770148839.3613365,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "title": "TauricResearch/TradingAgents ⭐29163",
+      "sent_at": 1770148839.3613365,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/microsoft/autogen",
+      "title": "microsoft/autogen ⭐54230",
+      "sent_at": 1770148862.5977178,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/vanna-ai/vanna",
+      "title": "vanna-ai/vanna ⭐22510",
+      "sent_at": 1770148862.5977178,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/virattt/dexter",
+      "title": "virattt/dexter ⭐10029",
+      "sent_at": 1770152444.0742097,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/pedramamini/Maestro",
+      "title": "pedramamini/Maestro ⭐1471",
+      "sent_at": 1770152444.0742097,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/Canner/WrenAI",
+      "title": "Canner/WrenAI ⭐13777",
+      "sent_at": 1770152466.5849428,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/open-metadata/OpenMetadata",
+      "title": "open-metadata/OpenMetadata ⭐0",
+      "sent_at": 1770152466.5849428,
       "sent_count": 1
     }
   ]
