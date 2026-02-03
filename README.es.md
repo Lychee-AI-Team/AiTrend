@@ -70,7 +70,15 @@
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
-./install.sh
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+nano .env
+
+# 运行
+python3 -m src.hourly
 ```
 
 ### Opción 2: Despliegue Docker

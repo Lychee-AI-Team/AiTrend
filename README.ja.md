@@ -1,6 +1,6 @@
 # AiTrend v0.3.0
 
-🔥 **AIホットスポット発見エンジン** - AI製品ニュースを自動収集・発信
+🔥 **AIホットトピック発見エンジン** - AI製品ニュースを自動収集・公開
 
 <p align="center">
   <a href="https://github.com/Lychee-AI-Team/AiTrend/actions">
@@ -22,55 +22,31 @@
 
 ---
 
-## 📸 スクリーンショット
+## ✨ 特徴
 
-<table>
-  <tr>
-    <td width="50%" align="center">
-      <a href="IMG_1034.PNG">
-        <img src="IMG_1034.PNG" width="100%" alt="Discord Forum プレビュー1"/>
-      </a>
-    </td>
-    <td width="50%" align="center">
-      <a href="IMG_1035.PNG">
-        <img src="IMG_1035.PNG" width="100%" alt="Discord Forum プレビュー2"/>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <a href="IMG_1036.PNG">
-        <img src="IMG_1036.PNG" width="100%" alt="Discord Forum プレビュー3"/>
-      </a>
-    </td>
-    <td width="50%" align="center">
-      <a href="IMG_1037.PNG">
-        <img src="IMG_1037.PNG" width="100%" alt="Discord Forum プレビュー4"/>
-      </a>
-    </td>
-  </tr>
-</table>
-
-<sub align="center">サムネイルをクリックして拡大表示</sub>
-
----
-
-## ✨ 機能
-
-- 🧩 **モジュール設計** - 情報源と出力チャネルを自由に組み合わせ
-- 🤖 **AIコンテンツ生成** - Geminiを使用して高品質な説明を自動生成
-- 📊 **マルチソース対応** - GitHub、Product Hunt、HackerNews、Reddit、Tavily
-- 📢 **マルチチャネル配信** - Discord、Telegram、Feishu
+- 🧩 **モジュール化設計** - 情報源と出力チャンネルを自由に組み合わせ
+- 🤖 **AIコンテンツ生成** - Geminiを使用して高品質な日本語紹介を自動生成
+- 📊 **複数データソース対応** - GitHub、Product Hunt、HackerNews、Reddit、Tavily
+- 📢 **複数チャンネル公開** - Discord、Telegram、Feishu
 - 🔄 **自動重複排除** - 24時間スライディングウィンドウで重複防止
 
 ## 🚀 クイックスタート
 
-### 方法1：ワンクリックインストール
+### 方法1：手動インストール
 
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
-./install.sh
+
+# 依存関係をインストール
+pip install -r requirements.txt
+
+# 環境変数を設定
+cp .env.example .env
+nano .env
+
+# 実行
+python3 -m src.hourly
 ```
 
 ### 方法2：Dockerデプロイ
@@ -79,37 +55,50 @@ cd AiTrend
 docker-compose up -d
 ```
 
-### 設定
+### 設定要件
 
-```bash
-# 1. APIキーを設定
-nano .env.keys
+必要な環境変数（`.env`ファイル）：
+- `GEMINI_API_KEY` - Gemini APIキー
+- `DISCORD_WEBHOOK_URL` - Discord Webhook URL
 
-# 必須：
-# - GEMINI_API_KEY
-# - DISCORD_WEBHOOK_URL
-
-# 2. 設定を編集
-nano config/config.yaml
-
-# 3. 実行
-python3 -m src.hourly
-```
+オプション：
+- `PRODUCTHUNT_TOKEN` - Product Hunt APIトークン
+- `TAVILY_API_KEY` - Tavily APIキー
 
 ## 📁 プロジェクト構成
 
 ```
 AiTrend/
-├── src/              # コアコード
-│   ├── sources/      # データソースモジュール
-│   ├── core/         # コア機能
-│   └── hourly.py     # メインエントリ
-├── config/           # 設定ファイル
-├── docs/             # ドキュメント
-├── scripts/          # ツールスクリプト
-├── install.sh        # インストールスクリプト
-├── Dockerfile        # Dockerイメージ
-└── skill.yaml        # OpenClaw Skill記述
+├── src/                    # コアコード
+│   ├── __main__.py        # モジュールエントリ
+│   ├── hourly.py          # メイン実行ロジック
+│   ├── llm_content_generator.py  # LLMコンテンツ生成
+│   ├── sources/           # データソースモジュール
+│   │   ├── base.py
+│   │   ├── github_trending.py
+│   │   ├── producthunt.py
+│   │   ├── reddit.py
+│   │   ├── tavily.py
+│   │   ├── hackernews.py
+│   │   └── twitter.py
+│   └── core/              # コアサービス
+│       ├── config_loader.py
+│       ├── deduplicator.py
+│       └── webhook_sender.py
+├── publishers/            # 公開モジュール
+│   ├── base.py
+│   ├── forum_publisher.py
+│   └── text_publisher.py
+├── tests/                 # テストディレクトリ
+├── config/                # 設定ファイル
+│   ├── config.json
+│   └── config.example.yaml
+├── docs/                  # ドキュメント
+├── scripts/               # ユーティリティスクリプト
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── skill.yaml
 ```
 
 ## 📄 ドキュメント
@@ -117,40 +106,31 @@ AiTrend/
 - [APIキー設定ガイド](docs/API_KEY_SETUP.md)
 - [開発ガイド](docs/DEVELOPMENT_GUIDE.md)
 - [トラブルシューティング](docs/TROUBLESHOOTING.md)
-- [クイックリファレンス](docs/QUICK_REFERENCE.md)
 - [貢献ガイド](CONTRIBUTING.md)
 
-## 🔧 対応チャネル
+## 🔧 サポートチャンネル
 
-| チャネル | 状態 | 説明 |
-|----------|------|------|
-| Discord Forum | ✅ 対応済 | 毎日のスレッドを自動作成 |
-| Discord Text | ✅ 対応済 | テキストチャネルに送信 |
-| Telegram | 🚧 開発中 | 近日公開 |
-| Feishu | 🚧 開発中 | 近日公開 |
+| チャンネル | 状態 | 説明 |
+|------|------|------|
+| Discord Forum | ✅ サポート済 | 自動で毎日のトピック投稿を作成 |
+| Discord Text | ✅ サポート済 | テキストチャンネルに送信 |
+| Telegram | 🚧 開発中 | 近日サポート予定 |
+| Feishu | 🚧 開発中 | 近日サポート予定 |
 
 ## 📊 データソース
 
-| ソース | APIキー | 説明 |
+| データソース | APIキー | 説明 |
 |--------|---------|------|
-| GitHub Trending | 任意 | 人気のAIプロジェクト |
-| Product Hunt | 任意 | 新製品リリース |
-| HackerNews | 不要 | 開発者コミュニティの注目トピック |
-| Reddit | 不要 | AIコミュニティの議論 |
-| Tavily | 任意 | AI検索 |
+| GitHub Trending | オプション | 人気AIプロジェクト |
+| Product Hunt | オプション | 新製品リリース |
+| HackerNews | 不要 | 開発者コミュニティのホットトピック |
+| Reddit | 不要 | AIコミュニティ議論 |
+| Tavily | オプション | AI検索 |
 
 ## 🤝 貢献
 
-すべての貢献を歓迎します！[貢献ガイド](CONTRIBUTING.md)をご覧ください。
+あらゆる形の貢献を歓迎します！[貢献ガイド](CONTRIBUTING.md)をご覧ください。
 
 ## 📜 ライセンス
 
 [MIT License](LICENSE)
-
-## 🙏 謝辞
-
-このプロジェクトに貢献してくださったすべての方々に感謝します！
-
----
-
-**GitHub**: https://github.com/Lychee-AI-Team/AiTrend

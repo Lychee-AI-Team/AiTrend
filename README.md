@@ -65,12 +65,21 @@
 
 ## 🚀 快速开始
 
-### 方式1：一键安装
+### 方式1：手动安装
 
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
-./install.sh
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+nano .env
+
+# 运行
+python3 -m src.hourly
 ```
 
 ### 方式2：Docker 部署
@@ -79,37 +88,50 @@ cd AiTrend
 docker-compose up -d
 ```
 
-### 配置
+### 配置要求
 
-```bash
-# 1. 配置 API Key
-nano .env.keys
+必需的环境变量（`.env` 文件）：
+- `GEMINI_API_KEY` - Gemini API 密钥
+- `DISCORD_WEBHOOK_URL` - Discord Webhook URL
 
-# 必需：
-# - GEMINI_API_KEY
-# - DISCORD_WEBHOOK_URL
-
-# 2. 编辑配置
-nano config/config.yaml
-
-# 3. 运行
-python3 -m src.hourly
-```
+可选：
+- `PRODUCTHUNT_TOKEN` - Product Hunt API 令牌
+- `TAVILY_API_KEY` - Tavily API 密钥
 
 ## 📁 项目结构
 
 ```
 AiTrend/
-├── src/              # 核心代码
-│   ├── sources/      # 信息源模块
-│   ├── core/         # 核心功能
-│   └── hourly.py     # 主入口
-├── config/           # 配置文件
-├── docs/             # 文档
-├── scripts/          # 工具脚本
-├── install.sh        # 安装脚本
-├── Dockerfile        # Docker 镜像
-└── skill.yaml        # OpenClaw Skill 描述
+├── src/                    # 核心代码
+│   ├── __main__.py        # 模块入口
+│   ├── hourly.py          # 主运行逻辑
+│   ├── llm_content_generator.py  # LLM内容生成
+│   ├── sources/           # 数据源模块
+│   │   ├── base.py
+│   │   ├── github_trending.py
+│   │   ├── producthunt.py
+│   │   ├── reddit.py
+│   │   ├── tavily.py
+│   │   ├── hackernews.py
+│   │   └── twitter.py
+│   └── core/              # 核心服务
+│       ├── config_loader.py
+│       ├── deduplicator.py
+│       └── webhook_sender.py
+├── publishers/            # 发布模块
+│   ├── base.py
+│   ├── forum_publisher.py
+│   └── text_publisher.py
+├── tests/                 # 测试目录
+├── config/                # 配置文件
+│   ├── config.json
+│   └── config.example.yaml
+├── docs/                  # 文档
+├── scripts/               # 工具脚本
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── skill.yaml
 ```
 
 ## 📄 文档

@@ -65,12 +65,21 @@
 
 ## 🚀 Quick Start
 
-### Option 1: One-click Install
+### Option 1: Manual Install
 
 ```bash
 git clone https://github.com/Lychee-AI-Team/AiTrend.git
 cd AiTrend
-./install.sh
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment
+cp .env.example .env
+nano .env
+
+# Run
+python3 -m src.hourly
 ```
 
 ### Option 2: Docker Deploy
@@ -79,37 +88,50 @@ cd AiTrend
 docker-compose up -d
 ```
 
-### Configuration
+### Configuration Requirements
 
-```bash
-# 1. Configure API Keys
-nano .env.keys
+Required environment variables (`.env` file):
+- `GEMINI_API_KEY` - Gemini API key
+- `DISCORD_WEBHOOK_URL` - Discord Webhook URL
 
-# Required:
-# - GEMINI_API_KEY
-# - DISCORD_WEBHOOK_URL
-
-# 2. Edit config
-nano config/config.yaml
-
-# 3. Run
-python3 -m src.hourly
-```
+Optional:
+- `PRODUCTHUNT_TOKEN` - Product Hunt API token
+- `TAVILY_API_KEY` - Tavily API key
 
 ## 📁 Project Structure
 
 ```
 AiTrend/
-├── src/              # Core code
-│   ├── sources/      # Data source modules
-│   ├── core/         # Core functionality
-│   └── hourly.py     # Main entry
-├── config/           # Configuration files
-├── docs/             # Documentation
-├── scripts/          # Utility scripts
-├── install.sh        # Install script
-├── Dockerfile        # Docker image
-└── skill.yaml        # OpenClaw Skill description
+├── src/                    # Core code
+│   ├── __main__.py        # Module entry
+│   ├── hourly.py          # Main runtime logic
+│   ├── llm_content_generator.py  # LLM content generation
+│   ├── sources/           # Data source modules
+│   │   ├── base.py
+│   │   ├── github_trending.py
+│   │   ├── producthunt.py
+│   │   ├── reddit.py
+│   │   ├── tavily.py
+│   │   ├── hackernews.py
+│   │   └── twitter.py
+│   └── core/              # Core services
+│       ├── config_loader.py
+│       ├── deduplicator.py
+│       └── webhook_sender.py
+├── publishers/            # Publisher modules
+│   ├── base.py
+│   ├── forum_publisher.py
+│   └── text_publisher.py
+├── tests/                 # Test directory
+├── config/                # Configuration files
+│   ├── config.json
+│   └── config.example.yaml
+├── docs/                  # Documentation
+├── scripts/               # Utility scripts
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── skill.yaml
 ```
 
 ## 📄 Documentation
