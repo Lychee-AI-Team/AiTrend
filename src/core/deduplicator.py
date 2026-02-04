@@ -5,11 +5,30 @@
 import json
 import os
 import time
+import urllib.parse
+import re
 from typing import List, Dict, Set
 from src.sources.base import Article
 
 class ArticleDeduplicator:
     """文章去重器 - 24小时滑动窗口"""
+    
+    # 常见的跟踪参数列表
+    TRACKING_PARAMS = {
+        'srsltid',      # Google 搜索跟踪
+        'utm_source',   # UTM 参数
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+        'fbclid',       # Facebook 跟踪
+        'gclid',        # Google Ads 跟踪
+        'ref',          # 推荐来源
+        'source',
+        'cid',          # Campaign ID
+        'mc_cid',       # Mailchimp Campaign ID
+        'mc_eid',       # Mailchimp Email ID
+    }
     
     def __init__(self, memory_path: str = None):
         if memory_path is None:
@@ -22,6 +41,38 @@ class ArticleDeduplicator:
         
         # 确保目录存在
         os.makedirs(os.path.dirname(memory_path), exist_ok=True)
+    
+    def normalize_url(self, url: str) -> str:
+        """规范化URL，移除跟踪参数"""
+        if not url:
+            return url
+        
+        try:
+            parsed = urllib.parse.urlparse(url)
+            
+            # 解析查询参数
+            query_params = urllib.parse.parse_qsl(parsed.query)
+            
+            # 过滤掉跟踪参数（不区分大小写）
+            filtered_params = [
+                (k, v) for k, v in query_params 
+                if k.lower() not in self.TRACKING_PARAMS
+            ]
+            
+            # 重新构建查询字符串
+            new_query = urllib.parse.urlencode(filtered_params)
+            
+            # 重建 URL
+            normalized = parsed._replace(query=new_query)
+            result = urllib.parse.urlunparse(normalized)
+            
+            # 移除末尾的 ? 或 &
+            result = result.rstrip('?&')
+            
+            return result
+        except Exception:
+            # 解析失败返回原 URL
+            return url
     
     def load_sent_articles(self) -> List[Dict]:
         """加载已发送的文章记录"""
@@ -50,13 +101,20 @@ class ArticleDeduplicator:
         if not url:
             return False
         
+        # 规范化 URL
+        normalized_url = self.normalize_url(url)
+        
         sent_articles = self.load_sent_articles()
         current_time = time.time()
         window_seconds = self.window_hours * 3600
         
         for article in sent_articles:
-            # URL匹配
-            if article.get('url') == url:
+            # 获取已发送文章的 URL（优先使用规范化 URL）
+            article_url = article.get('normalized_url') or article.get('url', '')
+            article_normalized = self.normalize_url(article_url)
+            
+            # URL匹配（比较规范化后的 URL）
+            if article_normalized == normalized_url:
                 sent_at = article.get('sent_at', 0)
                 # 检查是否在24小时内
                 if current_time - sent_at < window_seconds:
@@ -86,17 +144,28 @@ class ArticleDeduplicator:
             if current_time - a.get('sent_at', 0) < window_seconds
         ]
         
-        # 添加新记录
-        existing_urls = {a.get('url') for a in sent_articles}
+        # 构建已存在的规范化 URL 集合
+        existing_normalized_urls = {
+            self.normalize_url(a.get('normalized_url') or a.get('url', ''))
+            for a in sent_articles
+        }
         
         for article in articles:
-            if article.url and article.url not in existing_urls:
+            if not article.url:
+                continue
+            
+            normalized_url = self.normalize_url(article.url)
+            
+            # 检查是否已存在（比较规范化后的 URL）
+            if normalized_url not in existing_normalized_urls:
                 sent_articles.append({
-                    'url': article.url,
+                    'url': article.url,                    # 原始 URL
+                    'normalized_url': normalized_url,      # 规范化后的 URL
                     'title': article.title,
                     'sent_at': current_time,
                     'sent_count': 1
                 })
+                existing_normalized_urls.add(normalized_url)
         
         self.save_sent_articles(sent_articles)
     

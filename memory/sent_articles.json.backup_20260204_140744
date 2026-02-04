@@ -5,449 +5,439 @@
       "url": "https://www.producthunt.com/products/crisp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Hugo ⭐331",
       "sent_at": 1770134548.9080076,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/crisp"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/atoms-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Atoms ⭐256",
       "sent_at": 1770134548.9080076,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/atoms-5"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/trupeer?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] AI Doc Writer by Trupeer ⭐194",
       "sent_at": 1770134575.5166903,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/trupeer"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/lightfern?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Lightfern for Email ⭐128",
       "sent_at": 1770134575.5166903,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/lightfern"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/helply?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Helply ⭐172",
       "sent_at": 1770138078.3260329,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/helply"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/findable-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] findable. ⭐217",
       "sent_at": 1770138078.3260329,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/findable-3"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/relay-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Relay.app Agents ⭐135",
       "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/relay-app"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/memoryplugin-for-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] MemoryPlugin for OpenClaw ⭐113",
       "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/memoryplugin-for-openclaw"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/OpenBMB/ChatDev",
       "title": "OpenBMB/ChatDev ⭐29725",
       "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/OpenBMB/ChatDev"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/grok-com-beta?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Grok Imagine 1.0 ⭐134",
       "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/grok-com-beta"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Codex by OpenAI ⭐202",
       "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/openai"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/karpathy/nanochat",
       "title": "karpathy/nanochat ⭐41957",
       "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/karpathy/nanochat"
+      "sent_count": 1
     },
     {
       "url": "https://www.producthunt.com/products/heuris?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
       "title": "[Product Hunt] Heuris ⭐116",
       "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/heuris"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/VectifyAI/PageIndex",
       "title": "VectifyAI/PageIndex ⭐12887",
       "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/VectifyAI/PageIndex"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/shareAI-lab/learn-claude-code",
       "title": "shareAI-lab/learn-claude-code ⭐16268",
       "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/shareAI-lab/learn-claude-code"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/EbookFoundation/free-programming-books",
       "title": "EbookFoundation/free-programming-books ⭐382003",
       "sent_at": 1770145263.018384,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/EbookFoundation/free-programming-books"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/xerrors/Yuxi-Know",
       "title": "xerrors/Yuxi-Know ⭐0",
       "sent_at": 1770145263.018384,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/xerrors/Yuxi-Know"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/jingyaogong/minimind",
       "title": "jingyaogong/minimind ⭐38635",
       "sent_at": 1770148839.3613365,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/jingyaogong/minimind"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/TauricResearch/TradingAgents",
       "title": "TauricResearch/TradingAgents ⭐29163",
       "sent_at": 1770148839.3613365,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/TauricResearch/TradingAgents"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/microsoft/autogen",
       "title": "microsoft/autogen ⭐54230",
       "sent_at": 1770148862.5977178,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/microsoft/autogen"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/vanna-ai/vanna",
       "title": "vanna-ai/vanna ⭐22510",
       "sent_at": 1770148862.5977178,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/vanna-ai/vanna"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/virattt/dexter",
       "title": "virattt/dexter ⭐10029",
       "sent_at": 1770152444.0742097,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/virattt/dexter"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/pedramamini/Maestro",
       "title": "pedramamini/Maestro ⭐1471",
       "sent_at": 1770152444.0742097,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/pedramamini/Maestro"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/Canner/WrenAI",
       "title": "Canner/WrenAI ⭐13777",
       "sent_at": 1770152466.5849428,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/Canner/WrenAI"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/open-metadata/OpenMetadata",
       "title": "open-metadata/OpenMetadata ⭐0",
       "sent_at": 1770152466.5849428,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/open-metadata/OpenMetadata"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/amantus-ai/vibetunnel",
       "title": "amantus-ai/vibetunnel ⭐3743",
       "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/amantus-ai/vibetunnel"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/activepieces/activepieces",
       "title": "activepieces/activepieces ⭐0",
       "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/activepieces/activepieces"
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=auZZn7yvaAI",
       "title": "Best AI Tools for 2026 PT2 - YouTube",
       "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=auZZn7yvaAI"
+      "sent_count": 1
     },
     {
       "url": "https://github.com/gemini-cli-extensions/security",
       "title": "gemini-cli-extensions/security ⭐546",
       "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/gemini-cli-extensions/security"
+      "sent_count": 1
     },
     {
       "url": "https://llm-stats.com/ai-news",
       "title": "AI News - LLM Stats",
       "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://llm-stats.com/ai-news"
+      "sent_count": 1
     },
     {
       "url": "https://navigotechsolutions.com/blog/top-25-ai-tools-in-2026/",
       "title": "Top 25 AI Tools in 2026 - navigotechsolutions.com",
       "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://navigotechsolutions.com/blog/top-25-ai-tools-in-2026/"
+      "sent_count": 1
     },
     {
       "url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
       "title": "Top 10 AI Tools for 2026 - DataNorth AI",
       "sent_at": 1770156058.120294,
-      "sent_count": 1,
-      "normalized_url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026"
+      "sent_count": 1
     },
     {
       "url": "https://newvision-software.com/blogs/ai-tools-for-digital-transformation-2026/",
       "title": "Best AI Tools Powering Digital Transformation in 2026",
       "sent_at": 1770156058.120294,
-      "sent_count": 1,
-      "normalized_url": "https://newvision-software.com/blogs/ai-tools-for-digital-transformation-2026/"
+      "sent_count": 1
     },
     {
       "url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
       "title": "The Best AI Tools for 2026 - Medium",
       "sent_at": 1770156083.8009725,
-      "sent_count": 1,
-      "normalized_url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b"
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/ChatGPT/comments/1pyrlzw/list_of_ai_tools_to_look_at_in_2026/",
       "title": "List of AI tools to look at in 2026 : r/ChatGPT - Reddit",
       "sent_at": 1770156083.8009725,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ChatGPT/comments/1pyrlzw/list_of_ai_tools_to_look_at_in_2026/"
+      "sent_count": 1
     },
     {
       "url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
       "title": "Top 10 AI Tools for Business in 2026 - Express Analytics",
       "sent_at": 1770156437.7104652,
-      "sent_count": 1,
-      "normalized_url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026"
+      "sent_count": 1
     },
     {
-      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOopyVKuHCKbq7s57gkVzYieR8K7IYXudkZycgFw_g0un0CSW8EtD",
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOopjOVqDkqlhKwrLSOF6wK5QodCF1-aWmZ7vfVhVV6uKNNsLixvY",
       "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
-      "sent_at": 1770184934.9073575,
-      "sent_count": 1,
-      "normalized_url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/"
+      "sent_at": 1770156437.7104652,
+      "sent_count": 1
     },
     {
       "url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
       "title": "Generative coding: 10 Breakthrough Technologies 2026",
       "sent_at": 1770156635.9336305,
-      "sent_count": 1,
-      "normalized_url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/"
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/GeminiAI/comments/1qe5a0x/what_are_the_most_useful_ai_tools_in_2026_heres/",
       "title": "What Are the Most Useful AI Tools in 2026? Here's What I Actually ...",
       "sent_at": 1770156635.9336305,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/GeminiAI/comments/1qe5a0x/what_are_the_most_useful_ai_tools_in_2026_heres/"
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/ProductivityApps/comments/1pj0l1z/best_ai_tools_in_2026_youve_probably_never_heard/",
       "title": "Best AI Tools in 2026 You've Probably Never Heard Of (But ... - Reddit",
       "sent_at": 1770156903.5914228,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ProductivityApps/comments/1pj0l1z/best_ai_tools_in_2026_youve_probably_never_heard/"
+      "sent_count": 1
     },
     {
       "url": "https://www.zignuts.com/ai-models",
       "title": "AI Models & Versions - Zignuts Technolab",
       "sent_at": 1770156903.5914228,
-      "sent_count": 1,
-      "normalized_url": "https://www.zignuts.com/ai-models"
+      "sent_count": 1
     },
     {
       "url": "https://tech.yahoo.com/ai/articles/every-ai-tool-2026-170103669.html",
       "title": "Every AI Tool You Need in 2026 - Yahoo! Tech",
       "sent_at": 1770157096.127028,
-      "sent_count": 1,
-      "normalized_url": "https://tech.yahoo.com/ai/articles/every-ai-tool-2026-170103669.html"
+      "sent_count": 1
     },
     {
       "url": "https://aitechin.substack.com/p/45-ai-tools-in-2026-that-youll-actually",
       "title": "45 AI Tools in 2026 That You'll Actually Use (Not Just Save & Forget)",
       "sent_at": 1770157096.127028,
-      "sent_count": 1,
-      "normalized_url": "https://aitechin.substack.com/p/45-ai-tools-in-2026-that-youll-actually"
+      "sent_count": 1
     },
     {
       "url": "https://zapier.com/blog/best-ai-productivity-tools/",
       "title": "The best AI productivity tools in 2026 - Zapier",
       "sent_at": 1770157423.134309,
-      "sent_count": 1,
-      "normalized_url": "https://zapier.com/blog/best-ai-productivity-tools/"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoq_DzUO7l7Ty1lmCNZqxzxS7H0LdvbBmZA17Qq_45arn-Y2Kbaj",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770157423.134309,
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
       "title": "List of AI models released this month : r/ArtificialInteligence - Reddit",
       "sent_at": 1770159739.3522818,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoosg4UkNrqoSiPH4ixLyTJTQr-J9WRUfgTDPYEk1gLuj1zQmFyI",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770159739.3522818,
+      "sent_count": 1
     },
     {
       "url": "https://www.analyticsvidhya.com/blog/2025/06/ai-tools-everyone-is-using/",
       "title": "12 AI Tools Everyone is Using in 2026",
       "sent_at": 1770159829.8776143,
-      "sent_count": 1,
-      "normalized_url": "https://www.analyticsvidhya.com/blog/2025/06/ai-tools-everyone-is-using/"
+      "sent_count": 1
     },
     {
       "url": "https://llm-stats.com/llm-updates",
       "title": "AI Updates Today (February 2026) – Latest AI Model ... - LLM Stats",
       "sent_at": 1770159829.8776143,
-      "sent_count": 1,
-      "normalized_url": "https://llm-stats.com/llm-updates"
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=z-s5xqMJK4A",
       "title": "I Tested 230+ AI Tools: These 15 Will Be Hot in 2026 - YouTube",
       "sent_at": 1770163325.3128357,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=z-s5xqMJK4A"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOooZt3q5vQ8socjzqFJgIl0XAGM9tPoh8QzYHG0ub4mmhFP3J2cN",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770163325.3128357,
+      "sent_count": 1
     },
     {
       "url": "https://lastweekin.ai/",
       "title": "Last Week in AI | Substack",
       "sent_at": 1770163361.5902748,
-      "sent_count": 1,
-      "normalized_url": "https://lastweekin.ai/"
+      "sent_count": 1
     },
     {
       "url": "https://www.techradar.com/best/best-ai-tools",
       "title": "I tried 70+ best AI tools in 2026 - TechRadar",
       "sent_at": 1770166938.1314864,
-      "sent_count": 1,
-      "normalized_url": "https://www.techradar.com/best/best-ai-tools"
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=w5YvRT3dOEE",
       "title": "The 14 Best AI Tools in 2026 (Backed by Data) - YouTube",
       "sent_at": 1770166938.1314864,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=w5YvRT3dOEE"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOopWiwtZqnw3F6aYNYH8L9wF8YFce8nyAT-QWibijqwGnxIbNoxc",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770167110.1447058,
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=F-ANHe_hr9w",
       "title": "New #1 open-source AI model is WILD - YouTube",
       "sent_at": 1770167110.1447058,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=F-ANHe_hr9w"
+      "sent_count": 1
     },
     {
       "url": "https://www.usiq.org/these-ai-tools-you-must-use-in-2026/",
       "title": "These AI Tools You Must Use in 2026 - USIQ certification",
       "sent_at": 1770167171.4499893,
-      "sent_count": 1,
-      "normalized_url": "https://www.usiq.org/these-ai-tools-you-must-use-in-2026/"
+      "sent_count": 1
     },
     {
       "url": "https://aioperator.com/blog/top-10-ai-tools-to-try-in-2026",
       "title": "Top 10 AI tools to try in 2026 | AI Operator",
       "sent_at": 1770167321.6788042,
-      "sent_count": 1,
-      "normalized_url": "https://aioperator.com/blog/top-10-ai-tools-to-try-in-2026"
+      "sent_count": 1
     },
     {
       "url": "https://ai.plainenglish.io/top-ai-tools-to-know-in-2026-boost-productivity-creativity-and-automation-0c0fcdfb991f",
       "title": "Top AI Tools to Know in 2026: Boost Productivity, Creativity, and ...",
       "sent_at": 1770167321.6788042,
-      "sent_count": 1,
-      "normalized_url": "https://ai.plainenglish.io/top-ai-tools-to-know-in-2026-boost-productivity-creativity-and-automation-0c0fcdfb991f"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoq6lOeK80mgQ8qPw2edFrsSRhBn6_oNoQws6ksiWO8LQRcYrfWr",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770170512.7483897,
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/singularity/comments/1lnayv6/what_ai_models_are_expected_to_be_released_in_the/",
       "title": "What AI Models are expected to be released in the next 2 months ...",
       "sent_at": 1770170512.7483897,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/singularity/comments/1lnayv6/what_ai_models_are_expected_to_be_released_in_the/"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoqaRpwcEo3csaCT_U0DOrbg3w1u7AFall9uRrcvUbdBHycRJNqw",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770174111.1221774,
+      "sent_count": 1
     },
     {
       "url": "https://www.timesofai.com/industry-insights/roundup-of-ai-model-releases-in-2025/",
       "title": "AI Model Releases in 2025: The Roundup of AI Launches",
       "sent_at": 1770174111.1221774,
-      "sent_count": 1,
-      "normalized_url": "https://www.timesofai.com/industry-insights/roundup-of-ai-model-releases-in-2025/"
+      "sent_count": 1
     },
     {
       "url": "https://www.fullstackacademy.com/blog/best-generative-ai-tools",
       "title": "12 Top-Rated Generative AI Tools in 2026: Your Expert Guide",
       "sent_at": 1770177716.9098616,
-      "sent_count": 1,
-      "normalized_url": "https://www.fullstackacademy.com/blog/best-generative-ai-tools"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoosjpxM7OaW98QJZVoEvftSGhtB66Hoz87Gh4SXoFTPNm5GKW54",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770177716.9098616,
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/AIAssisted/comments/1par976/ai_tools_im_going_into_2026_with_more_than_10/",
       "title": "AI Tools I'm Going Into 2026 With (More Than 10!) - Reddit",
       "sent_at": 1770177843.8127546,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/AIAssisted/comments/1par976/ai_tools_im_going_into_2026_with_more_than_10/"
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=1KUKh7TofLg",
       "title": "The 5 Most Impactful AI Model Releases of 2025 - YouTube",
       "sent_at": 1770177843.8127546,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=1KUKh7TofLg"
+      "sent_count": 1
     },
     {
       "url": "https://aiflashreport.com/model-releases",
       "title": "AI Model Release Timeline - AI Flash Report",
       "sent_at": 1770177947.327473,
-      "sent_count": 1,
-      "normalized_url": "https://aiflashreport.com/model-releases"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOoopTjPWQKLDacpkVhbx6NVYXd6nFZlWeXZDV5kinbRWK4rQr8Ff",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770181397.0605152,
+      "sent_count": 1
     },
     {
       "url": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
       "title": "Latest AI News and AI Breakthroughs that Matter Most: 2026 & 2025",
       "sent_at": 1770181397.0605152,
-      "sent_count": 1,
-      "normalized_url": "https://www.crescendo.ai/news/latest-ai-news-and-updates"
+      "sent_count": 1
     },
     {
       "url": "https://www.youtube.com/watch?v=fJO-q7tV0zE",
       "title": "The Best AI Tools for Academia in 2026 - Stop Searching, Start Using!",
       "sent_at": 1770181534.5772398,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=fJO-q7tV0zE"
+      "sent_count": 1
+    },
+    {
+      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOopyVKuHCKbq7s57gkVzYieR8K7IYXudkZycgFw_g0un0CSW8EtD",
+      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
+      "sent_at": 1770184934.9073575,
+      "sent_count": 1
     },
     {
       "url": "https://thecasehq.com/7-ai-tools-in-2026/?srsltid=AfmBOoquRHYqIO_6cv5xwqWBlJe2WhXRwKWk56j4nH8LhsGWxw7r6WKy",
       "title": "Not Just ChatGPT – 7 AI Tools Everyone's Using in 2026",
       "sent_at": 1770184960.409132,
-      "sent_count": 1,
-      "normalized_url": "https://thecasehq.com/7-ai-tools-in-2026/"
+      "sent_count": 1
     }
   ]
 }
