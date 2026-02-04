@@ -9,6 +9,7 @@ from .reddit import RedditSource
 from .hackernews import HackerNewsSource
 from .producthunt import ProductHuntSource
 from .twitter import TwitterSource
+from .moltbook import MoltbookSource
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ SOURCE_REGISTRY: Dict[str, Type[DataSource]] = {
     "hackernews": HackerNewsSource,
     "producthunt": ProductHuntSource,
     "twitter": TwitterSource,
+    "moltbook": MoltbookSource,
 }
 
 def get_source(name: str) -> Type[DataSource]:

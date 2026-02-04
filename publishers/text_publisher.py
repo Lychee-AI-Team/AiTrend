@@ -8,10 +8,10 @@ import os
 import time
 import requests
 from typing import Dict, Any, List
-from modules.logger import get_logger
+import logging
 from publishers.base import BasePublisher
 
-logger = get_logger()
+logger = logging.getLogger(__name__)
 
 class TextPublisher(BasePublisher):
     """

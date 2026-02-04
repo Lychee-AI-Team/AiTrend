@@ -22,8 +22,11 @@ class DiscordWebhookSender:
         Returns:
             是否发送成功
         """
+        # Discord thread_name 限制100字符
+        truncated_title = title[:97] + "..." if len(title) > 100 else title
+        
         payload = {
-            "thread_name": title,
+            "thread_name": truncated_title,
             "content": content,
             "username": "AiTrend",
             "avatar_url": "https://cdn-icons-png.flaticon.com/512/2103/2103633.png"

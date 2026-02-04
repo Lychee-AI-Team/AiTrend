@@ -27,6 +27,18 @@
         "latest AI tools launch 2026",
         "new AI models released this week"
       ]
+    },
+    "moltbook": {
+      "enabled": true,
+      "api_key": "${MOLTBOOK_API_KEY}",
+      "sort_by": "hot",
+      "limit": 20,
+      "min_upvotes": 500,
+      "min_comments": 100,
+      "max_age_hours": 240,
+      "max_comments_per_post": 3,
+      "comment_min_upvotes": 10,
+      "comment_min_length": 50
     }
   },
   "summarizer": {
