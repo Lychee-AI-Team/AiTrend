@@ -8,13 +8,17 @@ LLM内容生成器
 重要变更：
 - 不再验证LLM输出（信任大模型质量）
 - 改为验证输入数据质量（确保输入有足够信息量）
+- 使用HTTP API直接调用（避免google.generativeai库的中文字符问题）
 """
 import os
-import google.generativeai as genai
+import json
+import socket
+import urllib.request
+import urllib.error
 from typing import Dict, Optional
 
 class LLMContentGenerator:
-    """使用Gemini生成独特内容"""
+    """使用Gemini生成独特内容（HTTP API版本）"""
     
     def __init__(self, model_name: str = None):
         """
@@ -30,11 +34,12 @@ class LLMContentGenerator:
             summarizer_config = config.get('summarizer', {})
             model_name = summarizer_config.get('model', 'gemini-2.5-flash')
         
-        api_key = os.getenv('GEMINI_API_KEY')
-        if not api_key:
-            raise RuntimeError("❌ GEMINI_API_KEY not set")
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel(model_name)
+        self.api_key = os.getenv('GEMINI_API_KEY')
+        if not self.api_key:
+            raise RuntimeError("❌ GEMINI_API_KEY not set. 请确保环境变量已正确导出: export GEMINI_API_KEY='your-key'")
+        
+        self.model_name = model_name
+        self.api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
     
     def _validate_input(self, article_data: Dict) -> tuple[bool, str]:
         """
@@ -115,17 +120,87 @@ class LLMContentGenerator:
         prompt = self._build_prompt(title, summary, url, source, metadata)
         
         try:
-            response = self.model.generate_content(prompt)
-            content = response.text.strip()
-            
-            # 确保URL在内容中
-            if url not in content:
-                content = f"{content} {url}"
-            
+            content = self._call_gemini_api(prompt, url)
             return content
             
         except Exception as e:
             raise RuntimeError(f"❌ LLM生成失败：{str(e)}")
+    
+    def _call_gemini_api(self, prompt: str, url: str) -> str:
+        """
+        调用Gemini HTTP API
+        
+        Args:
+            prompt: 提示词
+            url: 文章URL（用于确保在输出中）
+            
+        Returns:
+            生成的内容
+        """
+        import sys
+        print(f"   📝 开始生成内容...", file=sys.stderr)
+        
+        data = {
+            "contents": [{
+                "parts": [{"text": prompt}]
+            }],
+            "generationConfig": {
+                "temperature": 0.7,
+                "maxOutputTokens": 8000
+            }
+        }
+        
+        headers = {
+            "Content-Type": "application/json",
+            "x-goog-api-key": self.api_key
+        }
+        
+        req = urllib.request.Request(
+            self.api_url,
+            data=json.dumps(data).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        
+        # 设置socket级别的超时
+        old_timeout = socket.getdefaulttimeout()
+        socket.setdefaulttimeout(60)
+        
+        try:
+            print(f"   🌐 调用API: {self.model_name}...", file=sys.stderr)
+            with urllib.request.urlopen(req, timeout=60) as response:
+                result = json.loads(response.read().decode('utf-8'))
+                
+                if 'candidates' not in result or not result['candidates']:
+                    raise RuntimeError("API返回空结果")
+                
+                candidate = result['candidates'][0]
+                if 'content' not in candidate or 'parts' not in candidate['content']:
+                    raise RuntimeError("API返回格式错误")
+                
+                content = candidate['content']['parts'][0].get('text', '').strip()
+                
+                if not content:
+                    raise RuntimeError("API返回空内容")
+                
+                # 确保URL在内容中
+                if url not in content:
+                    content = f"{content} {url}"
+                
+                print(f"   ✅ 内容生成完成 ({len(content)}字符)", file=sys.stderr)
+                return content
+                
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8')
+            raise RuntimeError(f"API HTTP错误 {e.code}: {error_body}")
+        except urllib.error.URLError as e:
+            raise RuntimeError(f"API请求失败: {e.reason}")
+        except TimeoutError:
+            raise RuntimeError("API请求超时")
+        except socket.timeout:
+            raise RuntimeError("API请求超时(socket)")
+        finally:
+            socket.setdefaulttimeout(old_timeout)
     
     def _build_prompt(self, title: str, summary: str, url: str, source: str, metadata: Dict) -> str:
         """构建提示词 - 严格遵守宪法文档"""

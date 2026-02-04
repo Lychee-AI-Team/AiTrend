@@ -39,7 +39,15 @@ class DiscordWebhookSender:
                 headers={"Content-Type": "application/json"},
                 timeout=10
             )
+            if response.status_code not in [200, 204]:
+                print(f"   ⚠️ Webhook 返回错误: HTTP {response.status_code} - {response.text[:200]}")
             return response.status_code in [200, 204]
+        except requests.exceptions.Timeout:
+            print(f"   ⚠️ Webhook 请求超时")
+            return False
+        except requests.exceptions.RequestException as e:
+            print(f"   ⚠️ Webhook 请求失败: {e}")
+            return False
         except Exception as e:
-            print(f"Webhook 发送失败: {e}")
+            print(f"   ⚠️ Webhook 发送失败: {e}")
             return False

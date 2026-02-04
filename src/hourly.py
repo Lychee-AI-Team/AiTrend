@@ -297,22 +297,45 @@ def main():
     
     for i, article in enumerate(top_articles):
         delay = i * 2
+        if delay > 0:
+            print(f"   ⏳ 等待 {delay} 秒...", file=sys.stderr)
+            time.sleep(delay)
+        
         # 全量测试或测试模式都添加ATI ID
         is_test_flag = is_test_mode or is_full_test_mode
-        result = post_single_article(article, webhook_url, delay=delay, is_test=is_test_flag)
-        results.append({
-            'title': article.title[:40],
-            'source': article.source,
-            'success': result,
-            'is_test': is_test_flag
-        })
-        status = "✅" if result else "❌"
-        test_mark = " [TEST]" if is_test_flag else ""
-        print(f"   {status} 第{i+1}条{test_mark}发布{'成功' if result else '失败'}", file=sys.stderr)
+        
+        print(f"   📝 正在为 [{article.source}] {article.title[:40]}... 生成内容", file=sys.stderr)
+        
+        try:
+            result = post_single_article(article, webhook_url, delay=0, is_test=is_test_flag)
+            results.append({
+                'title': article.title[:40],
+                'source': article.source,
+                'success': result,
+                'is_test': is_test_flag
+            })
+            status = "✅" if result else "❌"
+            test_mark = " [TEST]" if is_test_flag else ""
+            print(f"   {status} 第{i+1}条{test_mark}发布{'成功' if result else '失败'}", file=sys.stderr)
+        except Exception as e:
+            print(f"   ❌ 第{i+1}条发布异常: {e}", file=sys.stderr)
+            results.append({
+                'title': article.title[:40],
+                'source': article.source,
+                'success': False,
+                'is_test': is_test_flag
+            })
     
-    # 记录已发送（测试模式不记录）
+    # 记录已发送（测试模式不记录，只记录成功的）
     if not is_test_mode and not is_full_test_mode:
-        deduplicator.record_sent_articles(top_articles)
+        # 只记录发布成功的文章
+        successful_articles = [
+            article for article, result in zip(top_articles, results) 
+            if result.get('success', False)
+        ]
+        if successful_articles:
+            deduplicator.record_sent_articles(successful_articles)
+            print(f"   📝 已记录 {len(successful_articles)} 条成功发布的内容", file=sys.stderr)
     
     # 输出结果
     success_count = sum(1 for r in results if r['success'])
