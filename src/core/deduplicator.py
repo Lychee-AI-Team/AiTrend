@@ -6,7 +6,6 @@ import json
 import os
 import time
 import urllib.parse
-import re
 from typing import List, Dict, Set
 from src.sources.base import Article
 
