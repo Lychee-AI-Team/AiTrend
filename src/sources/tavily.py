@@ -64,8 +64,8 @@ class TavilySource(DataSource):
             response = conn.getresponse()
             
             if response.status != 200:
-                error_body = response.read().decode()
-                logger.error(f"Tavily API 错误: {response.status} - {error_body}")
+                # 不记录 error_body，可能包含敏感信息
+                logger.error(f"Tavily API 错误: HTTP {response.status}")
                 return []
             
             data = json.loads(response.read().decode())

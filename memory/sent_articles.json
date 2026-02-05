@@ -2,458 +2,444 @@
   "description": "记录已发送的文章，24小时内不重复",
   "articles": [
     {
-      "url": "https://www.producthunt.com/products/crisp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Hugo ⭐331",
-      "sent_at": 1770134548.9080076,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/crisp"
+      "url": "https://www.producthunt.com/products/unblocked?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/unblocked",
+      "title": "[Product Hunt] Unblocked Code Review ⭐94",
+      "sent_at": 1770224439.9791493,
+      "sent_count": 1
     },
     {
-      "url": "https://www.producthunt.com/products/atoms-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Atoms ⭐256",
-      "sent_at": 1770134548.9080076,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/atoms-5"
+      "url": "https://www.youtube.com/watch?v=r_QY3y7oEmI",
+      "normalized_url": "https://www.youtube.com/watch?v=r_QY3y7oEmI",
+      "title": "10 AI Tools to Change Your Life in 2026 (for real) - YouTube",
+      "sent_at": 1770224439.9791493,
+      "sent_count": 1
     },
     {
-      "url": "https://www.producthunt.com/products/trupeer?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] AI Doc Writer by Trupeer ⭐194",
-      "sent_at": 1770134575.5166903,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/trupeer"
-    },
-    {
-      "url": "https://www.producthunt.com/products/lightfern?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Lightfern for Email ⭐128",
-      "sent_at": 1770134575.5166903,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/lightfern"
-    },
-    {
-      "url": "https://www.producthunt.com/products/helply?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Helply ⭐172",
-      "sent_at": 1770138078.3260329,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/helply"
-    },
-    {
-      "url": "https://www.producthunt.com/products/findable-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] findable. ⭐217",
-      "sent_at": 1770138078.3260329,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/findable-3"
-    },
-    {
-      "url": "https://www.producthunt.com/products/relay-app?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Relay.app Agents ⭐135",
-      "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/relay-app"
-    },
-    {
-      "url": "https://www.producthunt.com/products/memoryplugin-for-openclaw?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] MemoryPlugin for OpenClaw ⭐113",
-      "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/memoryplugin-for-openclaw"
+      "url": "https://www.youtube.com/watch?v=cEPTbXuw55Q",
+      "normalized_url": "https://www.youtube.com/watch?v=cEPTbXuw55Q",
+      "title": "AI News: Google's Infinite AI Worlds - YouTube",
+      "sent_at": 1770224439.9791493,
+      "sent_count": 1
     },
     {
       "url": "https://github.com/OpenBMB/ChatDev",
-      "title": "OpenBMB/ChatDev ⭐29725",
-      "sent_at": 1770141624.8072848,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/OpenBMB/ChatDev"
+      "normalized_url": "https://github.com/OpenBMB/ChatDev",
+      "title": "OpenBMB/ChatDev ⭐29925",
+      "sent_at": 1770228055.9066703,
+      "sent_count": 1
     },
     {
-      "url": "https://www.producthunt.com/products/grok-com-beta?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Grok Imagine 1.0 ⭐134",
-      "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/grok-com-beta"
+      "url": "https://www.synthesia.io/post/ai-tools",
+      "normalized_url": "https://www.synthesia.io/post/ai-tools",
+      "title": "The 45 Best AI Tools in 2026 (Tried & Tested)",
+      "sent_at": 1770228055.9066703,
+      "sent_count": 1
     },
     {
-      "url": "https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Codex by OpenAI ⭐202",
-      "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/openai"
+      "url": "https://github.com/disler/claude-code-hooks-mastery",
+      "normalized_url": "https://github.com/disler/claude-code-hooks-mastery",
+      "title": "disler/claude-code-hooks-mastery ⭐2303",
+      "sent_at": 1770231630.8276057,
+      "sent_count": 1
     },
     {
       "url": "https://github.com/karpathy/nanochat",
-      "title": "karpathy/nanochat ⭐41957",
-      "sent_at": 1770141652.9046192,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/karpathy/nanochat"
+      "normalized_url": "https://github.com/karpathy/nanochat",
+      "title": "karpathy/nanochat ⭐42242",
+      "sent_at": 1770231630.8276057,
+      "sent_count": 1
     },
     {
-      "url": "https://www.producthunt.com/products/heuris?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
-      "title": "[Product Hunt] Heuris ⭐116",
-      "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://www.producthunt.com/products/heuris"
+      "url": "https://github.com/zhayujie/chatgpt-on-wechat",
+      "normalized_url": "https://github.com/zhayujie/chatgpt-on-wechat",
+      "title": "zhayujie/chatgpt-on-wechat ⭐0",
+      "sent_at": 1770235244.668315,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/VectifyAI/PageIndex",
-      "title": "VectifyAI/PageIndex ⭐12887",
-      "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/VectifyAI/PageIndex"
+      "url": "https://github.com/pipecat-ai/pipecat",
+      "normalized_url": "https://github.com/pipecat-ai/pipecat",
+      "title": "pipecat-ai/pipecat ⭐10173",
+      "sent_at": 1770235273.2564797,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/shareAI-lab/learn-claude-code",
-      "title": "shareAI-lab/learn-claude-code ⭐16268",
-      "sent_at": 1770145235.9773242,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/shareAI-lab/learn-claude-code"
+      "url": "https://github.com/QwenLM/Qwen3-Coder",
+      "normalized_url": "https://github.com/QwenLM/Qwen3-Coder",
+      "title": "QwenLM/Qwen3-Coder ⭐15254",
+      "sent_at": 1770242445.8757052,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/EbookFoundation/free-programming-books",
-      "title": "EbookFoundation/free-programming-books ⭐382003",
-      "sent_at": 1770145263.018384,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/EbookFoundation/free-programming-books"
+      "url": "https://github.com/confident-ai/deepeval",
+      "normalized_url": "https://github.com/confident-ai/deepeval",
+      "title": "confident-ai/deepeval ⭐13420",
+      "sent_at": 1770242473.1247876,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/xerrors/Yuxi-Know",
-      "title": "xerrors/Yuxi-Know ⭐0",
-      "sent_at": 1770145263.018384,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/xerrors/Yuxi-Know"
-    },
-    {
-      "url": "https://github.com/jingyaogong/minimind",
-      "title": "jingyaogong/minimind ⭐38635",
-      "sent_at": 1770148839.3613365,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/jingyaogong/minimind"
+      "url": "https://github.com/microsoft/agent-lightning",
+      "normalized_url": "https://github.com/microsoft/agent-lightning",
+      "title": "microsoft/agent-lightning ⭐13955",
+      "sent_at": 1770246069.996451,
+      "sent_count": 1
     },
     {
       "url": "https://github.com/TauricResearch/TradingAgents",
-      "title": "TauricResearch/TradingAgents ⭐29163",
-      "sent_at": 1770148839.3613365,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/TauricResearch/TradingAgents"
-    },
-    {
-      "url": "https://github.com/microsoft/autogen",
-      "title": "microsoft/autogen ⭐54230",
-      "sent_at": 1770148862.5977178,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/microsoft/autogen"
-    },
-    {
-      "url": "https://github.com/vanna-ai/vanna",
-      "title": "vanna-ai/vanna ⭐22510",
-      "sent_at": 1770148862.5977178,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/vanna-ai/vanna"
-    },
-    {
-      "url": "https://github.com/virattt/dexter",
-      "title": "virattt/dexter ⭐10029",
-      "sent_at": 1770152444.0742097,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/virattt/dexter"
-    },
-    {
-      "url": "https://github.com/pedramamini/Maestro",
-      "title": "pedramamini/Maestro ⭐1471",
-      "sent_at": 1770152444.0742097,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/pedramamini/Maestro"
+      "normalized_url": "https://github.com/TauricResearch/TradingAgents",
+      "title": "TauricResearch/TradingAgents ⭐29278",
+      "sent_at": 1770249640.771248,
+      "sent_count": 1
     },
     {
       "url": "https://github.com/Canner/WrenAI",
-      "title": "Canner/WrenAI ⭐13777",
-      "sent_at": 1770152466.5849428,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/Canner/WrenAI"
+      "normalized_url": "https://github.com/Canner/WrenAI",
+      "title": "Canner/WrenAI ⭐13897",
+      "sent_at": 1770249666.2567658,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/open-metadata/OpenMetadata",
-      "title": "open-metadata/OpenMetadata ⭐0",
-      "sent_at": 1770152466.5849428,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/open-metadata/OpenMetadata"
+      "url": "https://github.com/pedramamini/Maestro",
+      "normalized_url": "https://github.com/pedramamini/Maestro",
+      "title": "pedramamini/Maestro ⭐1656",
+      "sent_at": 1770253225.6023276,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/amantus-ai/vibetunnel",
-      "title": "amantus-ai/vibetunnel ⭐3743",
-      "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/amantus-ai/vibetunnel"
+      "url": "https://github.com/refly-ai/refly",
+      "normalized_url": "https://github.com/refly-ai/refly",
+      "title": "refly-ai/refly ⭐6233",
+      "sent_at": 1770253251.9231598,
+      "sent_count": 1
     },
     {
-      "url": "https://github.com/activepieces/activepieces",
-      "title": "activepieces/activepieces ⭐0",
-      "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/activepieces/activepieces"
+      "url": "https://github.com/bytedance/UI-TARS-desktop",
+      "normalized_url": "https://github.com/bytedance/UI-TARS-desktop",
+      "title": "bytedance/UI-TARS-desktop ⭐26187",
+      "sent_at": 1770256912.482466,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=auZZn7yvaAI",
-      "title": "Best AI Tools for 2026 PT2 - YouTube",
-      "sent_at": 1770155525.0938025,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=auZZn7yvaAI"
-    },
-    {
-      "url": "https://github.com/gemini-cli-extensions/security",
-      "title": "gemini-cli-extensions/security ⭐546",
-      "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://github.com/gemini-cli-extensions/security"
-    },
-    {
-      "url": "https://llm-stats.com/ai-news",
-      "title": "AI News - LLM Stats",
-      "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://llm-stats.com/ai-news"
-    },
-    {
-      "url": "https://navigotechsolutions.com/blog/top-25-ai-tools-in-2026/",
-      "title": "Top 25 AI Tools in 2026 - navigotechsolutions.com",
-      "sent_at": 1770156024.6638117,
-      "sent_count": 1,
-      "normalized_url": "https://navigotechsolutions.com/blog/top-25-ai-tools-in-2026/"
-    },
-    {
-      "url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
-      "title": "Top 10 AI Tools for 2026 - DataNorth AI",
-      "sent_at": 1770156058.120294,
-      "sent_count": 1,
-      "normalized_url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026"
-    },
-    {
-      "url": "https://newvision-software.com/blogs/ai-tools-for-digital-transformation-2026/",
-      "title": "Best AI Tools Powering Digital Transformation in 2026",
-      "sent_at": 1770156058.120294,
-      "sent_count": 1,
-      "normalized_url": "https://newvision-software.com/blogs/ai-tools-for-digital-transformation-2026/"
-    },
-    {
-      "url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
-      "title": "The Best AI Tools for 2026 - Medium",
-      "sent_at": 1770156083.8009725,
-      "sent_count": 1,
-      "normalized_url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b"
-    },
-    {
-      "url": "https://www.reddit.com/r/ChatGPT/comments/1pyrlzw/list_of_ai_tools_to_look_at_in_2026/",
-      "title": "List of AI tools to look at in 2026 : r/ChatGPT - Reddit",
-      "sent_at": 1770156083.8009725,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ChatGPT/comments/1pyrlzw/list_of_ai_tools_to_look_at_in_2026/"
-    },
-    {
-      "url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
-      "title": "Top 10 AI Tools for Business in 2026 - Express Analytics",
-      "sent_at": 1770156437.7104652,
-      "sent_count": 1,
-      "normalized_url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026"
-    },
-    {
-      "url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/?srsltid=AfmBOopyVKuHCKbq7s57gkVzYieR8K7IYXudkZycgFw_g0un0CSW8EtD",
-      "title": "AI Model Releases Nov/Dec 2025: Grok 4.1, Gemini 3, Claude 4.5 ...",
-      "sent_at": 1770184934.9073575,
-      "sent_count": 1,
-      "normalized_url": "https://vertu.com/lifestyle/the-ai-model-race-reaches-singularity-speed/"
-    },
-    {
-      "url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
-      "title": "Generative coding: 10 Breakthrough Technologies 2026",
-      "sent_at": 1770156635.9336305,
-      "sent_count": 1,
-      "normalized_url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/"
-    },
-    {
-      "url": "https://www.reddit.com/r/GeminiAI/comments/1qe5a0x/what_are_the_most_useful_ai_tools_in_2026_heres/",
-      "title": "What Are the Most Useful AI Tools in 2026? Here's What I Actually ...",
-      "sent_at": 1770156635.9336305,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/GeminiAI/comments/1qe5a0x/what_are_the_most_useful_ai_tools_in_2026_heres/"
-    },
-    {
-      "url": "https://www.reddit.com/r/ProductivityApps/comments/1pj0l1z/best_ai_tools_in_2026_youve_probably_never_heard/",
-      "title": "Best AI Tools in 2026 You've Probably Never Heard Of (But ... - Reddit",
-      "sent_at": 1770156903.5914228,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ProductivityApps/comments/1pj0l1z/best_ai_tools_in_2026_youve_probably_never_heard/"
-    },
-    {
-      "url": "https://www.zignuts.com/ai-models",
-      "title": "AI Models & Versions - Zignuts Technolab",
-      "sent_at": 1770156903.5914228,
-      "sent_count": 1,
-      "normalized_url": "https://www.zignuts.com/ai-models"
-    },
-    {
-      "url": "https://tech.yahoo.com/ai/articles/every-ai-tool-2026-170103669.html",
-      "title": "Every AI Tool You Need in 2026 - Yahoo! Tech",
-      "sent_at": 1770157096.127028,
-      "sent_count": 1,
-      "normalized_url": "https://tech.yahoo.com/ai/articles/every-ai-tool-2026-170103669.html"
-    },
-    {
-      "url": "https://aitechin.substack.com/p/45-ai-tools-in-2026-that-youll-actually",
-      "title": "45 AI Tools in 2026 That You'll Actually Use (Not Just Save & Forget)",
-      "sent_at": 1770157096.127028,
-      "sent_count": 1,
-      "normalized_url": "https://aitechin.substack.com/p/45-ai-tools-in-2026-that-youll-actually"
-    },
-    {
-      "url": "https://zapier.com/blog/best-ai-productivity-tools/",
-      "title": "The best AI productivity tools in 2026 - Zapier",
-      "sent_at": 1770157423.134309,
-      "sent_count": 1,
-      "normalized_url": "https://zapier.com/blog/best-ai-productivity-tools/"
+      "url": "https://github.com/badlogic/pi-mono",
+      "normalized_url": "https://github.com/badlogic/pi-mono",
+      "title": "badlogic/pi-mono ⭐6729",
+      "sent_at": 1770260436.2502294,
+      "sent_count": 1
     },
     {
       "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
+      "normalized_url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
       "title": "List of AI models released this month : r/ArtificialInteligence - Reddit",
-      "sent_at": 1770159739.3522818,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/"
+      "sent_at": 1770260517.5626926,
+      "sent_count": 1
     },
     {
-      "url": "https://www.analyticsvidhya.com/blog/2025/06/ai-tools-everyone-is-using/",
-      "title": "12 AI Tools Everyone is Using in 2026",
-      "sent_at": 1770159829.8776143,
-      "sent_count": 1,
-      "normalized_url": "https://www.analyticsvidhya.com/blog/2025/06/ai-tools-everyone-is-using/"
+      "url": "https://github.com/activepieces/activepieces",
+      "normalized_url": "https://github.com/activepieces/activepieces",
+      "title": "activepieces/activepieces ⭐0",
+      "sent_at": 1770264040.1928775,
+      "sent_count": 1
     },
     {
-      "url": "https://llm-stats.com/llm-updates",
-      "title": "AI Updates Today (February 2026) – Latest AI Model ... - LLM Stats",
-      "sent_at": 1770159829.8776143,
-      "sent_count": 1,
-      "normalized_url": "https://llm-stats.com/llm-updates"
+      "url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
+      "normalized_url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
+      "title": "The Best AI Tools for 2026 - Medium",
+      "sent_at": 1770264040.1928775,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=z-s5xqMJK4A",
-      "title": "I Tested 230+ AI Tools: These 15 Will Be Hot in 2026 - YouTube",
-      "sent_at": 1770163325.3128357,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=z-s5xqMJK4A"
+      "url": "https://nmn.gl/blog/ai-killing-b2b-saas",
+      "normalized_url": "https://nmn.gl/blog/ai-killing-b2b-saas",
+      "title": "[HN] AI is killing B2B SaaS",
+      "sent_at": 1770264157.1678326,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/puemos/craftplan",
+      "normalized_url": "https://github.com/puemos/craftplan",
+      "title": "[Show HN] Show HN: Craftplan – I built my wife a production management tool for her bakery",
+      "sent_at": 1770264157.1678326,
+      "sent_count": 1
+    },
+    {
+      "url": "https://boxc.net/blog/2026/claude-code-connecting-to-local-models-when-your-quota-runs-out/",
+      "normalized_url": "https://boxc.net/blog/2026/claude-code-connecting-to-local-models-when-your-quota-runs-out/",
+      "title": "[HN] Claude Code: connect to a local model when your quota runs out",
+      "sent_at": 1770267647.4044514,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/bethington/ghidra-mcp",
+      "normalized_url": "https://github.com/bethington/ghidra-mcp",
+      "title": "[Show HN] Show HN: Ghidra MCP Server – 110 tools for AI-assisted reverse engineering",
+      "sent_at": 1770267647.4044514,
+      "sent_count": 1
+    },
+    {
+      "url": "https://morphllm.com/products/glance",
+      "normalized_url": "https://morphllm.com/products/glance",
+      "title": "[Show HN] Show HN: Morph – Videos of AI testing your PR, embedded in GitHub",
+      "sent_at": 1770267691.4983962,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/egeominotti/bunqueue",
+      "normalized_url": "https://github.com/egeominotti/bunqueue",
+      "title": "[Show HN] Show HN: Bunqueue – Job queue for Bun using SQLite instead of Redis",
+      "sent_at": 1770267691.4983962,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/virattt/dexter",
+      "normalized_url": "https://github.com/virattt/dexter",
+      "title": "virattt/dexter ⭐10501",
+      "sent_at": 1770271243.6821046,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.scmp.com/tech/big-tech/article/3342051/chinas-ai-labs-race-debut-latest-models-lunar-new-year",
+      "normalized_url": "https://www.scmp.com/tech/big-tech/article/3342051/chinas-ai-labs-race-debut-latest-models-lunar-new-year",
+      "title": "China's AI labs race to debut latest models before Lunar New Year",
+      "sent_at": 1770271243.6821046,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/cloudflare/agents",
+      "normalized_url": "https://github.com/cloudflare/agents",
+      "title": "cloudflare/agents ⭐3105",
+      "sent_at": 1770271298.7525275,
+      "sent_count": 1
     },
     {
       "url": "https://lastweekin.ai/",
+      "normalized_url": "https://lastweekin.ai/",
       "title": "Last Week in AI | Substack",
-      "sent_at": 1770163361.5902748,
-      "sent_count": 1,
-      "normalized_url": "https://lastweekin.ai/"
+      "sent_at": 1770271298.7525275,
+      "sent_count": 1
     },
     {
-      "url": "https://www.techradar.com/best/best-ai-tools",
-      "title": "I tried 70+ best AI tools in 2026 - TechRadar",
-      "sent_at": 1770166938.1314864,
-      "sent_count": 1,
-      "normalized_url": "https://www.techradar.com/best/best-ai-tools"
+      "url": "https://github.com/1jehuang/mermaid-rs-renderer/blob/master/README.md",
+      "normalized_url": "https://github.com/1jehuang/mermaid-rs-renderer/blob/master/README.md",
+      "title": "[Show HN] Show HN: Mmdr – 1000x faster Mermaid rendering in pure Rust (no browser)",
+      "sent_at": 1770274845.2712238,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=w5YvRT3dOEE",
-      "title": "The 14 Best AI Tools in 2026 (Backed by Data) - YouTube",
-      "sent_at": 1770166938.1314864,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=w5YvRT3dOEE"
+      "url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
+      "normalized_url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
+      "title": "Generative coding: 10 Breakthrough Technologies 2026",
+      "sent_at": 1770274845.2712238,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=F-ANHe_hr9w",
-      "title": "New #1 open-source AI model is WILD - YouTube",
-      "sent_at": 1770167110.1447058,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=F-ANHe_hr9w"
+      "url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
+      "normalized_url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
+      "title": "Top 10 AI Tools for 2026 - DataNorth AI",
+      "sent_at": 1770274884.6788785,
+      "sent_count": 1
     },
     {
-      "url": "https://www.usiq.org/these-ai-tools-you-must-use-in-2026/",
-      "title": "These AI Tools You Must Use in 2026 - USIQ certification",
-      "sent_at": 1770167171.4499893,
-      "sent_count": 1,
-      "normalized_url": "https://www.usiq.org/these-ai-tools-you-must-use-in-2026/"
+      "url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
+      "normalized_url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
+      "title": "Top 10 AI Tools for Business in 2026 - Express Analytics",
+      "sent_at": 1770274884.6788785,
+      "sent_count": 1
     },
     {
-      "url": "https://aioperator.com/blog/top-10-ai-tools-to-try-in-2026",
-      "title": "Top 10 AI tools to try in 2026 | AI Operator",
-      "sent_at": 1770167321.6788042,
-      "sent_count": 1,
-      "normalized_url": "https://aioperator.com/blog/top-10-ai-tools-to-try-in-2026"
+      "url": "https://www.producthunt.com/products/supaboard-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/supaboard-ai",
+      "title": "[Product Hunt] Supaboard ⭐142",
+      "sent_at": 1770285660.3658319,
+      "sent_count": 1
     },
     {
-      "url": "https://ai.plainenglish.io/top-ai-tools-to-know-in-2026-boost-productivity-creativity-and-automation-0c0fcdfb991f",
-      "title": "Top AI Tools to Know in 2026: Boost Productivity, Creativity, and ...",
-      "sent_at": 1770167321.6788042,
-      "sent_count": 1,
-      "normalized_url": "https://ai.plainenglish.io/top-ai-tools-to-know-in-2026-boost-productivity-creativity-and-automation-0c0fcdfb991f"
+      "url": "https://www.producthunt.com/products/modaal-ai-agent-for-ios?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/modaal-ai-agent-for-ios",
+      "title": "[Product Hunt] Modaal ⭐38",
+      "sent_at": 1770285660.3658319,
+      "sent_count": 1
     },
     {
-      "url": "https://www.reddit.com/r/singularity/comments/1lnayv6/what_ai_models_are_expected_to_be_released_in_the/",
-      "title": "What AI Models are expected to be released in the next 2 months ...",
-      "sent_at": 1770170512.7483897,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/singularity/comments/1lnayv6/what_ai_models_are_expected_to_be_released_in_the/"
+      "url": "https://www.producthunt.com/products/higgsfield?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/higgsfield",
+      "title": "[Product Hunt] Higgsfield Vibe-Motion ⭐109",
+      "sent_at": 1770285697.857693,
+      "sent_count": 1
     },
     {
-      "url": "https://www.timesofai.com/industry-insights/roundup-of-ai-model-releases-in-2025/",
-      "title": "AI Model Releases in 2025: The Roundup of AI Launches",
-      "sent_at": 1770174111.1221774,
-      "sent_count": 1,
-      "normalized_url": "https://www.timesofai.com/industry-insights/roundup-of-ai-model-releases-in-2025/"
+      "url": "https://www.producthunt.com/products/mistral-7b?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/mistral-7b",
+      "title": "[Product Hunt] Voxtral Transcribe 2 by Mistral ⭐108",
+      "sent_at": 1770285697.857693,
+      "sent_count": 1
     },
     {
-      "url": "https://www.fullstackacademy.com/blog/best-generative-ai-tools",
-      "title": "12 Top-Rated Generative AI Tools in 2026: Your Expert Guide",
-      "sent_at": 1770177716.9098616,
-      "sent_count": 1,
-      "normalized_url": "https://www.fullstackacademy.com/blog/best-generative-ai-tools"
+      "url": "https://www.producthunt.com/products/therapist-ai-time-for-what-matters?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/therapist-ai-time-for-what-matters",
+      "title": "[Product Hunt] Therapist AI ⭐65",
+      "sent_at": 1770289234.0380797,
+      "sent_count": 1
     },
     {
-      "url": "https://www.reddit.com/r/AIAssisted/comments/1par976/ai_tools_im_going_into_2026_with_more_than_10/",
-      "title": "AI Tools I'm Going Into 2026 With (More Than 10!) - Reddit",
-      "sent_at": 1770177843.8127546,
-      "sent_count": 1,
-      "normalized_url": "https://www.reddit.com/r/AIAssisted/comments/1par976/ai_tools_im_going_into_2026_with_more_than_10/"
+      "url": "https://www.producthunt.com/products/v0?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/v0",
+      "title": "[Product Hunt] The new v0 ⭐135",
+      "sent_at": 1770289234.0380797,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=1KUKh7TofLg",
-      "title": "The 5 Most Impactful AI Model Releases of 2025 - YouTube",
-      "sent_at": 1770177843.8127546,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=1KUKh7TofLg"
+      "url": "https://www.producthunt.com/products/webflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/webflow",
+      "title": "[Product Hunt] Webflow AI site builder ⭐100",
+      "sent_at": 1770289268.303153,
+      "sent_count": 1
     },
     {
-      "url": "https://aiflashreport.com/model-releases",
-      "title": "AI Model Release Timeline - AI Flash Report",
-      "sent_at": 1770177947.327473,
-      "sent_count": 1,
-      "normalized_url": "https://aiflashreport.com/model-releases"
+      "url": "https://www.producthunt.com/products/github?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/github",
+      "title": "[Product Hunt] GitHub Agent HQ ⭐101",
+      "sent_at": 1770289268.303153,
+      "sent_count": 1
     },
     {
-      "url": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
-      "title": "Latest AI News and AI Breakthroughs that Matter Most: 2026 & 2025",
-      "sent_at": 1770181397.0605152,
-      "sent_count": 1,
-      "normalized_url": "https://www.crescendo.ai/news/latest-ai-news-and-updates"
+      "url": "https://www.producthunt.com/products/sylvian-excel-agent?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/sylvian-excel-agent",
+      "title": "[Product Hunt] Sylvian AI Forms ⭐89",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
     },
     {
-      "url": "https://www.youtube.com/watch?v=fJO-q7tV0zE",
-      "title": "The Best AI Tools for Academia in 2026 - Stop Searching, Start Using!",
-      "sent_at": 1770181534.5772398,
-      "sent_count": 1,
-      "normalized_url": "https://www.youtube.com/watch?v=fJO-q7tV0zE"
+      "url": "https://www.producthunt.com/products/autobandstudio?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/autobandstudio",
+      "title": "[Product Hunt] AutoBandStudio ⭐79",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
     },
     {
-      "url": "https://thecasehq.com/7-ai-tools-in-2026/?srsltid=AfmBOoquRHYqIO_6cv5xwqWBlJe2WhXRwKWk56j4nH8LhsGWxw7r6WKy",
-      "title": "Not Just ChatGPT – 7 AI Tools Everyone's Using in 2026",
-      "sent_at": 1770184960.409132,
-      "sent_count": 1,
-      "normalized_url": "https://thecasehq.com/7-ai-tools-in-2026/"
+      "url": "https://github.com/vkazanov/elcity",
+      "normalized_url": "https://github.com/vkazanov/elcity",
+      "title": "[Show HN] Show HN: Micropolis/SimCity Clone in Emacs Lisp",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
     },
     {
-      "url": "https://medium.com/predict/six-new-ai-models-worth-your-attention-436976c7da22",
-      "normalized_url": "https://medium.com/predict/six-new-ai-models-worth-your-attention-436976c7da22",
-      "title": "Six new AI models worth your attention | by Conrad Gray - Medium",
-      "sent_at": 1770188512.4884043,
+      "url": "https://www.producthunt.com/products/talktopost?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/talktopost",
+      "title": "[Product Hunt] TalkToPost ⭐73",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/topoteretes/cognee",
+      "normalized_url": "https://github.com/topoteretes/cognee",
+      "title": "topoteretes/cognee ⭐11713",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "normalized_url": "https://github.com/anthropics/skills",
+      "title": "anthropics/skills ⭐63659",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/miro?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/miro",
+      "title": "[Product Hunt] Miro MCP ⭐75",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/GH05TCREW/pentestagent",
+      "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+      "title": "GH05TCREW/pentestagent ⭐1391",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/CVHub520/X-AnyLabeling",
+      "normalized_url": "https://github.com/CVHub520/X-AnyLabeling",
+      "title": "CVHub520/X-AnyLabeling ⭐8080",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/JerBouma/FinanceDatabase",
+      "normalized_url": "https://github.com/JerBouma/FinanceDatabase",
+      "title": "JerBouma/FinanceDatabase ⭐6868",
+      "sent_at": 1770296479.605989,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang",
+      "normalized_url": "https://github.com/sgl-project/sglang",
+      "title": "sgl-project/sglang ⭐23307",
+      "sent_at": 1770296479.605989,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/qodo-ai/pr-agent",
+      "normalized_url": "https://github.com/qodo-ai/pr-agent",
+      "title": "qodo-ai/pr-agent ⭐10062",
+      "sent_at": 1770300036.0208669,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/Polymarket/agents",
+      "normalized_url": "https://github.com/Polymarket/agents",
+      "title": "Polymarket/agents ⭐2013",
+      "sent_at": 1770300036.0208669,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/thedotmack/claude-mem",
+      "normalized_url": "https://github.com/thedotmack/claude-mem",
+      "title": "thedotmack/claude-mem ⭐0",
+      "sent_at": 1770300082.358128,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/linshenkx/prompt-optimizer",
+      "normalized_url": "https://github.com/linshenkx/prompt-optimizer",
+      "title": "linshenkx/prompt-optimizer ⭐19260",
+      "sent_at": 1770300082.358128,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/aidenybai/react-grab",
+      "normalized_url": "https://github.com/aidenybai/react-grab",
+      "title": "aidenybai/react-grab ⭐4890",
+      "sent_at": 1770303637.9915457,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/MotiaDev/motia",
+      "normalized_url": "https://github.com/MotiaDev/motia",
+      "title": "MotiaDev/motia ⭐14821",
+      "sent_at": 1770303672.098377,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "normalized_url": "https://github.com/google-gemini/gemini-cli",
+      "title": "google-gemini/gemini-cli ⭐93668",
+      "sent_at": 1770303672.098377,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/mermaid-js/mermaid",
+      "normalized_url": "https://github.com/mermaid-js/mermaid",
+      "title": "mermaid-js/mermaid ⭐85849",
+      "sent_at": 1770307259.1465554,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript",
+      "normalized_url": "https://github.com/anthropics/anthropic-sdk-typescript",
+      "title": "anthropics/anthropic-sdk-typescript ⭐1579",
+      "sent_at": 1770307259.1465554,
       "sent_count": 1
     }
   ]

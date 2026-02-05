@@ -2,10 +2,10 @@
   "language": "zh",
   "sources": {
     "reddit": {
-      "enabled": true
+      "enabled": false
     },
     "hackernews": {
-      "enabled": false
+      "enabled": true
     },
     "producthunt": {
       "enabled": true,
@@ -29,7 +29,7 @@
       ]
     },
     "moltbook": {
-      "enabled": true,
+      "enabled": false,
       "api_key": "${MOLTBOOK_API_KEY}",
       "sort_by": "hot",
       "limit": 20,

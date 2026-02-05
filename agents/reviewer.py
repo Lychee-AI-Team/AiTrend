@@ -4,12 +4,24 @@ AiTrend 评审员Agent - 以AI学习者视角评审内容质量
 """
 
 import json
+import logging
 import os
 import sys
 from datetime import datetime
 from typing import List, Dict, Any
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 配置日志 - 同时输出到控制台和文件
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),  # 控制台输出
+        logging.FileHandler('reviewer.log', encoding='utf-8')  # 文件输出
+    ]
+)
+logger = logging.getLogger(__name__)
 
 REVIEW_LOG_PATH = os.path.join(os.path.dirname(__file__), '..', 'memory', 'review_log.json')
 BATCH_DIR = os.path.join(os.path.dirname(__file__), '..', 'memory')
@@ -43,15 +55,15 @@ def review_content(content: Dict) -> Dict:
     source = content.get('source', '')
     url = content.get('url', '')
     
-    print(f"\n{'='*60}")
-    print(f"📄 评审: {title[:50]}...")
-    print('='*60)
+    logger.info(f"\n{'='*60}")
+    logger.info(f"📄 评审: {title[:50]}...")
+    logger.info('='*60)
     
     # 分析内容结构
     paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
     word_count = len(text.replace(' ', '').replace('\n', ''))
     
-    print(f"\n字数: {word_count} | 段落数: {len(paragraphs)}")
+    logger.info(f"字数: {word_count} | 段落数: {len(paragraphs)}")
     
     # 初始化评分维度
     scores = {
@@ -66,7 +78,7 @@ def review_content(content: Dict) -> Dict:
     suggestions = []
     
     # ========== 1. 信息量评分 (4分) ==========
-    print("\n🔍 分析信息量...")
+    logger.info("分析信息量...")
     
     # 检查是否说明了"是什么"
     if any(keyword in text.lower() for keyword in ['是一个', '是一款', '是用于', '主要解决', '提供']):
@@ -112,7 +124,7 @@ def review_content(content: Dict) -> Dict:
         suggestions.append("删除'针对痛点'等抽象表述，改为具体描述")
     
     # ========== 2. 实用性评分 (3分) ==========
-    print("🔍 分析实用性...")
+    logger.info("分析实用性...")
     
     # 检查是否有具体场景
     if any(keyword in text.lower() for keyword in [
@@ -143,7 +155,7 @@ def review_content(content: Dict) -> Dict:
         suggestions.append("明确目标用户：适合XX人群使用")
     
     # ========== 3. 可信度评分 (2分) ==========
-    print("🔍 分析可信度...")
+    logger.info("分析可信度...")
     
     # 检查是否有数据支撑
     has_numbers = any(char.isdigit() for char in text)
@@ -174,7 +186,7 @@ def review_content(content: Dict) -> Dict:
         suggestions.append("增加客观评价：存在的问题或适用限制")
     
     # ========== 4. 阅读体验评分 (1分) ==========
-    print("🔍 分析阅读体验...")
+    logger.info("分析阅读体验...")
     
     # 检查是否有固定套路
     template_phrases = [
@@ -227,50 +239,50 @@ def review_content(content: Dict) -> Dict:
     }
     
     # 打印评审结果
-    print(f"\n📊 评分结果: {total_score}/10")
-    print(f"  信息量: {scores['information']}/4 | 实用性: {scores['practicality']}/3")
-    print(f"  可信度: {scores['credibility']}/2 | 体验: {scores['experience']}/1")
+    logger.info(f"评分结果: {total_score}/10")
+    logger.info(f"  信息量: {scores["information"]}/4 | 实用性: {scores["practicality"]}/3")
+    logger.info(f"  可信度: {scores["credibility"]}/2 | 体验: {scores["experience"]}/1")
     
     if strengths:
-        print(f"\n✅ 优点:")
+        logger.info(f"优点:")
         for s in strengths[:3]:
-            print(f"  • {s}")
+            logger.info(f"  • {s}")
     
     if weaknesses:
-        print(f"\n❌ 问题:")
+        logger.info(f"问题:")
         for w in weaknesses[:3]:
-            print(f"  • {w}")
+            logger.info(f"  • {w}")
     
     if suggestions:
-        print(f"\n💡 建议:")
+        logger.info(f"建议:")
         for s in suggestions[:3]:
-            print(f"  → {s}")
+            logger.info(f"  → {s}")
     
-    print(f"\n👤 学习者视角: {perspective[:100]}...")
+    logger.info(f"学习者视角: {perspective[:100]}...")
     
     return review
 
 def review_batch(batch_id: str):
     """评审整个批次"""
-    print("\n" + "="*60)
-    print(f"🎯 AiTrend 内容评审员启动")
-    print("="*60)
-    print(f"\n角色：AI学习者 | 目标：找到真正能提升效率的工具")
-    print(f"批次: {batch_id}")
+    logger.info("="*60)
+    logger.info(f"AiTrend 内容评审员启动")
+    logger.info("="*60)
+    logger.info(f"角色：AI学习者 | 目标：找到真正能提升效率的工具")
+    logger.info(f"批次: {batch_id}")
     
     # 加载批次
     batch_data = load_batch(batch_id)
     contents = batch_data.get('contents', [])
     
-    print(f"\n📦 待评审内容: {len(contents)} 条")
+    logger.info(f"待评审内容: {len(contents)} 条")
     
     # 逐条评审
     reviews = []
     total_score = 0
     
     for i, content in enumerate(contents, 1):
-        print(f"\n{'='*60}")
-        print(f"评审进度: {i}/{len(contents)}")
+        logger.info("="*60)
+        logger.info(f"评审进度: {i}/{len(contents)}")
         review = review_content(content)
         reviews.append(review)
         total_score += review['total_score']
@@ -299,12 +311,12 @@ def review_batch(batch_id: str):
     save_review_log(log)
     
     # 打印汇总
-    print(f"\n{'='*60}")
-    print("📊 评审完成汇总")
-    print('='*60)
-    print(f"\n总平均分: {avg_score:.1f}/10")
-    print(f"高分内容(≥8): {sum(1 for r in reviews if r['total_score'] >= 8)}/{len(reviews)}")
-    print(f"状态: {'✅ 建议发布' if avg_score >= 8 else '❌ 建议优化'}")
+    logger.info("="*60)
+    logger.info("评审完成汇总")
+    logger.info('='*60)
+    logger.info(f"总平均分: {avg_score:.1f}/10")
+    logger.info(f"高分内容(≥8): {sum(1 for r in reviews if r["total_score"] >= 8)}/{len(reviews)}")
+    logger.info(f"状态: {'建议发布' if avg_score >= 8 else '建议优化'}")
     
     # 生成优化建议汇总
     all_weaknesses = []
@@ -317,18 +329,18 @@ def review_batch(batch_id: str):
     from collections import Counter
     weakness_counts = Counter(all_weaknesses)
     
-    print(f"\n🔧 最常见问题 (Top 3):")
+    logger.info(f"最常见问题 (Top 3):")
     for weakness, count in weakness_counts.most_common(3):
-        print(f"  • {weakness} ({count}次)")
+        logger.info(f"  • {weakness} ({count}次)")
     
-    print(f"\n💾 评审结果已保存到: {REVIEW_LOG_PATH}")
-    print(f"📊 主流程可以读取评分并决定是否优化")
+    logger.info(f"评审结果已保存到: {REVIEW_LOG_PATH}")
+    logger.info(f"主流程可以读取评分并决定是否优化")
 
 def main():
     """主入口"""
     if len(sys.argv) < 2:
-        print("用法: python3 -m agents.reviewer <batch_id>")
-        print("示例: python3 -m agents.reviewer 20250202_193000")
+        logger.info("用法: python3 -m agents.reviewer <batch_id>")
+        logger.info("示例: python3 -m agents.reviewer 20250202_193000")
         sys.exit(1)
     
     batch_id = sys.argv[1]

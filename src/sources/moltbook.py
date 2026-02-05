@@ -115,7 +115,8 @@ class MoltbookSource(DataSource):
                     post_time = time.mktime(time.strptime(created_at[:19], "%Y-%m-%dT%H:%M:%S"))
                     if current_time - post_time > max_age_seconds:
                         continue
-                except:
+                except (ValueError, TypeError):
+                    # 时间解析失败，跳过时间筛选
                     pass
             
             # 内容长度
