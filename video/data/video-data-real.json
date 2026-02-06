@@ -1,0 +1,71 @@
+{
+  "date": "2026-02-06",
+  "fps": 30,
+  "totalFrames": 1800,
+  "scenes": [
+    {
+      "id": "opening",
+      "type": "opening",
+      "startFrame": 0,
+      "durationFrames": 90,
+      "text": "今天AI圈发生了什么？",
+      "audioFile": "audio/2026-02-06/opening.mp3"
+    },
+    {
+      "id": "hotspot_1",
+      "type": "hotspot",
+      "startFrame": 90,
+      "durationFrames": 540,
+      "rank": 1,
+      "title": "Molt Beach - AI新工具",
+      "text": "Molt Beach在Product Hunt发布，获得18个赞。这是一个新的AI产品，值得关注。",
+      "keyPoint": "Product Hunt新品",
+      "vendor": "Molt",
+      "logo": "logos/default.svg",
+      "url": "https://www.producthunt.com/products/molt-beach",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_1.png",
+      "audioFile": "audio/2026-02-06/hotspot_1.mp3"
+    },
+    {
+      "id": "hotspot_2",
+      "type": "hotspot",
+      "startFrame": 630,
+      "durationFrames": 540,
+      "rank": 2,
+      "title": "Claude Opus 4.6发布",
+      "text": "Anthropic在Product Hunt发布Claude Opus 4.6，获得7个赞。Anthropic继续推动大模型发展。",
+      "keyPoint": "Anthropic新品",
+      "vendor": "Anthropic",
+      "logo": "logos/anthropic.svg",
+      "url": "https://www.producthunt.com/products/anthropic-5",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_2.png",
+      "audioFile": "audio/2026-02-06/hotspot_2.mp3"
+    },
+    {
+      "id": "hotspot_3",
+      "type": "hotspot",
+      "startFrame": 1170,
+      "durationFrames": 540,
+      "rank": 3,
+      "title": "阿里Qwen3-Coder开源",
+      "text": "阿里Qwen团队开源Qwen3-Coder代码模型，GitHub获得15328星。这是国产AI的重大突破。",
+      "keyPoint": "15328星开源项目",
+      "vendor": "Alibaba",
+      "logo": "logos/default.svg",
+      "url": "https://github.com/QwenLM/Qwen3-Coder",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_3.png",
+      "audioFile": "audio/2026-02-06/hotspot_3.mp3"
+    },
+    {
+      "id": "closing",
+      "type": "closing",
+      "startFrame": 1710,
+      "durationFrames": 90,
+      "text": "点赞关注，每天60秒了解AI热点！",
+      "audioFile": "audio/2026-02-06/closing.mp3"
+    }
+  ]
+}
