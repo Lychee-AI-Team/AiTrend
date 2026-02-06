@@ -9,6 +9,9 @@ interface DetailedHotspotProps {
   source?: string;
 }
 
+// 中文字体配置
+const CHINESE_FONT = '"Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif';
+
 export const DetailedHotspot: React.FC<DetailedHotspotProps> = ({
   rank,
   title,
@@ -43,6 +46,7 @@ export const DetailedHotspot: React.FC<DetailedHotspotProps> = ({
       padding: '80px 120px',
       background: 'linear-gradient(180deg, #0a0a0f 0%, #0f172a 100%)',
       boxSizing: 'border-box',
+      fontFamily: CHINESE_FONT,
     }}>
       {/* 排名标识 */}
       <div style={{

@@ -6,6 +6,9 @@ interface OpeningProps {
   date: string;
 }
 
+// 中文字体配置
+const CHINESE_FONT = '"Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif';
+
 export const Opening: React.FC<OpeningProps> = ({text, date}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -36,6 +39,7 @@ export const Opening: React.FC<OpeningProps> = ({text, date}) => {
       alignItems: 'center',
       background: 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%)',
       opacity,
+      fontFamily: CHINESE_FONT,
     }}>
       {/* Logo/标题 */}
       <div style={{
@@ -59,6 +63,7 @@ export const Opening: React.FC<OpeningProps> = ({text, date}) => {
           color: '#8892b0',
           marginTop: 20,
           letterSpacing: 8,
+          fontFamily: CHINESE_FONT,
         }}>
           AI 热点日报
         </p>
@@ -72,6 +77,7 @@ export const Opening: React.FC<OpeningProps> = ({text, date}) => {
         fontSize: 28,
         color: '#64ffda',
         fontWeight: 500,
+        fontFamily: CHINESE_FONT,
       }}>
         {date}
       </div>
@@ -88,6 +94,7 @@ export const Opening: React.FC<OpeningProps> = ({text, date}) => {
         lineHeight: 1.6,
         color: '#e6f1ff',
         padding: '0 100px',
+        fontFamily: CHINESE_FONT,
       }}>
         {text}
       </div>

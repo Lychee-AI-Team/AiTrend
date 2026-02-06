@@ -1,4 +1,7 @@
 import React from 'react';
+// 中文字体配置
+const CHINESE_FONT = '"Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif'
+
 import {useCurrentFrame, useVideoConfig, interpolate} from 'remotion';
 
 interface QuickItem {
