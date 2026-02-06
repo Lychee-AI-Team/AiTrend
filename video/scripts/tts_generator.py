@@ -15,23 +15,25 @@ from datetime import datetime
 class MinimaxTTS:
     """Minimax 文字转语音客户端"""
     
-    def __init__(self, api_key: str = None, voice_id: str = None):
+    def __init__(self, api_key: str = None, voice_id: str = None, speed: float = 1.2):
         """
         初始化 Minimax TTS 客户端
         
         Args:
             api_key: Minimax API Key（默认从环境变量读取）
             voice_id: 音色ID（默认从环境变量读取）
+            speed: 语速（1.0正常，1.2快20%，默认1.2）
         """
         self.api_key = api_key or os.getenv('MINIMAX_API_KEY')
         self.voice_id = voice_id or os.getenv('MINIMAX_VOICE_ID', 'mastercui')
+        self.speed = speed
         
         if not self.api_key:
             raise RuntimeError("❌ MINIMAX_API_KEY not set. 请确保环境变量已正确导出")
         
         self.base_url = "https://api.minimaxi.com/v1/t2a_v2"
     
-    def generate(self, text: str, output_file: str, voice_id: str = None) -> Dict:
+    def generate(self, text: str, output_file: str, voice_id: str = None, speed: float = None) -> Dict:
         """
         生成单段语音
         
@@ -39,11 +41,13 @@ class MinimaxTTS:
             text: 要合成的文本
             output_file: 输出文件路径
             voice_id: 音色ID（可选，覆盖默认）
+            speed: 语速（可选，覆盖默认，1.0正常，1.2快20%）
             
         Returns:
             包含 audio_url 和 duration 的字典
         """
         voice = voice_id or self.voice_id
+        speed = speed or self.speed
         
         headers = {
             "Authorization": f"Bearer {self.api_key}",
@@ -56,7 +60,7 @@ class MinimaxTTS:
             "stream": False,
             "voice_setting": {
                 "voice_id": voice,
-                "speed": 1,
+                "speed": speed,
                 "vol": 1,
                 "pitch": 0
             },
