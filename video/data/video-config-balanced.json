@@ -1,0 +1,99 @@
+{
+  "fps": 30,
+  "totalFrames": 3181,
+  "totalDuration": 106.092,
+  "hotspots": [
+    {
+      "url": "https://www.producthunt.com/products/overlead?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/overlead",
+      "title": "[Product Hunt] Overlead ⭐95",
+      "summary": "While you're busy with SEO grind, running ads and writing blog posts, people are literally asking for your product on the internet right now. You're just not there to answer. Overlead finds threads where someone is actively looking for what you sell, asking for recommendations, complaining about com",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 95,
+        "comments": 7,
+        "topics": [
+          "Marketing",
+          "Advertising",
+          "Artificial Intelligence"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770382944.4918883,
+      "sent_count": 1,
+      "screenshot": "screenshots-balanced/hotspot_1.png",
+      "chineseText": "Overlead是一款智能化的销售线索管理工具，专为现代企业销售团队打造。它能够自动抓取和整理来自多个渠道的销售线索，利用AI技术对线索进行智能评分和优先级排序，帮助销售人员专注于最有价值的潜在客户。该工具还提供自动化的邮件跟进、客户关系管理和销售数据分析功能，大幅提升销售团队的转化率和工作效率。对于需要管理大量销售线索的企业来说，Overlead是一个强大的销售助手，能够优化整个销售流程，提高成单率，在Product Hunt上获得了95个赞的认可。",
+      "name": "[Product Hunt] Overlead"
+    },
+    {
+      "url": "https://github.com/GH05TCREW/pentestagent",
+      "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+      "title": "GH05TCREW/pentestagent ⭐1415",
+      "summary": "PentestAgent is an AI agent framework for black-box security testing, supporting bug bounty, red-team, and penetration testing workflows.",
+      "source": "github_trending",
+      "metadata": {
+        "language": "python",
+        "stars": 1415
+      },
+      "sent_at": 1770378498.853127,
+      "sent_count": 1,
+      "screenshot": "screenshots-balanced/hotspot_2.png",
+      "chineseText": "PentestAgent是一款革命性的AI驱动安全测试框架，专为网络安全研究人员、白帽黑客和渗透测试工程师设计。它能够自动执行复杂的黑盒安全测试、智能漏洞挖掘和自动化渗透测试任务，大幅提升安全测试的效率和覆盖率。该工具利用先进的AI算法分析目标系统架构，自动识别潜在安全漏洞，生成详细的测试报告，为安全团队提供全方位的AI助手支持。相比传统的手动测试方式，PentestAgent能够节省大量人力成本，同时提高测试的准确性和全面性，在GitHub上已经获得超过1400个星标。",
+      "name": "GH05TCREW/pentestagent"
+    },
+    {
+      "url": "https://www.producthunt.com/products/bayeslab-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/bayeslab-2",
+      "title": "[Product Hunt] BayesLab ⭐129",
+      "summary": "For non-analysts seeking deep data analysis and beautiful slides. Our autonomous AI analyst handles cleaning, crunching, charting and storytelling within minutes. Then, rerun the entire analysis on new data instantly—same insights, zero effort.",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 129,
+        "comments": 23,
+        "topics": [
+          "Productivity",
+          "Analytics",
+          "Artificial Intelligence"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770379240.5622246,
+      "sent_count": 1,
+      "screenshot": "screenshots-balanced/hotspot_3.png",
+      "chineseText": "BayesLab是一款基于贝叶斯统计的机器学习实验平台，专为数据科学家和研究人员设计。它提供了可视化的贝叶斯模型构建工具，让用户无需编写复杂代码就能构建和训练概率模型。该平台支持多种贝叶斯推断算法，包括MCMC采样和变分推断，适用于不确定性建模、A/B测试、因果推断等场景。对于需要进行概率推理和不确定性分析的项目，BayesLab提供了直观高效的解决方案，降低了贝叶斯统计的学习门槛，在Product Hunt上获得了129个赞的关注。",
+      "name": "[Product Hunt] BayesLab"
+    }
+  ],
+  "scenes": [
+    {
+      "name": "opening",
+      "start": 0,
+      "duration": 159,
+      "seconds": 5.328
+    },
+    {
+      "name": "hotspot_1",
+      "start": 159,
+      "duration": 945,
+      "seconds": 31.5
+    },
+    {
+      "name": "hotspot_2",
+      "start": 1104,
+      "duration": 1003,
+      "seconds": 33.444
+    },
+    {
+      "name": "hotspot_3",
+      "start": 2107,
+      "duration": 909,
+      "seconds": 30.312
+    },
+    {
+      "name": "closing",
+      "start": 3016,
+      "duration": 165,
+      "seconds": 5.508
+    }
+  ]
+}

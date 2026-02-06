@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://www.producthunt.com/products/overlead?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+    "normalized_url": "https://www.producthunt.com/products/overlead",
+    "title": "[Product Hunt] Overlead ⭐95",
+    "summary": "While you're busy with SEO grind, running ads and writing blog posts, people are literally asking for your product on the internet right now. You're just not there to answer. Overlead finds threads where someone is actively looking for what you sell, asking for recommendations, complaining about com",
+    "source": "producthunt",
+    "metadata": {
+      "votes": 95,
+      "comments": 7,
+      "topics": [
+        "Marketing",
+        "Advertising",
+        "Artificial Intelligence"
+      ],
+      "collector_source": "producthunt"
+    },
+    "sent_at": 1770382944.4918883,
+    "sent_count": 1,
+    "screenshot": "screenshots-balanced/hotspot_1.png"
+  },
+  {
+    "url": "https://github.com/GH05TCREW/pentestagent",
+    "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+    "title": "GH05TCREW/pentestagent ⭐1415",
+    "summary": "PentestAgent is an AI agent framework for black-box security testing, supporting bug bounty, red-team, and penetration testing workflows.",
+    "source": "github_trending",
+    "metadata": {
+      "language": "python",
+      "stars": 1415
+    },
+    "sent_at": 1770378498.853127,
+    "sent_count": 1,
+    "screenshot": "screenshots-balanced/hotspot_2.png"
+  },
+  {
+    "url": "https://www.producthunt.com/products/bayeslab-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+    "normalized_url": "https://www.producthunt.com/products/bayeslab-2",
+    "title": "[Product Hunt] BayesLab ⭐129",
+    "summary": "For non-analysts seeking deep data analysis and beautiful slides. Our autonomous AI analyst handles cleaning, crunching, charting and storytelling within minutes. Then, rerun the entire analysis on new data instantly—same insights, zero effort.",
+    "source": "producthunt",
+    "metadata": {
+      "votes": 129,
+      "comments": 23,
+      "topics": [
+        "Productivity",
+        "Analytics",
+        "Artificial Intelligence"
+      ],
+      "collector_source": "producthunt"
+    },
+    "sent_at": 1770379240.5622246,
+    "sent_count": 1,
+    "screenshot": "screenshots-balanced/hotspot_3.png"
+  }
+]
