@@ -117,6 +117,83 @@
       },
       "sent_at": 1770378498.853127,
       "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/bayeslab-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/bayeslab-2",
+      "title": "[Product Hunt] BayesLab ⭐129",
+      "summary": "For non-analysts seeking deep data analysis and beautiful slides. Our autonomous AI analyst handles cleaning, crunching, charting and storytelling within minutes. Then, rerun the entire analysis on new data instantly—same insights, zero effort.",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 129,
+        "comments": 23,
+        "topics": [
+          "Productivity",
+          "Analytics",
+          "Artificial Intelligence"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770379240.5622246,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/betterbugs-io?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/betterbugs-io",
+      "title": "[Product Hunt] BetterBugs MCP ⭐143",
+      "summary": "AI can write code brilliantly but debugs blindly. It can't see your app, logs, or what users did, so you waste time explaining. BetterBugs MCP gives AI complete context to fix the bugs instantly.",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 143,
+        "comments": 12,
+        "topics": [
+          "Chrome Extensions",
+          "Developer Tools",
+          "Vibe coding"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770379240.5622246,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/anthropic-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/anthropic-5",
+      "title": "[Product Hunt] Claude Opus 4.6 ⭐149",
+      "summary": "Claude Opus 4.6 is Claude’s most capable model yet, built for deep reasoning, long-running agentic tasks, and large codebases. With a 1M token context window, adaptive thinking, and improved planning, it delivers state-of-the-art performance across coding, analysis, research, and real-world work.",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 149,
+        "comments": 11,
+        "topics": [
+          "Productivity",
+          "Developer Tools",
+          "Artificial Intelligence"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770379294.5260406,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/tabai-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/tabai-2",
+      "title": "[Product Hunt] TabAI ⭐112",
+      "summary": "TabAI collects your tasks from everywhere, keeps them structured in one place, and helps you stay focused. It automatically captures tasks from tabs, text, and tools so nothing needs manual input. AI organizes tasks and context so your brain stays clear. Personal analytics show where your attention ",
+      "source": "producthunt",
+      "metadata": {
+        "votes": 112,
+        "comments": 8,
+        "topics": [
+          "Chrome Extensions",
+          "Productivity",
+          "Task Management",
+          "User Experience"
+        ],
+        "collector_source": "producthunt"
+      },
+      "sent_at": 1770379294.5260406,
+      "sent_count": 1
     }
   ]
 }

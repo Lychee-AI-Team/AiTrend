@@ -5,7 +5,7 @@
       "enabled": false
     },
     "hackernews": {
-      "enabled": true
+      "enabled": false
     },
     "producthunt": {
       "enabled": true,
@@ -18,10 +18,10 @@
     },
     "github_trending": {
       "enabled": true,
-      "languages": ["python", "typescript", "rust", "go", "javascript"]
+      "languages": ["python"]
     },
     "tavily": {
-      "enabled": false,
+      "enabled": true,
       "api_key": "${TAVILY_API_KEY}",
       "queries": [
         "latest AI tools launch 2026",
