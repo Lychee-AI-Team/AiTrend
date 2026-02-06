@@ -55,7 +55,7 @@ const renderScene = (scene: SceneData, date: string) => {
       return (
         <>
           <Opening text={scene.text} date={date} />
-          <Audio src={staticFile(scene.audioFile.replace('assets/', ''))} />
+          <Audio src={staticFile(scene.audioFile.replace('public/', ''))} />
         </>
       );
     
@@ -69,7 +69,7 @@ const renderScene = (scene: SceneData, date: string) => {
             keyPoint={scene.keyPoint}
             source={scene.source}
           />
-          <Audio src={staticFile(scene.audioFile.replace('assets/', ''))} />
+          <Audio src={staticFile(scene.audioFile.replace('public/', ''))} />
         </>
       );
     
@@ -80,7 +80,7 @@ const renderScene = (scene: SceneData, date: string) => {
           {scene.audioFiles.map((file: string, idx: number) => (
             <Audio
               key={idx}
-              src={staticFile(file.replace('assets/', ''))}
+              src={staticFile(file.replace('public/', ''))}
               startFrom={idx === 0 ? 0 : undefined}
             />
           ))}
@@ -91,7 +91,7 @@ const renderScene = (scene: SceneData, date: string) => {
       return (
         <>
           <Closing text={scene.text} />
-          <Audio src={staticFile(scene.audioFile.replace('assets/', ''))} />
+          <Audio src={staticFile(scene.audioFile.replace('public/', ''))} />
         </>
       );
     
