@@ -1,0 +1,383 @@
+{
+  "description": "记录已发送的文章，24小时内不重复",
+  "articles": [
+    {
+      "url": "https://github.com/refly-ai/refly",
+      "normalized_url": "https://github.com/refly-ai/refly",
+      "title": "refly-ai/refly ⭐6233",
+      "sent_at": 1770253251.9231598,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/bytedance/UI-TARS-desktop",
+      "normalized_url": "https://github.com/bytedance/UI-TARS-desktop",
+      "title": "bytedance/UI-TARS-desktop ⭐26187",
+      "sent_at": 1770256912.482466,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/badlogic/pi-mono",
+      "normalized_url": "https://github.com/badlogic/pi-mono",
+      "title": "badlogic/pi-mono ⭐6729",
+      "sent_at": 1770260436.2502294,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
+      "normalized_url": "https://www.reddit.com/r/ArtificialInteligence/comments/1om3bn0/list_of_ai_models_released_this_month/",
+      "title": "List of AI models released this month : r/ArtificialInteligence - Reddit",
+      "sent_at": 1770260517.5626926,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/activepieces/activepieces",
+      "normalized_url": "https://github.com/activepieces/activepieces",
+      "title": "activepieces/activepieces ⭐0",
+      "sent_at": 1770264040.1928775,
+      "sent_count": 1
+    },
+    {
+      "url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
+      "normalized_url": "https://medium.com/artificial-corner/the-best-ai-tools-for-2026-933535a44f8b",
+      "title": "The Best AI Tools for 2026 - Medium",
+      "sent_at": 1770264040.1928775,
+      "sent_count": 1
+    },
+    {
+      "url": "https://nmn.gl/blog/ai-killing-b2b-saas",
+      "normalized_url": "https://nmn.gl/blog/ai-killing-b2b-saas",
+      "title": "[HN] AI is killing B2B SaaS",
+      "sent_at": 1770264157.1678326,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/puemos/craftplan",
+      "normalized_url": "https://github.com/puemos/craftplan",
+      "title": "[Show HN] Show HN: Craftplan – I built my wife a production management tool for her bakery",
+      "sent_at": 1770264157.1678326,
+      "sent_count": 1
+    },
+    {
+      "url": "https://boxc.net/blog/2026/claude-code-connecting-to-local-models-when-your-quota-runs-out/",
+      "normalized_url": "https://boxc.net/blog/2026/claude-code-connecting-to-local-models-when-your-quota-runs-out/",
+      "title": "[HN] Claude Code: connect to a local model when your quota runs out",
+      "sent_at": 1770267647.4044514,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/bethington/ghidra-mcp",
+      "normalized_url": "https://github.com/bethington/ghidra-mcp",
+      "title": "[Show HN] Show HN: Ghidra MCP Server – 110 tools for AI-assisted reverse engineering",
+      "sent_at": 1770267647.4044514,
+      "sent_count": 1
+    },
+    {
+      "url": "https://morphllm.com/products/glance",
+      "normalized_url": "https://morphllm.com/products/glance",
+      "title": "[Show HN] Show HN: Morph – Videos of AI testing your PR, embedded in GitHub",
+      "sent_at": 1770267691.4983962,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/egeominotti/bunqueue",
+      "normalized_url": "https://github.com/egeominotti/bunqueue",
+      "title": "[Show HN] Show HN: Bunqueue – Job queue for Bun using SQLite instead of Redis",
+      "sent_at": 1770267691.4983962,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/virattt/dexter",
+      "normalized_url": "https://github.com/virattt/dexter",
+      "title": "virattt/dexter ⭐10501",
+      "sent_at": 1770271243.6821046,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.scmp.com/tech/big-tech/article/3342051/chinas-ai-labs-race-debut-latest-models-lunar-new-year",
+      "normalized_url": "https://www.scmp.com/tech/big-tech/article/3342051/chinas-ai-labs-race-debut-latest-models-lunar-new-year",
+      "title": "China's AI labs race to debut latest models before Lunar New Year",
+      "sent_at": 1770271243.6821046,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/cloudflare/agents",
+      "normalized_url": "https://github.com/cloudflare/agents",
+      "title": "cloudflare/agents ⭐3105",
+      "sent_at": 1770271298.7525275,
+      "sent_count": 1
+    },
+    {
+      "url": "https://lastweekin.ai/",
+      "normalized_url": "https://lastweekin.ai/",
+      "title": "Last Week in AI | Substack",
+      "sent_at": 1770271298.7525275,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/1jehuang/mermaid-rs-renderer/blob/master/README.md",
+      "normalized_url": "https://github.com/1jehuang/mermaid-rs-renderer/blob/master/README.md",
+      "title": "[Show HN] Show HN: Mmdr – 1000x faster Mermaid rendering in pure Rust (no browser)",
+      "sent_at": 1770274845.2712238,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
+      "normalized_url": "https://www.technologyreview.com/2026/01/12/1130027/generative-coding-ai-software-2026-breakthrough-technology/",
+      "title": "Generative coding: 10 Breakthrough Technologies 2026",
+      "sent_at": 1770274845.2712238,
+      "sent_count": 1
+    },
+    {
+      "url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
+      "normalized_url": "https://datanorth.ai/blog/top-10-ai-tools-for-2026",
+      "title": "Top 10 AI Tools for 2026 - DataNorth AI",
+      "sent_at": 1770274884.6788785,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
+      "normalized_url": "https://www.expressanalytics.com/blog/top-10-ai-tools-in-2026",
+      "title": "Top 10 AI Tools for Business in 2026 - Express Analytics",
+      "sent_at": 1770274884.6788785,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/supaboard-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/supaboard-ai",
+      "title": "[Product Hunt] Supaboard ⭐142",
+      "sent_at": 1770285660.3658319,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/modaal-ai-agent-for-ios?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/modaal-ai-agent-for-ios",
+      "title": "[Product Hunt] Modaal ⭐38",
+      "sent_at": 1770285660.3658319,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/higgsfield?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/higgsfield",
+      "title": "[Product Hunt] Higgsfield Vibe-Motion ⭐109",
+      "sent_at": 1770285697.857693,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/mistral-7b?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/mistral-7b",
+      "title": "[Product Hunt] Voxtral Transcribe 2 by Mistral ⭐108",
+      "sent_at": 1770285697.857693,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/therapist-ai-time-for-what-matters?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/therapist-ai-time-for-what-matters",
+      "title": "[Product Hunt] Therapist AI ⭐65",
+      "sent_at": 1770289234.0380797,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/v0?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/v0",
+      "title": "[Product Hunt] The new v0 ⭐135",
+      "sent_at": 1770289234.0380797,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/webflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/webflow",
+      "title": "[Product Hunt] Webflow AI site builder ⭐100",
+      "sent_at": 1770289268.303153,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/github?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/github",
+      "title": "[Product Hunt] GitHub Agent HQ ⭐101",
+      "sent_at": 1770289268.303153,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/sylvian-excel-agent?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/sylvian-excel-agent",
+      "title": "[Product Hunt] Sylvian AI Forms ⭐89",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/autobandstudio?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/autobandstudio",
+      "title": "[Product Hunt] AutoBandStudio ⭐79",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/vkazanov/elcity",
+      "normalized_url": "https://github.com/vkazanov/elcity",
+      "title": "[Show HN] Show HN: Micropolis/SimCity Clone in Emacs Lisp",
+      "sent_at": 1770292839.559066,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/talktopost?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/talktopost",
+      "title": "[Product Hunt] TalkToPost ⭐73",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/topoteretes/cognee",
+      "normalized_url": "https://github.com/topoteretes/cognee",
+      "title": "topoteretes/cognee ⭐11713",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "normalized_url": "https://github.com/anthropics/skills",
+      "title": "anthropics/skills ⭐63659",
+      "sent_at": 1770292884.6710758,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/miro?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/miro",
+      "title": "[Product Hunt] Miro MCP ⭐75",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/GH05TCREW/pentestagent",
+      "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+      "title": "GH05TCREW/pentestagent ⭐1391",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/CVHub520/X-AnyLabeling",
+      "normalized_url": "https://github.com/CVHub520/X-AnyLabeling",
+      "title": "CVHub520/X-AnyLabeling ⭐8080",
+      "sent_at": 1770296441.6287272,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/JerBouma/FinanceDatabase",
+      "normalized_url": "https://github.com/JerBouma/FinanceDatabase",
+      "title": "JerBouma/FinanceDatabase ⭐6868",
+      "sent_at": 1770296479.605989,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang",
+      "normalized_url": "https://github.com/sgl-project/sglang",
+      "title": "sgl-project/sglang ⭐23307",
+      "sent_at": 1770296479.605989,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/qodo-ai/pr-agent",
+      "normalized_url": "https://github.com/qodo-ai/pr-agent",
+      "title": "qodo-ai/pr-agent ⭐10062",
+      "sent_at": 1770300036.0208669,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/Polymarket/agents",
+      "normalized_url": "https://github.com/Polymarket/agents",
+      "title": "Polymarket/agents ⭐2013",
+      "sent_at": 1770300036.0208669,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/thedotmack/claude-mem",
+      "normalized_url": "https://github.com/thedotmack/claude-mem",
+      "title": "thedotmack/claude-mem ⭐0",
+      "sent_at": 1770300082.358128,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/linshenkx/prompt-optimizer",
+      "normalized_url": "https://github.com/linshenkx/prompt-optimizer",
+      "title": "linshenkx/prompt-optimizer ⭐19260",
+      "sent_at": 1770300082.358128,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/aidenybai/react-grab",
+      "normalized_url": "https://github.com/aidenybai/react-grab",
+      "title": "aidenybai/react-grab ⭐4890",
+      "sent_at": 1770303637.9915457,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/MotiaDev/motia",
+      "normalized_url": "https://github.com/MotiaDev/motia",
+      "title": "MotiaDev/motia ⭐14821",
+      "sent_at": 1770303672.098377,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "normalized_url": "https://github.com/google-gemini/gemini-cli",
+      "title": "google-gemini/gemini-cli ⭐93668",
+      "sent_at": 1770303672.098377,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/mermaid-js/mermaid",
+      "normalized_url": "https://github.com/mermaid-js/mermaid",
+      "title": "mermaid-js/mermaid ⭐85849",
+      "sent_at": 1770307259.1465554,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript",
+      "normalized_url": "https://github.com/anthropics/anthropic-sdk-typescript",
+      "title": "anthropics/anthropic-sdk-typescript ⭐1579",
+      "sent_at": 1770307259.1465554,
+      "sent_count": 1
+    },
+    {
+      "url": "https://code.claude.com/docs/en/agent-teams",
+      "normalized_url": "https://code.claude.com/docs/en/agent-teams",
+      "title": "[HN] Claude Code Agent Teams",
+      "sent_at": 1770318028.0956333,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "normalized_url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "title": "[HN] Claude Opus 4.6",
+      "sent_at": 1770321633.903582,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.btboces.org/Downloads/7_There%20Will%20Come%20Soft%20Rains%20by%20Ray%20Bradbury.pdf",
+      "normalized_url": "https://www.btboces.org/Downloads/7_There%20Will%20Come%20Soft%20Rains%20by%20Ray%20Bradbury.pdf",
+      "title": "[HN] There Will Come Soft Rains (1950) [pdf]",
+      "sent_at": 1770321633.903582,
+      "sent_count": 1
+    },
+    {
+      "url": "https://mitchellh.com/writing/my-ai-adoption-journey",
+      "normalized_url": "https://mitchellh.com/writing/my-ai-adoption-journey",
+      "title": "[HN] My AI Adoption Journey",
+      "sent_at": 1770325229.046005,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/QwenLM/Qwen3-Coder",
+      "normalized_url": "https://github.com/QwenLM/Qwen3-Coder",
+      "title": "QwenLM/Qwen3-Coder ⭐15319",
+      "sent_at": 1770328860.881294,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/Canner/WrenAI",
+      "normalized_url": "https://github.com/Canner/WrenAI",
+      "title": "Canner/WrenAI ⭐14120",
+      "sent_at": 1770339638.4934616,
+      "sent_count": 1
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "fps": 30,
+  "totalFrames": 1052,
+  "totalDuration": 35.136,
+  "scenes": [
+    {
+      "name": "opening",
+      "text": "欢迎收看AiTrend，今天AI圈发生了什么？让我们一起来看看最新的AI热点。...",
+      "start": 0,
+      "duration": 193,
+      "seconds": 6.444
+    },
+    {
+      "name": "hotspot_1",
+      "text": "topoteretes/cognee，Memory for AI Agents in 6 lines of code...",
+      "start": 193,
+      "duration": 167,
+      "seconds": 5.58
+    },
+    {
+      "name": "hotspot_2",
+      "text": "anthropics/skills，Public repository for Agent Skills...",
+      "start": 360,
+      "duration": 145,
+      "seconds": 4.86
+    },
+    {
+      "name": "hotspot_3",
+      "text": "GH05TCREW/pentestagent，PentestAgent is an AI agent framework...",
+      "start": 505,
+      "duration": 356,
+      "seconds": 11.88
+    },
+    {
+      "name": "closing",
+      "text": "以上就是今天的AI热点资讯。点赞关注，AiTrend带你了解最新AI动态。...",
+      "start": 861,
+      "duration": 191,
+      "seconds": 6.372
+    }
+  ],
+  "articles": [
+    {
+      "url": "https://github.com/topoteretes/cognee",
+      "normalized_url": "https://github.com/topoteretes/cognee",
+      "title": "topoteretes/cognee ⭐11955",
+      "summary": "Memory for AI Agents in 6 lines of code",
+      "source": "github_trending",
+      "metadata": {
+        "language": "python",
+        "stars": 11955
+      },
+      "sent_at": 1770378498.853127,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "normalized_url": "https://github.com/anthropics/skills",
+      "title": "anthropics/skills ⭐64475",
+      "summary": "Public repository for Agent Skills",
+      "source": "github_trending",
+      "metadata": {
+        "language": "python",
+        "stars": 64475
+      },
+      "sent_at": 1770378498.853127,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/GH05TCREW/pentestagent",
+      "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+      "title": "GH05TCREW/pentestagent ⭐1415",
+      "summary": "PentestAgent is an AI agent framework for black-box security testing, supporting bug bounty, red-team, and penetration testing workflows.",
+      "source": "github_trending",
+      "metadata": {
+        "language": "python",
+        "stars": 1415
+      },
+      "sent_at": 1770378498.853127,
+      "sent_count": 1
+    }
+  ]
+}

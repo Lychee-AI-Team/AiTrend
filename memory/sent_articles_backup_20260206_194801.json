@@ -1,0 +1,236 @@
+{
+  "description": "记录已发送的文章，24小时内不重复",
+  "articles": [
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "normalized_url": "https://www.anthropic.com/news/claude-opus-4-6",
+      "title": "[HN] Claude Opus 4.6",
+      "sent_at": 1770339833.8299627,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/puemos/craftplan",
+      "normalized_url": "https://github.com/puemos/craftplan",
+      "title": "[Show HN] Show HN: Craftplan – I built my wife a production management tool for her bakery",
+      "sent_at": 1770339833.8299627,
+      "sent_count": 1
+    },
+    {
+      "url": "https://mitchellh.com/writing/my-ai-adoption-journey",
+      "normalized_url": "https://mitchellh.com/writing/my-ai-adoption-journey",
+      "title": "[HN] My AI Adoption Journey",
+      "sent_at": 1770343277.1170928,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/vkazanov/elcity",
+      "normalized_url": "https://github.com/vkazanov/elcity",
+      "title": "[Show HN] Show HN: Micropolis/SimCity Clone in Emacs Lisp",
+      "sent_at": 1770343277.1170928,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/supaboard-ai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/supaboard-ai",
+      "title": "[Product Hunt] Supaboard ⭐457",
+      "sent_at": 1770343277.1170928,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/topoteretes/cognee",
+      "normalized_url": "https://github.com/topoteretes/cognee",
+      "title": "topoteretes/cognee ⭐11865",
+      "sent_at": 1770346877.2154882,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "normalized_url": "https://github.com/anthropics/skills",
+      "title": "anthropics/skills ⭐64084",
+      "sent_at": 1770346877.2154882,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/v0?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/v0",
+      "title": "[Product Hunt] The new v0 ⭐333",
+      "sent_at": 1770354244.5896544,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/higgsfield?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/higgsfield",
+      "title": "[Product Hunt] Higgsfield Vibe-Motion ⭐266",
+      "sent_at": 1770354244.5896544,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/webflow?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/webflow",
+      "title": "[Product Hunt] Webflow AI site builder ⭐187",
+      "sent_at": 1770354266.3142524,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/sylvian-excel-agent?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/sylvian-excel-agent",
+      "title": "[Product Hunt] Sylvian AI Forms ⭐115",
+      "sent_at": 1770354266.3142524,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/miro?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/miro",
+      "title": "[Product Hunt] Miro MCP ⭐116",
+      "sent_at": 1770354280.7330437,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/talktopost?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/talktopost",
+      "title": "[Product Hunt] TalkToPost ⭐100",
+      "sent_at": 1770354280.7330437,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/autobandstudio?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/autobandstudio",
+      "title": "[Product Hunt] AutoBandStudio ⭐94",
+      "sent_at": 1770354324.3792253,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/mistral-7b?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/mistral-7b",
+      "title": "[Product Hunt] Voxtral Transcribe 2 by Mistral ⭐235",
+      "sent_at": 1770354324.3792253,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/GH05TCREW/pentestagent",
+      "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+      "title": "GH05TCREW/pentestagent ⭐1411",
+      "sent_at": 1770354324.3792253,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/github?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/github",
+      "title": "[Product Hunt] GitHub Agent HQ ⭐174",
+      "sent_at": 1770357726.5627224,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/CVHub520/X-AnyLabeling",
+      "normalized_url": "https://github.com/CVHub520/X-AnyLabeling",
+      "title": "CVHub520/X-AnyLabeling ⭐8090",
+      "sent_at": 1770357726.5627224,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/JerBouma/FinanceDatabase",
+      "normalized_url": "https://github.com/JerBouma/FinanceDatabase",
+      "title": "JerBouma/FinanceDatabase ⭐6894",
+      "sent_at": 1770357726.5627224,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang",
+      "normalized_url": "https://github.com/sgl-project/sglang",
+      "title": "sgl-project/sglang ⭐23360",
+      "sent_at": 1770357820.8079033,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/qodo-ai/pr-agent",
+      "normalized_url": "https://github.com/qodo-ai/pr-agent",
+      "title": "qodo-ai/pr-agent ⭐10069",
+      "sent_at": 1770357820.8079033,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/QwenLM/Qwen3-Coder",
+      "normalized_url": "https://github.com/QwenLM/Qwen3-Coder",
+      "title": "QwenLM/Qwen3-Coder ⭐15328",
+      "sent_at": 1770357916.4231513,
+      "sent_count": 1
+    },
+    {
+      "url": "https://github.com/Polymarket/agents",
+      "normalized_url": "https://github.com/Polymarket/agents",
+      "title": "Polymarket/agents ⭐2031",
+      "sent_at": 1770357916.4231513,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/molt-beach?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/molt-beach",
+      "title": "[Product Hunt] Molt Beach ⭐18",
+      "sent_at": 1770364921.70914,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/anthropic-5?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/anthropic-5",
+      "title": "[Product Hunt] Claude Opus 4.6 ⭐7",
+      "sent_at": 1770364921.70914,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/bayeslab-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/bayeslab-2",
+      "title": "[Product Hunt] BayesLab ⭐83",
+      "sent_at": 1770368489.6755536,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/y-bombinator-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/y-bombinator-3",
+      "title": "[Product Hunt] Y Bombinator ⭐80",
+      "sent_at": 1770368489.6755536,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/overlead?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/overlead",
+      "title": "[Product Hunt] Overlead ⭐68",
+      "sent_at": 1770368629.292143,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/betterbugs-io?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/betterbugs-io",
+      "title": "[Product Hunt] BetterBugs MCP ⭐97",
+      "sent_at": 1770368629.292143,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/obi-3?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/obi-3",
+      "title": "[Product Hunt] Obi ⭐97",
+      "sent_at": 1770372066.2181423,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/tabai-2?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/tabai-2",
+      "title": "[Product Hunt] TabAI ⭐92",
+      "sent_at": 1770372066.2181423,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/clawapp?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/clawapp",
+      "title": "[Product Hunt] ClawApp ⭐81",
+      "sent_at": 1770375682.0716736,
+      "sent_count": 1
+    },
+    {
+      "url": "https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&utm_medium=api-v2&utm_source=Application%3A+master-chat+%28ID%3A+268556%29",
+      "normalized_url": "https://www.producthunt.com/products/openai",
+      "title": "[Product Hunt] OpenAI Frontier ⭐85",
+      "sent_at": 1770375682.0716736,
+      "sent_count": 1
+    }
+  ]
+}
