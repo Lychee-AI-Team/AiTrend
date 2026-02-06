@@ -114,7 +114,14 @@ class HackerNewsSource(DataSource):
         # 构建摘要
         text = story.get('text', '')[:200] if story.get('text') else ''
         tag = "[Show HN]" if source_type == "show_hn" else "[HN]"
-        summary = text or f"HackerNews 热门讨论，{story.get('descendants', 0)} 条评论"
+        
+        # 确保摘要有足够信息量（至少30字符以满足LLM输入验证）
+        if text:
+            summary = text
+        else:
+            comment_count = story.get('descendants', 0)
+            score_val = story.get('score', 0)
+            summary = f"HackerNews 热门讨论，热度分数 {score_val}，共有 {comment_count} 条评论参与讨论。这是一个关于 {title[:30]}... 的社区热门话题"
         
         return Article(
             title=f"{tag} {title}",

@@ -161,6 +161,9 @@ class ArticleDeduplicator:
                     'url': article.url,                    # 原始 URL
                     'normalized_url': normalized_url,      # 规范化后的 URL
                     'title': article.title,
+                    'summary': article.summary,            # 内容摘要/介绍
+                    'source': article.source,              # 数据来源
+                    'metadata': article.metadata,          # 额外元数据(votes/topics等)
                     'sent_at': current_time,
                     'sent_count': 1
                 })

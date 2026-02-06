@@ -31,38 +31,34 @@ from src.core.config_loader import load_config
 from src.core.webhook_sender import DiscordWebhookSender
 
 def collect_all_sources(config: Dict[str, Any]) -> List[Article]:
-    """从所有数据源收集文章，每个数据源最多 30 秒"""
-    import signal
+    """从所有数据源收集文章"""
+    import socket
+    
+    # 设置全局socket超时，防止网络请求无限挂起
+    socket.setdefaulttimeout(30)
     
     sources_config = config.get("sources", {})
+    print(f"   [调试] sources_config: {list(sources_config.keys())}", file=sys.stderr)
+    
+    print(f"   [调试] 开始创建数据源...", file=sys.stderr)
     sources = create_sources(sources_config)
+    print(f"   [调试] 创建了 {len(sources)} 个数据源", file=sys.stderr)
     
     all_articles = []
-    for source in sources:
+    for i, source in enumerate(sources):
+        print(f"   [调试] 处理第 {i+1}/{len(sources)} 个数据源: {source.name}", file=sys.stderr)
         if source.is_enabled():
-            articles = []
+            print(f"   [调试] {source.name} 已启用，开始获取...", file=sys.stderr)
             try:
-                # 使用信号设置硬性超时（仅 Unix/Linux）
-                def timeout_handler(signum, frame):
-                    raise TimeoutError(f"{source.name} 超时")
-                
-                old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-                signal.alarm(30)  # 30 秒超时
-                
-                try:
-                    articles = source.fetch()
-                finally:
-                    signal.alarm(0)  # 取消闹钟
-                    signal.signal(signal.SIGALRM, old_handler)
-                
+                articles = source.fetch() or []
                 for article in articles:
                     article.metadata['collector_source'] = source.name
                 all_articles.extend(articles)
                 print(f"✓ {source.name}: {len(articles)} 条", file=sys.stderr)
-            except TimeoutError as e:
-                print(f"✗ {source.name}: 超时 (30s)", file=sys.stderr)
             except Exception as e:
                 print(f"✗ {source.name}: {e}", file=sys.stderr)
+        else:
+            print(f"   [调试] {source.name} 已禁用，跳过", file=sys.stderr)
     
     return all_articles
 

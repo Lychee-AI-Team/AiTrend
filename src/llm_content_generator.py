@@ -9,13 +9,40 @@ LLM内容生成器
 - 不再验证LLM输出（信任大模型质量）
 - 改为验证输入数据质量（确保输入有足够信息量）
 - 使用HTTP API直接调用（避免google.generativeai库的中文字符问题）
+- 使用requests库替代urllib（解决SSL/超时问题）
 """
 import os
 import json
-import socket
-import urllib.request
-import urllib.error
 from typing import Dict, Optional
+
+def _load_env_file():
+    """从.env文件加载环境变量"""
+    # 尝试多个可能的.env文件位置
+    possible_paths = [
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env'),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'),
+        os.path.join(os.getcwd(), '.env'),
+        '/home/ubuntu/.openclaw/workspace/AiTrend/.env',
+    ]
+    
+    for env_path in possible_paths:
+        if os.path.exists(env_path):
+            try:
+                with open(env_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if '=' in line and not line.startswith('#'):
+                            key, value = line.split('=', 1)
+                            # 只设置未存在的环境变量
+                            if key not in os.environ:
+                                os.environ[key] = value
+                return True
+            except Exception:
+                continue
+    return False
+
+# 模块加载时自动尝试加载.env
+_load_env_file()
 
 class LLMContentGenerator:
     """使用Gemini生成独特内容（HTTP API版本）"""
@@ -128,7 +155,7 @@ class LLMContentGenerator:
     
     def _call_gemini_api(self, prompt: str, url: str) -> str:
         """
-        调用Gemini HTTP API
+        调用Gemini HTTP API (使用requests库)
         
         Args:
             prompt: 提示词
@@ -138,7 +165,11 @@ class LLMContentGenerator:
             生成的内容
         """
         import sys
+        import requests
         print(f"   📝 开始生成内容...", file=sys.stderr)
+        
+        # 使用URL参数传递API key（requests更可靠）
+        api_url = f"{self.api_url}?key={self.api_key}"
         
         data = {
             "contents": [{
@@ -151,56 +182,41 @@ class LLMContentGenerator:
         }
         
         headers = {
-            "Content-Type": "application/json",
-            "x-goog-api-key": self.api_key
+            "Content-Type": "application/json"
         }
-        
-        req = urllib.request.Request(
-            self.api_url,
-            data=json.dumps(data).encode('utf-8'),
-            headers=headers,
-            method='POST'
-        )
-        
-        # 设置socket级别的超时
-        old_timeout = socket.getdefaulttimeout()
-        socket.setdefaulttimeout(60)
         
         try:
             print(f"   🌐 调用API: {self.model_name}...", file=sys.stderr)
-            with urllib.request.urlopen(req, timeout=60) as response:
-                result = json.loads(response.read().decode('utf-8'))
-                
-                if 'candidates' not in result or not result['candidates']:
-                    raise RuntimeError("API返回空结果")
-                
-                candidate = result['candidates'][0]
-                if 'content' not in candidate or 'parts' not in candidate['content']:
-                    raise RuntimeError("API返回格式错误")
-                
-                content = candidate['content']['parts'][0].get('text', '').strip()
-                
-                if not content:
-                    raise RuntimeError("API返回空内容")
-                
-                # 确保URL在内容中
-                if url not in content:
-                    content = f"{content} {url}"
-                
-                print(f"   ✅ 内容生成完成 ({len(content)}字符)", file=sys.stderr)
-                return content
-                
-        except urllib.error.HTTPError as e:
-            error_body = e.read().decode('utf-8')
-            raise RuntimeError(f"API HTTP错误 {e.code}: {error_body}")
-        except urllib.error.URLError as e:
-            raise RuntimeError(f"API请求失败: {e.reason}")
-        except TimeoutError:
-            raise RuntimeError("API请求超时")
-        except socket.timeout:
-            raise RuntimeError("API请求超时(socket)")
-        finally:
-            socket.setdefaulttimeout(old_timeout)
+            response = requests.post(api_url, json=data, headers=headers, timeout=60)
+            
+            if response.status_code != 200:
+                raise RuntimeError(f"API HTTP错误 {response.status_code}: {response.text}")
+            
+            result = response.json()
+            
+            if 'candidates' not in result or not result['candidates']:
+                raise RuntimeError("API返回空结果")
+            
+            candidate = result['candidates'][0]
+            if 'content' not in candidate or 'parts' not in candidate['content']:
+                raise RuntimeError("API返回格式错误")
+            
+            content = candidate['content']['parts'][0].get('text', '').strip()
+            
+            if not content:
+                raise RuntimeError("API返回空内容")
+            
+            # 确保URL在内容中
+            if url not in content:
+                content = f"{content} {url}"
+            
+            print(f"   ✅ 内容生成完成 ({len(content)}字符)", file=sys.stderr)
+            return content
+            
+        except requests.exceptions.Timeout:
+            raise RuntimeError("API请求超时(60s)")
+        except requests.exceptions.RequestException as e:
+            raise RuntimeError(f"API请求失败: {str(e)}")
     
     def _build_prompt(self, title: str, summary: str, url: str, source: str, metadata: Dict) -> str:
         """构建提示词 - 严格遵守宪法文档"""
