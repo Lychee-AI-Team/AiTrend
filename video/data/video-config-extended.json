@@ -1,0 +1,42 @@
+{
+  "fps": 30,
+  "totalFrames": 3887,
+  "totalDuration": 129.63600000000002,
+  "scenes": [
+    {
+      "name": "opening",
+      "text": "欢迎收看AiTrend，今天AI圈发生了什么？让我们一起来看看最新的AI热点。",
+      "start": 0,
+      "duration": 192,
+      "seconds": 6.408
+    },
+    {
+      "name": "hotspot_1",
+      "text": "cognee是一个专为AI智能体设计的记忆框架，它的最大特点是极其简洁易用，开发者只需编写6行代码就能为AI Agent",
+      "start": 192,
+      "duration": 1098,
+      "seconds": 36.612
+    },
+    {
+      "name": "hotspot_2",
+      "text": "Anthropic开源的AI Agent技能库是一个极具价值的开发资源库，它包含了各种实用的AI Agent技能实现代码",
+      "start": 1290,
+      "duration": 1169,
+      "seconds": 38.988
+    },
+    {
+      "name": "hotspot_3",
+      "text": "PentestAgent是一款革命性的AI驱动安全测试工具，它能够自动执行黑盒安全测试、漏洞挖掘和渗透测试等复杂任务。这",
+      "start": 2459,
+      "duration": 1243,
+      "seconds": 41.436
+    },
+    {
+      "name": "closing",
+      "text": "以上就是今天的AI热点资讯。点赞关注，AiTrend带你了解最新AI动态。",
+      "start": 3702,
+      "duration": 185,
+      "seconds": 6.192
+    }
+  ]
+}
