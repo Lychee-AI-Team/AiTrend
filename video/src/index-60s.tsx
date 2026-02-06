@@ -18,6 +18,7 @@ const VIDEO_DATA = {
       startFrame: 0,
       durationFrames: 90, // 3秒
       text: '今天AI圈发生了什么？',
+      audioFile: 'audio/60s/opening.mp3',
     },
     {
       id: 'hotspot_1',
@@ -32,7 +33,7 @@ const VIDEO_DATA = {
       logo: 'logos/openai.svg',
       url: 'https://openai.com',
       useScreenshot: false,
-      audioFile: 'audio/60s/opening.mp3',
+      audioFile: 'audio/60s/hotspot_1.mp3',
     },
     {
       id: 'hotspot_2',
@@ -47,7 +48,7 @@ const VIDEO_DATA = {
       logo: 'logos/meta.svg',
       url: 'https://ai.meta.com',
       useScreenshot: false,
-      audioFile: 'audio/60s/hotspot_1.mp3',
+      audioFile: 'audio/60s/hotspot_2.mp3',
     },
     {
       id: 'hotspot_3',
@@ -62,7 +63,7 @@ const VIDEO_DATA = {
       logo: 'logos/deepmind.svg',
       url: 'https://deepmind.google',
       useScreenshot: false,
-      audioFile: 'audio/60s/hotspot_2.mp3',
+      audioFile: 'audio/60s/hotspot_3.mp3',
     },
     {
       id: 'closing',
