@@ -1,0 +1,38 @@
+{
+  "fps": 30,
+  "totalFrames": 3303,
+  "totalDuration": 110.196,
+  "speed": 1.5,
+  "scenes": [
+    {
+      "name": "opening",
+      "start": 0,
+      "duration": 157,
+      "seconds": 5.256
+    },
+    {
+      "name": "hotspot_1",
+      "start": 157,
+      "duration": 927,
+      "seconds": 30.924
+    },
+    {
+      "name": "hotspot_2",
+      "start": 1084,
+      "duration": 1038,
+      "seconds": 34.632
+    },
+    {
+      "name": "hotspot_3",
+      "start": 2122,
+      "duration": 1015,
+      "seconds": 33.84
+    },
+    {
+      "name": "closing",
+      "start": 3137,
+      "duration": 166,
+      "seconds": 5.544
+    }
+  ]
+}
