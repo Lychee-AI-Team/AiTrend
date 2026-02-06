@@ -1,0 +1,10 @@
+# AiTrend 视频模块 Python 依赖
+
+# HTTP 请求
+requests>=2.31.0
+
+# 数据处理
+# (使用 Python 标准库 json, os, sys, datetime 等)
+
+# 可选：用于 Remotion 预览时的静态文件服务
+# http.server 是 Python 标准库，无需额外安装
