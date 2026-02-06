@@ -1,20 +1,12 @@
 import React from 'react';
 import {Composition, Sequence, registerRoot, staticFile, Audio} from 'remotion';
 
-// 60秒竖屏版本 - 动态加载数据
-// 从video-data-60s.json加载真实数据
+// 60秒竖屏版本 - 修复版（单一音频文件）
 
 const CHINESE_FONT = '"Noto Sans CJK SC", "Noto Sans SC", sans-serif';
 
-// 加载视频数据 - 使用内联的真实数据
-// 注意：不使用fs模块，因为浏览器环境不支持
-const loadVideoData = () => {
-  // 使用真实数据（今天推送到Discord的AI热点）
-  return getRealData();
-};
-
 // 真实数据（今天推送到Discord的AI热点）
-const getRealData = () => ({
+const VIDEO_DATA = {
   date: '2026-02-06',
   fps: 30,
   totalFrames: 1800,
@@ -24,8 +16,7 @@ const getRealData = () => ({
       type: 'opening',
       startFrame: 0,
       durationFrames: 90,
-      text: '今天AI圈发生了什么？',
-      audioFile: 'audio/2026-02-06/opening.mp3'
+      text: '今天AI圈发生了什么？'
     },
     {
       id: 'hotspot_1',
@@ -40,8 +31,7 @@ const getRealData = () => ({
       logo: 'logos/default.svg',
       url: 'https://www.producthunt.com/products/molt-beach',
       useScreenshot: true,
-      screenshot: 'screenshots/hotspot_1.png',
-      audioFile: 'audio/2026-02-06/hotspot_1.mp3'
+      screenshot: 'screenshots/hotspot_1.png'
     },
     {
       id: 'hotspot_2',
@@ -56,8 +46,7 @@ const getRealData = () => ({
       logo: 'logos/anthropic.svg',
       url: 'https://www.producthunt.com/products/anthropic-5',
       useScreenshot: true,
-      screenshot: 'screenshots/hotspot_2.png',
-      audioFile: 'audio/2026-02-06/hotspot_2.mp3'
+      screenshot: 'screenshots/hotspot_2.png'
     },
     {
       id: 'hotspot_3',
@@ -72,95 +61,17 @@ const getRealData = () => ({
       logo: 'logos/default.svg',
       url: 'https://github.com/QwenLM/Qwen3-Coder',
       useScreenshot: true,
-      screenshot: 'screenshots/hotspot_3.png',
-      audioFile: 'audio/2026-02-06/hotspot_3.mp3'
+      screenshot: 'screenshots/hotspot_3.png'
     },
     {
       id: 'closing',
       type: 'closing',
       startFrame: 1710,
       durationFrames: 90,
-      text: '点赞关注，每天60秒了解AI热点！',
-      audioFile: 'audio/2026-02-06/closing.mp3'
+      text: '点赞关注，每天60秒了解AI热点！'
     }
   ]
-});
-
-// 默认数据（不再使用）
-const getDefaultData = () => (
-  date: '2026-02-06',
-  fps: 30,
-  totalFrames: 1800,
-  scenes: [
-    {
-      id: 'opening',
-      type: 'opening',
-      startFrame: 0,
-      durationFrames: 90,
-      text: '今天AI圈发生了什么？',
-      audioFile: 'audio/2026-02-06/opening.mp3'
-    },
-    {
-      id: 'hotspot_1',
-      type: 'hotspot',
-      startFrame: 90,
-      durationFrames: 540,
-      rank: 1,
-      title: 'OpenAI发布GPT-5预览版',
-      text: 'GPT-5在GPQA测试中准确率达到87%，推理能力暴涨10倍',
-      keyPoint: '推理能力提升10倍',
-      vendor: 'OpenAI',
-      logo: 'logos/openai.svg',
-      url: 'https://openai.com/blog/gpt-5-preview',
-      useScreenshot: true,
-      screenshot: 'screenshots/hotspot_1.png',
-      audioFile: 'audio/2026-02-06/detailed_1.mp3'
-    },
-    {
-      id: 'hotspot_2',
-      type: 'hotspot',
-      startFrame: 630,
-      durationFrames: 540,
-      rank: 2,
-      title: 'Meta发布Llama 3.5',
-      text: 'Llama 3.5在多项基准测试中超越GPT-4，且完全开源可商用',
-      keyPoint: '开源超越GPT-4',
-      vendor: 'Meta',
-      logo: 'logos/meta.svg',
-      url: 'https://ai.meta.com/blog/',
-      useScreenshot: true,
-      screenshot: 'screenshots/hotspot_2.png',
-      audioFile: 'audio/2026-02-06/detailed_2.mp3'
-    },
-    {
-      id: 'hotspot_3',
-      type: 'hotspot',
-      startFrame: 1170,
-      durationFrames: 540,
-      rank: 3,
-      title: 'DeepMind机器人自学走路',
-      text: '新算法让机器人2小时学会在陌生环境行走，无需预设编程',
-      keyPoint: '2小时自学走路',
-      vendor: 'Google DeepMind',
-      logo: 'logos/deepmind.svg',
-      url: 'https://deepmind.google/discover/blog/',
-      useScreenshot: true,
-      screenshot: 'screenshots/hotspot_3.png',
-      audioFile: 'audio/2026-02-06/detailed_3.mp3'
-    },
-    {
-      id: 'closing',
-      type: 'closing',
-      startFrame: 1710,
-      durationFrames: 90,
-      text: '点赞关注，每天60秒了解AI热点！',
-      audioFile: 'audio/2026-02-06/closing.mp3'
-    }
-  ]
-});
-
-// 加载数据
-const VIDEO_DATA = loadVideoData();
+};
 
 // 主组件
 const DailyNews60s: React.FC = () => {
@@ -174,6 +85,9 @@ const DailyNews60s: React.FC = () => {
       fontFamily: CHINESE_FONT,
       color: '#ffffff',
     }}>
+      {/* 单一音频文件（避免多音轨冲突） */}
+      <Audio src={staticFile('audio/2026-02-06/full_audio.mp3')} />
+      
       {scenes.map((scene: any) => (
         <Sequence
           key={scene.id}
@@ -191,26 +105,11 @@ const DailyNews60s: React.FC = () => {
 const renderScene = (scene: any, date: string) => {
   switch (scene.type) {
     case 'opening':
-      return (
-        <>
-          <OpeningScene text={scene.text} />
-          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
-        </>
-      );
+      return <OpeningScene text={scene.text} />;
     case 'hotspot':
-      return (
-        <>
-          <HotspotScene {...scene} />
-          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
-        </>
-      );
+      return <HotspotScene {...scene} />;
     case 'closing':
-      return (
-        <>
-          <ClosingScene text={scene.text} />
-          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
-        </>
-      );
+      return <ClosingScene text={scene.text} />;
     default:
       return null;
   }
@@ -317,7 +216,7 @@ const HotspotScene: React.FC<any> = ({
       {text}
     </p>
     
-    {/* 截图/URL区域 */}
+    {/* 截图区域 */}
     {useScreenshot && (
       <div style={{
         width: '100%',
@@ -331,16 +230,14 @@ const HotspotScene: React.FC<any> = ({
         overflow: 'hidden',
         position: 'relative',
       }}>
-        {screenshot ? (
+        {screenshot && (
           <img 
             src={staticFile(screenshot)} 
             alt="screenshot"
             style={{width: '100%', height: '100%', objectFit: 'cover'}}
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
+            onError={(e) => {e.currentTarget.style.display = 'none'}}
           />
-        ) : null}
+        )}
         
         {/* URL显示 */}
         <div style={{
@@ -422,8 +319,8 @@ registerRoot(() => (
     <Composition
       id="DailyNews60s"
       component={DailyNews60s}
-      durationInFrames={VIDEO_DATA.totalFrames || 1800}
-      fps={VIDEO_DATA.fps || 30}
+      durationInFrames={VIDEO_DATA.totalFrames}
+      fps={VIDEO_DATA.fps}
       width={1080}
       height={1920}
     />
