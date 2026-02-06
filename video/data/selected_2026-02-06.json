@@ -1,0 +1,65 @@
+{
+  "date": "2026-02-06",
+  "selection_time": "2026-02-06T13:23:43.824004",
+  "selection_params": {
+    "max_items": 6,
+    "min_heat_score": 50
+  },
+  "selected_count": 6,
+  "hotspots": [
+    {
+      "title": "OpenAI 发布 GPT-5 预览版，推理能力提升 10 倍",
+      "summary": "OpenAI 今日发布 GPT-5 预览版，新模型在数学推理和代码生成方面提升显著。据官方测试，在 GPQA 钻石级难题上准确率达到 87%，比 GPT-4 提升近一倍。",
+      "url": "https://openai.com/blog/gpt-5-preview",
+      "heat_score": 95,
+      "category": "AI模型",
+      "source_origin": "hackernews",
+      "rank": 1
+    },
+    {
+      "title": "开源项目 Llama 3.5 发布，性能超越 GPT-4",
+      "summary": "Meta 发布 Llama 3.5 开源大模型，在多项基准测试中超越 GPT-4，且完全开源可商用。",
+      "url": "https://ai.meta.com/blog/",
+      "heat_score": 92,
+      "category": "开源模型",
+      "source_origin": "hackernews",
+      "rank": 2
+    },
+    {
+      "title": "DeepMind 新算法让机器人自学走路仅需 2 小时",
+      "summary": "Google DeepMind 发布最新强化学习算法，机器人可以在陌生环境中自学行走，无需预先编程。",
+      "url": "https://deepmind.google/discover/blog/",
+      "heat_score": 88,
+      "category": "机器人",
+      "source_origin": "hackernews",
+      "rank": 3
+    },
+    {
+      "title": "讨论：AI Agent 的安全边界在哪里？",
+      "summary": "Moltbook 社区热议 AI Agent 的安全问题，用户分享多个实际案例，讨论如何设定权限边界。",
+      "url": "https://moltbook.ai/t/ai-agent-safety",
+      "heat_score": 85,
+      "category": "社区讨论",
+      "source_origin": "moltbook",
+      "rank": 4
+    },
+    {
+      "title": "ChatPDF 3.0 - 支持 1000 页文档分析",
+      "summary": "ChatPDF 发布 3.0 版本，支持超长文档分析，新增图表理解和多文档对比功能。",
+      "url": "https://www.producthunt.com/posts/chatpdf-3",
+      "heat_score": 82,
+      "category": "产品更新",
+      "source_origin": "producthunt",
+      "rank": 5
+    },
+    {
+      "title": "实测：Claude 3.7 编程能力 vs GPT-5",
+      "summary": "开发者对比测试 Claude 3.7 和 GPT-5 的编程能力，发现 Claude 在代码解释方面更详细。",
+      "url": "https://moltbook.ai/t/claude-vs-gpt",
+      "heat_score": 79,
+      "category": "评测",
+      "source_origin": "moltbook",
+      "rank": 6
+    }
+  ]
+}

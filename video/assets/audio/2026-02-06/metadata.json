@@ -1,0 +1,73 @@
+{
+  "generation_time": "2026-02-06T13:25:08.147047",
+  "voice_id": "mastercui",
+  "total_segments": 8,
+  "successful": 8,
+  "failed": 0,
+  "segments": [
+    {
+      "file": "../assets/audio/2026-02-06/opening.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae1a44775bc1c5ba3fec0c92083c_1770355485820_5364.mp3?Expires=1770441885&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=7SWYj%2F3XOfrs5gw7yYmuxtNqRIA%3D",
+      "duration_ms": 28404,
+      "word_count": 131,
+      "success": true,
+      "scene_id": "opening"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/detailed_1.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae1e7192f115d091c76ccca61cb3_1770355489561_5117.mp3?Expires=1770441889&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=rp4gOBGja8ba9pIxXQ0j0cMmaHk%3D",
+      "duration_ms": 37656,
+      "word_count": 177,
+      "success": true,
+      "scene_id": "detailed_1"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/detailed_2.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae22f269699939b72e53d5fc8bf0_1770355494247_3451.mp3?Expires=1770441894&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=IQs7SF%2BhzxPlRWNWlaM2vRUXR7Y%3D",
+      "duration_ms": 34776,
+      "word_count": 167,
+      "success": true,
+      "scene_id": "detailed_2"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/detailed_3.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae27346b9a4fd89797d1655a1ad9_1770355498345_7034.mp3?Expires=1770441898&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=O0puHJA1KCIKL5VhI0w9qOUs2Dc%3D",
+      "duration_ms": 35928,
+      "word_count": 172,
+      "success": true,
+      "scene_id": "detailed_3"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/quick_1.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae2b2e39195baea697ec9ce842e9_1770355501032_9688.mp3?Expires=1770441901&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=a3uV1lT8TGa70CFREo0UNGrw5Ao%3D",
+      "duration_ms": 11592,
+      "word_count": 62,
+      "success": true,
+      "scene_id": "quick_1"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/quick_2.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae2d30cbcf2aaf7ff8a4c4d986b4_1770355503309_4347.mp3?Expires=1770441903&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=vtgsDNNGY%2BAqmHEQEXnA%2FxBXOEU%3D",
+      "duration_ms": 11736,
+      "word_count": 60,
+      "success": true,
+      "scene_id": "quick_2"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/quick_3.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae2fa53f12c3b8f5a624292d0911_1770355505539_8650.mp3?Expires=1770441905&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=c%2Fe8oaHjTJBhnY5qXtf8RMLaINk%3D",
+      "duration_ms": 12204,
+      "word_count": 63,
+      "success": true,
+      "scene_id": "quick_3"
+    },
+    {
+      "file": "../assets/audio/2026-02-06/closing.mp3",
+      "url": "https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Feffect%2F05d4ae3286009299317ce8deb2215314_1770355508206_2619.mp3?Expires=1770441908&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=X%2FsEDUlgEmTHKmtOEZfureLlokA%3D",
+      "duration_ms": 11520,
+      "word_count": 56,
+      "success": true,
+      "scene_id": "closing"
+    }
+  ]
+}
