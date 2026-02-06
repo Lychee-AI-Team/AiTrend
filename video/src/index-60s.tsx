@@ -18,7 +18,7 @@ const VIDEO_DATA = {
       startFrame: 0,
       durationFrames: 90, // 3秒
       text: '今天AI圈发生了什么？',
-      audioFile: 'audio/60s/opening.mp3',
+      audioFile: 'audio/2026-02-06/opening.mp3',
     },
     {
       id: 'hotspot_1',
@@ -32,8 +32,9 @@ const VIDEO_DATA = {
       vendor: 'OpenAI',
       logo: 'logos/openai.svg',
       url: 'https://openai.com',
-      useScreenshot: false,
-      audioFile: 'audio/60s/hotspot_1.mp3',
+      useScreenshot: true,
+      screenshot: 'screenshots/openai.svg',
+      audioFile: 'audio/2026-02-06/detailed_1.mp3',
     },
     {
       id: 'hotspot_2',
@@ -47,8 +48,9 @@ const VIDEO_DATA = {
       vendor: 'Meta',
       logo: 'logos/meta.svg',
       url: 'https://ai.meta.com',
-      useScreenshot: false,
-      audioFile: 'audio/60s/hotspot_2.mp3',
+      useScreenshot: true,
+      screenshot: 'screenshots/meta.svg',
+      audioFile: 'audio/2026-02-06/detailed_2.mp3',
     },
     {
       id: 'hotspot_3',
@@ -62,8 +64,9 @@ const VIDEO_DATA = {
       vendor: 'Google DeepMind',
       logo: 'logos/deepmind.svg',
       url: 'https://deepmind.google',
-      useScreenshot: false,
-      audioFile: 'audio/60s/hotspot_3.mp3',
+      useScreenshot: true,
+      screenshot: 'screenshots/google.svg',
+      audioFile: 'audio/2026-02-06/detailed_3.mp3',
     },
     {
       id: 'closing',
@@ -71,7 +74,7 @@ const VIDEO_DATA = {
       startFrame: 1710,
       durationFrames: 90, // 3秒
       text: '点赞关注，每天60秒了解AI热点！',
-      audioFile: 'audio/60s/closing.mp3',
+      audioFile: 'audio/2026-02-06/closing.mp3',
     }
   ]
 };
@@ -108,21 +111,21 @@ const renderScene = (scene: any, date: string) => {
       return (
         <>
           <OpeningScene text={scene.text} />
-          <Audio src={staticFile(scene.audioFile)} />
+          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
         </>
       );
     case 'hotspot':
       return (
         <>
           <HotspotScene {...scene} />
-          <Audio src={staticFile(scene.audioFile)} />
+          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
         </>
       );
     case 'closing':
       return (
         <>
           <ClosingScene text={scene.text} />
-          <Audio src={staticFile(scene.audioFile)} />
+          {scene.audioFile && <Audio src={staticFile(scene.audioFile)} />}
         </>
       );
     default:
@@ -164,7 +167,7 @@ const OpeningScene: React.FC<{text: string}> = ({text}) => (
 
 // 热点详情 - 18秒（带Logo和截图区域）
 const HotspotScene: React.FC<any> = ({
-  rank, title, text, keyPoint, vendor, logo, useScreenshot
+  rank, title, text, keyPoint, vendor, logo, useScreenshot, screenshot
 }) => (
   <div style={{
     width: 1080,
@@ -231,7 +234,7 @@ const HotspotScene: React.FC<any> = ({
       {text}
     </p>
     
-    {/* 截图区域（预留） */}
+    {/* 截图区域（使用Logo作为fallback） */}
     {useScreenshot && (
       <div style={{
         width: '100%',
@@ -241,11 +244,34 @@ const HotspotScene: React.FC<any> = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        color: '#8892b0',
-        fontSize: 28,
         marginBottom: 40,
+        overflow: 'hidden',
       }}>
-        [网站截图]
+        {screenshot ? (
+          <img 
+            src={staticFile(screenshot)} 
+            alt="screenshot"
+            style={{width: '100%', height: '100%', objectFit: 'cover'}}
+            onError={(e) => {
+              // 截图加载失败时显示Logo
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        ) : (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            color: '#8892b0',
+          }}>
+            <img 
+              src={staticFile(logo)} 
+              alt={vendor}
+              style={{width: 120, height: 120, marginBottom: 20, opacity: 0.5}}
+            />
+            <span style={{fontSize: 28}}>{vendor}</span>
+          </div>
+        )}
       </div>
     )}
     
