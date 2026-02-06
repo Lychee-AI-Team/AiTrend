@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-02-06
+
+### ✨ 七牛云集成
+
+#### 新增功能
+- 七牛云视频上传功能
+- 自动化上传脚本 (upload_to_qiniu.py)
+- 一键渲染上传脚本 (render_and_upload.sh)
+- 飞书通知集成 (notify_feishu.py)
+
+#### 技术实现
+- 七牛云Python SDK集成
+- 环境变量配置 (QINIU_ACCESS_KEY, QINIU_SECRET_KEY)
+- Bucket: ai-trend
+- 域名: ta1hoe4tw.hn-bkt.clouddn.com
+
+#### 成本
+- 存储: 10GB免费
+- 流量: 10GB/月免费
+- 实际成本: 基本免费
+
+#### 使用方式
+```bash
+./render_and_upload.sh
+```
+
+---
+
 ## [1.0.0] - 2026-02-06
 
 ### ✅ 初始版本交付
