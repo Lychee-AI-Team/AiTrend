@@ -1,0 +1,56 @@
+{
+  "fps": 30,
+  "totalFrames": 1575,
+  "totalDuration": 52.596000000000004,
+  "scenes": [
+    {
+      "name": "opening",
+      "text": "欢迎收看AiTrend，今天AI圈发生了什么？让我们一起来看看最新的AI热点。",
+      "start": 0,
+      "duration": 159,
+      "seconds": 5.328
+    },
+    {
+      "name": "hotspot_1",
+      "text": "cognee是一个AI智能体记忆框架，开发者只需6行代码就能为AI Agent添加长期记忆能力，让AI能够记住对话历史和",
+      "start": 159,
+      "duration": 390,
+      "seconds": 13.032
+    },
+    {
+      "name": "hotspot_2",
+      "text": "Anthropic开源的AI Agent技能库，包含各种实用的Agent技能实现，开发者可以直接参考或使用这些技能来构建",
+      "start": 549,
+      "duration": 380,
+      "seconds": 12.672
+    },
+    {
+      "name": "hotspot_3",
+      "text": "PentestAgent是一款AI驱动的安全测试工具，能够自动进行黑盒安全测试、漏洞挖掘和渗透测试，为安全研究人员和黑客",
+      "start": 929,
+      "duration": 466,
+      "seconds": 15.552
+    },
+    {
+      "name": "closing",
+      "text": "以上就是今天的AI热点资讯。点赞关注，AiTrend带你了解最新AI动态。",
+      "start": 1395,
+      "duration": 180,
+      "seconds": 6.012
+    }
+  ],
+  "articles": [
+    {
+      "title": "topoteretes/cognee ⭐11955",
+      "url": "https://github.com/topoteretes/cognee"
+    },
+    {
+      "title": "anthropics/skills ⭐64475",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "title": "GH05TCREW/pentestagent ⭐1415",
+      "url": "https://github.com/GH05TCREW/pentestagent"
+    }
+  ]
+}
