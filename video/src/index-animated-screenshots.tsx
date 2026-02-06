@@ -105,7 +105,7 @@ const renderScene = (scene: any) => {
   }
 };
 
-// 开场场景
+// 开场场景 - 使用Logo图片
 const OpeningScene: React.FC<{text: string}> = ({text}) => (
   <div style={{
     width: 1080,
@@ -117,18 +117,32 @@ const OpeningScene: React.FC<{text: string}> = ({text}) => (
     alignItems: 'center',
     padding: '80px',
   }}>
+    {/* Logo图片 */}
     <div style={{
-      width: 200,
-      height: 200,
-      borderRadius: 40,
-      background: 'linear-gradient(135deg, #00d4ff, #7b2cbf)',
+      width: 240,
+      height: 240,
+      marginBottom: 60,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: 60,
-      boxShadow: '0 20px 60px rgba(0, 212, 255, 0.3)',
     }}>
-      <span style={{fontSize: 80, fontWeight: 'bold'}}>AI</span>
+      <img 
+        src={staticFile('logos/logo.png')} 
+        alt="AiTrend Logo"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+        }}
+        onError={(e) => {
+          // 如果图片加载失败，显示文字
+          e.currentTarget.style.display = 'none';
+          const parent = e.currentTarget.parentElement;
+          if (parent) {
+            parent.innerHTML = '<span style="font-size: 80px; font-weight: bold; color: #00d4ff;">AI</span>';
+          }
+        }}
+      />
     </div>
     
     <h1 style={{
@@ -163,7 +177,7 @@ const OpeningScene: React.FC<{text: string}> = ({text}) => (
   </div>
 );
 
-// 带缩放动画的截图组件
+// 带缩放动画的截图组件 - 水平居中
 const AnimatedScreenshot: React.FC<{
   screenshot: string;
   durationFrames: number;
@@ -193,6 +207,12 @@ const AnimatedScreenshot: React.FC<{
   const containerWidth = targetWidth;
   const containerHeight = (targetWidth / originalWidth) * originalHeight; // 667px
   
+  // 计算居中偏移量
+  const scaledWidth = originalWidth * scale;
+  const scaledHeight = originalHeight * scale;
+  const offsetX = (containerWidth - scaledWidth) / 2;
+  const offsetY = (containerHeight - scaledHeight) / 2;
+  
   return (
     <div style={{
       width: containerWidth,
@@ -207,10 +227,12 @@ const AnimatedScreenshot: React.FC<{
         src={staticFile(screenshot)} 
         alt="screenshot"
         style={{
-          width: originalWidth * scale,
-          height: originalHeight * scale,
+          width: scaledWidth,
+          height: scaledHeight,
           objectFit: 'cover',
-          transformOrigin: 'top left',
+          position: 'absolute',
+          left: offsetX,
+          top: offsetY,
         }}
       />
     </div>
