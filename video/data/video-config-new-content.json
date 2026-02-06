@@ -1,0 +1,63 @@
+{
+  "fps": 30,
+  "totalFrames": 4204,
+  "totalDuration": 140.22,
+  "hotspots": [
+    {
+      "rank": 1,
+      "name": "PentestAgent",
+      "title": "GH05TCREW/pentestagent",
+      "chineseText": "PentestAgent是一款革命性的AI驱动安全测试框架，专为网络安全研究人员、白帽黑客和渗透测试工程师设计。它能够自动执行复杂的黑盒安全测试、智能漏洞挖掘和自动化渗透测试任务，大幅提升安全测试的效率和覆盖率。该工具利用先进的AI算法分析目标系统架构，自动识别潜在安全漏洞，生成详细的测试报告，为安全团队提供全方位的AI助手支持。相比传统的手动测试方式，PentestAgent能够节省大量人力成本，同时提高测试的准确性和全面性。在网络安全威胁日益严峻的今天，这款AI驱动的安全测试工具为企业和组织提供了强有力的安全保障，项目在GitHub上已经获得超过1400个星标，受到安全社区的广泛关注。",
+      "url": "github.com/GH05TCREW/pentestagent",
+      "screenshot": "screenshots-new/hotspot_1.png"
+    },
+    {
+      "rank": 2,
+      "name": "X-AnyLabeling",
+      "title": "CVHub520/X-AnyLabeling",
+      "chineseText": "X-AnyLabeling是一款强大的AI辅助数据标注工具，专为机器学习和计算机视觉领域的数据预处理而设计。它集成了Segment Anything等先进的AI模型，能够自动识别图像中的对象边界，大幅简化数据标注工作流程。用户只需简单的点击操作，AI就能自动完成复杂的分割和标注任务，标注效率相比传统手工方式提升数倍。该工具支持多种标注格式导出，兼容主流深度学习框架，是CV工程师和数据科学家的得力助手。无论是目标检测、语义分割还是实例分割任务，X-AnyLabeling都能提供精准的AI辅助标注功能，大幅降低数据准备成本，加速AI模型开发周期。项目在GitHub上已经获得超过8000个星标，是数据标注领域的优秀开源工具。",
+      "url": "github.com/CVHub520/X-AnyLabeling",
+      "screenshot": "screenshots-new/hotspot_2.png"
+    },
+    {
+      "rank": 3,
+      "name": "FinanceDatabase",
+      "title": "JerBouma/FinanceDatabase",
+      "chineseText": "FinanceDatabase是一个全面的金融数据数据库，收录了超过30万种金融产品的详细信息，涵盖股票、ETF、基金、指数、货币、加密货币和货币市场等多个资产类别。这个数据库为量化投资者、金融分析师和数据科学家提供了丰富的金融数据资源，支持全球主要金融市场的数据查询和分析。用户可以通过简单的API调用获取特定资产的详细信息，包括历史价格、财务指标、风险评估等多维度数据。该数据库定期更新维护，确保数据的准确性和时效性，是构建量化交易策略、进行投资组合分析和风险管理的理想数据源。无论是学术研究还是商业应用，FinanceDatabase都能提供可靠的金融数据支持，项目在GitHub上已经获得超过6900个星标。",
+      "url": "github.com/JerBouma/FinanceDatabase",
+      "screenshot": ""
+    }
+  ],
+  "scenes": [
+    {
+      "name": "opening",
+      "start": 0,
+      "duration": 153,
+      "seconds": 5.112
+    },
+    {
+      "name": "hotspot_1",
+      "start": 153,
+      "duration": 1263,
+      "seconds": 42.12
+    },
+    {
+      "name": "hotspot_2",
+      "start": 1416,
+      "duration": 1325,
+      "seconds": 44.172
+    },
+    {
+      "name": "hotspot_3",
+      "start": 2741,
+      "duration": 1317,
+      "seconds": 43.92
+    },
+    {
+      "name": "closing",
+      "start": 4058,
+      "duration": 146,
+      "seconds": 4.896
+    }
+  ]
+}

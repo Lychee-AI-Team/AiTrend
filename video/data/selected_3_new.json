@@ -1,0 +1,41 @@
+[
+  {
+    "url": "https://github.com/GH05TCREW/pentestagent",
+    "normalized_url": "https://github.com/GH05TCREW/pentestagent",
+    "title": "GH05TCREW/pentestagent ⭐1415",
+    "summary": "PentestAgent is an AI agent framework for black-box security testing, supporting bug bounty, red-team, and penetration testing workflows.",
+    "source": "github_trending",
+    "metadata": {
+      "language": "python",
+      "stars": 1415
+    },
+    "sent_at": 1770378498.853127,
+    "sent_count": 1
+  },
+  {
+    "url": "https://github.com/CVHub520/X-AnyLabeling",
+    "normalized_url": "https://github.com/CVHub520/X-AnyLabeling",
+    "title": "CVHub520/X-AnyLabeling ⭐8096",
+    "summary": "Effortless data labeling with AI support from Segment Anything and other awesome models.",
+    "source": "github_trending",
+    "metadata": {
+      "language": "python",
+      "stars": 8096
+    },
+    "sent_at": 1770378498.853127,
+    "sent_count": 1
+  },
+  {
+    "url": "https://github.com/JerBouma/FinanceDatabase",
+    "normalized_url": "https://github.com/JerBouma/FinanceDatabase",
+    "title": "JerBouma/FinanceDatabase ⭐6903",
+    "summary": "This is a database of 300.000+ symbols containing Equities, ETFs, Funds, Indices, Currencies, Cryptocurrencies and Money Markets.",
+    "source": "github_trending",
+    "metadata": {
+      "language": "python",
+      "stars": 6903
+    },
+    "sent_at": 1770378498.853127,
+    "sent_count": 1
+  }
+]
