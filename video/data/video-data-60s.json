@@ -1,0 +1,71 @@
+{
+  "date": "2026-02-06",
+  "fps": 30,
+  "totalFrames": 1800,
+  "scenes": [
+    {
+      "id": "opening",
+      "type": "opening",
+      "startFrame": 0,
+      "durationFrames": 90,
+      "text": "今天AI圈发生了什么？",
+      "audioFile": "audio/2026-02-06/opening.mp3"
+    },
+    {
+      "id": "hotspot_1",
+      "type": "hotspot",
+      "startFrame": 90,
+      "durationFrames": 540,
+      "rank": 1,
+      "title": "OpenAI 发布 GPT-5 预览版，推理能力提升 10 ...",
+      "text": "OpenAI 今日发布 GPT-5 预览版，新模型在数学推理和代码生成方面提升显著。据官方测试，在 GPQA 钻石级难题上准确率达到 87%，比 GPT-4 提升近一倍。",
+      "keyPoint": "OpenAI 发布 GPT-5 预览版，...",
+      "vendor": "openai",
+      "logo": "logos/openai.svg",
+      "url": "https://openai.com/blog/gpt-5-preview",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_1.png",
+      "audioFile": "audio/2026-02-06/detailed_1.mp3"
+    },
+    {
+      "id": "hotspot_2",
+      "type": "hotspot",
+      "startFrame": 630,
+      "durationFrames": 540,
+      "rank": 2,
+      "title": "开源项目 Llama 3.5 发布，性能超越 GPT-4",
+      "text": "Meta 发布 Llama 3.5 开源大模型，在多项基准测试中超越 GPT-4，且完全开源可商用。",
+      "keyPoint": "开源项目 Llama 3.5 发布，性能...",
+      "vendor": "openai",
+      "logo": "logos/openai.svg",
+      "url": "https://ai.meta.com/blog/",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_2.png",
+      "audioFile": "audio/2026-02-06/detailed_2.mp3"
+    },
+    {
+      "id": "hotspot_3",
+      "type": "hotspot",
+      "startFrame": 1170,
+      "durationFrames": 540,
+      "rank": 3,
+      "title": "DeepMind 新算法让机器人自学走路仅需 2 小时",
+      "text": "Google DeepMind 发布最新强化学习算法，机器人可以在陌生环境中自学行走，无需预先编程。",
+      "keyPoint": "DeepMind 新算法让机器人自学走路...",
+      "vendor": "google",
+      "logo": "logos/google.svg",
+      "url": "https://deepmind.google/discover/blog/",
+      "useScreenshot": true,
+      "screenshot": "screenshots/hotspot_3.png",
+      "audioFile": "audio/2026-02-06/detailed_3.mp3"
+    },
+    {
+      "id": "closing",
+      "type": "closing",
+      "startFrame": 1710,
+      "durationFrames": 90,
+      "text": "点赞关注，每天60秒了解AI热点！",
+      "audioFile": "audio/2026-02-06/closing.mp3"
+    }
+  ]
+}
