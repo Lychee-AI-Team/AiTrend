@@ -250,7 +250,7 @@ export GITHUB_TOKEN="..."  # 可选，提高速率限制
 
 # 大模型（可选，默认使用OpenClaw）
 export OPENAI_API_KEY="..."
-export KIMI_API_KEY="..."
+# 大模型API（可选，默认使用Gemini）
 ```
 
 ---

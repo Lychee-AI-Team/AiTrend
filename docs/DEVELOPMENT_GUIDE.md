@@ -337,7 +337,7 @@ DISCORD_WEBHOOK_URL=xxx
 
 # 大模型（可选）
 OPENAI_API_KEY=xxx
-KIMI_API_KEY=xxx
+# 大模型API（可选，默认使用Gemini）
 ```
 
 ---
